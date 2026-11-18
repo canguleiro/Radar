@@ -1679,6 +1679,8 @@ function ensureEditorialProfiles(){
     }
   });
   let active=c.editorialProfiles.find(x=>x.id===c.activeEditorialProfileId)||null;
+  // Enquanto a consulta ao GitHub não termina, a lista fica vazia. Não apagar aqui
+  // o ID local do último perfil: ele será usado para selecionar o perfil após a sincronização.
   if(!active&&c.editorialProfiles.length){active=c.editorialProfiles[0];c.activeEditorialProfileId=active.id;}
   if(active){
     c.editorialProfile=active.editorialProfile||'';
@@ -1686,7 +1688,7 @@ function ensureEditorialProfiles(){
     c.commentPrompt=active.commentPrompt||'';
     c.processingPrompt=[c.summaryPrompt,c.commentPrompt].filter(Boolean).join('\n\n');
   }else{
-    c.activeEditorialProfileId='';c.editorialProfile='';c.summaryPrompt='';c.commentPrompt='';c.processingPrompt='';
+    c.editorialProfile='';c.summaryPrompt='';c.commentPrompt='';c.processingPrompt='';
   }
   return active;
 }
@@ -1699,7 +1701,7 @@ function saveActiveEditorialProfile(){
   p.summaryPrompt=document.getElementById('cfgSummaryPrompt')?.value||'';
   p.commentPrompt=document.getElementById('cfgCommentPrompt')?.value||'';
   p.interests=JSON.parse(JSON.stringify(state.config.interests||defaultState.config.interests));
-  p.sources=JSON.parse(JSON.stringify(state.sources||[]));
+  p.sources=(state.sources||[]).map(source=>({...JSON.parse(JSON.stringify(source)),active:source.active===true}));
   state.config.editorialProfile=p.editorialProfile;state.config.summaryPrompt=p.summaryPrompt;state.config.commentPrompt=p.commentPrompt;
   state.config.processingPrompt=[p.summaryPrompt,p.commentPrompt].filter(Boolean).join('\n\n');persist();
 }
@@ -1730,6 +1732,8 @@ const RADAR_GITHUB_PROFILE_DELETE_API='https://radar-api.camiloctorquato.workers
 let githubProfilesLoading=false;
 async function loadGitHubEditorialProfiles(showFeedback=false){
   if(githubProfilesLoading)return;
+  // Captura síncrona: init/persist não pode apagar a seleção enquanto o fetch está em andamento.
+  const previousActiveId=localStorage.getItem(ACTIVE_PROFILE_KEY)||state.config.activeEditorialProfileId||'';
   githubProfilesLoading=true;
   const button=[...document.querySelectorAll('.editorial-profile-actions button')].find(b=>b.textContent.trim()==='Carregar Perfis');
   if(button){button.disabled=true;button.textContent='Carregando…';}
@@ -1738,7 +1742,6 @@ async function loadGitHubEditorialProfiles(showFeedback=false){
     if(!response.ok)throw new Error(response.status===404?'Repositório ou pasta profiles ainda não publicados.':`GitHub respondeu HTTP ${response.status}.`);
     const files=await response.json();
     const jsonFiles=Array.isArray(files)?files.filter(f=>f.type==='file'&&f.name.toLowerCase().endsWith('.json')&&!f.name.toLowerCase().endsWith('.template.json')):[];
-    const previousActiveId=localStorage.getItem(ACTIVE_PROFILE_KEY)||state.config.activeEditorialProfileId||'';
     const syncedProfiles=[];
     for(const file of jsonFiles){
       const raw=await fetch(file.download_url);
@@ -1818,7 +1821,9 @@ function importEditorialProfile(input){
 function editorialProfilePayload(profile=activeEditorialProfile()){
   if(!profile)throw new Error('Carregue um perfil do GitHub ou crie um novo perfil antes de continuar.');
   saveActiveEditorialProfile();
-  return {version:2,type:'radar-editorial-profile',name:String(profile.name||'Perfil sem nome'),editorialProfile:String(profile.editorialProfile||''),summaryPrompt:String(profile.summaryPrompt||DEFAULT_SUMMARY_PROMPT),commentPrompt:String(profile.commentPrompt||DEFAULT_RADIO_COMMENT_PROMPT),scopeFilter:profile.scopeFilter||null,interests:JSON.parse(JSON.stringify(profile.interests||state.config.interests||defaultState.config.interests)),sources:JSON.parse(JSON.stringify(profile.sources||state.sources||[])),sourcePath:profile.sourcePath||undefined};
+  // Fonte de verdade do estado de ativação é a tabela atualmente exibida no perfil ativo.
+  profile.sources=(state.sources||[]).map(source=>({...JSON.parse(JSON.stringify(source)),active:source.active===true}));
+  return {version:2,type:'radar-editorial-profile',name:String(profile.name||'Perfil sem nome'),editorialProfile:String(profile.editorialProfile||''),summaryPrompt:String(profile.summaryPrompt||DEFAULT_SUMMARY_PROMPT),commentPrompt:String(profile.commentPrompt||DEFAULT_RADIO_COMMENT_PROMPT),scopeFilter:profile.scopeFilter||null,interests:JSON.parse(JSON.stringify(profile.interests||state.config.interests||defaultState.config.interests)),sources:(profile.sources||state.sources||[]).map(source=>({...JSON.parse(JSON.stringify(source)),active:source.active===true})),sourcePath:profile.sourcePath||undefined};
 }
 function profileFileSlug(name){return String(name||'perfil').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70)||'perfil';}
 async function saveEditorialProfileToGitHub(mode){
@@ -2054,7 +2059,7 @@ function persist(){
   snapshot.config.interests=JSON.parse(JSON.stringify(defaultState.config.interests));
   snapshot.sources=JSON.parse(JSON.stringify(defaultState.sources));
   try{localStorage.setItem(KEY,JSON.stringify(snapshot));}catch(e){console.warn('Não foi possível salvar os dados locais do Radar',e)}
-  try{const id=String(state.config.activeEditorialProfileId||'');if(id)localStorage.setItem(ACTIVE_PROFILE_KEY,id);else localStorage.removeItem(ACTIVE_PROFILE_KEY)}catch(e){}
+  try{const id=String(state.config.activeEditorialProfileId||'');if(id)localStorage.setItem(ACTIVE_PROFILE_KEY,id)}catch(e){}
   updateStats(); updateNexoAccess(); if(typeof refreshEditorialCards==='function')refreshEditorialCards()
 }
 function updateNexoAccess(){
@@ -4252,7 +4257,11 @@ function statusBadge(s){
   if(st.includes('Proxy'))return '<span class="tag med">🟡 '+esc(st)+'</span>';
   return '<span class="tag">⚪ '+esc(st)+'</span>';
 }
-function syncActiveProfileSources(){const p=activeEditorialProfile();if(p)p.sources=JSON.parse(JSON.stringify(state.sources||[]));}
+function syncActiveProfileSources(){
+  const id=state.config.activeEditorialProfileId;
+  const p=(state.config.editorialProfiles||[]).find(profile=>profile.id===id);
+  if(p)p.sources=(state.sources||[]).map(source=>({...JSON.parse(JSON.stringify(source)),active:source.active===true}));
+}
 function toggleSource(id,v){const s=state.sources.find(x=>x.id===id);if(s)s.active=v;syncActiveProfileSources();persist();renderSources()}
 function toggleAllSources(enabled){state.sources.forEach(s=>s.active=!!enabled);syncActiveProfileSources();persist();renderSources();toast(enabled?'Todas as fontes foram ativadas.':'Todas as fontes foram desativadas.')} 
 function removeSource(id){const source=state.sources.find(x=>x.id===id);if(confirm(`Excluir “${source?.name||'esta fonte'}” deste perfil? A fonte nativa continuará disponível no catálogo padrão e poderá ser incluída em outros perfis.`)){state.sources=state.sources.filter(x=>x.id!==id);syncActiveProfileSources();persist();renderSources()}}
