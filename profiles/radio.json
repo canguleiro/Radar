@@ -1,0 +1,1093 @@
+{
+  "version": 2,
+  "type": "radar-editorial-profile",
+  "name": "Perfil padrão",
+  "editorialProfile": "ABRANGÊNCIA GEOGRÁFICA\nPriorize notícias do Rio Grande do Norte, de Natal/RN e do Brasil. Dê preferência a fatos locais e estaduais, sem deixar de incluir notícias nacionais de grande relevância, especialmente aquelas com impacto político, econômico, social ou administrativo sobre o Brasil, o Rio Grande do Norte e seus municípios. Notícias de outros países, municípios, estados e federações não interessam, exceto quando houver reflexo para o RN ou para a população nacional.\n\nCONFIABILIDADE DE FONTES\n- Veículos jornalísticos reconhecidos e com histórico editorial.\n- Agências de notícias e fontes oficiais para confirmação de fatos.\n- Publicações originais, evitando páginas agregadoras, sites de reputação duvidosa e conteúdo sem autoria ou procedência verificável.\n- Diversidade de veículos, sem transformar a lista de fontes habilitadas em restrição exclusiva.\n\nPRIORIDADES EDITORIAIS\nValorize notícias sobre política, administração pública, atuação dos governos e do Poder Legislativo, eleições, decisões judiciais de interesse público, segurança pública, violência, serviços públicos, saúde, educação, infraestrutura, mobilidade urbana, economia, emprego, direitos do cidadão e acontecimentos do cotidiano. Inclua notícias esportivas relevantes, com atenção ao futebol nacional e aos clubes e competições de interesse regional. Considere cultura e outros assuntos de interesse público quando apresentarem relevância jornalística.\n\nCRITÉRIOS DE SELEÇÃO\nPriorize acontecimentos recentes, fatos concretos, decisões oficiais, medidas governamentais, investigações, indicadores econômicos, mudanças em serviços públicos e ocorrências com consequências para a população. Prefira notícias que informem o que aconteceu, onde, quem está envolvido e os possíveis impactos. Valorize relevância pública e interesse jornalístico, não apenas popularidade ou apelo da manchete. Evite duplicações, conteúdos promocionais, publicidade disfarçada de notícia, rumores sem confirmação e matérias sem informação factual suficiente.\n\nORIENTAÇÃO PARA A TRIAGEM CONVENCIONAL\nSempre que possível, oriente a seleção por correspondências objetivas entre palavras-chave, expressões, nomes de pessoas, instituições, órgãos públicos, municípios e temas cadastrados nas pautas do Radar. Considere variações de grafia e expressões equivalentes quando os filtros permitirem. Não descarte notícia apenas porque o título não contém exatamente a palavra-chave esperada: considere também resumo e conteúdo textual. Não presuma relações ou impactos regionais sem sustentação na notícia. Respeite em conjunto as pautas cadastradas e os assuntos a descartar. As quantidades por editoria continuam controladas pelas configurações próprias do Radar.\n\nDIRETRIZ GERAL\nBusque seleção diversificada, factual e útil para um noticiário jornalístico, combinando acontecimentos locais e estaduais com notícias nacionais relevantes. Priorize coleta convencional por RSS e filtros sistematizados, reservando pesquisa com inteligência artificial para quando estiver explicitamente selecionada pelo usuário.",
+  "summaryPrompt": "Produza um resumo jornalístico claro, objetivo, informativo e suficientemente contextualizado.\nLinguagem e tamanho:\n- Use linguagem natural, fluida e acessível, semelhante à de um portal de notícias ou boletim jornalístico para rádio.\n- Seja conciso, mas não telegráfico. Como referência, produza normalmente entre 70 e 130 palavras, ajustando à complexidade e importância da notícia.\n- Comece pelo fato principal, sem introduções genéricas.\n- Preserve nomes, números, datas, valores, cargos, instituições, prazos, locais e informações relevantes presentes na fonte.\n- Explique dados, percentuais, comparações, regras, procedimentos, decisões e consequências práticas quando necessário.\n- Organize as informações em sequência lógica: fato principal, detalhes, contexto e consequências.\n- Evite repetições, adjetivos desnecessários, frases burocráticas e expressões artificiais. Prefira parágrafos corridos, não listas.\n- Não copie extensos trechos: reescreva com suas próprias palavras, preservando o sentido.\n- Não acrescente informações externas, datas, números, explicações ou conclusões sem sustentação na notícia ou em fontes consultadas.\n- Não apresente suspeitas como fatos nem atribua intenções sem evidências. Explicite contradições, incertezas e alegações não comprovadas.",
+  "commentPrompt": "Produza comentários jornalísticos com linguagem coloquial, espontânea e natural, próprios para serem apresentados em um programa de rádio. O texto deve soar como uma conversa informativa e analítica com o ouvinte, e não como a leitura de uma notícia, um editorial formal ou um artigo de opinião.\n\nComece pelo aspecto mais relevante do assunto e desenvolva a análise de maneira progressiva. Contextualize os acontecimentos, recupere antecedentes importantes, identifique os personagens envolvidos e explique as relações, interesses e circunstâncias que ajudam a compreender o fato.\n\nVá além da simples exposição da notícia. Apresente interpretações, estabeleça conexões, explore possíveis desdobramentos e explique por que determinado acontecimento merece atenção. Quando houver diferentes grupos, interesses ou cenários, organize a exposição de maneira clara, mostrando os lados envolvidos e os fatores que podem influenciar o desfecho.\n\nUtilize construções próprias da oralidade, como \"a gente sabe\", \"na verdade\", \"do outro lado\", \"então\", \"é importante observar\", entre outras expressões semelhantes, sempre com naturalidade e sem repetições artificiais. Prefira frases fluidas, com ritmo de fala, e evite construções excessivamente formais ou rebuscadas.\n\nO comentário pode apresentar avaliações e opiniões moderadas, desde que estejam fundamentadas nas informações disponíveis. Quando houver incertezas, deixe isso explícito. Diferencie fatos confirmados, informações de bastidores, avaliações pessoais e possibilidades ainda não concretizadas.\n\nNão transforme hipóteses em certezas, não atribua intenções sem fundamento e não acrescente informações que não estejam na notícia ou no contexto fornecido. Não force uma conclusão quando o assunto ainda estiver em aberto.\n\nEncerre retomando o ponto central da análise, destacando o que está em jogo ou o que ainda precisa acontecer. O resultado deve transmitir a impressão de que um jornalista está explicando o assunto ao ouvinte, com conhecimento do contexto, espontaneidade e capacidade de interpretação.",
+  "scopeFilter": null,
+  "interests": {
+    "Política": [
+      "Eleições 2026",
+      "Partidos políticos",
+      "Reforma eleitoral",
+      "Decisões políticas com impacto nacional",
+      "Governo do Rio Grande do Norte",
+      "Assembleia Legislativa do RN",
+      "Prefeitura de Natal",
+      "Câmara Municipal de Natal",
+      "Política do RN"
+    ],
+    "Cotidiano": [
+      "Transporte",
+      "Mobilidade",
+      "Serviços públicos",
+      "Infraestrutura",
+      "Obras",
+      "Turismo",
+      "Meio ambiente",
+      "Chuvas",
+      "Problemas urbanos",
+      "Segurança pública"
+    ],
+    "Esportes": [
+      "América-RN",
+      "ABC",
+      "Futebol potiguar",
+      "Campeonato Potiguar",
+      "Segundona Potiguar",
+      "Copa do Nordeste",
+      "Campeonato Brasileiro",
+      "Copa do Brasil",
+      "Libertadores (clubes brasileiros)",
+      "Brasileirão Série A",
+      "Seleção Brasileira",
+      "Clubes brasileiros",
+      "Atletas brasileiros"
+    ],
+    "Cultura": [
+      "Música",
+      "Teatro",
+      "Cinema",
+      "Literatura",
+      "Exposições",
+      "Cultura potiguar",
+      "Festivais",
+      "Patrimônio histórico"
+    ],
+    "Economia": [
+      "Selic",
+      "PIB",
+      "Impostos",
+      "Combustíveis",
+      "Energia",
+      "Comércio",
+      "Turismo",
+      "Economia do RN",
+      "Finanças públicas"
+    ],
+    "Descartar Assuntos": [
+      "celebridade",
+      "publicidade",
+      "anúncio"
+    ]
+  },
+  "sources": [
+    {
+      "name": "Agência Brasil",
+      "url": "https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml",
+      "feeds": [
+        "https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml",
+        "https://agenciabrasil.ebc.com.br/rss/geral/feed.xml",
+        "https://agenciabrasil.ebc.com.br/rss/politica/feed.xml",
+        "https://agenciabrasil.ebc.com.br/rss/economia/feed.xml",
+        "https://agenciabrasil.ebc.com.br/rss/internacional/feed.xml",
+        "https://agenciabrasil.ebc.com.br/rss/justica/feed.xml",
+        "https://agenciabrasil.ebc.com.br/rss/saude/feed.xml",
+        "https://agenciabrasil.ebc.com.br/rss/educacao/feed.xml",
+        "https://agenciabrasil.ebc.com.br/rss/esportes/feed.xml",
+        "https://agenciabrasil.ebc.com.br/rss/cultura/feed.xml",
+        "https://agenciabrasil.ebc.com.br/rss/direitos-humanos/feed.xml",
+        "https://agenciabrasil.ebc.com.br/rss/meio-ambiente/feed.xml"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "agenciabrasil.ebc.com.br",
+      "queries": [
+        "Brasil",
+        "Governo Federal",
+        "política",
+        "economia",
+        "segurança",
+        "saúde",
+        "esportes"
+      ],
+      "scope": "Nacional",
+      "weight": "Alta",
+      "active": false,
+      "status": "OK — Automático (RSS → Google Notícias)",
+      "id": "xyskjb35bh8c"
+    },
+    {
+      "name": "Agência Câmara",
+      "url": "https://www.camara.leg.br/noticias/rss/ultimas-noticias",
+      "feeds": [
+        "https://www.camara.leg.br/noticias/rss/ultimas-noticias",
+        "https://www.camara.leg.br/noticias/rss/politica",
+        "https://www.camara.leg.br/noticias/rss/economia",
+        "https://www.camara.leg.br/noticias/rss/seguranca",
+        "https://www.camara.leg.br/noticias/rss/saude",
+        "https://www.camara.leg.br/noticias/rss/educacao-e-cultura",
+        "https://www.camara.leg.br/noticias/rss/cidades",
+        "https://www.camara.leg.br/noticias/rss/ciencia",
+        "https://www.camara.leg.br/noticias/rss/meio-ambiente",
+        "https://www.camara.leg.br/noticias/rss/direitos-humanos",
+        "https://www.camara.leg.br/noticias/rss/relacoes-exteriores",
+        "https://www.camara.leg.br/noticias/rss/administracao-publica",
+        "https://www.camara.leg.br/noticias/rss/trabalho-e-previdencia",
+        "https://www.camara.leg.br/noticias/rss/transporte-e-transito",
+        "https://www.camara.leg.br/noticias/rss/turismo",
+        "https://www.camara.leg.br/noticias/rss/esportes",
+        "https://www.camara.leg.br/noticias/rss/eleicoes",
+        "https://www.camara.leg.br/noticias/rss/consumidor",
+        "https://www.camara.leg.br/noticias/rss/agropecuaria",
+        "https://www.camara.leg.br/noticias/rss/industria-e-comercio",
+        "https://www.camara.leg.br/noticias/rss/assistencia-social",
+        "https://www.camara.leg.br/noticias/rss/comunicacao",
+        "https://www.camara.leg.br/noticias/rss/direito-e-justica"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "www.camara.leg.br",
+      "queries": [
+        "Câmara dos Deputados",
+        "Congresso Nacional",
+        "legislação",
+        "política nacional"
+      ],
+      "scope": "Nacional",
+      "weight": "Alta",
+      "active": false,
+      "status": "OK — Automático (RSS → Google Notícias)",
+      "id": "slw909t0bh8c"
+    },
+    {
+      "name": "Agência FAPESP",
+      "url": "https://agencia.fapesp.br/rss/",
+      "feeds": [
+        "https://agencia.fapesp.br/rss/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "agencia.fapesp.br",
+      "queries": [
+        "ciência",
+        "pesquisa",
+        "saúde"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "tlkd502ibh8c"
+    },
+    {
+      "name": "Agência Fiocruz",
+      "url": "https://agencia.fiocruz.br/rss.xml",
+      "feeds": [
+        "https://agencia.fiocruz.br/rss.xml"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "agencia.fiocruz.br",
+      "queries": [
+        "saúde",
+        "ciência",
+        "pesquisa"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "56oo55z0bh8c"
+    },
+    {
+      "name": "Agência Senado",
+      "url": "https://www12.senado.leg.br/noticias/rss.xml",
+      "feeds": [
+        "https://www12.senado.leg.br/noticias/rss.xml",
+        "https://www12.senado.leg.br/noticias/rss/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "www12.senado.leg.br",
+      "queries": [
+        "Senado Federal",
+        "Congresso Nacional",
+        "legislação",
+        "política nacional"
+      ],
+      "scope": "Nacional",
+      "weight": "Alta",
+      "active": false,
+      "status": "Não testada",
+      "id": "8loh9d6mbh8c"
+    },
+    {
+      "name": "Agora RN",
+      "url": "https://agorarn.com.br/feed/",
+      "feeds": [
+        "https://agorarn.com.br/feed/",
+        "https://agorarn.com.br/politica/feed/",
+        "https://agorarn.com.br/economia/feed/",
+        "https://agorarn.com.br/editoria/esporte/feed/",
+        "https://agorarn.com.br/editoria/rn/feed/"
+      ],
+      "type": "web",
+      "method": "auto",
+      "domain": "agorarn.com.br",
+      "queries": [
+        "Rio Grande do Norte",
+        "Natal",
+        "política RN",
+        "Governo do RN",
+        "Assembleia Legislativa",
+        "Prefeitura de Natal",
+        "segurança RN",
+        "economia RN",
+        "esportes RN"
+      ],
+      "scope": "Local",
+      "weight": "Alta",
+      "active": false,
+      "status": "OK — Automático: RSS (40)",
+      "id": "dy8bzy6gbh8c"
+    },
+    {
+      "id": "fqse45rzbh8c",
+      "name": "Andreza Matais",
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://www.metropoles.com/colunas/andreza-matais"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "https://www.metropoles.com/",
+      "queries": [],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "OK — Página HTML"
+    },
+    {
+      "name": "BBC News Brasil",
+      "url": "https://feeds.bbci.co.uk/portuguese/rss.xml",
+      "feeds": [
+        "https://feeds.bbci.co.uk/portuguese/rss.xml",
+        "https://www.bbc.com/portuguese/topics/cp7r8vgl0q9t/rss.xml"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "www.bbc.com",
+      "queries": [
+        "Brasil",
+        "mundo",
+        "política",
+        "economia",
+        "segurança"
+      ],
+      "scope": "Nacional",
+      "weight": "Alta",
+      "active": false,
+      "status": "Não testada",
+      "id": "opewgst9bh8c"
+    },
+    {
+      "id": "4cf0l3jwbh8c",
+      "name": "Blog da Andreia Sadi",
+      "url": "",
+      "feeds": [],
+      "type": "web",
+      "method": "auto",
+      "domain": "https://g1.globo.com/politica/blog/andreia-sadi/",
+      "queries": [],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "OK — Automático: Site (8); fonte sem RSS"
+    },
+    {
+      "id": "8ieq54r9bh8c",
+      "name": "Blog da Natuza Nery",
+      "url": "",
+      "feeds": [],
+      "type": "web",
+      "method": "auto",
+      "domain": "https://g1.globo.com/politica/blog/natuza-nery/",
+      "queries": [],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "OK — Automático: Site (8); fonte sem RSS"
+    },
+    {
+      "id": "umpmhfhybh8c",
+      "name": "Blog do BG",
+      "url": "",
+      "feeds": [],
+      "type": "web",
+      "method": "auto",
+      "domain": "https://www.blogdobg.com.br/",
+      "queries": [],
+      "scope": "Local",
+      "weight": "Baixa",
+      "active": false,
+      "status": "OK — Automático: Site (8); fonte sem RSS",
+      "siteUrls": []
+    },
+    {
+      "name": "Brasil 247",
+      "url": "https://www.brasil247.com/feed/",
+      "feeds": [
+        "https://www.brasil247.com/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "www.brasil247.com",
+      "queries": [
+        "política",
+        "Brasil",
+        "Governo Federal"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "tweqj1ptbh8c"
+    },
+    {
+      "name": "Brasil de Fato",
+      "url": "https://www.brasildefato.com.br/feed/",
+      "feeds": [
+        "https://www.brasildefato.com.br/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "www.brasildefato.com.br",
+      "queries": [
+        "política",
+        "sociedade",
+        "direitos sociais"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "y9msz9rmbh8c"
+    },
+    {
+      "name": "CartaCapital",
+      "url": "https://www.cartacapital.com.br/feed/",
+      "feeds": [
+        "https://www.cartacapital.com.br/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "www.cartacapital.com.br",
+      "queries": [
+        "política",
+        "Brasil",
+        "sociedade"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "ns9e428vbh8c"
+    },
+    {
+      "name": "CBN",
+      "url": "https://cbn.globoradio.globo.com/rss/noticias/",
+      "feeds": [
+        "https://cbn.globoradio.globo.com/rss/noticias/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "cbn.globoradio.globo.com",
+      "queries": [
+        "Brasil",
+        "política",
+        "economia",
+        "segurança"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "fmg1s3ahbh8c"
+    },
+    {
+      "name": "CNN Brasil",
+      "url": "https://admin.cnnbrasil.com.br/feed/",
+      "feeds": [
+        "https://admin.cnnbrasil.com.br/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "www.cnnbrasil.com.br",
+      "queries": [
+        "Brasil",
+        "política",
+        "economia",
+        "segurança"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "bu9jthyfbh8c"
+    },
+    {
+      "name": "Congresso em Foco",
+      "url": "https://congressoemfoco.uol.com.br/feed/",
+      "feeds": [
+        "https://congressoemfoco.uol.com.br/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "congressoemfoco.uol.com.br",
+      "queries": [
+        "Congresso Nacional",
+        "Senado",
+        "Câmara dos Deputados",
+        "política nacional",
+        "STF"
+      ],
+      "scope": "Nacional",
+      "weight": "Alta",
+      "active": false,
+      "status": "Não testada",
+      "id": "txgk9mxcbh8c"
+    },
+    {
+      "name": "Estadão",
+      "url": "https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/",
+      "feeds": [
+        "https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/",
+        "https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/",
+        "https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/",
+        "https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/internacional/",
+        "https://www.estadao.com.br/rss/brasil.xml"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "www.estadao.com.br",
+      "queries": [
+        "Brasil",
+        "política",
+        "economia",
+        "Congresso",
+        "segurança"
+      ],
+      "scope": "Nacional",
+      "weight": "Alta",
+      "active": false,
+      "status": "Não testada",
+      "id": "v6h0q4bqbh8c"
+    },
+    {
+      "name": "Exame",
+      "url": "https://exame.com/feed/",
+      "feeds": [
+        "https://exame.com/feed/",
+        "https://exame.com/brasil/feed/",
+        "https://exame.com/economia/feed/",
+        "https://exame.com/negocios/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "exame.com",
+      "queries": [
+        "economia",
+        "negócios",
+        "empresas",
+        "mercado"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "qchlk43rbh8c"
+    },
+    {
+      "name": "Folha de S.Paulo",
+      "url": "https://feeds.folha.uol.com.br/emcimadahora/rss091.xml",
+      "feeds": [
+        "https://feeds.folha.uol.com.br/emcimadahora/rss091.xml",
+        "https://feeds.folha.uol.com.br/poder/rss091.xml",
+        "https://feeds.folha.uol.com.br/cotidiano/rss091.xml",
+        "https://feeds.folha.uol.com.br/mercado/rss091.xml",
+        "https://feeds.folha.uol.com.br/mundo/rss091.xml",
+        "https://feeds.folha.uol.com.br/esporte/rss091.xml",
+        "https://feeds.folha.uol.com.br/ilustrada/rss091.xml",
+        "https://feeds.folha.uol.com.br/tec/rss091.xml",
+        "https://feeds.folha.uol.com.br/ciencia/rss091.xml",
+        "https://feeds.folha.uol.com.br/equilibrioesaude/rss091.xml",
+        "https://feeds.folha.uol.com.br/turismo/rss091.xml",
+        "https://feeds.folha.uol.com.br/comida/rss091.xml"
+      ],
+      "type": "web",
+      "method": "auto",
+      "domain": "feeds.folha.uol.com.br",
+      "queries": [
+        "Brasil",
+        "política",
+        "economia",
+        "cotidiano",
+        "segurança"
+      ],
+      "scope": "Nacional",
+      "weight": "Alta",
+      "active": false,
+      "status": "OK — Automático: RSS (96)",
+      "id": "hp3r1j7ibh8c"
+    },
+    {
+      "name": "G1",
+      "url": "https://g1.globo.com/rss/g1/",
+      "feeds": [
+        "https://g1.globo.com/rss/g1/",
+        "https://g1.globo.com/rss/g1/politica/",
+        "https://g1.globo.com/rss/g1/economia/",
+        "https://g1.globo.com/rss/g1/mundo/",
+        "https://g1.globo.com/rss/g1/educacao/",
+        "https://g1.globo.com/rss/g1/tecnologia/",
+        "https://g1.globo.com/rss/g1/pop-arte/",
+        "https://g1.globo.com/rss/g1/carros/",
+        "https://g1.globo.com/rss/g1/natureza/",
+        "https://g1.globo.com/rss/g1/turismo-e-viagem/",
+        "https://g1.globo.com/rss/g1/ciencia-e-saude",
+        "https://g1.globo.com/dynamo/politica/rss2.xml",
+        "https://g1.globo.com/dynamo/rn/rio-grande-do-norte/rss2.xml"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "g1.globo.com",
+      "queries": [
+        "Brasil",
+        "política",
+        "economia",
+        "segurança",
+        "Rio Grande do Norte",
+        "Natal"
+      ],
+      "scope": "Nacional",
+      "weight": "Alta",
+      "active": false,
+      "status": "OK — Automático: RSS (104)",
+      "id": "58max175bh8c"
+    },
+    {
+      "name": "Gazeta do Povo",
+      "url": "https://www.gazetadopovo.com.br/feed/rss/ultimas-noticias.xml",
+      "feeds": [
+        "https://www.gazetadopovo.com.br/feed/rss/ultimas-noticias.xml"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "www.gazetadopovo.com.br",
+      "queries": [
+        "Brasil",
+        "política",
+        "economia"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "ib6i87s5bh8c"
+    },
+    {
+      "name": "Gazeta Esportiva",
+      "url": "https://www.gazetaesportiva.com/feed/",
+      "feeds": [
+        "https://www.gazetaesportiva.com/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "www.gazetaesportiva.com",
+      "queries": [
+        "esportes",
+        "futebol",
+        "Campeonato Brasileiro"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "c3b5eev7bh8c"
+    },
+    {
+      "name": "Globo Esporte",
+      "url": "https://ge.globo.com/rss/ge/",
+      "feeds": [
+        "https://ge.globo.com/rss/ge/",
+        "https://pox.globo.com/rss/ge/"
+      ],
+      "type": "web",
+      "method": "auto",
+      "domain": "ge.globo.com",
+      "queries": [
+        "esportes",
+        "futebol",
+        "Série A",
+        "ABC",
+        "América-RN",
+        "Alecrim"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "OK — Automático: RSS (16)",
+      "id": "8ulwzud3bh8c",
+      "siteUrls": []
+    },
+    {
+      "id": "finryyv4bh8c",
+      "name": "Globo Esporte - RN",
+      "url": "",
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "https://ge.globo.com/",
+      "queries": [],
+      "scope": "Nacional",
+      "weight": "Alta",
+      "active": false,
+      "status": "OK — Página HTML",
+      "siteUrls": [
+        "https://ge.globo.com/rn/futebol/campeonato-potiguar/",
+        "https://ge.globo.com/rn/futebol/abc/",
+        "https://ge.globo.com/rn/futebol/america-rn/",
+        "https://ge.globo.com/rn/"
+      ]
+    },
+    {
+      "name": "InfoMoney",
+      "url": "https://www.infomoney.com.br/feed/",
+      "feeds": [
+        "https://www.infomoney.com.br/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "www.infomoney.com.br",
+      "queries": [
+        "economia",
+        "mercado",
+        "juros",
+        "inflação",
+        "investimentos"
+      ],
+      "scope": "Nacional",
+      "weight": "Alta",
+      "active": false,
+      "status": "Não testada",
+      "id": "ob3zm0t9bh8c"
+    },
+    {
+      "name": "Jornal da USP",
+      "url": "https://jornal.usp.br/feed/",
+      "feeds": [
+        "https://jornal.usp.br/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "jornal.usp.br",
+      "queries": [
+        "ciência",
+        "educação",
+        "pesquisa"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "65727ybcbh8c"
+    },
+    {
+      "name": "Jovem Pan",
+      "url": "https://jovempan.com.br/feed/",
+      "feeds": [
+        "https://jovempan.com.br/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "jovempan.com.br",
+      "queries": [
+        "Brasil",
+        "política",
+        "economia"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "t2wc5t9tbh8c"
+    },
+    {
+      "name": "Metrópoles",
+      "url": "https://www.metropoles.com/feed",
+      "feeds": [
+        "https://www.metropoles.com/feed",
+        "https://www.metropoles.com/colunas/claudia-meireles/feed",
+        "https://www.metropoles.com/colunas/rodrigo-franca/feed",
+        "https://www.metropoles.com/colunas/tiago-pavinatto/feed",
+        "https://www.metropoles.com/colunas/reinaldo-azevedo/feed",
+        "https://www.metropoles.com/colunas/demetrio-vecchioli/feed",
+        "https://www.metropoles.com/colunas/lucas-pasin/feed",
+        "https://www.metropoles.com/colunas/conceicao-freitas/feed",
+        "https://www.metropoles.com/colunas/nas-redes/feed",
+        "https://www.metropoles.com/colunas/juris/feed"
+      ],
+      "type": "web",
+      "method": "auto",
+      "domain": "www.metropoles.com",
+      "queries": [
+        "Brasil",
+        "política",
+        "economia",
+        "segurança"
+      ],
+      "scope": "Nacional",
+      "weight": "Baixa",
+      "active": false,
+      "status": "OK — Automático: RSS (80)",
+      "id": "5xpy7qj2bh8c"
+    },
+    {
+      "name": "Nexo Jornal",
+      "url": "https://www.nexojornal.com.br/rss.xml",
+      "feeds": [
+        "https://www.nexojornal.com.br/rss.xml"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "www.nexojornal.com.br",
+      "queries": [
+        "análise",
+        "política",
+        "sociedade"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "tmyydpdobh8c"
+    },
+    {
+      "name": "NOVO Notícias",
+      "url": "https://novonoticias.com.br/feed",
+      "feeds": [
+        "https://novonoticias.com.br/feed",
+        "https://novonoticias.com.br/categorias/ultimas/feed/",
+        "https://novonoticias.com.br/categorias/politica/feed/",
+        "https://novonoticias.com.br/categorias/economia/feed/",
+        "https://novonoticias.com.br/categorias/cotidiano/feed/",
+        "https://www.novonoticias.com.br/categorias/esporte/feed/",
+        "https://novonoticias.com.br/tags/natal/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "novonoticias.com.br",
+      "queries": [
+        "Rio Grande do Norte",
+        "Natal",
+        "política RN",
+        "Governo do RN",
+        "Assembleia Legislativa",
+        "Prefeitura de Natal",
+        "segurança RN",
+        "economia RN",
+        "esportes RN"
+      ],
+      "scope": "Local",
+      "weight": "Alta",
+      "active": false,
+      "status": "OK — Automático: RSS (56)",
+      "id": "q223dyarbh8c"
+    },
+    {
+      "name": "O Antagonista",
+      "url": "https://oantagonista.com.br/feed/",
+      "feeds": [
+        "https://oantagonista.com.br/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "oantagonista.com.br",
+      "queries": [
+        "política",
+        "Brasil",
+        "Congresso"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "nl03rvo9bh8c"
+    },
+    {
+      "name": "O Globo",
+      "url": "https://oglobo.globo.com/rss/oglobo",
+      "feeds": [
+        "https://oglobo.globo.com/rss/oglobo",
+        "https://oglobo.globo.com/rss.xml"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "oglobo.globo.com",
+      "queries": [
+        "Brasil",
+        "política",
+        "economia",
+        "cotidiano"
+      ],
+      "scope": "Nacional",
+      "weight": "Alta",
+      "active": false,
+      "status": "OK — Automático (RSS → Google Notícias)",
+      "id": "xbuvq4ngbh8c"
+    },
+    {
+      "name": "Olhar Digital",
+      "url": "https://olhardigital.com.br/feed/",
+      "feeds": [
+        "https://olhardigital.com.br/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "olhardigital.com.br",
+      "queries": [
+        "tecnologia",
+        "ciência",
+        "inovação"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "ky57lv3obh8c"
+    },
+    {
+      "name": "Poder360",
+      "url": "https://www.poder360.com.br/feed/",
+      "feeds": [
+        "https://www.poder360.com.br/feed/"
+      ],
+      "type": "web",
+      "method": "auto",
+      "domain": "www.poder360.com.br",
+      "queries": [
+        "política nacional",
+        "Congresso",
+        "Governo Federal",
+        "STF",
+        "economia"
+      ],
+      "scope": "Nacional",
+      "weight": "Baixa",
+      "active": false,
+      "status": "OK — Automático: RSS (8)",
+      "id": "f58cdhrwbh8c"
+    },
+    {
+      "name": "R7",
+      "url": "https://noticias.r7.com/feed.xml",
+      "feeds": [
+        "https://noticias.r7.com/feed.xml",
+        "https://www.r7.com/arc/outboundfeeds/rss/?outputType=xml"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "noticias.r7.com",
+      "queries": [
+        "Brasil",
+        "política",
+        "cotidiano"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "2t3t8jznbh8c"
+    },
+    {
+      "name": "Revista Oeste",
+      "url": "https://revistaoeste.com/feed/",
+      "feeds": [
+        "https://revistaoeste.com/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "revistaoeste.com",
+      "queries": [
+        "política",
+        "Brasil",
+        "atualidades"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "mgz8f5slbh8c"
+    },
+    {
+      "name": "Saiba Mais (RN)",
+      "url": "https://saibamais.jor.br/feed/",
+      "feeds": [
+        "https://saibamais.jor.br/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "saibamais.jor.br",
+      "queries": [
+        "Rio Grande do Norte",
+        "Natal",
+        "política RN",
+        "Governo do RN",
+        "Assembleia Legislativa",
+        "Prefeitura de Natal",
+        "direitos humanos",
+        "educação RN",
+        "saúde RN",
+        "segurança RN",
+        "cultura RN"
+      ],
+      "scope": "Local",
+      "weight": "Alta",
+      "active": false,
+      "status": "Não testada",
+      "id": "syb1youkbh8c"
+    },
+    {
+      "name": "Tecnoblog",
+      "url": "https://tecnoblog.net/feed/",
+      "feeds": [
+        "https://tecnoblog.net/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "tecnoblog.net",
+      "queries": [
+        "tecnologia",
+        "internet",
+        "celulares"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "qzxnah81bh8c"
+    },
+    {
+      "name": "Terra",
+      "url": "https://www.terra.com.br/rss/",
+      "feeds": [
+        "https://www.terra.com.br/rss/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "www.terra.com.br",
+      "queries": [
+        "Brasil",
+        "política",
+        "economia",
+        "cotidiano"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "Não testada",
+      "id": "h6axe8r7bh8c"
+    },
+    {
+      "name": "Tribuna do Norte",
+      "url": "https://tribunadonorte.com.br/categoria/politica/feed/",
+      "feeds": [
+        "https://tribunadonorte.com.br/categoria/politica/feed/",
+        "https://tribunadonorte.com.br/categoria/economia/feed/",
+        "https://tribunadonorte.com.br/categoria/esportes/feed/",
+        "https://tribunadonorte.com.br/categoria/natal/feed/"
+      ],
+      "type": "web",
+      "method": "auto",
+      "domain": "tribunadonorte.com.br",
+      "queries": [
+        "Rio Grande do Norte",
+        "Natal",
+        "política RN",
+        "Governo do RN",
+        "Assembleia Legislativa",
+        "Prefeitura de Natal",
+        "segurança RN",
+        "economia RN",
+        "esportes RN"
+      ],
+      "scope": "Local",
+      "weight": "Alta",
+      "active": false,
+      "status": "OK — Automático: RSS (20)",
+      "id": "uiwlne7rbh8c"
+    },
+    {
+      "name": "UOL Notícias",
+      "url": "https://rss.uol.com.br/feed/noticias.xml",
+      "feeds": [
+        "https://rss.uol.com.br/feed/noticias.xml",
+        "https://rss.uol.com.br/feed/politica.xml",
+        "https://rss.uol.com.br/feed/esporte.xml",
+        "https://rss.home.uol.com.br/index.xml"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "noticias.uol.com.br",
+      "queries": [
+        "Brasil",
+        "política",
+        "economia",
+        "segurança",
+        "esportes"
+      ],
+      "scope": "Nacional",
+      "weight": "Alta",
+      "active": false,
+      "status": "OK — Automático (RSS → Google Notícias)",
+      "id": "co57e6nzbh8c"
+    },
+    {
+      "name": "Valor Econômico",
+      "url": "https://valor.globo.com/rss/valor",
+      "feeds": [
+        "https://valor.globo.com/rss/valor"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "valor.globo.com",
+      "queries": [
+        "economia",
+        "negócios",
+        "mercado",
+        "empresas"
+      ],
+      "scope": "Nacional",
+      "weight": "Alta",
+      "active": false,
+      "status": "Não testada",
+      "id": "qvsjwdxnbh8c"
+    },
+    {
+      "name": "VEJA",
+      "url": "https://veja.abril.com.br/feed/",
+      "feeds": [
+        "https://veja.abril.com.br/feed/",
+        "https://veja.abril.com.br/ultimas-noticias/rss",
+        "https://veja.abril.com.br/politica/feed/"
+      ],
+      "type": "rss",
+      "method": "auto",
+      "domain": "veja.abril.com.br",
+      "queries": [
+        "Brasil",
+        "política",
+        "economia"
+      ],
+      "scope": "Nacional",
+      "weight": "Normal",
+      "active": false,
+      "status": "OK — Automático (RSS → Google Notícias)",
+      "id": "q2fgb2oxbh8c"
+    }
+  ],
+  "sourcePath": "profiles/radio.json"
+}
