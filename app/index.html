@@ -1506,7 +1506,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
     <div class="sidebar-prompt-section rules-instructions-content">
       <div class="editorial-profiles-toolbar">
         <div class="editorial-profile-picker"><label for="editorialProfileSelect" class="sidebar-section-title">Perfil em uso</label><select id="editorialProfileSelect" onchange="switchEditorialProfile(this.value)"></select></div>
-        <div class="editorial-profile-actions"><button class="btn btn-secondary" type="button" onclick="document.getElementById('editorialProfileImportFile').click()" title="Importar perfil JSON">Importar JSON</button><input id="editorialProfileImportFile" type="file" accept=".json,application/json" hidden onchange="importEditorialProfile(this)"><button class="btn btn-secondary" type="button" onclick="addEditorialProfile()" title="Criar perfil">+ Novo perfil</button><button class="btn btn-secondary" type="button" onclick="renameEditorialProfile()" title="Renomear perfil">Renomear</button><button class="btn btn-secondary" type="button" onclick="deleteEditorialProfile()" title="Excluir perfil">Excluir</button></div>
+        <div class="editorial-profile-actions"><button class="btn btn-secondary" type="button" onclick="loadGitHubEditorialProfiles(true)" title="Carregar perfis publicados no repositório GitHub">Carregar do GitHub</button><button class="btn btn-secondary" type="button" onclick="document.getElementById('editorialProfileImportFile').click()" title="Importar perfil JSON">Importar JSON</button><input id="editorialProfileImportFile" type="file" accept=".json,application/json" hidden onchange="importEditorialProfile(this)"><button class="btn btn-secondary" type="button" onclick="addEditorialProfile()" title="Criar perfil">+ Novo perfil</button><button class="btn btn-secondary" type="button" onclick="renameEditorialProfile()" title="Renomear perfil">Renomear</button><button class="btn btn-secondary" type="button" onclick="deleteEditorialProfile()" title="Excluir perfil">Excluir</button></div>
       </div>
       <p class="footer-note">Cada perfil guarda suas próprias instruções. Apenas um perfil fica ativo por vez e suas três regras são aplicadas em conjunto.</p>
       <label for="cfgEditorialProfile" class="sidebar-section-title">1. Perfil Editorial</label>
@@ -1703,6 +1703,35 @@ function saveActiveEditorialProfile(){
 function renderEditorialProfileSelector(){
   ensureEditorialProfiles();const sel=document.getElementById('editorialProfileSelect');if(!sel)return;
   sel.innerHTML=state.config.editorialProfiles.map(p=>`<option value="${esc(p.id)}">${esc(p.name||'Perfil sem nome')}</option>`).join('');sel.value=state.config.activeEditorialProfileId;
+}
+const RADAR_GITHUB_PROFILE_API='https://api.github.com/repos/cangulonarede/Radar/contents/profiles?ref=main';
+let githubProfilesLoading=false;
+async function loadGitHubEditorialProfiles(showFeedback=false){
+  if(githubProfilesLoading)return;
+  githubProfilesLoading=true;
+  const button=[...document.querySelectorAll('.editorial-profile-actions button')].find(b=>b.textContent.trim()==='Carregar do GitHub');
+  if(button){button.disabled=true;button.textContent='Carregando…';}
+  try{
+    const response=await fetch(RADAR_GITHUB_PROFILE_API,{headers:{'Accept':'application/vnd.github+json'}});
+    if(!response.ok)throw new Error(response.status===404?'Repositório ou pasta profiles ainda não publicados.':`GitHub respondeu HTTP ${response.status}.`);
+    const files=await response.json();
+    const jsonFiles=Array.isArray(files)?files.filter(f=>f.type==='file'&&f.name.toLowerCase().endsWith('.json')&&!f.name.toLowerCase().endsWith('.example.json')):[];
+    let added=0;
+    for(const file of jsonFiles){
+      const raw=await fetch(file.download_url);
+      if(!raw.ok)continue;
+      const data=await raw.json();
+      if(data?.type!=='radar-editorial-profile'||!String(data.name||'').trim()||!String(data.editorialProfile||'').trim())continue;
+      if(!data.interests||typeof data.interests!=='object'||!Array.isArray(data.interests['Política'])||!Array.isArray(data.interests['Descartar Assuntos']))continue;
+      const id='github-profile-'+file.name.replace(/[^a-z0-9_-]/gi,'-').toLowerCase();
+      if(state.config.editorialProfiles.some(p=>p.id===id))continue;
+      state.config.editorialProfiles.push({id,name:String(data.name).trim(),editorialProfile:String(data.editorialProfile),summaryPrompt:String(data.summaryPrompt||DEFAULT_SUMMARY_PROMPT),commentPrompt:String(data.commentPrompt||DEFAULT_RADIO_COMMENT_PROMPT),scopeFilter:data.scopeFilter?JSON.parse(JSON.stringify(data.scopeFilter)):null,interests:JSON.parse(JSON.stringify(data.interests)),source:'github',sourcePath:file.path});
+      added++;
+    }
+    persist();renderEditorialProfileSelector();
+    if(showFeedback)toast(added?`${added} perfil(is) carregado(s) do GitHub.`:(jsonFiles.length?'Os perfis do GitHub já estão carregados.':'Nenhum perfil JSON publicado foi encontrado.'));
+  }catch(error){console.warn('Catálogo de perfis do Radar',error);if(showFeedback)toast(error?.message||'Não foi possível consultar os perfis do GitHub.');}
+  finally{githubProfilesLoading=false;if(button){button.disabled=false;button.textContent='Carregar do GitHub';}}
 }
 function switchEditorialProfile(id){
   saveActiveEditorialProfile();const p=state.config.editorialProfiles.find(x=>x.id===id);if(!p)return;
@@ -3770,6 +3799,7 @@ function renderConfig(){
   const summaryEl=document.getElementById('cfgSummaryPrompt');if(summaryEl)summaryEl.value=activeProfile.summaryPrompt||DEFAULT_SUMMARY_PROMPT;
   const commentEl=document.getElementById('cfgCommentPrompt');if(commentEl)commentEl.value=activeProfile.commentPrompt||DEFAULT_RADIO_COMMENT_PROMPT;
   renderEditorialProfileSelector();
+  if(!state.config.editorialProfiles.some(p=>p.source==='github'))loadGitHubEditorialProfiles(false);
   renderGeminiModels([],c.model||'gemini-3.8-flash');
   const providerNote=document.getElementById('providerNote');if(providerNote)providerNote.textContent='Gemini selecionado. A Pesquisa Google é usada pelas fontes configuradas com esse método.';const proxyEl=document.getElementById('cfgProxy');if(proxyEl)proxyEl.value=c.proxy||'';
   if(document.getElementById('dateFrom'))document.getElementById('dateFrom').value=c.dateFrom||localISODate(-1);
@@ -4792,6 +4822,7 @@ ${String(footballData?.updatedAt||'não informada')}`;
   }
 }
 </style>
+<!-- Radar V1.19: catálogo remoto de perfis editoriais no GitHub, carregado ao abrir Regras e Instruções. -->
 </body>
 </html>
 <style id="v88-sidebar-import-width">
