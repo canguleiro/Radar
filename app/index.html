@@ -1704,7 +1704,7 @@ function renderEditorialProfileSelector(){
   ensureEditorialProfiles();const sel=document.getElementById('editorialProfileSelect');if(!sel)return;
   sel.innerHTML=state.config.editorialProfiles.map(p=>`<option value="${esc(p.id)}">${esc(p.name||'Perfil sem nome')}</option>`).join('');sel.value=state.config.activeEditorialProfileId;
 }
-const RADAR_GITHUB_PROFILE_API='https://api.github.com/repos/cangulonarede/Radar/contents/profiles?ref=main';
+const RADAR_GITHUB_PROFILE_API='https://api.github.com/repos/canguleiro/Radar/contents/profiles?ref=main';
 let githubProfilesLoading=false;
 async function loadGitHubEditorialProfiles(showFeedback=false){
   if(githubProfilesLoading)return;
