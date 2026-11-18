@@ -1738,7 +1738,7 @@ async function loadGitHubEditorialProfiles(showFeedback=false){
     if(!response.ok)throw new Error(response.status===404?'Repositório ou pasta profiles ainda não publicados.':`GitHub respondeu HTTP ${response.status}.`);
     const files=await response.json();
     const jsonFiles=Array.isArray(files)?files.filter(f=>f.type==='file'&&f.name.toLowerCase().endsWith('.json')&&!f.name.toLowerCase().endsWith('.template.json')):[];
-    const previousActiveId=state.config.activeEditorialProfileId||'';
+    const previousActiveId=localStorage.getItem(ACTIVE_PROFILE_KEY)||state.config.activeEditorialProfileId||'';
     const syncedProfiles=[];
     for(const file of jsonFiles){
       const raw=await fetch(file.download_url);
@@ -1757,7 +1757,7 @@ async function loadGitHubEditorialProfiles(showFeedback=false){
     else{state.config.editorialProfile='';state.config.summaryPrompt='';state.config.commentPrompt='';state.config.processingPrompt='';}
     persist();renderConfig();
     if(showFeedback)toast(syncedProfiles.length?`${syncedProfiles.length} perfil(is) sincronizado(s) com o GitHub.`:'Nenhum perfil JSON publicado foi encontrado no GitHub.');
-  }catch(error){console.warn('Catálogo de perfis do Radar',error);toast(`Não foi possível sincronizar os perfis com o GitHub. Os dados locais foram preservados. ${error?.message||''}`.trim());}
+  }catch(error){console.warn('Catálogo de perfis do Radar',error);toast(`Não foi possível sincronizar os perfis com o GitHub. Nenhum perfil é mantido no armazenamento local. ${error?.message||''}`.trim());}
   finally{githubProfilesLoading=false;if(button){button.disabled=false;button.textContent='Carregar Perfis';}}
 }
 function switchEditorialProfile(id){
@@ -1880,6 +1880,7 @@ async function deleteEditorialProfile(){
 }
 
 const KEY='RADAR_APP_V31';
+const ACTIVE_PROFILE_KEY='RADAR_LAST_GITHUB_PROFILE_ID';
 const GEMINI_COST_RATES={inputPerMillionUSD:0.75,outputPerMillionUSD:3.75,searchPerThousandUSD:14,usdToBrl:5.5,freeSearchesPerMonth:5000};
 function normalizeUsage(raw){
   const month=new Date().toISOString().slice(0,7);
@@ -1909,7 +1910,7 @@ function addUsageMeasurement(data){
     bucket.searchQueries+=queries; if(measured)bucket.measuredCalls++;
   }
   state.usage.month=new Date().toISOString().slice(0,7);
-  try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){console.warn('Não foi possível salvar o medidor de consumo',e);}
+  try{persist();}catch(e){console.warn('Não foi possível salvar o medidor de consumo',e);}
   renderGeminiUsageMeter();
 }
 async function trackedGeminiFetch(url,options){
@@ -1987,7 +1988,9 @@ state.sources=(state.sources||[]).filter(s=>s.name!=='Tribuna RN / Novo Notícia
 state.config={...defaultState.config,...state.config,provider:'gemini',editorialCounts:{...defaultState.config.editorialCounts,...(state.config?.editorialCounts||{})},percentages:{...defaultState.config.percentages,...(state.config?.percentages||{})},interests:{...defaultState.config.interests,...(state.config?.interests||{})}};
 state.config.collectionMethod='universal';
 // Aplica o novo perfil e as instruções completas como padrão em configurações antigas vazias ou ainda no padrão anterior.
-if(!String(state.config.editorialProfile||'').trim())state.config.editorialProfile=DEFAULT_EDITORIAL_PROFILE;
+state.config.editorialProfiles=[];
+state.config.activeEditorialProfileId=localStorage.getItem(ACTIVE_PROFILE_KEY)||'';
+state.config.editorialProfile='';state.config.summaryPrompt='';state.config.commentPrompt='';state.config.processingPrompt='';
 ensureEditorialProfiles();
 if(!String(state.config.processingPrompt||'').trim()||state.config.processingPrompt===DEFAULT_COMMENT_INSTRUCTIONS||state.config.processingPrompt.includes('Os comentários não devem ser meros resumos nem repetir o título.'))state.config.processingPrompt=DEFAULT_PROCESSING_PROMPT;
 state.usage=normalizeUsage(state.usage);
@@ -2033,12 +2036,27 @@ function loadState(){
         const exists=mergedSources.some(s=>s.name===ds.name || s.url===ds.url);
         if(!exists) mergedSources.push({...ds,id:uid()});
       });
-      return {...defaultState,...x,sources:mergedSources,config:{...defaultState.config,...x.config,editorialCounts:{...defaultState.config.editorialCounts,...(x.config?.editorialCounts||{})},percentages:{...defaultState.config.percentages,...(x.config?.percentages||{})},interests:{...defaultState.config.interests,...(x.config?.interests||{})},contextCards:{...defaultState.config.contextCards,...(x.config?.contextCards||{}),visibility:{...defaultState.config.contextCards.visibility,...(x.config?.contextCards?.visibility||{})},order:Array.isArray(x.config?.contextCards?.order)?x.config.contextCards.order:defaultState.config.contextCards.order}}};
+      const loaded={...defaultState,...x,sources:JSON.parse(JSON.stringify(defaultState.sources)),config:{...defaultState.config,...x.config,editorialCounts:{...defaultState.config.editorialCounts,...(x.config?.editorialCounts||{})},percentages:{...defaultState.config.percentages,...(x.config?.percentages||{})},interests:JSON.parse(JSON.stringify(defaultState.config.interests)),contextCards:{...defaultState.config.contextCards,...(x.config?.contextCards||{}),visibility:{...defaultState.config.contextCards.visibility,...(x.config?.contextCards?.visibility||{})},order:Array.isArray(x.config?.contextCards?.order)?x.config.contextCards.order:defaultState.config.contextCards.order}}};
+      loaded.config.editorialProfiles=[];
+      loaded.config.activeEditorialProfileId=localStorage.getItem(ACTIVE_PROFILE_KEY)||'';
+      loaded.config.editorialProfile='';loaded.config.summaryPrompt='';loaded.config.commentPrompt='';loaded.config.processingPrompt='';
+      return loaded;
     }
   }catch(e){}
   return structuredClone(defaultState);
 }
-function persist(){localStorage.setItem(KEY,JSON.stringify(state)); updateStats(); updateNexoAccess(); if(typeof refreshEditorialCards==='function')refreshEditorialCards()}
+function persist(){
+  const snapshot=JSON.parse(JSON.stringify(state));
+  // Perfis editoriais e suas fontes/instruções existem somente no GitHub; localmente fica apenas o ID selecionado.
+  snapshot.config.editorialProfiles=[];
+  snapshot.config.activeEditorialProfileId='';
+  snapshot.config.editorialProfile='';snapshot.config.summaryPrompt='';snapshot.config.commentPrompt='';snapshot.config.processingPrompt='';
+  snapshot.config.interests=JSON.parse(JSON.stringify(defaultState.config.interests));
+  snapshot.sources=JSON.parse(JSON.stringify(defaultState.sources));
+  try{localStorage.setItem(KEY,JSON.stringify(snapshot));}catch(e){console.warn('Não foi possível salvar os dados locais do Radar',e)}
+  try{const id=String(state.config.activeEditorialProfileId||'');if(id)localStorage.setItem(ACTIVE_PROFILE_KEY,id);else localStorage.removeItem(ACTIVE_PROFILE_KEY)}catch(e){}
+  updateStats(); updateNexoAccess(); if(typeof refreshEditorialCards==='function')refreshEditorialCards()
+}
 function updateNexoAccess(){
   const enabled=Array.isArray(state?.radar)&&state.radar.length>0;
   document.querySelectorAll('button[data-page="radar"]').forEach(btn=>{
