@@ -1720,10 +1720,12 @@ function applyCatalogToProfile(profile){
  state.sources=(sourceCatalogOriginal||[]).map(src=>({...JSON.parse(JSON.stringify(src)),active:states.get(String(src.id))===true,status:src.status||'Não testada'}));
 }
 async function loadGitHubSourceCatalog(){
- const response=await fetch(RADAR_GITHUB_SOURCES_API,{headers:{'Accept':'application/vnd.github+json','Cache-Control':'no-cache'}});
+ // Busca o arquivo público diretamente no raw.githubusercontent.com. Evita a requisição
+ // intermediária à API Contents e cabeçalhos personalizados que podem provocar preflight CORS.
+ const rawUrl='https://raw.githubusercontent.com/canguleiro/Radar/main/sources/catalog.json';
+ const response=await fetch(rawUrl,{cache:'no-store'});
  if(!response.ok)throw new Error(`Não foi possível carregar o catálogo de fontes (HTTP ${response.status}).`);
- const file=await response.json();const raw=await fetch(file.download_url,{cache:'no-store'});if(!raw.ok)throw new Error('Não foi possível baixar o catálogo de fontes.');
- const data=await raw.json();if(data?.type!=='radar-source-catalog'||!Array.isArray(data.sources))throw new Error('Formato do catálogo de fontes inválido.');
+ const data=await response.json();if(data?.type!=='radar-source-catalog'||!Array.isArray(data.sources))throw new Error('Formato do catálogo de fontes inválido.');
  sourceCatalogOriginal=data.sources.map(x=>({...x}));sourceCatalogLoaded=true;sourceCatalogDirty=false;
  const p=activeEditorialProfile();if(p)applyCatalogToProfile(p);else state.sources=sourceCatalogOriginal.map(x=>({...x,active:false}));
  renderSources();return data.sources.length;
@@ -4404,7 +4406,11 @@ function initCollectionDates(){
   to.value=localISODate(0);
   if(state&&state.config){state.config.dateFrom=from.value;state.config.dateTo=to.value;persist()}
 }
-renderConfig();renderNews();renderNexo();updateStats();loadGitHubSourceCatalog().then(()=>loadGitHubEditorialProfiles(false)).catch(e=>{console.error(e);toast('Não foi possível carregar o catálogo global de fontes: '+e.message);});
+renderConfig();renderNews();renderNexo();updateStats();
+// Catálogo e perfis são carregados de forma independente: uma falha no catálogo
+// não pode impedir o preenchimento do seletor de perfis.
+loadGitHubSourceCatalog().catch(e=>{console.error('Catálogo global de fontes',e);toast('Não foi possível carregar o catálogo global de fontes: '+e.message);});
+loadGitHubEditorialProfiles(false).catch(e=>{console.error('Perfis editoriais do GitHub',e);toast('Não foi possível carregar os perfis do GitHub: '+e.message);});
 initCollectionDates();
 </script>
 <script>applyTheme(localStorage.getItem('radar_theme')==='dark'?'dark':'light');initViewControls();
@@ -4964,7 +4970,7 @@ ${String(footballData?.updatedAt||'não informada')}`;
   }
 }
 </style>
-<!-- Radar V1.33: limpeza da barra lateral e atualização imediata das fontes na troca de perfil. -->
+<!-- Radar V1.34: limpeza da barra lateral e atualização imediata das fontes na troca de perfil. -->
 <!-- Radar V1.19: catálogo remoto de perfis editoriais no GitHub, carregado ao abrir Regras e Instruções. -->
 </body>
 </html>
