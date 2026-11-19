@@ -1284,10 +1284,8 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
         <div class="toolbar sidebar-collect-toolbar">
           <button class="btn btn-primary collect-news-btn" onclick="collectNews()"><span class="collect-news-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="M2 7v12a1 1 0 0 0 1 1"/></g></svg></span> Coletar notícias</button>
           <div class="sidebar-collect-secondary-actions">
-            <button class="btn btn-secondary outlook-import-btn" id="outlookImportBtn" type="button" onclick="importOutlookBulletin()"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Boletim</button>
             <button class="btn btn-danger clear-sidebar-btn clear-collection-top-btn" onclick="clearNews()"><i class="fa-regular fa-newspaper" aria-hidden="true"></i> Limpar</button>
           </div>
-          <div id="outlookImportStatus" class="small" role="status" aria-live="polite"></div>
         </div>
         <div class="sidebar-actions-divider collect-actions-divider" role="separator"></div>
         <div class="sidebar-collection-progress">
@@ -1365,9 +1363,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
               <div class="sidebar-section-title">Dados do sistema</div>
               <button class="btn btn-primary save-data-btn" type="button" onclick="saveAllData()">Salvar dados</button>
               <button class="btn btn-danger clear-storage-data-btn" type="button" onclick="openClearStorageModal()">Limpar dados</button>
-              <button class="btn btn-secondary" type="button" onclick="exportSystemData()">Exportar dados</button>
-              <button class="btn btn-secondary" type="button" onclick="document.getElementById('sidebarImportFile').click()">Importar dados</button>
-              <input id="sidebarImportFile" type="file" accept=".json,application/json" class="hidden" onchange="importSystemData(event)">
+
             </div>
           </div>
         </div>
@@ -1769,7 +1765,12 @@ function switchEditorialProfile(id){
   const selected=state.config.editorialProfiles.find(x=>x.id===id);
   if(selected?.interests)state.config.interests=JSON.parse(JSON.stringify(selected.interests));
   applyProfileSources(selected);
-  persist();renderConfig();
+  // Atualiza imediatamente a tabela de fontes com o conjunto do perfil recém-selecionado.
+  // renderConfig também atualiza fontes, mas a chamada explícita evita depender da ordem
+  // de renderização dos painéis/modal e garante a troca visual no mesmo evento.
+  persist();
+  renderConfig();
+  renderSources();
 }
 function cleanEditorialProfileName(value){return String(value||'').trim().replace(/\.json$/i,'').trim();}
 function addEditorialProfile(){
@@ -4942,6 +4943,7 @@ ${String(footballData?.updatedAt||'não informada')}`;
   }
 }
 </style>
+<!-- Radar V1.32: limpeza da barra lateral e atualização imediata das fontes na troca de perfil. -->
 <!-- Radar V1.19: catálogo remoto de perfis editoriais no GitHub, carregado ao abrir Regras e Instruções. -->
 </body>
 </html>
@@ -5983,4 +5985,18 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
 .editorial-rules-grid textarea{height:260px;max-height:42vh}
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
+</style>
+
+<style id="radar-v132-sidebar-and-profile-switch">
+/* V1.32: removeu-se o botão Boletim; Limpar ocupa toda a largura disponível. */
+#page-noticias .sidebar-collect-secondary-actions {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  width: 100% !important;
+}
+#page-noticias .sidebar-collect-secondary-actions .clear-collection-top-btn {
+  width: 100% !important;
+  min-width: 0 !important;
+  grid-column: 1 / -1 !important;
+}
 </style>
