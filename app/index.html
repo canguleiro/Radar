@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Radar Interface 2026 V1.28: catálogo GitHub aceita perfis JSON publicados com sufixo .example.json. -->
+<!-- Radar Interface 2026 V1.1: agrupamento de coberturas sem descarte de matérias. -->
 <html lang="pt-BR">
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -1284,8 +1284,10 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
         <div class="toolbar sidebar-collect-toolbar">
           <button class="btn btn-primary collect-news-btn" onclick="collectNews()"><span class="collect-news-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="M2 7v12a1 1 0 0 0 1 1"/></g></svg></span> Coletar notícias</button>
           <div class="sidebar-collect-secondary-actions">
+            <button class="btn btn-secondary outlook-import-btn" id="outlookImportBtn" type="button" onclick="importOutlookBulletin()"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Boletim</button>
             <button class="btn btn-danger clear-sidebar-btn clear-collection-top-btn" onclick="clearNews()"><i class="fa-regular fa-newspaper" aria-hidden="true"></i> Limpar</button>
           </div>
+          <div id="outlookImportStatus" class="small" role="status" aria-live="polite"></div>
         </div>
         <div class="sidebar-actions-divider collect-actions-divider" role="separator"></div>
         <div class="sidebar-collection-progress">
@@ -1351,7 +1353,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
                 <div class="context-card-settings-body">
                   <p class="footer-note">Escolha quais cards serão exibidos. Arraste os cards na coluna direita para mudar a ordem.</p>
                   <label class="context-setting-option"><input type="checkbox" id="showContextClock" checked onchange="setContextCardVisibility('clock',this.checked)"> Data, hora e clima</label>
-                  <label class="context-setting-option"><input type="checkbox" id="showContextTimer" onchange="setContextCardVisibility('timer',this.checked)"> Timer</label>
+                  <label class="context-setting-option"><input type="checkbox" id="showContextTimer" checked onchange="setContextCardVisibility('timer',this.checked)"> Timer</label>
                   <label class="context-setting-option"><input type="checkbox" id="showContextUrgency" onchange="setContextCardVisibility('urgency',this.checked)"> Radar de urgência</label>
                   <label class="context-setting-option"><input type="checkbox" id="showContextAgenda" checked onchange="setContextCardVisibility('agenda',this.checked)"> Agenda do dia</label>
                   <label class="context-setting-option"><input type="checkbox" id="showContextRundown" onchange="setContextCardVisibility('rundown',this.checked)"> Tempo estimado da pauta</label>
@@ -1363,7 +1365,9 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
               <div class="sidebar-section-title">Dados do sistema</div>
               <button class="btn btn-primary save-data-btn" type="button" onclick="saveAllData()">Salvar dados</button>
               <button class="btn btn-danger clear-storage-data-btn" type="button" onclick="openClearStorageModal()">Limpar dados</button>
-
+              <button class="btn btn-secondary" type="button" onclick="exportSystemData()">Exportar dados</button>
+              <button class="btn btn-secondary" type="button" onclick="document.getElementById('sidebarImportFile').click()">Importar dados</button>
+              <input id="sidebarImportFile" type="file" accept=".json,application/json" class="hidden" onchange="importSystemData(event)">
             </div>
           </div>
         </div>
@@ -1394,6 +1398,12 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
         <p class="footer-note">O cadastro define a origem, o domínio, a abrangência padrão e o peso editorial. O método de pesquisa é escolhido na barra lateral no momento da coleta.</p>
       </div>
 
+      <div class="card">
+        <h3>Coleta avançada</h3>
+        <label>Proxy RSS opcional</label>
+        <input id="cfgProxy" placeholder="https://api.rss2json.com/v1/api.json?rss_url=">
+        <p class="footer-note">O Radar tenta primeiro o feed diretamente. Se houver bloqueio do navegador, pode usar o proxy configurado. Deixe vazio para não usar proxy.</p>
+      </div>
 
     </section>
   </main>
@@ -1496,7 +1506,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
     <div class="sidebar-prompt-section rules-instructions-content">
       <div class="editorial-profiles-toolbar">
         <div class="editorial-profile-picker"><label for="editorialProfileSelect" class="sidebar-section-title">Perfil em uso</label><select id="editorialProfileSelect" onchange="switchEditorialProfile(this.value)"></select></div>
-        <div class="editorial-profile-actions"><button class="btn btn-secondary" type="button" onclick="addEditorialProfile()">Novo Perfil</button><button class="btn btn-secondary" type="button" onclick="saveEditorialProfileToGitHub('update')">Atualizar Perfil</button><button class="btn btn-secondary" type="button" onclick="renameEditorialProfile()">Renomear Perfil</button><button class="btn btn-secondary" type="button" onclick="deleteEditorialProfile()">Excluir Perfil</button><button class="btn btn-secondary" type="button" onclick="loadGitHubEditorialProfiles(true)">Carregar Perfis</button></div>
+        <div class="editorial-profile-actions"><button class="btn btn-secondary" type="button" onclick="loadGitHubEditorialProfiles(true)" title="Carregar perfis publicados no repositório GitHub">Carregar do GitHub</button><button class="btn btn-secondary" type="button" onclick="document.getElementById('editorialProfileImportFile').click()" title="Importar perfil JSON">Importar JSON</button><input id="editorialProfileImportFile" type="file" accept=".json,application/json" hidden onchange="importEditorialProfile(this)"><button class="btn btn-secondary" type="button" onclick="addEditorialProfile()" title="Criar perfil">+ Novo perfil</button><button class="btn btn-secondary" type="button" onclick="renameEditorialProfile()" title="Renomear perfil">Renomear</button><button class="btn btn-secondary" type="button" onclick="deleteEditorialProfile()" title="Excluir perfil">Excluir</button></div>
       </div>
       <p class="footer-note">Cada perfil guarda suas próprias instruções. Apenas um perfil fica ativo por vez e suas três regras são aplicadas em conjunto.</p>
       <label for="cfgEditorialProfile" class="sidebar-section-title">1. Perfil Editorial</label>
@@ -1663,82 +1673,50 @@ function splitLegacyProcessingPrompt(value){
 }
 function ensureEditorialProfiles(){
   const c=state.config;
-  if(!Array.isArray(c.editorialProfiles))c.editorialProfiles=[];
+  if(!Array.isArray(c.editorialProfiles)||!c.editorialProfiles.length){
+    const legacy=splitLegacyProcessingPrompt(c.processingPrompt||c.customPrompt||DEFAULT_PROCESSING_PROMPT);
+    c.editorialProfiles=[{id:'profile-default',name:'Perfil padrão',editorialProfile:c.editorialProfile||DEFAULT_EDITORIAL_PROFILE,summaryPrompt:legacy.summary||DEFAULT_SUMMARY_PROMPT,commentPrompt:legacy.comment||DEFAULT_RADIO_COMMENT_PROMPT}];
+    c.activeEditorialProfileId='profile-default';
+  }
   c.editorialProfiles.forEach(p=>{
     if(!p.interests||typeof p.interests!=='object')p.interests=JSON.parse(JSON.stringify(c.interests||defaultState.config.interests));
-    if(p.id===c.activeEditorialProfileId)p.sources=JSON.parse(JSON.stringify(state.sources||[]));
-    else if(Array.isArray(p.sources)){
-      const catalog=[...(state.sources||[]),...(defaultState.sources||[])];
-      const byId=new Map(catalog.map(s=>[String(s.id||''),s]));
-      const byName=new Map(catalog.map(s=>[String(s.name||'').trim().toLowerCase(),s]));
-      p.sources=p.sources.map(saved=>({...JSON.parse(JSON.stringify(byId.get(String(saved.id||''))||byName.get(String(saved.name||'').trim().toLowerCase())||{})),...JSON.parse(JSON.stringify(saved))}));
-    }
   });
-  let active=c.editorialProfiles.find(x=>x.id===c.activeEditorialProfileId)||null;
-  // Enquanto a consulta ao GitHub não termina, a lista fica vazia. Não apagar aqui
-  // o ID local do último perfil: ele será usado para selecionar o perfil após a sincronização.
-  if(!active&&c.editorialProfiles.length){active=c.editorialProfiles[0];c.activeEditorialProfileId=active.id;}
-  if(active){
-    c.editorialProfile=active.editorialProfile||'';
-    c.summaryPrompt=active.summaryPrompt||'';
-    c.commentPrompt=active.commentPrompt||'';
-    c.processingPrompt=[c.summaryPrompt,c.commentPrompt].filter(Boolean).join('\n\n');
-  }else{
-    c.editorialProfile='';c.summaryPrompt='';c.commentPrompt='';c.processingPrompt='';
-  }
+  let active=c.editorialProfiles.find(x=>x.id===c.activeEditorialProfileId);
+  if(!active){active=c.editorialProfiles[0];c.activeEditorialProfileId=active.id;}
+  c.editorialProfile=active.editorialProfile||'';
+  c.summaryPrompt=active.summaryPrompt||DEFAULT_SUMMARY_PROMPT;
+  c.commentPrompt=active.commentPrompt||DEFAULT_RADIO_COMMENT_PROMPT;
+  c.processingPrompt=[c.summaryPrompt,c.commentPrompt].filter(Boolean).join('\n\n');
   return active;
 }
 function activeEditorialProfile(){return ensureEditorialProfiles()}
-function getProcessingInstructions(){const p=activeEditorialProfile();return {editorial:p?.editorialProfile||'',summary:p?.summaryPrompt||'',comment:p?.commentPrompt||''}}
+function getProcessingInstructions(){const p=activeEditorialProfile();return {editorial:p.editorialProfile||'',summary:p.summaryPrompt||'',comment:p.commentPrompt||''}}
 function saveActiveEditorialProfile(){
   const p=activeEditorialProfile();
-  if(!p)return;
   p.editorialProfile=document.getElementById('cfgEditorialProfile')?.value.trim()||'';
   p.summaryPrompt=document.getElementById('cfgSummaryPrompt')?.value||'';
   p.commentPrompt=document.getElementById('cfgCommentPrompt')?.value||'';
   p.interests=JSON.parse(JSON.stringify(state.config.interests||defaultState.config.interests));
-  p.sources=(state.sources||[]).map(source=>({...JSON.parse(JSON.stringify(source)),active:source.active===true}));
   state.config.editorialProfile=p.editorialProfile;state.config.summaryPrompt=p.summaryPrompt;state.config.commentPrompt=p.commentPrompt;
   state.config.processingPrompt=[p.summaryPrompt,p.commentPrompt].filter(Boolean).join('\n\n');persist();
 }
-
-function applyProfileSources(profile){
-  const current=state.sources||[], native=defaultState.sources||[];
-  if(!profile||!Array.isArray(profile.sources)){
-    state.sources=native.map(src=>({...JSON.parse(JSON.stringify(src)),active:false,status:src.status||'Não testada'}));
-    return true;
-  }
-  const index=list=>({id:new Map(list.map(s=>[String(s.id||''),s])),name:new Map(list.map(s=>[String(s.name||'').trim().toLowerCase(),s]))});
-  const ci=index(current),ni=index(native);
-  state.sources=profile.sources.filter(s=>s&&typeof s==='object').map(saved=>{
-    const base=ci.id.get(String(saved.id||''))||ci.name.get(String(saved.name||'').trim().toLowerCase())||ni.id.get(String(saved.id||''))||ni.name.get(String(saved.name||'').trim().toLowerCase())||{};
-    return {...JSON.parse(JSON.stringify(base)),...JSON.parse(JSON.stringify(saved)),active:saved.active===true};
-  });
-  return true;
-}
-
 function renderEditorialProfileSelector(){
   ensureEditorialProfiles();const sel=document.getElementById('editorialProfileSelect');if(!sel)return;
-  sel.innerHTML=state.config.editorialProfiles.map(p=>`<option value="${esc(p.id)}">${esc(p.name||'Perfil sem nome')}</option>`).join('');sel.value=state.config.activeEditorialProfileId||'';
+  sel.innerHTML=state.config.editorialProfiles.map(p=>`<option value="${esc(p.id)}">${esc(p.name||'Perfil sem nome')}</option>`).join('');sel.value=state.config.activeEditorialProfileId;
 }
 const RADAR_GITHUB_PROFILE_API='https://api.github.com/repos/canguleiro/Radar/contents/profiles?ref=main';
-const RADAR_GITHUB_PROFILE_WRITE_API='https://radar-api.camiloctorquato.workers.dev/api/profiles/save';
-const RADAR_GITHUB_PROFILE_RENAME_API='https://radar-api.camiloctorquato.workers.dev/api/profiles/rename';
-const RADAR_GITHUB_PROFILE_DELETE_API='https://radar-api.camiloctorquato.workers.dev/api/profiles/delete';
 let githubProfilesLoading=false;
 async function loadGitHubEditorialProfiles(showFeedback=false){
   if(githubProfilesLoading)return;
-  // Captura síncrona: init/persist não pode apagar a seleção enquanto o fetch está em andamento.
-  const previousActiveId=localStorage.getItem(ACTIVE_PROFILE_KEY)||state.config.activeEditorialProfileId||'';
   githubProfilesLoading=true;
-  const button=[...document.querySelectorAll('.editorial-profile-actions button')].find(b=>b.textContent.trim()==='Carregar Perfis');
+  const button=[...document.querySelectorAll('.editorial-profile-actions button')].find(b=>b.textContent.trim()==='Carregar do GitHub');
   if(button){button.disabled=true;button.textContent='Carregando…';}
   try{
     const response=await fetch(RADAR_GITHUB_PROFILE_API,{headers:{'Accept':'application/vnd.github+json'}});
     if(!response.ok)throw new Error(response.status===404?'Repositório ou pasta profiles ainda não publicados.':`GitHub respondeu HTTP ${response.status}.`);
     const files=await response.json();
-    const jsonFiles=Array.isArray(files)?files.filter(f=>f.type==='file'&&f.name.toLowerCase().endsWith('.json')&&!f.name.toLowerCase().endsWith('.template.json')):[];
-    const syncedProfiles=[];
+    const jsonFiles=Array.isArray(files)?files.filter(f=>f.type==='file'&&f.name.toLowerCase().endsWith('.json')&&!f.name.toLowerCase().endsWith('.example.json')):[];
+    let added=0;
     for(const file of jsonFiles){
       const raw=await fetch(file.download_url);
       if(!raw.ok)continue;
@@ -1746,38 +1724,27 @@ async function loadGitHubEditorialProfiles(showFeedback=false){
       if(data?.type!=='radar-editorial-profile'||!String(data.name||'').trim()||!String(data.editorialProfile||'').trim())continue;
       if(!data.interests||typeof data.interests!=='object'||!Array.isArray(data.interests['Política'])||!Array.isArray(data.interests['Descartar Assuntos']))continue;
       const id='github-profile-'+file.name.replace(/[^a-z0-9_-]/gi,'-').toLowerCase();
-      const existing=state.config.editorialProfiles.find(p=>p.id===id);
-      syncedProfiles.push({id,name:String(data.name).trim(),editorialProfile:String(data.editorialProfile),summaryPrompt:String(data.summaryPrompt||DEFAULT_SUMMARY_PROMPT),commentPrompt:String(data.commentPrompt||DEFAULT_RADIO_COMMENT_PROMPT),scopeFilter:data.scopeFilter?JSON.parse(JSON.stringify(data.scopeFilter)):null,interests:JSON.parse(JSON.stringify(data.interests)),sources:Array.isArray(data.sources)?JSON.parse(JSON.stringify(data.sources)):undefined,source:'github',sourcePath:file.path});
+      if(state.config.editorialProfiles.some(p=>p.id===id))continue;
+      state.config.editorialProfiles.push({id,name:String(data.name).trim(),editorialProfile:String(data.editorialProfile),summaryPrompt:String(data.summaryPrompt||DEFAULT_SUMMARY_PROMPT),commentPrompt:String(data.commentPrompt||DEFAULT_RADIO_COMMENT_PROMPT),scopeFilter:data.scopeFilter?JSON.parse(JSON.stringify(data.scopeFilter)):null,interests:JSON.parse(JSON.stringify(data.interests)),source:'github',sourcePath:file.path});
+      added++;
     }
-    state.config.editorialProfiles=syncedProfiles;
-    const selected=state.config.editorialProfiles.find(p=>p.id===previousActiveId)||state.config.editorialProfiles[0]||null;
-    state.config.activeEditorialProfileId=selected?.id||'';
-    if(selected){if(selected.interests)state.config.interests=JSON.parse(JSON.stringify(selected.interests));applyProfileSources(selected);}
-    else{state.config.editorialProfile='';state.config.summaryPrompt='';state.config.commentPrompt='';state.config.processingPrompt='';}
-    persist();renderConfig();
-    if(showFeedback)toast(syncedProfiles.length?`${syncedProfiles.length} perfil(is) sincronizado(s) com o GitHub.`:'Nenhum perfil JSON publicado foi encontrado no GitHub.');
-  }catch(error){console.warn('Catálogo de perfis do Radar',error);toast(`Não foi possível sincronizar os perfis com o GitHub. Nenhum perfil é mantido no armazenamento local. ${error?.message||''}`.trim());}
-  finally{githubProfilesLoading=false;if(button){button.disabled=false;button.textContent='Carregar Perfis';}}
+    persist();renderEditorialProfileSelector();
+    if(showFeedback)toast(added?`${added} perfil(is) carregado(s) do GitHub.`:(jsonFiles.length?'Os perfis do GitHub já estão carregados.':'Nenhum perfil JSON publicado foi encontrado.'));
+  }catch(error){console.warn('Catálogo de perfis do Radar',error);if(showFeedback)toast(error?.message||'Não foi possível consultar os perfis do GitHub.');}
+  finally{githubProfilesLoading=false;if(button){button.disabled=false;button.textContent='Carregar do GitHub';}}
 }
 function switchEditorialProfile(id){
   saveActiveEditorialProfile();const p=state.config.editorialProfiles.find(x=>x.id===id);if(!p)return;
   state.config.activeEditorialProfileId=id;ensureEditorialProfiles();
   const selected=state.config.editorialProfiles.find(x=>x.id===id);
   if(selected?.interests)state.config.interests=JSON.parse(JSON.stringify(selected.interests));
-  applyProfileSources(selected);
-  // Atualiza imediatamente a tabela de fontes com o conjunto do perfil recém-selecionado.
-  // renderConfig também atualiza fontes, mas a chamada explícita evita depender da ordem
-  // de renderização dos painéis/modal e garante a troca visual no mesmo evento.
-  persist();
-  renderConfig();
-  renderSources();
+  persist();renderConfig();
 }
-function cleanEditorialProfileName(value){return String(value||'').trim().replace(/\.json$/i,'').trim();}
 function addEditorialProfile(){
-  saveActiveEditorialProfile();const name=cleanEditorialProfileName(prompt('Nome do novo perfil:'));if(!name)return;
+  saveActiveEditorialProfile();const name=prompt('Nome do novo perfil editorial:');if(!name||!name.trim())return;
   const id='profile-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7);
-  state.config.editorialProfiles.push({id,name,editorialProfile:DEFAULT_EDITORIAL_PROFILE,summaryPrompt:DEFAULT_SUMMARY_PROMPT,commentPrompt:DEFAULT_RADIO_COMMENT_PROMPT,sources:JSON.parse(JSON.stringify(state.sources||[]))});
-  state.config.activeEditorialProfileId=id;ensureEditorialProfiles();persist();renderConfig();toast('Novo perfil criado. Vamos publicá-lo no GitHub.');saveEditorialProfileToGitHub('create');
+  state.config.editorialProfiles.push({id,name:name.trim(),editorialProfile:DEFAULT_EDITORIAL_PROFILE,summaryPrompt:DEFAULT_SUMMARY_PROMPT,commentPrompt:DEFAULT_RADIO_COMMENT_PROMPT});
+  state.config.activeEditorialProfileId=id;ensureEditorialProfiles();persist();renderConfig();toast('Novo perfil criado.');
 }
 function importEditorialProfile(input){
   const file=input?.files?.[0];if(!file)return;
@@ -1799,14 +1766,12 @@ function importEditorialProfile(input){
         summaryPrompt:String(data.summaryPrompt||DEFAULT_SUMMARY_PROMPT),
         commentPrompt:String(data.commentPrompt||DEFAULT_RADIO_COMMENT_PROMPT),
         scopeFilter:data.scopeFilter?JSON.parse(JSON.stringify(data.scopeFilter)):null,
-        interests:JSON.parse(JSON.stringify(data.interests)),
-        sources:Array.isArray(data.sources)?JSON.parse(JSON.stringify(data.sources)):undefined,sourcePath:data.sourcePath||undefined,source:'import'
+        interests:JSON.parse(JSON.stringify(data.interests))
       };
       state.config.editorialProfiles.push(profile);
       state.config.activeEditorialProfileId=id;
       ensureEditorialProfiles();
       state.config.interests=JSON.parse(JSON.stringify(profile.interests));
-      applyProfileSources(profile);
       persist();
       renderConfig();
       toast(profile.scopeFilter?'Perfil importado, ativado e com filtro exclusivo de entidades.':'Perfil editorial importado e ativado.');
@@ -1819,74 +1784,15 @@ function importEditorialProfile(input){
   reader.onerror=()=>{toast('Não foi possível ler o arquivo JSON.');input.value='';};
   reader.readAsText(file);
 }
-function editorialProfilePayload(profile=activeEditorialProfile()){
-  if(!profile)throw new Error('Carregue um perfil do GitHub ou crie um novo perfil antes de continuar.');
-  saveActiveEditorialProfile();
-  // Fonte de verdade do estado de ativação é a tabela atualmente exibida no perfil ativo.
-  profile.sources=(state.sources||[]).map(source=>({...JSON.parse(JSON.stringify(source)),active:source.active===true}));
-  return {version:2,type:'radar-editorial-profile',name:String(profile.name||'Perfil sem nome'),editorialProfile:String(profile.editorialProfile||''),summaryPrompt:String(profile.summaryPrompt||DEFAULT_SUMMARY_PROMPT),commentPrompt:String(profile.commentPrompt||DEFAULT_RADIO_COMMENT_PROMPT),scopeFilter:profile.scopeFilter||null,interests:JSON.parse(JSON.stringify(profile.interests||state.config.interests||defaultState.config.interests)),sources:(profile.sources||state.sources||[]).map(source=>({...JSON.parse(JSON.stringify(source)),active:source.active===true})),sourcePath:profile.sourcePath||undefined};
+function renameEditorialProfile(){
+  const p=activeEditorialProfile();const name=prompt('Novo nome do perfil:',p.name||'');if(!name||!name.trim())return;p.name=name.trim();persist();renderEditorialProfileSelector();
 }
-function profileFileSlug(name){return String(name||'perfil').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70)||'perfil';}
-async function saveEditorialProfileToGitHub(mode){
-  const p=activeEditorialProfile();if(!p){toast('Carregue ou crie um perfil antes de atualizar.');return;}const payload=editorialProfilePayload(p);
-  let path=p.sourcePath||'';
-  if(mode==='update'){
-    if(!path||!String(path).startsWith('profiles/')){toast('Este perfil ainda não está vinculado a um arquivo do GitHub. Crie e publique o perfil primeiro.');return;}
-    if(!confirm(`Atualizar o arquivo ${path} no GitHub? O conteúdo atual será substituído.`))return;
-  }else{
-    const profileName=cleanEditorialProfileName(p.name);
-    if(!profileName){toast('Informe um nome válido para o perfil.');return;}
-    p.name=profileName;
-    const filename=profileFileSlug(profileName)+'.json';
-    path='profiles/'+filename;
-    if(!confirm(`Publicar o perfil “${profileName}” como ${path} no GitHub?`))return;
-  }
-  try{
-    payload.sourcePath=path;
-    const accessToken=prompt('Informe o token de acesso do Radar para autorizar a publicação deste perfil:');
-    if(!accessToken)return;
-    const response=await fetch(RADAR_GITHUB_PROFILE_WRITE_API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+accessToken.trim()},body:JSON.stringify({mode,path,profile:payload})});
-    const result=await response.json().catch(()=>({}));
-    if(response.status===401)throw new Error('Token de acesso inválido. Confira o token RADAR_IMPORT_TOKEN cadastrado no Cloudflare.');
-    if(!response.ok||!result.ok)throw new Error(result.error||`Worker respondeu HTTP ${response.status}.`);
-    p.source='github';p.sourcePath=result.path||path;persist();
-    toast(mode==='update'?'Perfil atualizado no GitHub.':'Novo perfil publicado no GitHub.');
-  }catch(error){console.error('Publicação de perfil no GitHub',error);toast(error.message||'Não foi possível salvar o perfil no GitHub.');}
+function deleteEditorialProfile(){
+  if(state.config.editorialProfiles.length<=1){toast('É necessário manter pelo menos um perfil.');return;}
+  const p=activeEditorialProfile();if(!confirm(`Excluir o perfil “${p.name}”? Esta ação não pode ser desfeita.`))return;
+  state.config.editorialProfiles=state.config.editorialProfiles.filter(x=>x.id!==p.id);state.config.activeEditorialProfileId=state.config.editorialProfiles[0].id;ensureEditorialProfiles();persist();renderConfig();toast('Perfil excluído.');
 }
-async function renameEditorialProfile(){
-  const p=activeEditorialProfile();if(!p){toast('Selecione um perfil primeiro.');return;}
-  if(!p.sourcePath||!String(p.sourcePath).startsWith('profiles/')){toast('Este perfil não está publicado no GitHub.');return;}
-  const name=cleanEditorialProfileName(prompt('Novo nome do perfil:',p.name||''));if(!name||name===p.name)return;
-  const accessToken=prompt('Informe o token de acesso do Radar para autorizar a renomeação:');if(!accessToken)return;
-  if(!confirm(`Renomear “${p.name}” para “${name}” diretamente no GitHub? O arquivo antigo será removido.`))return;
-  try{
-    const response=await fetch(RADAR_GITHUB_PROFILE_RENAME_API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+accessToken.trim()},body:JSON.stringify({path:p.sourcePath,name})});
-    const result=await response.json().catch(()=>({}));
-    if(response.status===401)throw new Error('Token de acesso inválido.');
-    if(!response.ok||!result.ok)throw new Error(result.error||`Worker respondeu HTTP ${response.status}.`);
-    const oldId=p.id;await loadGitHubEditorialProfiles(false);
-    const renamed=state.config.editorialProfiles.find(x=>x.sourcePath===result.path);
-    if(renamed){state.config.activeEditorialProfileId=renamed.id;persist();renderConfig();}
-    toast(`Perfil renomeado no GitHub: ${result.path}`);
-  }catch(error){console.error('Renomeação de perfil no GitHub',error);toast(error.message||'Não foi possível renomear o perfil no GitHub.');}
-}
-async function deleteEditorialProfile(){
-  const p=activeEditorialProfile();if(!p){toast('Selecione um perfil primeiro.');return;}
-  if(!p.sourcePath||!String(p.sourcePath).startsWith('profiles/')){toast('Este perfil não está publicado no GitHub e não pode ser excluído por esta ação.');return;}
-  if(!confirm(`Excluir definitivamente o perfil “${p.name}” do GitHub? O arquivo ${p.sourcePath} será removido do repositório.`))return;
-  const accessToken=prompt('Informe o token de acesso do Radar para autorizar a exclusão:');if(!accessToken)return;
-  try{
-    const response=await fetch(RADAR_GITHUB_PROFILE_DELETE_API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+accessToken.trim()},body:JSON.stringify({path:p.sourcePath})});
-    const result=await response.json().catch(()=>({}));
-    if(response.status===401)throw new Error('Token de acesso inválido.');
-    if(!response.ok||!result.ok)throw new Error(result.error||`Worker respondeu HTTP ${response.status}.`);
-    await loadGitHubEditorialProfiles(false);
-    toast(`Perfil excluído do GitHub: ${result.path}`);
-  }catch(error){console.error('Exclusão de perfil no GitHub',error);toast(error.message||'Não foi possível excluir o perfil do GitHub.');}
-}
-
 const KEY='RADAR_APP_V31';
-const ACTIVE_PROFILE_KEY='RADAR_LAST_GITHUB_PROFILE_ID';
 const GEMINI_COST_RATES={inputPerMillionUSD:0.75,outputPerMillionUSD:3.75,searchPerThousandUSD:14,usdToBrl:5.5,freeSearchesPerMonth:5000};
 function normalizeUsage(raw){
   const month=new Date().toISOString().slice(0,7);
@@ -1916,7 +1822,7 @@ function addUsageMeasurement(data){
     bucket.searchQueries+=queries; if(measured)bucket.measuredCalls++;
   }
   state.usage.month=new Date().toISOString().slice(0,7);
-  try{persist();}catch(e){console.warn('Não foi possível salvar o medidor de consumo',e);}
+  try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){console.warn('Não foi possível salvar o medidor de consumo',e);}
   renderGeminiUsageMeter();
 }
 async function trackedGeminiFetch(url,options){
@@ -1938,7 +1844,7 @@ function renderGeminiUsageMeter(){
 const defaultState={
   storyTrendHistory:[],
   config:{
-    count:50, editorialCounts:{'Política':10,'Cotidiano':10,'Economia':10,'Esportes':10,'Cultura':10}, contextCards:{visibility:{clock:true,timer:false,urgency:false,agenda:true,rundown:false,football:true},order:['clock','timer','agenda','football','urgency','rundown']}, collectionMethod:'universal', aiCollect:false, editorialProfile:DEFAULT_EDITORIAL_PROFILE, customPrompt:'', collectionPrompt:'', processingPrompt:DEFAULT_PROCESSING_PROMPT, provider:'gemini', model:'gemini-3.8-flash',
+    count:50, editorialCounts:{'Política':10,'Cotidiano':10,'Economia':10,'Esportes':10,'Cultura':10}, collectionMethod:'universal', aiCollect:false, editorialProfile:DEFAULT_EDITORIAL_PROFILE, customPrompt:'', collectionPrompt:'', processingPrompt:DEFAULT_PROCESSING_PROMPT, provider:'gemini', model:'gemini-3.8-flash',
     api:'', proxy:'', scoring:{base:25,topicHit:8,topicCap:30,local:15,sourceHigh:8,sourceNormal:4,sourceLow:-3,currentMax:10,eventHit:3,eventCap:12,discardPenalty:35,promoPenalty:20}, percentages:{
       'Política':70,'Cotidiano':10,'Economia':10,'Esportes':10,'Cultura':0
     },
@@ -1954,7 +1860,7 @@ const defaultState={
     dateTo:localISODate(0),
     geoFilter:''
   },
-  sources:[{"name":"Agência Brasil","url":"https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml","feeds":["https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml","https://agenciabrasil.ebc.com.br/rss/geral/feed.xml","https://agenciabrasil.ebc.com.br/rss/politica/feed.xml","https://agenciabrasil.ebc.com.br/rss/economia/feed.xml","https://agenciabrasil.ebc.com.br/rss/internacional/feed.xml","https://agenciabrasil.ebc.com.br/rss/justica/feed.xml","https://agenciabrasil.ebc.com.br/rss/saude/feed.xml","https://agenciabrasil.ebc.com.br/rss/educacao/feed.xml","https://agenciabrasil.ebc.com.br/rss/esportes/feed.xml","https://agenciabrasil.ebc.com.br/rss/cultura/feed.xml","https://agenciabrasil.ebc.com.br/rss/direitos-humanos/feed.xml","https://agenciabrasil.ebc.com.br/rss/meio-ambiente/feed.xml"],"type":"rss","method":"auto","domain":"agenciabrasil.ebc.com.br","queries":["Brasil","Governo Federal","política","economia","segurança","saúde","esportes"],"scope":"Nacional","weight":"Alta","active":false,"status":"OK — Automático (RSS → Google Notícias)","id":"native-source-1"},{"name":"Agência Câmara","url":"https://www.camara.leg.br/noticias/rss/ultimas-noticias","feeds":["https://www.camara.leg.br/noticias/rss/ultimas-noticias","https://www.camara.leg.br/noticias/rss/politica","https://www.camara.leg.br/noticias/rss/economia","https://www.camara.leg.br/noticias/rss/seguranca","https://www.camara.leg.br/noticias/rss/saude","https://www.camara.leg.br/noticias/rss/educacao-e-cultura","https://www.camara.leg.br/noticias/rss/cidades","https://www.camara.leg.br/noticias/rss/ciencia","https://www.camara.leg.br/noticias/rss/meio-ambiente","https://www.camara.leg.br/noticias/rss/direitos-humanos","https://www.camara.leg.br/noticias/rss/relacoes-exteriores","https://www.camara.leg.br/noticias/rss/administracao-publica","https://www.camara.leg.br/noticias/rss/trabalho-e-previdencia","https://www.camara.leg.br/noticias/rss/transporte-e-transito","https://www.camara.leg.br/noticias/rss/turismo","https://www.camara.leg.br/noticias/rss/esportes","https://www.camara.leg.br/noticias/rss/eleicoes","https://www.camara.leg.br/noticias/rss/consumidor","https://www.camara.leg.br/noticias/rss/agropecuaria","https://www.camara.leg.br/noticias/rss/industria-e-comercio","https://www.camara.leg.br/noticias/rss/assistencia-social","https://www.camara.leg.br/noticias/rss/comunicacao","https://www.camara.leg.br/noticias/rss/direito-e-justica"],"type":"rss","method":"auto","domain":"www.camara.leg.br","queries":["Câmara dos Deputados","Congresso Nacional","legislação","política nacional"],"scope":"Nacional","weight":"Alta","active":false,"status":"OK — Automático (RSS → Google Notícias)","id":"native-source-2"},{"name":"Agência FAPESP","url":"https://agencia.fapesp.br/rss/","feeds":["https://agencia.fapesp.br/rss/"],"type":"rss","method":"auto","domain":"agencia.fapesp.br","queries":["ciência","pesquisa","saúde"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-3"},{"name":"Agência Fiocruz","url":"https://agencia.fiocruz.br/rss.xml","feeds":["https://agencia.fiocruz.br/rss.xml"],"type":"rss","method":"auto","domain":"agencia.fiocruz.br","queries":["saúde","ciência","pesquisa"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-4"},{"name":"Agência Senado","url":"https://www12.senado.leg.br/noticias/rss.xml","feeds":["https://www12.senado.leg.br/noticias/rss.xml","https://www12.senado.leg.br/noticias/rss/"],"type":"rss","method":"auto","domain":"www12.senado.leg.br","queries":["Senado Federal","Congresso Nacional","legislação","política nacional"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-5"},{"name":"Agora RN","url":"https://agorarn.com.br/feed/","feeds":["https://agorarn.com.br/feed/","https://agorarn.com.br/politica/feed/","https://agorarn.com.br/economia/feed/","https://agorarn.com.br/editoria/esporte/feed/","https://agorarn.com.br/editoria/rn/feed/"],"type":"web","method":"auto","domain":"agorarn.com.br","queries":["Rio Grande do Norte","Natal","política RN","Governo do RN","Assembleia Legislativa","Prefeitura de Natal","segurança RN","economia RN","esportes RN"],"scope":"Local","weight":"Alta","active":false,"status":"OK — Automático: RSS (40)","id":"native-source-6"},{"id":"native-source-7","name":"Andreza Matais","url":"","feeds":[],"siteUrls":["https://www.metropoles.com/colunas/andreza-matais"],"type":"html","method":"html","domain":"https://www.metropoles.com/","queries":[],"scope":"Nacional","weight":"Normal","active":false,"status":"OK — Página HTML"},{"name":"BBC News Brasil","url":"https://feeds.bbci.co.uk/portuguese/rss.xml","feeds":["https://feeds.bbci.co.uk/portuguese/rss.xml","https://www.bbc.com/portuguese/topics/cp7r8vgl0q9t/rss.xml"],"type":"rss","method":"auto","domain":"www.bbc.com","queries":["Brasil","mundo","política","economia","segurança"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-8"},{"id":"native-source-9","name":"Blog da Andreia Sadi","url":"","feeds":[],"type":"web","method":"auto","domain":"https://g1.globo.com/politica/blog/andreia-sadi/","queries":[],"scope":"Nacional","weight":"Normal","active":false,"status":"OK — Automático: Site (8); fonte sem RSS"},{"id":"native-source-10","name":"Blog da Natuza Nery","url":"","feeds":[],"type":"web","method":"auto","domain":"https://g1.globo.com/politica/blog/natuza-nery/","queries":[],"scope":"Nacional","weight":"Normal","active":false,"status":"OK — Automático: Site (8); fonte sem RSS"},{"id":"native-source-11","name":"Blog do BG","url":"","feeds":[],"type":"web","method":"auto","domain":"https://www.blogdobg.com.br/","queries":[],"scope":"Local","weight":"Baixa","active":false,"status":"OK — Automático: Site (8); fonte sem RSS","siteUrls":[]},{"name":"Brasil 247","url":"https://www.brasil247.com/feed/","feeds":["https://www.brasil247.com/feed/"],"type":"rss","method":"auto","domain":"www.brasil247.com","queries":["política","Brasil","Governo Federal"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-12"},{"name":"Brasil de Fato","url":"https://www.brasildefato.com.br/feed/","feeds":["https://www.brasildefato.com.br/feed/"],"type":"rss","method":"auto","domain":"www.brasildefato.com.br","queries":["política","sociedade","direitos sociais"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-13"},{"name":"CartaCapital","url":"https://www.cartacapital.com.br/feed/","feeds":["https://www.cartacapital.com.br/feed/"],"type":"rss","method":"auto","domain":"www.cartacapital.com.br","queries":["política","Brasil","sociedade"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-14"},{"name":"CBN","url":"https://cbn.globoradio.globo.com/rss/noticias/","feeds":["https://cbn.globoradio.globo.com/rss/noticias/"],"type":"rss","method":"auto","domain":"cbn.globoradio.globo.com","queries":["Brasil","política","economia","segurança"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-15"},{"name":"CNN Brasil","url":"https://admin.cnnbrasil.com.br/feed/","feeds":["https://admin.cnnbrasil.com.br/feed/"],"type":"rss","method":"auto","domain":"www.cnnbrasil.com.br","queries":["Brasil","política","economia","segurança"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-16"},{"name":"Congresso em Foco","url":"https://congressoemfoco.uol.com.br/feed/","feeds":["https://congressoemfoco.uol.com.br/feed/"],"type":"rss","method":"auto","domain":"congressoemfoco.uol.com.br","queries":["Congresso Nacional","Senado","Câmara dos Deputados","política nacional","STF"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-17"},{"name":"Estadão","url":"https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/","feeds":["https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/","https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/","https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/","https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/internacional/","https://www.estadao.com.br/rss/brasil.xml"],"type":"rss","method":"auto","domain":"www.estadao.com.br","queries":["Brasil","política","economia","Congresso","segurança"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-18"},{"name":"Exame","url":"https://exame.com/feed/","feeds":["https://exame.com/feed/","https://exame.com/brasil/feed/","https://exame.com/economia/feed/","https://exame.com/negocios/feed/"],"type":"rss","method":"auto","domain":"exame.com","queries":["economia","negócios","empresas","mercado"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-19"},{"name":"Folha de S.Paulo","url":"https://feeds.folha.uol.com.br/emcimadahora/rss091.xml","feeds":["https://feeds.folha.uol.com.br/emcimadahora/rss091.xml","https://feeds.folha.uol.com.br/poder/rss091.xml","https://feeds.folha.uol.com.br/cotidiano/rss091.xml","https://feeds.folha.uol.com.br/mercado/rss091.xml","https://feeds.folha.uol.com.br/mundo/rss091.xml","https://feeds.folha.uol.com.br/esporte/rss091.xml","https://feeds.folha.uol.com.br/ilustrada/rss091.xml","https://feeds.folha.uol.com.br/tec/rss091.xml","https://feeds.folha.uol.com.br/ciencia/rss091.xml","https://feeds.folha.uol.com.br/equilibrioesaude/rss091.xml","https://feeds.folha.uol.com.br/turismo/rss091.xml","https://feeds.folha.uol.com.br/comida/rss091.xml"],"type":"web","method":"auto","domain":"feeds.folha.uol.com.br","queries":["Brasil","política","economia","cotidiano","segurança"],"scope":"Nacional","weight":"Alta","active":false,"status":"OK — Automático: RSS (96)","id":"native-source-20"},{"name":"G1","url":"https://g1.globo.com/rss/g1/","feeds":["https://g1.globo.com/rss/g1/","https://g1.globo.com/rss/g1/politica/","https://g1.globo.com/rss/g1/economia/","https://g1.globo.com/rss/g1/mundo/","https://g1.globo.com/rss/g1/educacao/","https://g1.globo.com/rss/g1/tecnologia/","https://g1.globo.com/rss/g1/pop-arte/","https://g1.globo.com/rss/g1/carros/","https://g1.globo.com/rss/g1/natureza/","https://g1.globo.com/rss/g1/turismo-e-viagem/","https://g1.globo.com/rss/g1/ciencia-e-saude","https://g1.globo.com/dynamo/politica/rss2.xml","https://g1.globo.com/dynamo/rn/rio-grande-do-norte/rss2.xml"],"type":"rss","method":"auto","domain":"g1.globo.com","queries":["Brasil","política","economia","segurança","Rio Grande do Norte","Natal"],"scope":"Nacional","weight":"Alta","active":false,"status":"OK — Automático: RSS (104)","id":"native-source-21"},{"name":"Gazeta do Povo","url":"https://www.gazetadopovo.com.br/feed/rss/ultimas-noticias.xml","feeds":["https://www.gazetadopovo.com.br/feed/rss/ultimas-noticias.xml"],"type":"rss","method":"auto","domain":"www.gazetadopovo.com.br","queries":["Brasil","política","economia"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-22"},{"name":"Gazeta Esportiva","url":"https://www.gazetaesportiva.com/feed/","feeds":["https://www.gazetaesportiva.com/feed/"],"type":"rss","method":"auto","domain":"www.gazetaesportiva.com","queries":["esportes","futebol","Campeonato Brasileiro"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-23"},{"name":"Globo Esporte","url":"https://ge.globo.com/rss/ge/","feeds":["https://ge.globo.com/rss/ge/","https://pox.globo.com/rss/ge/"],"type":"web","method":"auto","domain":"ge.globo.com","queries":["esportes","futebol","Série A","ABC","América-RN","Alecrim"],"scope":"Nacional","weight":"Normal","active":false,"status":"OK — Automático: RSS (16)","id":"native-source-24","siteUrls":[]},{"id":"native-source-25","name":"Globo Esporte - RN","url":"","feeds":[],"type":"html","method":"html","domain":"https://ge.globo.com/","queries":[],"scope":"Nacional","weight":"Alta","active":false,"status":"OK — Página HTML","siteUrls":["https://ge.globo.com/rn/futebol/campeonato-potiguar/","https://ge.globo.com/rn/futebol/abc/","https://ge.globo.com/rn/futebol/america-rn/","https://ge.globo.com/rn/"]},{"name":"InfoMoney","url":"https://www.infomoney.com.br/feed/","feeds":["https://www.infomoney.com.br/feed/"],"type":"rss","method":"auto","domain":"www.infomoney.com.br","queries":["economia","mercado","juros","inflação","investimentos"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-26"},{"name":"Jornal da USP","url":"https://jornal.usp.br/feed/","feeds":["https://jornal.usp.br/feed/"],"type":"rss","method":"auto","domain":"jornal.usp.br","queries":["ciência","educação","pesquisa"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-27"},{"name":"Jovem Pan","url":"https://jovempan.com.br/feed/","feeds":["https://jovempan.com.br/feed/"],"type":"rss","method":"auto","domain":"jovempan.com.br","queries":["Brasil","política","economia"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-28"},{"name":"Metrópoles","url":"https://www.metropoles.com/feed","feeds":["https://www.metropoles.com/feed","https://www.metropoles.com/colunas/claudia-meireles/feed","https://www.metropoles.com/colunas/rodrigo-franca/feed","https://www.metropoles.com/colunas/tiago-pavinatto/feed","https://www.metropoles.com/colunas/reinaldo-azevedo/feed","https://www.metropoles.com/colunas/demetrio-vecchioli/feed","https://www.metropoles.com/colunas/lucas-pasin/feed","https://www.metropoles.com/colunas/conceicao-freitas/feed","https://www.metropoles.com/colunas/nas-redes/feed","https://www.metropoles.com/colunas/juris/feed"],"type":"web","method":"auto","domain":"www.metropoles.com","queries":["Brasil","política","economia","segurança"],"scope":"Nacional","weight":"Baixa","active":false,"status":"OK — Automático: RSS (80)","id":"native-source-29"},{"name":"Nexo Jornal","url":"https://www.nexojornal.com.br/rss.xml","feeds":["https://www.nexojornal.com.br/rss.xml"],"type":"rss","method":"auto","domain":"www.nexojornal.com.br","queries":["análise","política","sociedade"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-30"},{"name":"NOVO Notícias","url":"https://novonoticias.com.br/feed","feeds":["https://novonoticias.com.br/feed","https://novonoticias.com.br/categorias/ultimas/feed/","https://novonoticias.com.br/categorias/politica/feed/","https://novonoticias.com.br/categorias/economia/feed/","https://novonoticias.com.br/categorias/cotidiano/feed/","https://www.novonoticias.com.br/categorias/esporte/feed/","https://novonoticias.com.br/tags/natal/feed/"],"type":"rss","method":"auto","domain":"novonoticias.com.br","queries":["Rio Grande do Norte","Natal","política RN","Governo do RN","Assembleia Legislativa","Prefeitura de Natal","segurança RN","economia RN","esportes RN"],"scope":"Local","weight":"Alta","active":false,"status":"OK — Automático: RSS (56)","id":"native-source-31"},{"name":"O Antagonista","url":"https://oantagonista.com.br/feed/","feeds":["https://oantagonista.com.br/feed/"],"type":"rss","method":"auto","domain":"oantagonista.com.br","queries":["política","Brasil","Congresso"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-32"},{"name":"O Globo","url":"https://oglobo.globo.com/rss/oglobo","feeds":["https://oglobo.globo.com/rss/oglobo","https://oglobo.globo.com/rss.xml"],"type":"rss","method":"auto","domain":"oglobo.globo.com","queries":["Brasil","política","economia","cotidiano"],"scope":"Nacional","weight":"Alta","active":false,"status":"OK — Automático (RSS → Google Notícias)","id":"native-source-33"},{"name":"Olhar Digital","url":"https://olhardigital.com.br/feed/","feeds":["https://olhardigital.com.br/feed/"],"type":"rss","method":"auto","domain":"olhardigital.com.br","queries":["tecnologia","ciência","inovação"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-34"},{"name":"Poder360","url":"https://www.poder360.com.br/feed/","feeds":["https://www.poder360.com.br/feed/"],"type":"web","method":"auto","domain":"www.poder360.com.br","queries":["política nacional","Congresso","Governo Federal","STF","economia"],"scope":"Nacional","weight":"Baixa","active":false,"status":"OK — Automático: RSS (8)","id":"native-source-35"},{"name":"R7","url":"https://noticias.r7.com/feed.xml","feeds":["https://noticias.r7.com/feed.xml","https://www.r7.com/arc/outboundfeeds/rss/?outputType=xml"],"type":"rss","method":"auto","domain":"noticias.r7.com","queries":["Brasil","política","cotidiano"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-36"},{"name":"Revista Oeste","url":"https://revistaoeste.com/feed/","feeds":["https://revistaoeste.com/feed/"],"type":"rss","method":"auto","domain":"revistaoeste.com","queries":["política","Brasil","atualidades"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-37"},{"name":"Saiba Mais (RN)","url":"https://saibamais.jor.br/feed/","feeds":["https://saibamais.jor.br/feed/"],"type":"rss","method":"auto","domain":"saibamais.jor.br","queries":["Rio Grande do Norte","Natal","política RN","Governo do RN","Assembleia Legislativa","Prefeitura de Natal","direitos humanos","educação RN","saúde RN","segurança RN","cultura RN"],"scope":"Local","weight":"Alta","active":false,"status":"Não testada","id":"native-source-38"},{"name":"Tecnoblog","url":"https://tecnoblog.net/feed/","feeds":["https://tecnoblog.net/feed/"],"type":"rss","method":"auto","domain":"tecnoblog.net","queries":["tecnologia","internet","celulares"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-39"},{"name":"Terra","url":"https://www.terra.com.br/rss/","feeds":["https://www.terra.com.br/rss/"],"type":"rss","method":"auto","domain":"www.terra.com.br","queries":["Brasil","política","economia","cotidiano"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-40"},{"name":"Tribuna do Norte","url":"https://tribunadonorte.com.br/categoria/politica/feed/","feeds":["https://tribunadonorte.com.br/categoria/politica/feed/","https://tribunadonorte.com.br/categoria/economia/feed/","https://tribunadonorte.com.br/categoria/esportes/feed/","https://tribunadonorte.com.br/categoria/natal/feed/"],"type":"web","method":"auto","domain":"tribunadonorte.com.br","queries":["Rio Grande do Norte","Natal","política RN","Governo do RN","Assembleia Legislativa","Prefeitura de Natal","segurança RN","economia RN","esportes RN"],"scope":"Local","weight":"Alta","active":false,"status":"OK — Automático: RSS (20)","id":"native-source-41"},{"name":"UOL Notícias","url":"https://rss.uol.com.br/feed/noticias.xml","feeds":["https://rss.uol.com.br/feed/noticias.xml","https://rss.uol.com.br/feed/politica.xml","https://rss.uol.com.br/feed/esporte.xml","https://rss.home.uol.com.br/index.xml"],"type":"rss","method":"auto","domain":"noticias.uol.com.br","queries":["Brasil","política","economia","segurança","esportes"],"scope":"Nacional","weight":"Alta","active":false,"status":"OK — Automático (RSS → Google Notícias)","id":"native-source-42"},{"name":"Valor Econômico","url":"https://valor.globo.com/rss/valor","feeds":["https://valor.globo.com/rss/valor"],"type":"rss","method":"auto","domain":"valor.globo.com","queries":["economia","negócios","mercado","empresas"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-43"},{"name":"VEJA","url":"https://veja.abril.com.br/feed/","feeds":["https://veja.abril.com.br/feed/","https://veja.abril.com.br/ultimas-noticias/rss","https://veja.abril.com.br/politica/feed/"],"type":"rss","method":"auto","domain":"veja.abril.com.br","queries":["Brasil","política","economia"],"scope":"Nacional","weight":"Normal","active":false,"status":"OK — Automático (RSS → Google Notícias)","id":"native-source-44"}],
+  sources:[{"name":"Agora RN","url":"https://agorarn.com.br/feed/","feeds":["https://agorarn.com.br/feed/","https://agorarn.com.br/politica/feed/","https://agorarn.com.br/economia/feed/","https://agorarn.com.br/editoria/esporte/feed/","https://agorarn.com.br/editoria/rn/feed/"],"type":"rss","method":"auto","domain":"agorarn.com.br","queries":["Rio Grande do Norte","Natal","política RN","Governo do RN","Assembleia Legislativa","Prefeitura de Natal","segurança RN","economia RN","esportes RN"],"scope":"Local","weight":"Alta","active":false,"status":"Não testada","id":"native-source-1"},{"name":"Agência Brasil","url":"https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml","feeds":["https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml","https://agenciabrasil.ebc.com.br/rss/geral/feed.xml","https://agenciabrasil.ebc.com.br/rss/politica/feed.xml","https://agenciabrasil.ebc.com.br/rss/economia/feed.xml","https://agenciabrasil.ebc.com.br/rss/internacional/feed.xml","https://agenciabrasil.ebc.com.br/rss/justica/feed.xml","https://agenciabrasil.ebc.com.br/rss/saude/feed.xml","https://agenciabrasil.ebc.com.br/rss/educacao/feed.xml","https://agenciabrasil.ebc.com.br/rss/esportes/feed.xml","https://agenciabrasil.ebc.com.br/rss/cultura/feed.xml","https://agenciabrasil.ebc.com.br/rss/direitos-humanos/feed.xml","https://agenciabrasil.ebc.com.br/rss/meio-ambiente/feed.xml"],"type":"rss","method":"auto","domain":"agenciabrasil.ebc.com.br","queries":["Brasil","Governo Federal","política","economia","segurança","saúde","esportes"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-2"},{"name":"Agência Câmara","url":"https://www.camara.leg.br/noticias/rss/ultimas-noticias","feeds":["https://www.camara.leg.br/noticias/rss/ultimas-noticias","https://www.camara.leg.br/noticias/rss/politica","https://www.camara.leg.br/noticias/rss/economia","https://www.camara.leg.br/noticias/rss/seguranca","https://www.camara.leg.br/noticias/rss/saude","https://www.camara.leg.br/noticias/rss/educacao-e-cultura","https://www.camara.leg.br/noticias/rss/cidades","https://www.camara.leg.br/noticias/rss/ciencia","https://www.camara.leg.br/noticias/rss/meio-ambiente","https://www.camara.leg.br/noticias/rss/direitos-humanos","https://www.camara.leg.br/noticias/rss/relacoes-exteriores","https://www.camara.leg.br/noticias/rss/administracao-publica","https://www.camara.leg.br/noticias/rss/trabalho-e-previdencia","https://www.camara.leg.br/noticias/rss/transporte-e-transito","https://www.camara.leg.br/noticias/rss/turismo","https://www.camara.leg.br/noticias/rss/esportes","https://www.camara.leg.br/noticias/rss/eleicoes","https://www.camara.leg.br/noticias/rss/consumidor","https://www.camara.leg.br/noticias/rss/agropecuaria","https://www.camara.leg.br/noticias/rss/industria-e-comercio","https://www.camara.leg.br/noticias/rss/assistencia-social","https://www.camara.leg.br/noticias/rss/comunicacao","https://www.camara.leg.br/noticias/rss/direito-e-justica"],"type":"rss","method":"auto","domain":"www.camara.leg.br","queries":["Câmara dos Deputados","Congresso Nacional","legislação","política nacional"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-4"},{"name":"Agência FAPESP","url":"https://agencia.fapesp.br/rss/","feeds":["https://agencia.fapesp.br/rss/"],"type":"rss","method":"auto","domain":"agencia.fapesp.br","queries":["ciência","pesquisa","saúde"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-5"},{"name":"Agência Fiocruz","url":"https://agencia.fiocruz.br/rss.xml","feeds":["https://agencia.fiocruz.br/rss.xml"],"type":"rss","method":"auto","domain":"agencia.fiocruz.br","queries":["saúde","ciência","pesquisa"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-6"},{"name":"Agência Senado","url":"https://www12.senado.leg.br/noticias/rss.xml","feeds":["https://www12.senado.leg.br/noticias/rss.xml","https://www12.senado.leg.br/noticias/rss/"],"type":"rss","method":"auto","domain":"www12.senado.leg.br","queries":["Senado Federal","Congresso Nacional","legislação","política nacional"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-7"},{"name":"BBC News Brasil","url":"https://feeds.bbci.co.uk/portuguese/rss.xml","feeds":["https://feeds.bbci.co.uk/portuguese/rss.xml","https://www.bbc.com/portuguese/topics/cp7r8vgl0q9t/rss.xml"],"type":"rss","method":"auto","domain":"www.bbc.com","queries":["Brasil","mundo","política","economia","segurança"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-8"},{"name":"Brasil 247","url":"https://www.brasil247.com/feed/","feeds":["https://www.brasil247.com/feed/"],"type":"rss","method":"auto","domain":"www.brasil247.com","queries":["política","Brasil","Governo Federal"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-9"},{"name":"Brasil de Fato","url":"https://www.brasildefato.com.br/feed/","feeds":["https://www.brasildefato.com.br/feed/"],"type":"rss","method":"auto","domain":"www.brasildefato.com.br","queries":["política","sociedade","direitos sociais"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-10"},{"name":"CartaCapital","url":"https://www.cartacapital.com.br/feed/","feeds":["https://www.cartacapital.com.br/feed/"],"type":"rss","method":"auto","domain":"www.cartacapital.com.br","queries":["política","Brasil","sociedade"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-11"},{"name":"CBN","url":"https://cbn.globoradio.globo.com/rss/noticias/","feeds":["https://cbn.globoradio.globo.com/rss/noticias/"],"type":"rss","method":"auto","domain":"cbn.globoradio.globo.com","queries":["Brasil","política","economia","segurança"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-12"},{"name":"CNN Brasil","url":"https://admin.cnnbrasil.com.br/feed/","feeds":["https://admin.cnnbrasil.com.br/feed/"],"type":"rss","method":"auto","domain":"www.cnnbrasil.com.br","queries":["Brasil","política","economia","segurança"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-13"},{"name":"Congresso em Foco","url":"https://congressoemfoco.uol.com.br/feed/","feeds":["https://congressoemfoco.uol.com.br/feed/"],"type":"rss","method":"auto","domain":"congressoemfoco.uol.com.br","queries":["Congresso Nacional","Senado","Câmara dos Deputados","política nacional","STF"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-14"},{"name":"Estadão","url":"https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/","feeds":["https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/","https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/","https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/","https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/internacional/","https://www.estadao.com.br/rss/brasil.xml"],"type":"rss","method":"auto","domain":"www.estadao.com.br","queries":["Brasil","política","economia","Congresso","segurança"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-15"},{"name":"Exame","url":"https://exame.com/feed/","feeds":["https://exame.com/feed/","https://exame.com/brasil/feed/","https://exame.com/economia/feed/","https://exame.com/negocios/feed/"],"type":"rss","method":"auto","domain":"exame.com","queries":["economia","negócios","empresas","mercado"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-16"},{"name":"Folha de S.Paulo","url":"https://feeds.folha.uol.com.br/emcimadahora/rss091.xml","feeds":["https://feeds.folha.uol.com.br/emcimadahora/rss091.xml","https://feeds.folha.uol.com.br/poder/rss091.xml","https://feeds.folha.uol.com.br/cotidiano/rss091.xml","https://feeds.folha.uol.com.br/mercado/rss091.xml","https://feeds.folha.uol.com.br/mundo/rss091.xml","https://feeds.folha.uol.com.br/esporte/rss091.xml","https://feeds.folha.uol.com.br/ilustrada/rss091.xml","https://feeds.folha.uol.com.br/tec/rss091.xml","https://feeds.folha.uol.com.br/ciencia/rss091.xml","https://feeds.folha.uol.com.br/equilibrioesaude/rss091.xml","https://feeds.folha.uol.com.br/turismo/rss091.xml","https://feeds.folha.uol.com.br/comida/rss091.xml"],"type":"rss","method":"auto","domain":"feeds.folha.uol.com.br","queries":["Brasil","política","economia","cotidiano","segurança"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-17"},{"name":"G1","url":"https://g1.globo.com/rss/g1/","feeds":["https://g1.globo.com/rss/g1/","https://g1.globo.com/rss/g1/politica/","https://g1.globo.com/rss/g1/economia/","https://g1.globo.com/rss/g1/mundo/","https://g1.globo.com/rss/g1/educacao/","https://g1.globo.com/rss/g1/tecnologia/","https://g1.globo.com/rss/g1/pop-arte/","https://g1.globo.com/rss/g1/carros/","https://g1.globo.com/rss/g1/natureza/","https://g1.globo.com/rss/g1/turismo-e-viagem/","https://g1.globo.com/rss/g1/ciencia-e-saude","https://g1.globo.com/dynamo/politica/rss2.xml","https://g1.globo.com/dynamo/rn/rio-grande-do-norte/rss2.xml"],"type":"rss","method":"auto","domain":"g1.globo.com","queries":["Brasil","política","economia","segurança","Rio Grande do Norte","Natal"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-18"},{"name":"Gazeta do Povo","url":"https://www.gazetadopovo.com.br/feed/rss/ultimas-noticias.xml","feeds":["https://www.gazetadopovo.com.br/feed/rss/ultimas-noticias.xml"],"type":"rss","method":"auto","domain":"www.gazetadopovo.com.br","queries":["Brasil","política","economia"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-19"},{"name":"Gazeta Esportiva","url":"https://www.gazetaesportiva.com/feed/","feeds":["https://www.gazetaesportiva.com/feed/"],"type":"rss","method":"auto","domain":"www.gazetaesportiva.com","queries":["esportes","futebol","Campeonato Brasileiro"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-20"},{"name":"ge","url":"https://ge.globo.com/rss/ge/","feeds":["https://ge.globo.com/rss/ge/","https://pox.globo.com/rss/ge/"],"type":"rss","method":"auto","domain":"ge.globo.com","queries":["esportes","futebol","Série A","ABC","América-RN","Alecrim"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-21"},{"name":"InfoMoney","url":"https://www.infomoney.com.br/feed/","feeds":["https://www.infomoney.com.br/feed/"],"type":"rss","method":"auto","domain":"www.infomoney.com.br","queries":["economia","mercado","juros","inflação","investimentos"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-22"},{"name":"Jornal da USP","url":"https://jornal.usp.br/feed/","feeds":["https://jornal.usp.br/feed/"],"type":"rss","method":"auto","domain":"jornal.usp.br","queries":["ciência","educação","pesquisa"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-23"},{"name":"Jovem Pan","url":"https://jovempan.com.br/feed/","feeds":["https://jovempan.com.br/feed/"],"type":"rss","method":"auto","domain":"jovempan.com.br","queries":["Brasil","política","economia"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-24"},{"name":"Metrópoles","url":"https://www.metropoles.com/feed","feeds":["https://www.metropoles.com/feed","https://www.metropoles.com/colunas/claudia-meireles/feed","https://www.metropoles.com/colunas/rodrigo-franca/feed","https://www.metropoles.com/colunas/tiago-pavinatto/feed","https://www.metropoles.com/colunas/reinaldo-azevedo/feed","https://www.metropoles.com/colunas/demetrio-vecchioli/feed","https://www.metropoles.com/colunas/lucas-pasin/feed","https://www.metropoles.com/colunas/conceicao-freitas/feed","https://www.metropoles.com/colunas/nas-redes/feed","https://www.metropoles.com/colunas/juris/feed"],"type":"rss","method":"auto","domain":"www.metropoles.com","queries":["Brasil","política","economia","segurança"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-25"},{"name":"Radar Jornal","url":"https://www.nexojornal.com.br/rss.xml","feeds":["https://www.nexojornal.com.br/rss.xml"],"type":"rss","method":"auto","domain":"www.nexojornal.com.br","queries":["análise","política","sociedade"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-26"},{"name":"NOVO Notícias","url":"https://novonoticias.com.br/feed","feeds":["https://novonoticias.com.br/feed","https://novonoticias.com.br/categorias/ultimas/feed/","https://novonoticias.com.br/categorias/politica/feed/","https://novonoticias.com.br/categorias/economia/feed/","https://novonoticias.com.br/categorias/cotidiano/feed/","https://www.novonoticias.com.br/categorias/esporte/feed/","https://novonoticias.com.br/tags/natal/feed/"],"type":"rss","method":"auto","domain":"novonoticias.com.br","queries":["Rio Grande do Norte","Natal","política RN","Governo do RN","Assembleia Legislativa","Prefeitura de Natal","segurança RN","economia RN","esportes RN"],"scope":"Local","weight":"Alta","active":false,"status":"Não testada","id":"native-source-27"},{"name":"O Antagonista","url":"https://oantagonista.com.br/feed/","feeds":["https://oantagonista.com.br/feed/"],"type":"rss","method":"auto","domain":"oantagonista.com.br","queries":["política","Brasil","Congresso"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-28"},{"name":"O Globo","url":"https://oglobo.globo.com/rss/oglobo","feeds":["https://oglobo.globo.com/rss/oglobo","https://oglobo.globo.com/rss.xml"],"type":"rss","method":"auto","domain":"oglobo.globo.com","queries":["Brasil","política","economia","cotidiano"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-29"},{"name":"Olhar Digital","url":"https://olhardigital.com.br/feed/","feeds":["https://olhardigital.com.br/feed/"],"type":"rss","method":"auto","domain":"olhardigital.com.br","queries":["tecnologia","ciência","inovação"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-30"},{"name":"Poder360","url":"https://www.poder360.com.br/feed/","feeds":["https://www.poder360.com.br/feed/"],"type":"rss","method":"auto","domain":"www.poder360.com.br","queries":["política nacional","Congresso","Governo Federal","STF","economia"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-31"},{"name":"R7","url":"https://noticias.r7.com/feed.xml","feeds":["https://noticias.r7.com/feed.xml","https://www.r7.com/arc/outboundfeeds/rss/?outputType=xml"],"type":"rss","method":"auto","domain":"noticias.r7.com","queries":["Brasil","política","cotidiano"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-32"},{"name":"Revista Oeste","url":"https://revistaoeste.com/feed/","feeds":["https://revistaoeste.com/feed/"],"type":"rss","method":"auto","domain":"revistaoeste.com","queries":["política","Brasil","atualidades"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-33"},{"name":"Tecnoblog","url":"https://tecnoblog.net/feed/","feeds":["https://tecnoblog.net/feed/"],"type":"rss","method":"auto","domain":"tecnoblog.net","queries":["tecnologia","internet","celulares"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-34"},{"name":"Terra","url":"https://www.terra.com.br/rss/","feeds":["https://www.terra.com.br/rss/"],"type":"rss","method":"auto","domain":"www.terra.com.br","queries":["Brasil","política","economia","cotidiano"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-35"},{"name":"Tribuna do Norte","url":"https://tribunadonorte.com.br/categoria/politica/feed/","feeds":["https://tribunadonorte.com.br/categoria/politica/feed/","https://tribunadonorte.com.br/categoria/economia/feed/","https://tribunadonorte.com.br/categoria/esportes/feed/","https://tribunadonorte.com.br/categoria/natal/feed/"],"type":"rss","method":"auto","domain":"tribunadonorte.com.br","queries":["Rio Grande do Norte","Natal","política RN","Governo do RN","Assembleia Legislativa","Prefeitura de Natal","segurança RN","economia RN","esportes RN"],"scope":"Local","weight":"Alta","active":false,"status":"Não testada","id":"native-source-36"},{"name":"UOL Notícias","url":"https://rss.uol.com.br/feed/noticias.xml","feeds":["https://rss.uol.com.br/feed/noticias.xml","https://rss.uol.com.br/feed/politica.xml","https://rss.uol.com.br/feed/esporte.xml","https://rss.home.uol.com.br/index.xml"],"type":"rss","method":"auto","domain":"noticias.uol.com.br","queries":["Brasil","política","economia","segurança","esportes"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-37"},{"name":"Valor Econômico","url":"https://valor.globo.com/rss/valor","feeds":["https://valor.globo.com/rss/valor"],"type":"rss","method":"auto","domain":"valor.globo.com","queries":["economia","negócios","mercado","empresas"],"scope":"Nacional","weight":"Alta","active":false,"status":"Não testada","id":"native-source-38"},{"name":"VEJA","url":"https://veja.abril.com.br/feed/","feeds":["https://veja.abril.com.br/feed/","https://veja.abril.com.br/ultimas-noticias/rss","https://veja.abril.com.br/politica/feed/"],"type":"rss","method":"auto","domain":"veja.abril.com.br","queries":["Brasil","política","economia"],"scope":"Nacional","weight":"Normal","active":false,"status":"Não testada","id":"native-source-39"},{"name":"Saiba Mais (RN)","url":"https://saibamais.jor.br/feed/","feeds":["https://saibamais.jor.br/feed/"],"type":"rss","method":"auto","domain":"saibamais.jor.br","queries":["Rio Grande do Norte","Natal","política RN","Governo do RN","Assembleia Legislativa","Prefeitura de Natal","direitos humanos","educação RN","saúde RN","segurança RN","cultura RN"],"scope":"Local","weight":"Alta","active":false,"status":"Não testada","id":"native-source-40"}].map(s=>({...s,id:uid(),active:false,status:'Não testada'})),
   news:[], radar:[]
 };
 let state=loadState();
@@ -1962,9 +1868,9 @@ let state=loadState();
 // A função é declarada adiante e executada após o carregamento do DOM.
 // V164: substitui uma única vez o cadastro antigo pelo catálogo nativo do JSON fornecido.
 // Preserva configurações, notícias e itens do Radar; todas as fontes começam desativadas.
-const NATIVE_SOURCES_MIGRATION_KEY='radar_native_sources_v165_corrected_catalog';
+const NATIVE_SOURCES_MIGRATION_KEY='radar_native_sources_v164_json_catalog';
 if(localStorage.getItem(NATIVE_SOURCES_MIGRATION_KEY)!=='1'){
-  state.sources=defaultState.sources.map(s=>({...s,id:uid(),active:false,status:s.status||'Não testada'}));
+  state.sources=defaultState.sources.map(s=>({...s,id:uid(),active:false,status:'Não testada'}));
   localStorage.setItem(NATIVE_SOURCES_MIGRATION_KEY,'1');
   // Impede que um cadastro antigo separado sobrescreva o catálogo nativo.
   localStorage.setItem('radar_v4_sources_imported','1');
@@ -1994,9 +1900,7 @@ state.sources=(state.sources||[]).filter(s=>s.name!=='Tribuna RN / Novo Notícia
 state.config={...defaultState.config,...state.config,provider:'gemini',editorialCounts:{...defaultState.config.editorialCounts,...(state.config?.editorialCounts||{})},percentages:{...defaultState.config.percentages,...(state.config?.percentages||{})},interests:{...defaultState.config.interests,...(state.config?.interests||{})}};
 state.config.collectionMethod='universal';
 // Aplica o novo perfil e as instruções completas como padrão em configurações antigas vazias ou ainda no padrão anterior.
-state.config.editorialProfiles=[];
-state.config.activeEditorialProfileId=localStorage.getItem(ACTIVE_PROFILE_KEY)||'';
-state.config.editorialProfile='';state.config.summaryPrompt='';state.config.commentPrompt='';state.config.processingPrompt='';
+if(!String(state.config.editorialProfile||'').trim())state.config.editorialProfile=DEFAULT_EDITORIAL_PROFILE;
 ensureEditorialProfiles();
 if(!String(state.config.processingPrompt||'').trim()||state.config.processingPrompt===DEFAULT_COMMENT_INSTRUCTIONS||state.config.processingPrompt.includes('Os comentários não devem ser meros resumos nem repetir o título.'))state.config.processingPrompt=DEFAULT_PROCESSING_PROMPT;
 state.usage=normalizeUsage(state.usage);
@@ -2042,27 +1946,12 @@ function loadState(){
         const exists=mergedSources.some(s=>s.name===ds.name || s.url===ds.url);
         if(!exists) mergedSources.push({...ds,id:uid()});
       });
-      const loaded={...defaultState,...x,sources:JSON.parse(JSON.stringify(defaultState.sources)),config:{...defaultState.config,...x.config,editorialCounts:{...defaultState.config.editorialCounts,...(x.config?.editorialCounts||{})},percentages:{...defaultState.config.percentages,...(x.config?.percentages||{})},interests:JSON.parse(JSON.stringify(defaultState.config.interests)),contextCards:{...defaultState.config.contextCards,...(x.config?.contextCards||{}),visibility:{...defaultState.config.contextCards.visibility,...(x.config?.contextCards?.visibility||{})},order:Array.isArray(x.config?.contextCards?.order)?x.config.contextCards.order:defaultState.config.contextCards.order}}};
-      loaded.config.editorialProfiles=[];
-      loaded.config.activeEditorialProfileId=localStorage.getItem(ACTIVE_PROFILE_KEY)||'';
-      loaded.config.editorialProfile='';loaded.config.summaryPrompt='';loaded.config.commentPrompt='';loaded.config.processingPrompt='';
-      return loaded;
+      return {...defaultState,...x,sources:mergedSources,config:{...defaultState.config,...x.config,editorialCounts:{...defaultState.config.editorialCounts,...(x.config?.editorialCounts||{})},percentages:{...defaultState.config.percentages,...(x.config?.percentages||{})},interests:{...defaultState.config.interests,...(x.config?.interests||{})}}};
     }
   }catch(e){}
   return structuredClone(defaultState);
 }
-function persist(){
-  const snapshot=JSON.parse(JSON.stringify(state));
-  // Perfis editoriais e suas fontes/instruções existem somente no GitHub; localmente fica apenas o ID selecionado.
-  snapshot.config.editorialProfiles=[];
-  snapshot.config.activeEditorialProfileId='';
-  snapshot.config.editorialProfile='';snapshot.config.summaryPrompt='';snapshot.config.commentPrompt='';snapshot.config.processingPrompt='';
-  snapshot.config.interests=JSON.parse(JSON.stringify(defaultState.config.interests));
-  snapshot.sources=JSON.parse(JSON.stringify(defaultState.sources));
-  try{localStorage.setItem(KEY,JSON.stringify(snapshot));}catch(e){console.warn('Não foi possível salvar os dados locais do Radar',e)}
-  try{const id=String(state.config.activeEditorialProfileId||'');if(id)localStorage.setItem(ACTIVE_PROFILE_KEY,id)}catch(e){}
-  updateStats(); updateNexoAccess(); if(typeof refreshEditorialCards==='function')refreshEditorialCards()
-}
+function persist(){localStorage.setItem(KEY,JSON.stringify(state)); updateStats(); updateNexoAccess(); if(typeof refreshEditorialCards==='function')refreshEditorialCards()}
 function updateNexoAccess(){
   const enabled=Array.isArray(state?.radar)&&state.radar.length>0;
   document.querySelectorAll('button[data-page="radar"]').forEach(btn=>{
@@ -2897,11 +2786,11 @@ function loadScoringSettingsIntoUI(){
   const values={...DEFAULT_SCORING_SETTINGS,...(state.config.scoring||{})};
   for(const [key,id] of Object.entries(scoringInputMap())){const el=document.getElementById(id);if(el)el.value=values[key]}
 }
-function saveScoringSettings(showToast=true){
+function saveScoringSettings(){
   const values={};
   for(const [key,id] of Object.entries(scoringInputMap())){const el=document.getElementById(id);if(el){const n=Number(el.value);values[key]=Number.isFinite(n)?n:DEFAULT_SCORING_SETTINGS[key]}}
   state.config.scoring={...DEFAULT_SCORING_SETTINGS,...values};
-  persist();renderNews();if(showToast)toast('Pontuação de relevância salva neste navegador.');
+  persist();renderNews();
 }
 function resetScoringSettings(){
   state.config.scoring={...DEFAULT_SCORING_SETTINGS};
@@ -3906,10 +3795,11 @@ function renderConfig(){
   const c=state.config;renderAICollectToggle();renderCollectionMethod();
   const apiEl=document.getElementById('cfgApi');if(apiEl)apiEl.value=c.api||'';
   const activeProfile=ensureEditorialProfiles();
-  const profileEl=document.getElementById('cfgEditorialProfile');if(profileEl)profileEl.value=activeProfile?.editorialProfile||'';
-  const summaryEl=document.getElementById('cfgSummaryPrompt');if(summaryEl)summaryEl.value=activeProfile?.summaryPrompt||'';
-  const commentEl=document.getElementById('cfgCommentPrompt');if(commentEl)commentEl.value=activeProfile?.commentPrompt||'';
+  const profileEl=document.getElementById('cfgEditorialProfile');if(profileEl)profileEl.value=activeProfile.editorialProfile||'';
+  const summaryEl=document.getElementById('cfgSummaryPrompt');if(summaryEl)summaryEl.value=activeProfile.summaryPrompt||DEFAULT_SUMMARY_PROMPT;
+  const commentEl=document.getElementById('cfgCommentPrompt');if(commentEl)commentEl.value=activeProfile.commentPrompt||DEFAULT_RADIO_COMMENT_PROMPT;
   renderEditorialProfileSelector();
+  if(!state.config.editorialProfiles.some(p=>p.source==='github'))loadGitHubEditorialProfiles(false);
   renderGeminiModels([],c.model||'gemini-3.8-flash');
   const providerNote=document.getElementById('providerNote');if(providerNote)providerNote.textContent='Gemini selecionado. A Pesquisa Google é usada pelas fontes configuradas com esse método.';const proxyEl=document.getElementById('cfgProxy');if(proxyEl)proxyEl.value=c.proxy||'';
   if(document.getElementById('dateFrom'))document.getElementById('dateFrom').value=c.dateFrom||localISODate(-1);
@@ -3924,11 +3814,10 @@ function renderConfig(){
   const discardEl=document.getElementById('interestDiscard');if(discardEl)discardEl.value=(interests['Descartar Assuntos']||[]).join('\n');
   const counts=c.editorialCounts||defaultState.config.editorialCounts;
   for(const [id,key] of [['quotaPolitics','Política'],['quotaDaily','Cotidiano'],['quotaEconomy','Economia'],['quotaSports','Esportes'],['quotaCulture','Cultura']]){const el=document.getElementById(id);if(el)el.value=counts[key]??10;}
-  loadScoringSettingsIntoUI();
   renderSources();
 }
 function restoreDefaultCommentInstructions(){
-  const p=activeEditorialProfile();if(!p){toast('Nenhum perfil selecionado.');return;}p.editorialProfile=DEFAULT_EDITORIAL_PROFILE;p.summaryPrompt=DEFAULT_SUMMARY_PROMPT;p.commentPrompt=DEFAULT_RADIO_COMMENT_PROMPT;
+  const p=activeEditorialProfile();p.editorialProfile=DEFAULT_EDITORIAL_PROFILE;p.summaryPrompt=DEFAULT_SUMMARY_PROMPT;p.commentPrompt=DEFAULT_RADIO_COMMENT_PROMPT;
   ensureEditorialProfiles();persist();renderConfig();toast('As instruções do perfil ativo foram restauradas aos padrões.');
 }
 function openRulesInstructionsModal(){
@@ -3954,11 +3843,9 @@ function saveAllData(){
   const counts={};
   for(const [id,key] of [['quotaPolitics','Política'],['quotaDaily','Cotidiano'],['quotaEconomy','Economia'],['quotaSports','Esportes'],['quotaCulture','Cultura']]){const el=document.getElementById(id);counts[key]=el?Math.max(0,Number(el.value)||0):(state.config.editorialCounts?.[key]??10);}
   state.config.editorialCounts=counts;state.config.count=Object.values(counts).reduce((a,b)=>a+b,0);
-  saveScoringSettings(false);
-  saveContextCardPreferences();
   const parse=id=>{const el=document.getElementById(id);return el?[...new Set(el.value.split(/\r?\n|\r|\\n/).map(x=>x.trim()).filter(Boolean))]:(state.config.interests?.[id]||[])};
   state.config.interests={...state.config.interests,'Política':parse('interestPolitics'),'Cotidiano':parse('interestDaily'),'Economia':parse('interestEconomy'),'Esportes':parse('interestSports'),'Cultura':parse('interestCulture'),'Descartar Assuntos':parse('interestDiscard')};
-  const active=activeEditorialProfile();if(active)active.interests=JSON.parse(JSON.stringify(state.config.interests));
+  activeEditorialProfile().interests=JSON.parse(JSON.stringify(state.config.interests));
   persist();toast('Todos os dados foram salvos neste navegador.');
 }
 function saveInterests(){
@@ -3971,7 +3858,7 @@ function saveInterests(){
     'Cultura':parse('interestCulture'),
     'Descartar Assuntos':parse('interestDiscard')
   };
-  const active=activeEditorialProfile();if(active)active.interests=JSON.parse(JSON.stringify(state.config.interests));
+  const active=activeEditorialProfile();active.interests=JSON.parse(JSON.stringify(state.config.interests));
   persist();
   setTextContent('interestStatus','Assuntos salvos neste navegador.');
   toast('Assuntos de interesse salvos.');
@@ -4170,7 +4057,7 @@ function addSource(){
   if(method==='rss'&&!url){toast('Informe pelo menos uma URL RSS/Atom.');return}
   if(method==='auto'&&!url&&!domain){toast('Informe pelo menos um feed RSS/Atom ou o domínio do site.');return}
 
-  state.sources.push({id:uid(),name,url:method==='html'?'':url,feeds:method==='html'?[]:feeds,siteUrls:method==='html'?siteUrls:[],type:method==='html'?'html':'web',method,domain,queries,scope,weight,active:false,status:'Não testada'});
+  state.sources.push({id:uid(),name,url:method==='html'?'':url,feeds:method==='html'?[]:feeds,siteUrls:method==='html'?siteUrls:[],type:method==='html'?'html':'web',method,domain,queries,scope,weight,active:true,status:'Não testada'});
   persist();closeAddSourceModal();clearSourceForm();renderSources();toast('Fonte adicionada.');
 }
 function clearSourceForm(){
@@ -4258,14 +4145,9 @@ function statusBadge(s){
   if(st.includes('Proxy'))return '<span class="tag med">🟡 '+esc(st)+'</span>';
   return '<span class="tag">⚪ '+esc(st)+'</span>';
 }
-function syncActiveProfileSources(){
-  const id=state.config.activeEditorialProfileId;
-  const p=(state.config.editorialProfiles||[]).find(profile=>profile.id===id);
-  if(p)p.sources=(state.sources||[]).map(source=>({...JSON.parse(JSON.stringify(source)),active:source.active===true}));
-}
-function toggleSource(id,v){const s=state.sources.find(x=>x.id===id);if(s)s.active=v;syncActiveProfileSources();persist();renderSources()}
-function toggleAllSources(enabled){state.sources.forEach(s=>s.active=!!enabled);syncActiveProfileSources();persist();renderSources();toast(enabled?'Todas as fontes foram ativadas.':'Todas as fontes foram desativadas.')} 
-function removeSource(id){const source=state.sources.find(x=>x.id===id);if(confirm(`Excluir “${source?.name||'esta fonte'}” deste perfil? A fonte nativa continuará disponível no catálogo padrão e poderá ser incluída em outros perfis.`)){state.sources=state.sources.filter(x=>x.id!==id);syncActiveProfileSources();persist();renderSources()}}
+function toggleSource(id,v){const s=state.sources.find(x=>x.id===id);if(s)s.active=v;persist();renderSources()}
+function toggleAllSources(enabled){state.sources.forEach(s=>s.active=!!enabled);persist();renderSources();toast(enabled?'Todas as fontes foram ativadas.':'Todas as fontes foram desativadas.')} 
+function removeSource(id){if(confirm('Excluir esta fonte?')){state.sources=state.sources.filter(x=>x.id!==id);persist();renderSources()}}
 function editSource(id){
   const s=state.sources.find(x=>x.id===id);if(!s)return;
   document.getElementById('editSourceId').value=s.id;
@@ -4299,7 +4181,7 @@ function saveEditedSource(){
   s.type=method==='html'?'html':'web';
   s.domain=domain;
   s.status='Não testada';
-  syncActiveProfileSources();persist();renderSources();closeSourceEditor();toast('Fonte atualizada.');
+  persist();renderSources();closeSourceEditor();toast('Fonte atualizada.');
 }
 function shortError(e){
   const msg=String(e?.message||e||'Erro').replace(/\s+/g,' ').trim();
@@ -4344,12 +4226,12 @@ async function testSources(){
 function resetBuiltInSources(){
   if(!confirm('Restaurar Fontes Padrão? Todas as fontes personalizadas pelo usuário e as alterações feitas nas fontes serão removidas. O catálogo nativo será restaurado, com todas as fontes desativadas. As notícias, configurações e itens do Radar serão preservados.'))return;
   // Restaura o catálogo nativo completo, descartando fontes adicionadas/importadas e edições feitas pelo usuário.
-  state.sources=defaultState.sources.map(s=>({...s,active:false,status:'Não testada',feeds:Array.isArray(s.feeds)?[...s.feeds]:[s.url],queries:Array.isArray(s.queries)?[...s.queries]:[]}));
+  state.sources=defaultState.sources.map(s=>({...s,id:uid(),active:false,status:'Não testada',feeds:Array.isArray(s.feeds)?[...s.feeds]:[s.url],queries:Array.isArray(s.queries)?[...s.queries]:[]}));
   // Evita que um registro antigo de fontes personalizadas seja reimportado na próxima inicialização.
   localStorage.removeItem('radar_sources_v1');
   localStorage.setItem('radar_v4_sources_imported','1');
   localStorage.setItem(NATIVE_SOURCES_MIGRATION_KEY,'1');
-  syncActiveProfileSources();persist();renderSources();toast('Fontes Padrão restauradas. Fontes personalizadas removidas.');
+  persist();renderSources();toast('Fontes Padrão restauradas. Fontes personalizadas removidas.');
 }
 function setTodayPeriod(){
   const d=new Date().toISOString().slice(0,10);
@@ -4362,7 +4244,7 @@ async function testAI(){
   catch(e){setTextContent('aiStatus','Falha: '+e.message);toast('Não foi possível testar a IA.')}
 }
 function exportData(){const payload={version:1,type:'radar-sources',sources:state.sources};download('radar-fontes-'+dateFile()+'.json',JSON.stringify(payload,null,2),'application/json')}
-function importData(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);const incoming=Array.isArray(x)?x:(x.type==='radar-sources'&&Array.isArray(x.sources)?x.sources:null);if(!incoming)throw Error();state.sources=incoming.filter(s=>s&&s.name!=='Tribuna RN / Novo Notícias').map(s=>({...s,id:s.id||uid(),status:s.status||'Não testada'}));syncActiveProfileSources();persist();renderSources();toast('Fontes importadas. Os demais dados do sistema foram preservados.')}catch(e){toast('Arquivo inválido: importe um JSON de fontes exportado pelo Radar.')} };r.readAsText(f);ev.target.value=''}
+function importData(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);const incoming=Array.isArray(x)?x:(x.type==='radar-sources'&&Array.isArray(x.sources)?x.sources:null);if(!incoming)throw Error();state.sources=incoming.filter(s=>s&&s.name!=='Tribuna RN / Novo Notícias').map(s=>({...s,id:s.id||uid(),status:s.status||'Não testada'}));persist();renderSources();toast('Fontes importadas. Os demais dados do sistema foram preservados.')}catch(e){toast('Arquivo inválido: importe um JSON de fontes exportado pelo Radar.')} };r.readAsText(f);ev.target.value=''}
 function exportSystemData(){download('radar-backup-'+dateFile()+'.json',JSON.stringify(state,null,2),'application/json')}
 function importSystemData(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x.config||!Array.isArray(x.sources))throw Error();state=x;state.sources=(state.sources||[]).filter(s=>s.name!=='Tribuna RN / Novo Notícias');persist();renderConfig();renderNews();renderNexo();renderSources();toast('Dados do sistema importados.')}catch(e){toast('Arquivo inválido ou incompatível.')} };r.readAsText(f);ev.target.value=''}
 function factoryReset(){if(confirm('Restaurar todas as configurações, fontes, notícias e Radar?')){state=structuredClone(defaultState);persist();renderConfig();renderNews();renderNexo();toast('Radar restaurado.')}}
@@ -4383,7 +4265,7 @@ function initCollectionDates(){
   to.value=localISODate(0);
   if(state&&state.config){state.config.dateFrom=from.value;state.config.dateTo=to.value;persist()}
 }
-renderConfig();renderNews();renderNexo();updateStats();loadGitHubEditorialProfiles(false);
+renderConfig();renderNews();renderNexo();updateStats();
 initCollectionDates();
 </script>
 <script>applyTheme(localStorage.getItem('radar_theme')==='dark'?'dark':'light');initViewControls();
@@ -4429,29 +4311,26 @@ async function loadContextTides(){
 }
 const CONTEXT_CARD_IDS={clock:'contextCardClock',timer:'contextCardTimer',urgency:'contextCardUrgency',agenda:'contextCardAgenda',rundown:'contextCardRundown',football:'contextCardFootball'};
 const CONTEXT_CHECK_IDS={clock:'showContextClock',timer:'showContextTimer',urgency:'showContextUrgency',agenda:'showContextAgenda',rundown:'showContextRundown',football:'showContextFootball'};
-function saveContextCardPreferences(){
- const cfg=state.config.contextCards||(state.config.contextCards={visibility:{clock:true,timer:false,urgency:false,agenda:true,rundown:false,football:true},order:['clock','timer','agenda','football','urgency','rundown']});
- cfg.visibility=cfg.visibility||{};
- Object.entries(CONTEXT_CHECK_IDS).forEach(([key,id])=>{const cb=document.getElementById(id);if(cb)cfg.visibility[key]=!!cb.checked;});
- const rail=document.querySelector('.context-rail');if(rail)cfg.order=Array.from(rail.querySelectorAll('[data-context-card]')).map(x=>x.dataset.contextCard);
- persist();
-}
-function setContextCardVisibility(key,visible){
- const card=document.getElementById(CONTEXT_CARD_IDS[key]);if(card)card.hidden=!visible;
- const cfg=state.config.contextCards||(state.config.contextCards={visibility:{},order:[]});cfg.visibility=cfg.visibility||{};cfg.visibility[key]=!!visible;if(key==='clock')cfg.visibility.weather=!!visible;
- persist();if(key==='football'&&visible)loadFootballMatches(false);
-}
+function setContextCardVisibility(key,visible){const card=document.getElementById(CONTEXT_CARD_IDS[key]);if(card)card.hidden=!visible;const values=JSON.parse(localStorage.getItem('radar_context_card_visibility')||'{}');values[key]=!!visible;if(key==='clock')values.weather=!!visible;localStorage.setItem('radar_context_card_visibility',JSON.stringify(values));if(key==='football'&&visible)loadFootballMatches(false);}
 function initContextCardPreferences(){
- const cfg=state.config.contextCards||defaultState.config.contextCards;const visibility=cfg.visibility||{};
- Object.entries(CONTEXT_CARD_IDS).forEach(([key,id])=>{const cb=document.getElementById(CONTEXT_CHECK_IDS[key]);let visible;
-  if(key==='clock'){const hasClock=Object.prototype.hasOwnProperty.call(visibility,'clock'),hasWeather=Object.prototype.hasOwnProperty.call(visibility,'weather');visible=(hasClock||hasWeather)?(visibility.clock!==false||visibility.weather!==false):true;}
-  else visible=Object.prototype.hasOwnProperty.call(visibility,key)?visibility[key]===true:(key==='agenda'||key==='football');
+ let visibility={};try{visibility=JSON.parse(localStorage.getItem('radar_context_card_visibility')||'{}')}catch(e){}
+ Object.entries(CONTEXT_CARD_IDS).forEach(([key,id])=>{const cb=document.getElementById(CONTEXT_CHECK_IDS[key]);let visible;if(key==='clock'){
+   // Migra as preferências antigas dos cards separados: o combinado fica visível se qualquer um dos dois estava visível.
+   const hasClock=Object.prototype.hasOwnProperty.call(visibility,'clock'),hasWeather=Object.prototype.hasOwnProperty.call(visibility,'weather');
+   visible=(hasClock||hasWeather)?(visibility.clock!==false||visibility.weather!==false):true;
+  }else visible=(key==='rundown'||key==='urgency') ? visibility[key]===true : visibility[key]!==false;
   if(cb)cb.checked=visible;const card=document.getElementById(id);if(card)card.hidden=!visible;});
- const rail=document.querySelector('.context-rail');if(rail){const defaults=Array.from(rail.querySelectorAll('[data-context-card]')).map(x=>x.dataset.contextCard);const preferred=['clock','timer','agenda','football','urgency','rundown'];const baseOrder=preferred.filter(k=>defaults.includes(k));const saved=Array.isArray(cfg.order)?cfg.order:[];const ordered=saved.length?[...saved.filter(k=>defaults.includes(k)),...baseOrder.filter(k=>!saved.includes(k))]:baseOrder;ordered.forEach(key=>{const card=rail.querySelector(`[data-context-card="${key}"]`);if(card)rail.appendChild(card)});
- let dragged=null;rail.querySelectorAll('[data-context-card]').forEach(card=>{card.addEventListener('dragstart',e=>{dragged=card;card.classList.add('dragging');e.dataTransfer.effectAllowed='move';try{e.dataTransfer.setData('text/plain',card.dataset.contextCard)}catch(_){}});card.addEventListener('dragend',()=>{card.classList.remove('dragging');rail.querySelectorAll('.drag-over').forEach(x=>x.classList.remove('drag-over'));dragged=null;saveContextCardPreferences()});card.addEventListener('dragover',e=>{if(!dragged||dragged===card)return;e.preventDefault();card.classList.add('drag-over');e.dataTransfer.dropEffect='move'});card.addEventListener('dragleave',()=>card.classList.remove('drag-over'));card.addEventListener('drop',e=>{e.preventDefault();card.classList.remove('drag-over');if(!dragged||dragged===card)return;const r=card.getBoundingClientRect();if(e.clientY-r.top>r.height/2)card.after(dragged);else card.before(dragged);});});}
+ let saved=[];try{saved=JSON.parse(localStorage.getItem('radar_context_card_order')||'[]')}catch(e){}
+ const rail=document.querySelector('.context-rail');if(rail){const defaults=Array.from(rail.querySelectorAll('[data-context-card]')).map(x=>x.dataset.contextCard);const preferred=['clock','timer','agenda','football','urgency','rundown'];const baseOrder=preferred.filter(k=>defaults.includes(k));const ordered=saved.length?[...saved.filter(k=>defaults.includes(k)),...baseOrder.filter(k=>!saved.includes(k))]:baseOrder;ordered.forEach(key=>{const card=rail.querySelector(`[data-context-card="${key}"]`);if(card)rail.appendChild(card)});
+ let dragged=null;rail.querySelectorAll('[data-context-card]').forEach(card=>{card.addEventListener('dragstart',e=>{dragged=card;card.classList.add('dragging');e.dataTransfer.effectAllowed='move';try{e.dataTransfer.setData('text/plain',card.dataset.contextCard)}catch(_){}});card.addEventListener('dragend',()=>{card.classList.remove('dragging');rail.querySelectorAll('.drag-over').forEach(x=>x.classList.remove('drag-over'));dragged=null;localStorage.setItem('radar_context_card_order',JSON.stringify(Array.from(rail.querySelectorAll('[data-context-card]')).map(x=>x.dataset.contextCard)))});card.addEventListener('dragover',e=>{if(!dragged||dragged===card)return;e.preventDefault();card.classList.add('drag-over');e.dataTransfer.dropEffect='move'});card.addEventListener('dragleave',()=>card.classList.remove('drag-over'));card.addEventListener('drop',e=>{e.preventDefault();card.classList.remove('drag-over');if(!dragged||dragged===card)return;const r=card.getBoundingClientRect();if(e.clientY-r.top>r.height/2)card.after(dragged);else card.before(dragged);});});}
  renderAgendaAnnotations();
  const legacyAgenda=localStorage.getItem('radar_context_agenda');
- if(legacyAgenda&&legacyAgenda.trim()){let current=[];try{current=JSON.parse(localStorage.getItem('radar_context_agenda_items')||'[]')}catch(e){}if(!Array.isArray(current)||!current.length)localStorage.setItem('radar_context_agenda_items',JSON.stringify([{id:'legacy-'+Date.now(),text:legacyAgenda.trim()}]));localStorage.removeItem('radar_context_agenda');renderAgendaAnnotations();}
+ if(legacyAgenda&&legacyAgenda.trim()){
+   let current=[];try{current=JSON.parse(localStorage.getItem('radar_context_agenda_items')||'[]')}catch(e){}
+   if(!Array.isArray(current)||!current.length){localStorage.setItem('radar_context_agenda_items',JSON.stringify([{id:'legacy-'+Date.now(),text:legacyAgenda.trim()}]));}
+   localStorage.removeItem('radar_context_agenda');
+   renderAgendaAnnotations();
+ }
 }
 function getAgendaAnnotations(){try{const items=JSON.parse(localStorage.getItem('radar_context_agenda_items')||'[]');return Array.isArray(items)?items:[]}catch(e){return []}}
 function saveAgendaAnnotations(items){localStorage.setItem('radar_context_agenda_items',JSON.stringify(items));}
@@ -4943,7 +4822,6 @@ ${String(footballData?.updatedAt||'não informada')}`;
   }
 }
 </style>
-<!-- Radar V1.32: limpeza da barra lateral e atualização imediata das fontes na troca de perfil. -->
 <!-- Radar V1.19: catálogo remoto de perfis editoriais no GitHub, carregado ao abrir Regras e Instruções. -->
 </body>
 </html>
@@ -5985,18 +5863,4 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
 .editorial-rules-grid textarea{height:260px;max-height:42vh}
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
-</style>
-
-<style id="radar-v132-sidebar-and-profile-switch">
-/* V1.32: removeu-se o botão Boletim; Limpar ocupa toda a largura disponível. */
-#page-noticias .sidebar-collect-secondary-actions {
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) !important;
-  width: 100% !important;
-}
-#page-noticias .sidebar-collect-secondary-actions .clear-collection-top-btn {
-  width: 100% !important;
-  min-width: 0 !important;
-  grid-column: 1 / -1 !important;
-}
 </style>
