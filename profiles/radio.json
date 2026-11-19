@@ -31,13 +31,12 @@
       "visibility": {
         "clock": true,
         "timer": false,
-        "urgency": true,
+        "urgency": false,
         "agenda": true,
         "rundown": false,
         "football": true
       },
       "order": [
-        "clock",
         "timer",
         "agenda",
         "football",
