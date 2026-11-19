@@ -31,7 +31,7 @@
       "visibility": {
         "clock": true,
         "timer": false,
-        "urgency": false,
+        "urgency": true,
         "agenda": true,
         "rundown": false,
         "football": true
