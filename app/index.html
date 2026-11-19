@@ -1777,10 +1777,10 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <span style="flex:1 1 auto"></span>
 <span aria-live="polite" class="source-catalog-status" id="sourceCatalogStatus" role="status" title="Indica a situação de sincronização do catálogo">Catálogo sincronizado com o GitHub</span>
 </div>
-<div aria-live="polite" class="source-save-bar" hidden="" id="sourceSaveBar"></div><div class="tablewrap" style="margin-top:15px">
-<table class="source-table"><thead><tr><th>Fonte</th><th>Abrangência</th><th>Status</th><th>Ações</th></tr></thead><tbody id="sourceTable"></tbody></table>
+<div aria-live="polite" class="source-save-bar" hidden="" id="sourceSaveBar"></div><div class="source-catalog-filters" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:8px;margin-top:14px"><input id="sourceSearchFilter" placeholder="Buscar fonte..." oninput="renderSources()"/><select id="sourceScopeFilter" onchange="renderSources()"><option value="">Todas as abrangências</option><option value="Nacional">Nacional</option><option value="Local">Local (RN)</option></select><select id="sourceTypeFilter" onchange="renderSources()"><option value="">Todos os tipos</option><option>Portal</option><option>Jornal / Portal</option><option>Blog</option><option>Blog / Portal</option><option>Rádio</option><option>TV</option><option>Agência / Portal</option><option>Jornal</option><option>Portal / TV</option><option>Portal / Esportes</option><option>Blog / Análise</option><option>Blog / Coluna</option><option>TV pública</option><option>Agência</option><option>Rádio / Portal</option><option>TV / Portal</option><option>Revista / Portal</option><option>Portal especializado</option><option>Revista</option></select></div><div class="tablewrap" style="margin-top:12px">
+<table class="source-table"><thead><tr><th>Fonte</th><th>Abrangência</th><th>Tipo</th><th>Status</th><th>Ações</th></tr></thead><tbody id="sourceTable"></tbody></table><p class="footer-note" id="sourceFilterCount" style="margin-top:8px"></p>
 </div>
-<p class="footer-note">O cadastro global define origem, domínio, abrangência, peso editorial e método de coleta. A ativação das fontes é configurada exclusivamente em Editar Perfis.</p>
+<p class="footer-note">O catálogo organiza as fontes por abrangência (Nacional ou Local — RN), tipo de veículo e método de coleta. A ativação das fontes é configurada exclusivamente em Editar Perfis.</p>
 </div>
 </section>
 </main>
@@ -1822,7 +1822,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <div class="edit-source-grid">
 <div class="edit-source-column">
 <div><label>Nome</label><input id="srcName" placeholder="Ex.: G1 — RN"/></div>
-<div><label>Abrangência padrão</label><select id="srcScope"><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div>
+<div><label>Abrangência padrão</label><select id="srcScope"><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div><div><label>Tipo de veículo</label><select id="srcVehicleType"><option>Portal</option><option>Jornal / Portal</option><option>Jornal</option><option>Blog</option><option>Blog / Portal</option><option>Rádio</option><option>TV</option><option>Agência / Portal</option><option>Portal / TV</option><option>Portal / Esportes</option><option>Blog / Análise</option><option>Blog / Coluna</option><option>TV pública</option><option>Agência</option><option>Rádio / Portal</option><option>TV / Portal</option><option>Revista / Portal</option><option>Portal especializado</option></select></div>
 <div><label>Método de coleta</label><select id="srcMethod" onchange="updateSourceMethodHelp('src')"><option selected="" value="auto">Automático (RSS + Site + Google Search com IA)</option><option value="rss">Somente RSS / Atom</option><option value="html">Somente página do site</option></select></div>
 <div><label>Site da Fonte <span class="small">(endereço principal do veículo)</span></label><input id="srcDomain" placeholder="ex.: g1.globo.com"/></div>
 </div>
@@ -1844,7 +1844,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <div class="edit-source-grid">
 <div class="edit-source-column">
 <div><label>Nome</label><input id="editSrcName"/></div>
-<div><label>Abrangência</label><select id="editSrcScope"><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div>
+<div><label>Abrangência</label><select id="editSrcScope"><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div><div><label>Tipo de veículo</label><select id="editSrcVehicleType"><option>Portal</option><option>Jornal / Portal</option><option>Jornal</option><option>Blog</option><option>Blog / Portal</option><option>Rádio</option><option>TV</option><option>Agência / Portal</option><option>Portal / TV</option><option>Blog / Análise</option><option>Blog / Coluna</option><option>TV pública</option><option>Agência</option><option>Rádio / Portal</option><option>TV / Portal</option><option>Revista / Portal</option><option>Portal especializado</option></select></div>
 <div><label>Método de coleta</label><select id="editSrcMethod" onchange="updateSourceMethodHelp('editSrc')"><option value="auto">Automático (RSS + Site + Google Search com IA)</option><option value="rss">Somente RSS / Atom</option><option value="html">Somente página do site</option></select></div>
 <div><label>Site da Fonte <span class="small">(endereço principal do veículo)</span></label><input id="editSrcDomain"/></div>
 </div>
@@ -4650,26 +4650,22 @@ function closeAddSourceModal(){document.getElementById('sourceAddModal').classLi
 function addSource(){
   const name=document.getElementById('srcName').value.trim();
   const enteredUrls=[...new Set(document.getElementById('srcUrl').value.split(/\r?\n|\r|\\n/).map(x=>x.trim()).filter(Boolean))];
-  const feeds=enteredUrls;
-  const siteUrls=enteredUrls;
+  const method=document.getElementById('srcMethod')?.value||'auto';
+  const feeds=method==='html'?[]:enteredUrls,siteUrls=method==='html'?enteredUrls:[];
   const url=feeds[0]||'';
   const scope=document.getElementById('srcScope').value;
   const weight='Normal';
-  const method=document.getElementById('srcMethod')?.value||'auto';
   const domain=(document.getElementById('srcDomain').value.trim()||extractDomain((method==='html'?siteUrls[0]:url)||''));
   const queriesEl=document.getElementById('srcQueries');
   const queries=queriesEl?(queriesEl.value||'').split(/\n+/).map(x=>x.trim()).filter(Boolean):[];
-
   if(!name){toast('Informe o nome da fonte.');return}
   if(method==='html'&&!siteUrls.length){toast('Informe pelo menos uma URL de página pública do site.');return}
-  if(method==='rss'&&!url){toast('Informe pelo menos uma URL RSS/Atom.');return}
-  if(method==='auto'&&!url&&!domain){toast('Informe pelo menos um feed RSS/Atom ou o domínio do site.');return}
-
-  state.sources.push({id:uid(),name,url:method==='html'?'':url,feeds:method==='html'?[]:feeds,siteUrls:method==='html'?siteUrls:[],type:method==='html'?'html':'web',method,domain,queries,scope,weight,active:false,status:'Não testada'});
+  if(method!=='html'&&!url&&!domain){toast('Informe pelo menos um feed RSS/Atom ou o domínio do site.');return}
+  state.sources.push({id:uid(),name,url,feeds,siteUrls,type:method==='html'?'html':'web',method,domain,queries,scope,weight,vehicleType:document.getElementById('srcVehicleType')?.value||'Portal',active:false,status:'Não testada'});
   markSourceCatalogDirty();closeAddSourceModal();clearSourceForm();renderSources();toast('Fonte adicionada. Publicando no catálogo global…');
 }
 function clearSourceForm(){
-  ['srcName','srcUrl','srcDomain'].forEach(id=>{const e=document.getElementById(id);if(e)e.value=''});if(document.getElementById('srcMethod')){document.getElementById('srcMethod').value='auto';updateSourceMethodHelp('src')}
+  ['srcName','srcUrl','srcDomain'].forEach(id=>{const e=document.getElementById(id);if(e)e.value=''});if(document.getElementById('srcVehicleType'))document.getElementById('srcVehicleType').value='Portal';if(document.getElementById('srcMethod')){document.getElementById('srcMethod').value='auto';updateSourceMethodHelp('src')}
 }
 function openAddNewsLinkModal(){
   const modal=document.getElementById('addNewsLinkModal');
@@ -4727,22 +4723,26 @@ async function addNewsFromLink(){
 }
 
 function renderSources(){
-  renderSourceSaveBar();
-  const sourceTable=document.getElementById('sourceTable');
-  if(sourceTable&&!sourceTable.dataset.editHandlerBound){sourceTable.dataset.editHandlerBound='1';sourceTable.addEventListener('click',event=>{const button=event.target.closest('[data-source-edit]');if(!button||!sourceTable.contains(button))return;event.preventDefault();event.stopPropagation();editSource(button.getAttribute('data-source-edit'));});}
-  state.sources.sort((a,b)=>String(a.name||'').localeCompare(String(b.name||''),'pt-BR',{sensitivity:'base'}));
-  const table=document.getElementById('sourceTable');if(!table)return;table.innerHTML=state.sources.map(s=>`<tr>
-    <td><b>${esc(s.name)}</b><br><span class="small">${esc(s.domain||s.url||'')}</span></td>
-    <td>${esc(normalizeSourceScope(s.scope,s.name,s.url))}</td><td>${esc(s.weight||'Normal')}</td>
-    <td>${statusBadge(s)}</td>
-    <td>
-      <div class="source-actions-inline">
-        <button class="btn btn-secondary" onclick="testSource('${s.id}')">Testar</button>
-        <button class="btn btn-secondary" type="button" data-source-edit="${esc(String(s.id))}">Editar</button>
-        <button class="btn btn-danger" onclick="removeSource('${s.id}')">Excluir</button>
-      </div>
-    </td>
-  </tr>`).join('');
+ renderSourceSaveBar();
+ const sourceTable=document.getElementById('sourceTable');
+ if(sourceTable&&!sourceTable.dataset.editHandlerBound){sourceTable.dataset.editHandlerBound='1';sourceTable.addEventListener('click',event=>{const button=event.target.closest('[data-source-edit]');if(!button||!sourceTable.contains(button))return;event.preventDefault();event.stopPropagation();editSource(button.getAttribute('data-source-edit'));});}
+ const search=(document.getElementById('sourceSearchFilter')?.value||'').trim().toLocaleLowerCase('pt-BR');
+ const scope=document.getElementById('sourceScopeFilter')?.value||'';
+ const type=document.getElementById('sourceTypeFilter')?.value||'';
+ const all=[...(state.sources||[])].sort((a,b)=>String(a.name||'').localeCompare(String(b.name||''),'pt-BR',{sensitivity:'base'}));
+ const visible=all.filter(s=>{
+  const hay=[s.name,s.domain,s.url,s.vehicleType,(s.queries||[]).join(' ')].join(' ').toLocaleLowerCase('pt-BR');
+  return (!search||hay.includes(search))&&(!scope||normalizeSourceScope(s.scope,s.name,s.url)===scope)&&(!type||s.vehicleType===type);
+ });
+ if(!sourceTable)return;
+ sourceTable.innerHTML=visible.map(s=>`<tr>
+  <td><b>${esc(s.name)}</b><br><span class="small">${esc(s.domain||s.url||s.siteUrls?.[0]||'')}</span></td>
+  <td>${esc(normalizeSourceScope(s.scope,s.name,s.url)==='Local'?'Local (RN)':'Nacional')}</td>
+  <td>${esc(s.vehicleType||'Não classificado')}</td>
+  <td>${statusBadge(s)}<br><span class="small">${esc(s.method==='html'?'Somente página/site':'Automático')}</span></td>
+  <td><div class="source-actions-inline"><button class="btn btn-secondary" onclick="testSource('${s.id}')">Testar</button><button class="btn btn-secondary" type="button" data-source-edit="${esc(String(s.id))}">Editar</button><button class="btn btn-danger" onclick="removeSource('${s.id}')">Excluir</button></div></td>
+ </tr>`).join('')||'<tr><td colspan="5" class="small">Nenhuma fonte corresponde aos filtros.</td></tr>';
+ const count=document.getElementById('sourceFilterCount');if(count)count.textContent=`Exibindo ${visible.length} de ${all.length} fontes cadastradas.`;
 }
 function statusBadge(s){
   const st=String(s.status||'Não testada');
@@ -4765,7 +4765,8 @@ function editSource(id){
   document.getElementById('editSrcName').value=s.name||'';
   document.getElementById('editSrcUrl').value=(s.method==='html'?(s.siteUrls?.length?s.siteUrls:[s.url]):(s.feeds?.length?s.feeds:[s.url])).filter(Boolean).join('\n');
   document.getElementById('editSrcScope').value=normalizeSourceScope(s.scope,s.name,s.url);
-  document.getElementById('editSrcDomain').value=s.domain||extractDomain(s.url||'');
+  document.getElementById('editSrcVehicleType').value=s.vehicleType||'Portal';
+  document.getElementById('editSrcDomain').value=s.domain||extractDomain(s.url||s.siteUrls?.[0]||'');
   document.getElementById('editSrcMethod').value=s.method==='html'?'html':s.method==='rss'?'rss':'auto';updateSourceMethodHelp('editSrc');
   const modal=document.getElementById('sourceEditModal');if(!modal){toast('Janela de edição indisponível.');return;}modal.classList.add('open');modal.setAttribute('aria-hidden','false');
 }
@@ -4775,21 +4776,18 @@ function saveEditedSource(){
   const s=state.sources.find(x=>x.id===id);if(!s)return;
   const method=document.getElementById('editSrcMethod')?.value||'auto';
   const enteredUrls=[...new Set(document.getElementById('editSrcUrl').value.split(/\r?\n|\r|\\n/).map(x=>x.trim()).filter(Boolean))];
-  const feeds=enteredUrls;
-  const siteUrls=enteredUrls;
+  const feeds=method==='html'?[]:enteredUrls,siteUrls=method==='html'?enteredUrls:[];
   const url=feeds[0]||'';
   const domain=(document.getElementById('editSrcDomain').value.trim()||extractDomain((method==='html'?siteUrls[0]:url)||''));
   if(!document.getElementById('editSrcName').value.trim()){toast('Informe o nome da fonte.');return}
   if(method==='html'&&!siteUrls.length){toast('Informe pelo menos uma URL de página pública do site.');return}
-  if(method==='rss'&&!url){toast('Informe pelo menos uma URL RSS/Atom.');return}
-  if(method==='auto'&&!url&&!domain){toast('Informe pelo menos um feed RSS/Atom ou o domínio do site.');return}
+  if(method!=='html'&&!url&&!domain){toast('Informe pelo menos um feed RSS/Atom ou o domínio do site.');return}
   s.name=document.getElementById('editSrcName').value.trim();
-  s.url=method==='html'?'':url;s.feeds=method==='html'?[]:feeds;s.siteUrls=method==='html'?siteUrls:[];
+  s.url=url;s.feeds=feeds;s.siteUrls=siteUrls;
   s.scope=document.getElementById('editSrcScope').value;
-  s.method=method;
-  s.type=method==='html'?'html':'web';
-  s.domain=domain;
-  s.status='Não testada';
+  s.method=method;s.type=method==='html'?'html':'web';
+  s.vehicleType=document.getElementById('editSrcVehicleType')?.value||'Portal';
+  s.domain=domain;s.status='Não testada';
   markSourceCatalogDirty();renderSources();closeSourceEditor();toast('Fonte alterada. Publicando no catálogo global…');
 }
 function shortError(e){
