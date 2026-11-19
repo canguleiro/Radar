@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <!-- Radar Interface 2026 V1.28: catálogo GitHub aceita perfis JSON publicados com sufixo .example.json. -->
 <html lang="pt-BR">
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#102a43">
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#102a43" name="theme-color"/>
 <title>RADAR. — Notícias Integradas</title>
 <style>
 :root{
@@ -834,7 +835,6 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
 @media(max-width:760px){.profile-editor-tab{padding:10px 9px;font-size:12px}.profile-editor-pane{min-height:250px}.profile-editor-pane>textarea{min-height:220px}}
 </style>
 <!-- Radar V98: ações reorganizadas, notícias por editoria recolhíveis e indicador de processamento -->
-
 <style>
 /* V80: corrige estilos que estavam fora do documento HTML. */
 /* V50: compact sidebar controls and clearer collection separation */
@@ -1122,7 +1122,6 @@ body.sidebar-global-visible #page-noticias .collection-card { z-index: 18; }
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style id="v116-global-controls-fixed-with-original-visuals">
 /* V116: fixa o conjunto global de editorias e filtros como uma unidade, sem mudar o visual interno. */
 .global-news-controls{position:sticky!important;top:64px!important;z-index:24!important;align-self:start;width:100%;}
@@ -1143,7 +1142,6 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style>.brand-news{font-size:.68em;font-weight:300;font-style:italic;letter-spacing:.01em;opacity:.9;vertical-align:baseline}
 /* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
 .rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
@@ -1219,7 +1217,6 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
   .mobile-header-action { display: inline-flex; }
 }
 </style>
-
 <style id="radar-profile-editor-v135">
 .sidebar-profile-select{width:100%;margin:4px 0 8px;min-height:38px}
 .profile-editor-section{border:1px solid var(--border);border-radius:10px;margin:10px 0;background:var(--card);overflow:hidden}
@@ -1235,378 +1232,596 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 .rules-instructions-modal-box{max-height:90vh;overflow:auto}
 #sourceCatalogStatus[data-pending="true"]{color:var(--warning,#b7791f)}
 </style>
-</head>
+<style>
+/* V1.37 — refinamento visual do editor e organização do perfil ativo */
+#rulesInstructionsModal .profile-editor-modal-compact{
+  width:min(1120px, calc(100vw - 36px))!important;
+  max-width:1120px!important;
+  max-height:calc(100vh - 32px)!important;
+  overflow:auto!important;
+  padding:20px 24px!important;
+  border-radius:14px!important;
+}
+#rulesInstructionsModal .api-modal-head{margin-bottom:10px!important}
+#rulesInstructionsModal .editorial-profiles-toolbar{
+  display:grid!important;
+  grid-template-columns:minmax(220px,1fr) auto!important;
+  align-items:end!important;
+  gap:12px!important;
+  margin:8px 0!important;
+}
+#rulesInstructionsModal .editorial-profile-actions{
+  display:flex!important;flex-wrap:wrap!important;gap:6px!important;
+  justify-content:flex-end!important;width:auto!important;
+}
+#rulesInstructionsModal .editorial-profile-actions .btn,
+#rulesInstructionsModal .profile-editor-footer .btn,
+#rulesInstructionsModal .rules-processing-actions .btn{
+  min-height:32px!important;padding:6px 11px!important;font-size:12px!important;
+  font-weight:600!important;border-radius:7px!important;flex:0 0 auto!important;
+}
+#rulesInstructionsModal .profile-editor-tabs{
+  display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:2px!important;margin:12px 0 14px!important;
+  border-bottom:1px solid var(--line)!important;overflow:visible!important;
+}
+#rulesInstructionsModal .profile-editor-tab{
+  min-width:0!important;min-height:40px!important;padding:8px 10px!important;
+  font-size:13px!important;font-weight:650!important;border-bottom:2px solid transparent!important;
+  white-space:nowrap!important;
+}
+#rulesInstructionsModal .profile-editor-tab i{margin-right:5px!important;font-size:12px!important}
+#rulesInstructionsModal .profile-editor-pane{
+  min-height:300px!important;padding:2px 0!important;
+}
+#rulesInstructionsModal .profile-editor-pane>label{
+  display:block!important;margin:4px 0 7px!important;font-size:13px!important;
+}
+#rulesInstructionsModal .profile-editor-pane>textarea{
+  display:block!important;width:100%!important;min-height:250px!important;
+  height:250px!important;max-height:42vh!important;box-sizing:border-box!important;
+  padding:11px 12px!important;font-size:13px!important;line-height:1.5!important;
+}
+#rulesInstructionsModal .profile-editor-pane[data-pane="summary"]>textarea,
+#rulesInstructionsModal .profile-editor-pane[data-pane="comment"]>textarea{height:250px!important;min-height:250px!important}
+#rulesInstructionsModal .pautas-modal-grid{
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:10px!important;margin-top:10px!important;
+}
+#rulesInstructionsModal .pautas-modal-grid .sidebar-pauta textarea{
+  width:100%!important;min-height:90px!important;box-sizing:border-box!important;
+}
+#rulesInstructionsModal .profile-source-table{width:100%!important;font-size:12px!important}
+#rulesInstructionsModal .profile-source-table th,
+#rulesInstructionsModal .profile-source-table td{padding:7px 9px!important;vertical-align:middle!important}
+#rulesInstructionsModal .profile-source-priority{min-width:100px!important;padding:5px 7px!important;font-size:12px!important}
+#rulesInstructionsModal .profile-editor-footer{
+  position:sticky!important;bottom:-20px!important;background:var(--surface)!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:12px!important;padding:12px 0 0!important;margin-top:8px!important;
+  border-top:1px solid var(--line)!important;
+}
+#rulesInstructionsModal .profile-editor-footer>div{display:flex!important;gap:7px!important}
+.sidebar-active-profile-card{
+  margin-top:10px!important;padding:12px!important;
+  border:1px solid var(--line)!important;border-radius:12px!important;
+}
+.sidebar-active-profile-head{
+  font-size:12px!important;font-weight:700!important;color:var(--muted)!important;
+  margin-bottom:8px!important;
+}
+.sidebar-active-profile-card .sidebar-extra-settings{
+  display:flex!important;flex-direction:column!important;gap:8px!important;
+  margin:0!important;padding:0!important;border:0!important;
+}
+.sidebar-active-profile-card .sidebar-section-title{margin:0!important}
+.sidebar-active-profile-card .sidebar-profile-select{width:100%!important;min-height:36px!important}
+.sidebar-active-profile-card .rules-instructions-btn{
+  width:100%!important;min-height:34px!important;padding:7px 10px!important;
+  font-size:12px!important;border-radius:7px!important;
+}
+@media(max-width:760px){
+ #rulesInstructionsModal .profile-editor-modal-compact{width:calc(100vw - 16px)!important;padding:14px!important}
+ #rulesInstructionsModal .editorial-profiles-toolbar{grid-template-columns:1fr!important}
+ #rulesInstructionsModal .editorial-profile-actions{justify-content:flex-start!important}
+ #rulesInstructionsModal .profile-editor-tabs{grid-template-columns:repeat(5,minmax(78px,1fr))!important;overflow-x:auto!important}
+ #rulesInstructionsModal .profile-editor-tab{font-size:11px!important;padding:7px 5px!important}
+ #rulesInstructionsModal .pautas-modal-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+</style><style>
+/* V1.38 — rodapé contextual, tabela compacta e card de perfil na coluna lateral */
+#rulesInstructionsModal .profile-editor-modal-compact{
+  display:flex!important;flex-direction:column!important;
+  overflow:hidden!important;max-height:calc(100vh - 30px)!important;
+}
+#rulesInstructionsModal .rules-instructions-content{
+  min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;
+  padding-bottom:4px!important;
+}
+#rulesInstructionsModal .profile-editor-footer{
+  flex:0 0 auto!important;position:sticky!important;bottom:0!important;z-index:8!important;
+  background:var(--card,#fff)!important;
+  background-color:var(--card,#fff)!important;
+  box-shadow:0 -7px 16px rgba(15,35,55,.09)!important;
+  border-top:1px solid var(--line,#dbe3eb)!important;
+  padding:10px 12px!important;margin:0 -24px -20px!important;
+  min-height:54px!important;box-sizing:border-box!important;
+}
+#rulesInstructionsModal .profile-editor-context-actions{
+  display:flex!important;align-items:center!important;gap:6px!important;flex:0 0 auto!important;
+}
+#rulesInstructionsModal .profile-editor-context-actions .btn{
+  min-height:30px!important;padding:5px 9px!important;font-size:11px!important;
+  font-weight:600!important;white-space:nowrap!important;border-radius:6px!important;
+}
+#rulesInstructionsModal .profile-source-footer-action[hidden]{display:none!important}
+#rulesInstructionsModal .profile-source-actions{display:none!important}
+#rulesInstructionsModal .profile-source-table{
+  width:100%!important;table-layout:fixed!important;border-collapse:separate!important;
+  border-spacing:0!important;font-size:11px!important;
+}
+#rulesInstructionsModal .profile-source-table th,
+#rulesInstructionsModal .profile-source-table td{
+  padding:5px 9px!important;height:34px!important;line-height:1.25!important;
+  border-bottom:1px solid var(--line,#e2e8f0)!important;vertical-align:middle!important;
+}
+#rulesInstructionsModal .profile-source-table th:nth-child(1){width:40%!important}
+#rulesInstructionsModal .profile-source-table th:nth-child(2){width:22%!important}
+#rulesInstructionsModal .profile-source-table th:nth-child(3){width:23%!important}
+#rulesInstructionsModal .profile-source-table th:nth-child(4){width:15%!important;text-align:center!important}
+#rulesInstructionsModal .profile-source-table td:nth-child(1){font-weight:650!important;overflow-wrap:anywhere}
+#rulesInstructionsModal .profile-source-table td:nth-child(2){font-size:10px!important;color:var(--muted)!important}
+#rulesInstructionsModal .profile-source-table td:nth-child(3){text-align:center!important}
+#rulesInstructionsModal .profile-source-table td:nth-child(4){text-align:center!important}
+#rulesInstructionsModal .profile-source-priority{
+  width:100%!important;max-width:130px!important;min-width:0!important;
+  min-height:28px!important;padding:4px 7px!important;font-size:11px!important;
+  border-radius:6px!important;
+}
+#rulesInstructionsModal .profile-source-table .switch{
+  transform:scale(.82)!important;transform-origin:center!important;margin:0 auto!important;
+}
+#rulesInstructionsModal .profile-editor-pane[data-pane="sources"] .tablewrap{
+  width:100%!important;max-width:none!important;overflow-x:hidden!important;
+  margin-top:4px!important;
+}
+#rulesInstructionsModal .profile-editor-pane[data-pane="sources"]>.footer-note{
+  font-size:11px!important;margin:2px 0 8px!important;
+}
+#page-noticias .sidebar-active-profile-card{
+  grid-column:1!important;grid-row:auto!important;width:100%!important;
+  box-sizing:border-box!important;margin:9px 0 0!important;align-self:start!important;
+}
+#page-noticias .collection-card{grid-column:1!important}
+#page-noticias .sidebar-active-profile-card .sidebar-extra-settings{gap:7px!important}
+#page-noticias .sidebar-active-profile-card .sidebar-section-title{font-size:10px!important}
+#page-noticias .sidebar-active-profile-card .sidebar-profile-select{min-height:32px!important;font-size:11px!important}
+#page-noticias .sidebar-active-profile-card .rules-instructions-btn{min-height:32px!important;font-size:11px!important}
+@media(max-width:760px){
+ #rulesInstructionsModal .profile-editor-footer{margin:0 -14px -14px!important;padding:9px 10px!important;gap:6px!important;flex-wrap:wrap!important}
+ #rulesInstructionsModal .profile-editor-context-actions{gap:4px!important}
+ #rulesInstructionsModal .profile-editor-context-actions .btn{font-size:10px!important;padding:5px 6px!important}
+ #rulesInstructionsModal .profile-editor-footer>div{gap:4px!important}
+ #rulesInstructionsModal .profile-source-table th:nth-child(1){width:36%!important}
+ #rulesInstructionsModal .profile-source-table th:nth-child(2){width:20%!important}
+ #rulesInstructionsModal .profile-source-table th:nth-child(3){width:27%!important}
+ #rulesInstructionsModal .profile-source-table th:nth-child(4){width:17%!important}
+}
+</style><style id="radar-v139-layout-corrections">
+/* V1.39 — correção estrutural do editor, coluna lateral e controles da coleta. */
+/* Modal: cabeçalho e rodapé fixos; somente a área central rola. */
+#rulesInstructionsModal .profile-editor-modal-compact{
+  display:flex!important;flex-direction:column!important;
+  width:min(1120px,calc(100vw - 36px))!important;
+  max-width:1120px!important;height:min(900px,calc(100vh - 32px))!important;
+  max-height:calc(100vh - 32px)!important;min-height:0!important;
+  overflow:hidden!important;box-sizing:border-box!important;
+}
+#rulesInstructionsModal .profile-editor-modal-compact>.api-modal-head{
+  flex:0 0 auto!important;position:relative!important;
+}
+#rulesInstructionsModal .rules-instructions-content{
+  flex:1 1 auto!important;min-height:0!important;
+  overflow-y:auto!important;overflow-x:hidden!important;
+  padding-bottom:14px!important;
+}
+#rulesInstructionsModal .profile-editor-footer{
+  flex:0 0 auto!important;position:relative!important;
+  left:auto!important;right:auto!important;bottom:auto!important;
+  width:auto!important;box-sizing:border-box!important;
+  margin:0!important;padding:10px 12px!important;
+  background:#fff!important;background:var(--card,#fff)!important;
+  border-top:1px solid var(--line,#dbe3eb)!important;
+  box-shadow:0 -7px 16px rgba(15,35,55,.10)!important;
+  z-index:20!important;
+}
+/* O perfil pertence à coluna lateral: fica dentro do card de coleta/definições. */
+#page-noticias>.collection-card>.sidebar-active-profile-card{
+  display:block!important;position:relative!important;
+  inset:auto!important;float:none!important;clear:both!important;
+  width:100%!important;max-width:100%!important;box-sizing:border-box!important;
+  margin:12px 0 0!important;
+}
+#page-noticias>.sidebar-active-profile-card{display:none!important}
+/* Controles da linha de datas com alturas alinhadas. */
+#page-noticias .collection-card .grid.grid-4>div{display:flex;flex-direction:column;justify-content:flex-end;min-width:0}
+#page-noticias .collection-card .grid.grid-4>div>input,
+#page-noticias .collection-card .grid.grid-4>div>select{height:36px!important;min-height:36px!important;box-sizing:border-box!important}
+#page-noticias .collection-card .grid.grid-4>div>button{
+  height:36px!important;min-height:36px!important;box-sizing:border-box!important;
+  padding:6px 8px!important;line-height:1.1!important;margin:0!important;
+}
+/* Botões principais da coleta com a mesma altura. */
+#page-noticias .collection-card .collect-news-btn,
+#page-noticias .collection-card .clear-collection-top-btn{
+  min-height:38px!important;height:38px!important;box-sizing:border-box!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  padding:8px 10px!important;line-height:1.15!important;
+}
+/* Evita exibição transitória de elementos móveis antes da sincronização responsiva. */
+@media(min-width:851px){
+  #mobileBottomNav{display:none!important}
+}
+@media(max-width:760px){
+  #rulesInstructionsModal .profile-editor-modal-compact{
+    width:calc(100vw - 16px)!important;height:calc(100vh - 16px)!important;
+    max-height:calc(100vh - 16px)!important;
+  }
+  #rulesInstructionsModal .profile-editor-footer{flex-wrap:nowrap!important;gap:6px!important}
+}
+</style></head>
 <body class="news-radar-workspace-active">
 <header class="topbar">
-  <button class="mobile-header-action mobile-menu-toggle" id="mobileSidebarToggle" type="button" onclick="toggleMobileSidebar()" aria-label="Abrir painel lateral" aria-expanded="false" title="Menu"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
-  <button class="brand" type="button" onclick="goHome()" aria-label="Voltar à página inicial" title="Página inicial"><span class="brand-name">RADAR</span><span class="brand-dot">.</span><span class="brand-tagline">Notícias Integradas</span></button>
-  <button class="mobile-header-action mobile-filter-toggle" id="mobileFilterToggle" type="button" onclick="toggleMobileFilters()" aria-label="Mostrar filtros" aria-expanded="false" title="Filtros"><i class="fa-solid fa-filter" aria-hidden="true"></i></button>
-  <button class="mobile-header-action mobile-sources-toggle" id="mobileSourcesToggle" type="button" onclick="showPage('fontes')" aria-label="Abrir página de fontes" title="Fontes"><i class="fa-solid fa-rss" aria-hidden="true"></i></button>
-  <div class="top-actions">
-    <button data-page="noticias" class="active" onclick="showPage('noticias')" aria-label="Notícias"><span class="header-icon fa-solid fa-newspaper" aria-hidden="true"></span> Notícias</button>
-    <button data-page="radar" onclick="showPage('radar')" aria-label="Radar"><span class="header-icon fa-solid fa-satellite-dish" aria-hidden="true"></span> Radar</button>
-    <button class="icon-action" data-page="fontes" onclick="showPage('fontes')" aria-label="Fontes" title="Fontes"><span class="header-icon fa-solid fa-rss" aria-hidden="true"></span></button>
-    <button class="icon-action" id="themeToggle" type="button" onclick="toggleTheme()" aria-label="Ativar modo escuro" title="Ativar modo escuro" aria-pressed="false"><span class="header-icon fa-solid fa-moon" aria-hidden="true" id="themeIcon"></span></button>
-    <div class="zoom-stepper" role="group" aria-label="Controle de zoom da visualização">
-      <button type="button" class="zoom-step" onclick="stepViewZoom(-5)" aria-label="Reduzir zoom" title="Reduzir 5%">−</button>
-      <output id="viewZoomValue" class="zoom-value" aria-live="polite">100%</output>
-      <button type="button" class="zoom-step" onclick="stepViewZoom(5)" aria-label="Ampliar zoom" title="Ampliar 5%">+</button>
-    </div>
-  </div>
+<button aria-expanded="false" aria-label="Abrir painel lateral" class="mobile-header-action mobile-menu-toggle" id="mobileSidebarToggle" onclick="toggleMobileSidebar()" title="Menu" type="button"><i aria-hidden="true" class="fa-solid fa-bars"></i></button>
+<button aria-label="Voltar à página inicial" class="brand" onclick="goHome()" title="Página inicial" type="button"><span class="brand-name">RADAR</span><span class="brand-dot">.</span><span class="brand-tagline">Notícias Integradas</span></button>
+<button aria-expanded="false" aria-label="Mostrar filtros" class="mobile-header-action mobile-filter-toggle" id="mobileFilterToggle" onclick="toggleMobileFilters()" title="Filtros" type="button"><i aria-hidden="true" class="fa-solid fa-filter"></i></button>
+<button aria-label="Abrir página de fontes" class="mobile-header-action mobile-sources-toggle" id="mobileSourcesToggle" onclick="showPage('fontes')" title="Fontes" type="button"><i aria-hidden="true" class="fa-solid fa-rss"></i></button>
+<div class="top-actions">
+<button aria-label="Notícias" class="active" data-page="noticias" onclick="showPage('noticias')"><span aria-hidden="true" class="header-icon fa-solid fa-newspaper"></span> Notícias</button>
+<button aria-label="Radar" data-page="radar" onclick="showPage('radar')"><span aria-hidden="true" class="header-icon fa-solid fa-satellite-dish"></span> Radar</button>
+<button aria-label="Fontes" class="icon-action" data-page="fontes" onclick="showPage('fontes')" title="Fontes"><span aria-hidden="true" class="header-icon fa-solid fa-rss"></span></button>
+<button aria-label="Ativar modo escuro" aria-pressed="false" class="icon-action" id="themeToggle" onclick="toggleTheme()" title="Ativar modo escuro" type="button"><span aria-hidden="true" class="header-icon fa-solid fa-moon" id="themeIcon"></span></button>
+<div aria-label="Controle de zoom da visualização" class="zoom-stepper" role="group">
+<button aria-label="Reduzir zoom" class="zoom-step" onclick="stepViewZoom(-5)" title="Reduzir 5%" type="button">−</button>
+<output aria-live="polite" class="zoom-value" id="viewZoomValue">100%</output>
+<button aria-label="Ampliar zoom" class="zoom-step" onclick="stepViewZoom(5)" title="Ampliar 5%" type="button">+</button>
+</div>
+</div>
 </header>
-<div class="mobile-sidebar-backdrop" id="mobileSidebarBackdrop" onclick="closeMobileSidebar()" aria-hidden="true"></div>
-
+<div aria-hidden="true" class="mobile-sidebar-backdrop" id="mobileSidebarBackdrop" onclick="closeMobileSidebar()"></div>
 <div class="layout">
-  <aside class="sidebar">
-    <button class="navbtn active" data-page="noticias" onclick="showPage('noticias')">📰 Notícias</button>
-    <button class="navbtn" data-page="radar" onclick="showPage('radar')">📡 Radar</button>
-    <button class="navbtn" data-page="fontes" onclick="showPage('fontes')">🔗 Fontes</button>
-  </aside>
-
-  <main class="main">
-    <div id="globalNewsControls" class="global-news-controls">
-      <div class="card news-filter-card">
-        <div class="editorial-pills-standalone">
-        <div id="editoriaPills" class="pill-row editorial-pills"></div>
-        <select id="filterEditoria" class="visually-hidden" aria-hidden="true" tabindex="-1" onchange="renderNews()"><option value="">Todas</option><option>Política</option><option>Cotidiano</option><option>Economia</option><option>Esportes</option><option>Cultura</option><option>Outros</option></select>
-      </div>
-        <div class="news-filter-layout">
-          <div class="news-radar-segmented" role="group" aria-label="Alternar entre Notícias e Radar">
-            <span id="radarCountBadge" hidden aria-label="Quantidade de notícias no Radar">0</span>
-            <button type="button" class="news-radar-tab active" data-page="noticias" onclick="showPage('noticias')" aria-pressed="true"><span class="header-icon fa-solid fa-newspaper" aria-hidden="true"></span> Notícias</button>
-            <button type="button" class="news-radar-tab" data-page="radar" onclick="showPage('radar')" aria-pressed="false"><span class="header-icon fa-solid fa-satellite-dish" aria-hidden="true"></span> Radar</button>
-          </div>
-          <div class="filter-bottom-grid" id="filterBottomGrid">
-          <div class="filter-block" aria-label="Abrangência">
-            <div id="geoPills" class="pill-row" aria-label="Filtrar por abrangência"></div>
-            <select id="filterGeo" class="visually-hidden" aria-hidden="true" tabindex="-1" onchange="renderNews()"><option value="">Todas</option><option value="Nacional">Nacional</option><option value="Local">Local</option></select>
-          </div>
-          <div class="filter-block" aria-label="Ordenação">
-            <div id="sortPills" class="pill-row" aria-label="Ordenar notícias"></div>
-            <select id="sortNews" class="visually-hidden" aria-hidden="true" tabindex="-1" onchange="renderNews()"><option value="priority">Relevância</option><option value="manual">Manual</option><option value="date">Recentes</option></select>
-          </div>
-          <div class="filter-block search-filter search-add-row">
-            <input id="searchNews" aria-label="Buscar notícias" title="Buscar notícias por título, fonte ou palavra-chave" placeholder="Título, fonte ou palavra..." oninput="renderNews()">
-            <button type="button" class="add-news-link-btn" onclick="openAddNewsLinkModal()" title="Adicionar notícia por link" aria-label="Adicionar notícia por link"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
-            <button type="button" class="add-news-link-btn global-pdf-btn" onclick="downloadActivePagePdf()" title="Gerar PDF de todas as notícias desta aba" aria-label="Gerar PDF de todas as notícias desta aba"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i></button>
-          </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <section id="page-noticias" class="page active">
-
-      <div class="card collection-card">
-        <div class="mobile-drawer-head"><strong>Radar</strong><button type="button" onclick="closeMobileSidebar()" aria-label="Fechar painel lateral" title="Fechar">×</button></div>
-        <div class="sidebar-mode-switch" role="group" aria-label="Seção da barra lateral">
-          <button type="button" class="sidebar-mode-tab active" data-sidebar-tab="coleta" onclick="switchSidebarTab('coleta')" aria-pressed="true"><i class="fa-solid fa-satellite-dish" aria-hidden="true"></i><span>Coleta</span></button>
-          <button type="button" class="sidebar-mode-tab" data-sidebar-tab="definicoes" onclick="switchSidebarTab('definicoes')" aria-pressed="false"><i class="fa-solid fa-sliders" aria-hidden="true"></i><span>Definições</span></button>
-        </div>
-        <div id="sidebarCollectPanel" class="sidebar-mode-panel">
-        <div class="grid grid-4" style="margin-bottom:12px">
-          <div><label>Coletar de</label><input id="dateFrom" type="date"></div>
-          <div><label>Até</label><input id="dateTo" type="date"></div>
-          <div><label>Filtrar</label><select id="collectGeo"><option value="">Todos</option><optgroup label="Editorias"><option value="editorial:Política">Política</option><option value="editorial:Cotidiano">Cotidiano</option><option value="editorial:Economia">Economia</option><option value="editorial:Esportes">Esportes</option><option value="editorial:Cultura">Cultura</option></optgroup><optgroup label="Abrangência"><option value="Nacional">Nacional</option><option value="Local">Local</option></optgroup></select></div>
-          <div style="display:flex;align-items:end"><button class="btn btn-secondary" style="width:100%" onclick="setTodayPeriod()">Hoje</button></div>
-        </div>
-        <div class="toolbar sidebar-collect-toolbar">
-          <button class="btn btn-primary collect-news-btn" onclick="collectNews()"><span class="collect-news-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="M2 7v12a1 1 0 0 0 1 1"/></g></svg></span> Coletar notícias</button>
-          <div class="sidebar-collect-secondary-actions">
-            <button class="btn btn-danger clear-sidebar-btn clear-collection-top-btn" onclick="clearNews()"><i class="fa-regular fa-newspaper" aria-hidden="true"></i> Limpar</button>
-          </div>
-        </div>
-        <div class="sidebar-actions-divider collect-actions-divider" role="separator"></div>
-        <div class="sidebar-collection-progress">
-          <div class="small" id="collectionStatus">Pronto para coletar.</div>
-          <div class="progress"><i id="progressBar"></i></div>
-        </div>
-        <div class="sidebar-ai-row">
-          <label class="ai-collect-control" title="Ativar ou desativar o uso de IA"><span>Usar IA</span><span class="switch"><input id="aiCollectToggle" type="checkbox" aria-label="Usar IA" onchange="toggleAICollect(this.checked)"><span class="slider"></span></span></label>
-          <button class="btn btn-secondary configure-api-btn" type="button" onclick="openApiConfigModal()" title="Configurar modelo Gemini e API"><i class="fa-solid fa-sliders" aria-hidden="true"></i> API</button>
-        </div>
-        <div class="small" id="geminiUsageMeter" aria-live="polite" style="margin-top:6px">Consumo Gemini: aguardando dados de uso da API.</div>
-        <div class="sidebar-extra-settings">
-          <label class="sidebar-section-title" for="sidebarEditorialProfileSelect">Perfil ativo</label>
-          <select id="sidebarEditorialProfileSelect" class="sidebar-profile-select" onchange="switchEditorialProfile(this.value)"></select>
-          <button class="btn btn-secondary rules-instructions-btn" type="button" onclick="openRulesInstructionsModal()"><i class="fa-solid fa-user-pen" aria-hidden="true"></i> Editar Perfis</button>
-        </div>
-        <div class="sidebar-actions-divider rules-instructions-divider" role="separator"></div>
-        <div class="sidebar-selection-actions">
-          <div class="sidebar-selection-row">
-            <button class="btn btn-secondary" onclick="selectAllVisible()">Selecionar tudo</button>
-            <button class="btn btn-secondary" onclick="clearSelection()">Limpar seleção</button>
-          </div>
-          <button class="btn btn-yellow process-sidebar-btn" id="processBtn" onclick="processSelected()">Processar selecionadas (<span id="selCount">0</span>)</button>
-        </div>
-        </div><!-- /sidebarCollectPanel -->
-        <div id="sidebarDefinitionsPanel" class="sidebar-mode-panel" hidden>
-          <div class="sidebar-pautas-section">
-            <details class="editorial-settings-details">
-              <summary><span class="context-settings-chevron" aria-hidden="true">▸</span><span class="sidebar-section-title">Notícias por Editoria</span></summary>
-              <div class="editorial-settings-body">
-                <div class="quota-compact-grid">
-                  <label>Política<input id="quotaPolitics" aria-label="Quantidade de notícias de Política" type="number" min="0" max="100" step="1" value="10" onchange="saveEditorialCounts()"></label>
-                  <label>Cotidiano<input id="quotaDaily" aria-label="Quantidade de notícias de Cotidiano" type="number" min="0" max="100" step="1" value="10" onchange="saveEditorialCounts()"></label>
-                  <label>Economia<input id="quotaEconomy" aria-label="Quantidade de notícias de Economia" type="number" min="0" max="100" step="1" value="10" onchange="saveEditorialCounts()"></label>
-                  <label>Esportes<input id="quotaSports" aria-label="Quantidade de notícias de Esportes" type="number" min="0" max="100" step="1" value="10" onchange="saveEditorialCounts()"></label>
-                  <label>Cultura<input id="quotaCulture" aria-label="Quantidade de notícias de Cultura" type="number" min="0" max="100" step="1" value="10" onchange="saveEditorialCounts()"></label>
-                </div>
-                <button class="btn btn-secondary define-pautas-btn" type="button" onclick="openProfileEditorSection('Definir Pautas')"><i class="fa-solid fa-list-check" aria-hidden="true"></i> Definir Pautas</button>
-              </div>
-            </details>
-            <details class="editorial-settings-details scoring-settings-details">
-              <summary><span class="context-settings-chevron" aria-hidden="true">▸</span><span class="sidebar-section-title">Pontuação de relevância</span></summary>
-              <div class="editorial-settings-body scoring-settings-body">
-                <p class="footer-note">Ajuste os pesos usados na ordenação por Relevância. As alterações são aplicadas localmente, sem chamada de IA.</p>
-                <div class="scoring-settings-grid">
-                  <label title="Pontos atribuídos a toda notícia antes de avaliar os demais critérios.">Base<input id="scoreBase" type="number" min="0" max="100" step="1" value="25" onchange="saveScoringSettings()"></label>
-                  <label title="Pontos somados para cada correspondência entre a notícia e as pautas cadastradas na editoria.">Por pauta<input id="scoreTopicHit" type="number" min="0" max="100" step="1" value="8" onchange="saveScoringSettings()"></label>
-                  <label title="Máximo de pontos que todas as correspondências com pautas podem acrescentar juntas.">Teto das pautas<input id="scoreTopicCap" type="number" min="0" max="100" step="1" value="30" onchange="saveScoringSettings()"></label>
-                  <label title="Bônus aplicado quando a notícia é identificada como de abrangência local.">Bônus local<input id="scoreLocal" type="number" min="-100" max="100" step="1" value="15" onchange="saveScoringSettings()"></label>
-                  <label title="Pontos adicionados quando a fonte está cadastrada com prioridade Alta.">Fonte alta<input id="scoreSourceHigh" type="number" min="-100" max="100" step="1" value="8" onchange="saveScoringSettings()"></label>
-                  <label title="Pontos adicionados quando a fonte está cadastrada com prioridade Normal.">Fonte normal<input id="scoreSourceNormal" type="number" min="-100" max="100" step="1" value="4" onchange="saveScoringSettings()"></label>
-                  <label title="Pontos adicionados (ou retirados, se o valor for negativo) quando a fonte tem prioridade Baixa.">Fonte baixa<input id="scoreSourceLow" type="number" min="-100" max="100" step="1" value="-3" onchange="saveScoringSettings()"></label>
-                  <label title="Pontuação máxima concedida pela data da notícia. Notícias mais recentes recebem mais pontos; notícias antigas recebem menos.">Atualidade (máx.)<input id="scoreCurrentMax" type="number" min="0" max="100" step="1" value="10" onchange="saveScoringSettings()"></label>
-                  <label title="Pontos por ocorrência de termos genéricos de acontecimentos relevantes, como aprovação, decisão, investigação ou inauguração.">Por acontecimento<input id="scoreEventHit" type="number" min="0" max="100" step="1" value="3" onchange="saveScoringSettings()"></label>
-                  <label title="Limite total de pontos que os termos de acontecimentos relevantes podem acrescentar.">Teto<input id="scoreEventCap" type="number" min="0" max="100" step="1" value="12" onchange="saveScoringSettings()"></label>
-                  <label title="Quantidade de pontos retirada quando a notícia corresponde a um assunto que o usuário marcou para descartar.">Desconto: descartados<input id="scoreDiscardPenalty" type="number" min="0" max="100" step="1" value="35" onchange="saveScoringSettings()"></label>
-                  <label title="Quantidade de pontos retirada quando o sistema reconhece linguagem promocional ou publicitária.">Desconto: promocional<input id="scorePromoPenalty" type="number" min="0" max="100" step="1" value="20" onchange="saveScoringSettings()"></label>
-                </div>
-                <button class="btn btn-secondary" type="button" onclick="resetScoringSettings()">Restaurar pontuação</button>
-              </div>
-            </details>
-            <div class="context-card-settings">
-              <details class="context-card-settings-details">
-                <summary><span class="context-settings-chevron" aria-hidden="true">▸</span><span class="sidebar-section-title">Cards informativos</span></summary>
-                <div class="context-card-settings-body">
-                  <p class="footer-note">Escolha quais cards serão exibidos. Arraste os cards na coluna direita para mudar a ordem.</p>
-                  <label class="context-setting-option"><input type="checkbox" id="showContextClock" checked onchange="setContextCardVisibility('clock',this.checked)"> Data, hora e clima</label>
-                  <label class="context-setting-option"><input type="checkbox" id="showContextTimer" onchange="setContextCardVisibility('timer',this.checked)"> Timer</label>
-                  <label class="context-setting-option"><input type="checkbox" id="showContextUrgency" onchange="setContextCardVisibility('urgency',this.checked)"> Radar de urgência</label>
-                  <label class="context-setting-option"><input type="checkbox" id="showContextAgenda" checked onchange="setContextCardVisibility('agenda',this.checked)"> Agenda do dia</label>
-                  <label class="context-setting-option"><input type="checkbox" id="showContextRundown" onchange="setContextCardVisibility('rundown',this.checked)"> Tempo estimado da pauta</label>
-                  <label class="context-setting-option"><input type="checkbox" id="showContextFootball" checked onchange="setContextCardVisibility('football',this.checked)"> Resultados de futebol</label>
-                </div>
-              </details>
-            </div>
-            <div class="sidebar-data-tools">
-              <div class="sidebar-section-title">Dados do sistema</div>
-              <button class="btn btn-primary save-data-btn" type="button" onclick="saveAllData()">Salvar dados</button>
-              <button class="btn btn-danger clear-storage-data-btn" type="button" onclick="openClearStorageModal()">Limpar dados</button>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="newsList"></div>
-    </section>
-
-    <section id="page-radar" class="page">
-      <div id="radarList"></div>
-    </section>
-
-    <section id="page-fontes" class="page">
-      <div class="sources-back-row"><button type="button" class="sources-back-btn" onclick="backFromSources()" aria-label="Voltar à página anterior" title="Voltar"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span>Voltar</span></button></div>
-      <div class="card">
-        <div class="toolbar source-toolbar" style="margin-top:0;display:flex;align-items:center;flex-wrap:wrap;gap:8px">
-          <button class="btn btn-primary" onclick="openAddSourceModal()">+ Adicionar fonte</button>
-          
-          <span style="flex:1 1 auto"></span>
-          <button type="button" id="sourceCatalogStatus" class="btn btn-secondary small" onclick="saveGlobalSourceCatalog()" aria-live="polite" title="Tentar sincronizar o catálogo">Catálogo sincronizado com o GitHub</button>
-        </div>
-        <div id="sourceSaveBar" class="source-save-bar" hidden aria-live="polite"></div><div class="tablewrap" style="margin-top:15px">
-          <table class="source-table"><thead><tr><th>Fonte</th><th>Abrangência</th><th>Status</th><th>Ações</th></tr></thead><tbody id="sourceTable"></tbody></table>
-        </div>
-        <p class="footer-note">O cadastro global define origem, domínio, abrangência, peso editorial e método de coleta. A ativação das fontes é configurada exclusivamente em Editar Perfis.</p>
-      </div>
-
-
-    </section>
-  </main>
-</div>
-
-<nav class="mobile-bottom" id="mobileBottomNav" aria-label="Filtrar notícias por editoria"></nav>
-
-<div id="addNewsLinkModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="addNewsLinkTitle" onclick="if(event.target===this)closeAddNewsLinkModal()">
-  <div class="modalbox">
-    <h3 id="addNewsLinkTitle" style="margin-top:0">Adicionar notícia por link</h3>
-    <p class="footer-note">Cole o endereço da notícia. O Radar tentará obter título, data de publicação e o início do texto diretamente da página, sem IA, usando o Worker. Se o site bloquear a leitura ou não disponibilizar esses dados, você ainda poderá adicionar o link e completar as informações manualmente.</p>
-    <div style="margin-top:12px"><label for="manualNewsUrl">Link da notícia</label><input id="manualNewsUrl" type="url" inputmode="url" placeholder="https://..." autocomplete="url"></div>
-    <div style="margin-top:12px"><label for="manualNewsEditorial">Editoria</label><select id="manualNewsEditorial"><option>Política</option><option>Cotidiano</option><option>Economia</option><option>Esportes</option><option>Cultura</option><option>Outros</option></select></div>
-    <div class="toolbar" style="margin-top:16px"><button id="addNewsLinkSubmit" type="button" class="btn btn-primary" onclick="addNewsFromLink()">Buscar e adicionar</button><button type="button" class="btn btn-secondary" onclick="closeAddNewsLinkModal()">Cancelar</button></div>
-  </div>
-</div>
-<div id="clearStorageModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="clearStorageTitle" onclick="if(event.target===this)closeClearStorageModal()">
-  <div class="modalbox" style="width:min(540px,94vw);max-width:94vw">
-    <h3 id="clearStorageTitle" style="margin-top:0">Limpar dados locais do Radar?</h3>
-    <p><strong>Antes de continuar, exporte um backup JSON.</strong></p>
-    <p>Esta ação apagará do armazenamento deste navegador os dados e preferências locais do Radar, incluindo notícias, itens do Radar, fontes personalizadas, configurações e credenciais locais relacionadas ao sistema. A ação não pode ser desfeita.</p>
-    <p class="footer-note">Antes de prosseguir, clique em “Cancelar”, use “Exportar dados” e guarde o backup JSON em local seguro. Sem esse arquivo, os dados apagados não poderão ser recuperados.</p>
-    <div class="toolbar" style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
-      <button type="button" class="btn btn-danger" onclick="confirmClearStorage()">Sim, limpar dados locais</button>
-      <button type="button" class="btn btn-secondary" onclick="closeClearStorageModal()">Cancelar</button>
-    </div>
-  </div>
-</div>
-<div id="newsClassificationModal" class="modal">
-  <div class="modalbox" style="width:min(520px,94vw);max-width:94vw">
-    <h3 style="margin-top:0">Editar classificação da notícia</h3>
-    <input id="classificationNewsId" type="hidden">
-    <div><label for="classificationEditorial">Editoria</label><select id="classificationEditorial"><option>Política</option><option>Cotidiano</option><option>Economia</option><option>Esportes</option><option>Cultura</option><option>Outros</option></select></div>
-    <div style="margin-top:12px"><label for="classificationGeo">Abrangência</label><select id="classificationGeo"><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div>
-    <div class="toolbar" style="margin-top:16px"><button class="btn btn-primary" onclick="saveNewsClassification()">Salvar classificação</button><button class="btn btn-secondary" onclick="closeNewsClassification()">Cancelar</button></div>
-  </div>
-</div>
-<div id="sourceAddModal" class="modal">
-  <div class="modalbox">
-    <h3 style="margin-top:0">Adicionar fonte</h3>
-    <div class="edit-source-grid">
-      <div class="edit-source-column">
-        <div><label>Nome</label><input id="srcName" placeholder="Ex.: G1 — RN"></div>
-        <div><label>Abrangência padrão</label><select id="srcScope"><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div>
-        
-        <div><label>Método de coleta</label><select id="srcMethod" onchange="updateSourceMethodHelp('src')"><option value="auto" selected>Automático (RSS + Site + Google Search com IA)</option><option value="rss">Somente RSS / Atom</option><option value="html">Somente página do site</option></select></div>
-        <div><label>Site da Fonte <span class="small">(endereço principal do veículo)</span></label><input id="srcDomain" placeholder="ex.: g1.globo.com"></div>
-      </div>
-      <div class="edit-source-column">
-        <div style="display:flex;flex-direction:column;flex:1;min-height:0"><label id="srcUrlLabel">URLs RSS / Atom (uma por linha)</label><textarea id="srcUrl" rows="12" placeholder="https://.../feed.xml"></textarea><p class="footer-note" id="srcUrlHelp">Para fontes sem RSS, selecione “Página do site” e informe a URL de uma página pública de notícias ou editoria.</p></div>
-      </div>
-    </div>
-    <p class="footer-note">As pautas de interesse são configuradas na seção Definições da barra lateral. A abrangência da fonte orienta a triagem geográfica.</p>
-    <div class="toolbar" style="margin-top:12px">
-      <button class="btn btn-primary" onclick="addSource()">Salvar fonte</button>
-      <button class="btn btn-secondary" onclick="closeAddSourceModal()">Cancelar</button>
-    </div>
-  </div>
-</div>
-<div id="sourceEditModal" class="modal">
-  <div class="modalbox">
-    <h3 style="margin-top:0">Editar fonte</h3>
-    <input id="editSourceId" type="hidden">
-    <div class="edit-source-grid">
-      <div class="edit-source-column">
-        <div><label>Nome</label><input id="editSrcName"></div>
-        <div><label>Abrangência</label><select id="editSrcScope"><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div>
-        
-        <div><label>Método de coleta</label><select id="editSrcMethod" onchange="updateSourceMethodHelp('editSrc')"><option value="auto">Automático (RSS + Site + Google Search com IA)</option><option value="rss">Somente RSS / Atom</option><option value="html">Somente página do site</option></select></div>
-        <div><label>Site da Fonte <span class="small">(endereço principal do veículo)</span></label><input id="editSrcDomain"></div>
-      </div>
-      <div class="edit-source-column">
-        <div style="display:flex;flex-direction:column;flex:1;min-height:0"><label id="editSrcUrlLabel">URLs RSS / Atom (uma por linha)</label><textarea id="editSrcUrl" rows="12"></textarea><p class="footer-note" id="editSrcUrlHelp">Para fontes sem RSS, informe uma página pública de notícias ou editoria.</p></div>
-      </div>
-    </div>
-    <div class="toolbar" style="margin-top:12px">
-      <button class="btn btn-primary" onclick="saveEditedSource()">Salvar alterações</button>
-      <button class="btn btn-secondary" onclick="closeSourceEditor()">Cancelar</button>
-    </div>
-  </div>
-</div>
-<div id="rulesInstructionsModal" class="modal api-modal" role="dialog" aria-modal="true" aria-labelledby="rulesInstructionsTitle">
-  <div class="modalbox rules-instructions-modal-box">
-    <div class="api-modal-head"><h3 id="rulesInstructionsTitle">Editar Perfis</h3><button type="button" class="api-modal-close" onclick="requestCloseProfileEditor()" aria-label="Fechar">×</button></div>
-    <div class="sidebar-prompt-section rules-instructions-content">
-      <div class="editorial-profiles-toolbar">
-        <div class="editorial-profile-picker"><label for="editorialProfileSelect" class="sidebar-section-title">Perfil em edição</label><select id="editorialProfileSelect" onchange="switchProfileInsideEditor(this.value)"></select></div>
-        <div class="editorial-profile-actions"><button class="btn btn-secondary" type="button" onclick="addEditorialProfile()">Novo Perfil</button><button class="btn btn-secondary" type="button" onclick="renameEditorialProfile()">Renomear Perfil</button><button class="btn btn-secondary" type="button" onclick="deleteEditorialProfile()">Excluir Perfil</button><button class="btn btn-secondary" type="button" onclick="loadGitHubEditorialProfiles(true)">Carregar Perfis</button></div>
-      </div>
-      <p class="footer-note">As alterações nas seções abaixo serão salvas em conjunto no perfil selecionado.</p>
-      <nav class="profile-editor-tabs" role="tablist" aria-label="Seções do perfil">
-        <button type="button" class="profile-editor-tab active" role="tab" aria-selected="true" data-tab="editorial" onclick="selectProfileEditorTab('editorial')"><i class="fa-solid fa-compass"></i> Editorial</button>
-        <button type="button" class="profile-editor-tab" role="tab" aria-selected="false" data-tab="summary" onclick="selectProfileEditorTab('summary')"><i class="fa-solid fa-align-left"></i> Resumo</button>
-        <button type="button" class="profile-editor-tab" role="tab" aria-selected="false" data-tab="comment" onclick="selectProfileEditorTab('comment')"><i class="fa-solid fa-comment-dots"></i> Comentário</button>
-        <button type="button" class="profile-editor-tab" role="tab" aria-selected="false" data-tab="interests" onclick="selectProfileEditorTab('interests')"><i class="fa-solid fa-list-check"></i> Pautas</button>
-        <button type="button" class="profile-editor-tab" role="tab" aria-selected="false" data-tab="sources" onclick="selectProfileEditorTab('sources')"><i class="fa-solid fa-rss"></i> Fontes</button>
-      </nav>
-      <section class="profile-editor-pane active" data-pane="editorial" role="tabpanel"><label for="cfgEditorialProfile">Perfil Editorial</label><textarea id="cfgEditorialProfile" rows="12" placeholder="Defina área de cobertura, público, prioridades temáticas, critérios de relevância e orientação editorial."></textarea><p class="footer-note">Define a orientação editorial geral deste perfil.</p></section>
-      <section class="profile-editor-pane" data-pane="summary" role="tabpanel"><label for="cfgSummaryPrompt">Regras para o Resumo</label><textarea id="cfgSummaryPrompt" rows="16" placeholder="Defina linguagem, extensão, estrutura, contextualização e critérios para os resumos."></textarea></section>
-      <section class="profile-editor-pane" data-pane="comment" role="tabpanel"><label for="cfgCommentPrompt">Regras para o Comentário</label><textarea id="cfgCommentPrompt" rows="16" placeholder="Defina voz, oralidade, análise, posicionamento, ritmo e encerramento dos comentários."></textarea><div class="rules-processing-actions"><button class="btn btn-secondary" type="button" onclick="restoreDefaultCommentInstructions()">Restaurar perfil</button></div></section>
-      <section class="profile-editor-pane" data-pane="interests" role="tabpanel"><p class="footer-note">Cadastre um assunto por linha. Essas pautas orientam a busca e a classificação das notícias.</p><div class="pautas-modal-grid">
-        <div class="sidebar-pauta"><label for="interestPolitics">Política</label><textarea id="interestPolitics" rows="5" placeholder="Eleições, partidos, reforma eleitoral"></textarea></div>
-        <div class="sidebar-pauta"><label for="interestDaily">Cotidiano</label><textarea id="interestDaily" rows="5" placeholder="Transporte, mobilidade, serviços públicos"></textarea></div>
-        <div class="sidebar-pauta"><label for="interestEconomy">Economia</label><textarea id="interestEconomy" rows="5" placeholder="Selic, PIB, impostos"></textarea></div>
-        <div class="sidebar-pauta"><label for="interestSports">Esportes</label><textarea id="interestSports" rows="5" placeholder="Futebol potiguar, campeonatos"></textarea></div>
-        <div class="sidebar-pauta"><label for="interestCulture">Cultura</label><textarea id="interestCulture" rows="5" placeholder="Música, teatro, cinema, cultura potiguar"></textarea></div>
-        <div class="sidebar-pauta"><label for="interestDiscard">Descartar Assuntos</label><textarea id="interestDiscard" rows="5" placeholder="Assuntos a evitar, um por linha"></textarea></div>
-      </div></section>
-      <section class="profile-editor-pane" data-pane="sources" role="tabpanel"><p class="footer-note">Selecione as fontes, defina a prioridade de cada uma e sua ativação neste perfil. O cadastro é administrado na página Fontes.</p><div class="profile-source-actions"><button class="btn btn-secondary" type="button" onclick="setProfileSourcesEnabled(true)">Ativar todas</button><button class="btn btn-secondary" type="button" onclick="setProfileSourcesEnabled(false)">Desativar todas</button></div><div class="tablewrap"><table class="source-table profile-source-table"><thead><tr><th>Fonte</th><th>Abrangência</th><th>Prioridade</th><th>Ativa</th></tr></thead><tbody id="profileSourceTable"></tbody></table></div></section>
-      <div class="profile-editor-footer"><span id="profileEditorStatus" class="small muted" aria-live="polite">Alterações ainda não salvas</span><div><button class="btn btn-secondary" type="button" onclick="requestCloseProfileEditor()">Fechar</button> <button class="btn btn-primary" id="saveEditorialProfileButton" type="button" onclick="saveProfileEditorAndClose()">Salvar perfil</button></div></div>
-    </div>
-  </div>
-</div>
-<div id="apiConfigModal" class="modal api-modal" role="dialog" aria-modal="true" aria-labelledby="apiConfigTitle">
-  <div class="modalbox">
-    <div class="api-modal-head"><h3 id="apiConfigTitle">Configurar API</h3><button type="button" class="api-modal-close" onclick="closeApiConfigModal()" aria-label="Fechar">×</button></div>
-    <div class="sidebar-gemini-section" style="margin:0;padding:0;border:0">
-      <label for="cfgModel" class="sidebar-section-title">Modelo Gemini</label>
-      <select id="cfgModel" aria-label="Modelo Gemini"></select>
-      <label for="cfgApi" class="sidebar-section-title sidebar-api-label">API Key do Gemini</label>
-      <input id="cfgApi" type="password" autocomplete="off" placeholder="Cole sua chave do Google AI Studio" aria-label="API Key do Gemini">
-      <div class="sidebar-gemini-actions">
-        <button class="btn btn-secondary" type="button" onclick="refreshGeminiModels()" title="Atualizar modelos">↻ Modelos</button>
-        <button class="btn btn-secondary" type="button" onclick="testAI()">Testar conexão</button>
-      </div>
-      <div id="modelStatus" class="small sidebar-gemini-status"></div>
-      <div id="aiStatus" class="small sidebar-gemini-status"></div>
-    </div>
-    <div class="toolbar" style="margin-top:16px"><button class="btn btn-primary" type="button" onclick="saveConfig();closeApiConfigModal()">Salvar e fechar</button></div>
-  </div>
-</div>
-<aside class="context-rail" aria-label="Painel de apoio editorial">
-  <section class="context-card context-clock-weather-card" id="contextCardClock" data-context-card="clock" draggable="true" aria-labelledby="clockCardTitle">
-    <h2 class="context-card-head" id="clockCardTitle"><i class="fa-regular fa-clock" aria-hidden="true"></i> Data, hora e clima</h2>
-    <div class="clock-weather-grid">
-      <div class="clock-weather-time"><div id="contextClock" class="context-clock">--:--:--</div><div id="contextDate" class="context-date">Carregando data…</div></div>
-      <div id="weatherContent" class="clock-weather-weather context-loading" role="status" aria-live="polite">Consultando clima…</div>
-    </div>
-  </section>
-  <section class="context-card" id="contextCardTimer" data-context-card="timer" draggable="true" aria-labelledby="timerCardTitle">
-    <h2 class="context-card-head" id="timerCardTitle"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> Timer</h2>
-    <div class="timer-readout-row"><div id="timerDisplay" class="context-clock">05:00</div><input id="timerMinutes" type="text" inputmode="numeric" maxlength="3" value="5" aria-label="Duração personalizada em minutos" placeholder="min" oninput="this.value=this.value.replace(/\D/g,'').slice(0,3);if(Number(this.value)>180)this.value='180'"></div><div class="timer-presets" aria-label="Tempos rápidos"><button type="button" class="btn btn-secondary" onclick="setContextTimer(15)">15s</button><button type="button" class="btn btn-secondary" onclick="setContextTimer(30)">30s</button><button type="button" class="btn btn-secondary" onclick="setContextTimer(45)">45s</button><button type="button" class="btn btn-secondary" onclick="setContextTimer(60)">60s</button></div><div class="timer-controls"><button type="button" class="btn btn-primary" id="timerStartBtn" onclick="toggleContextTimer()">Iniciar</button><button type="button" class="btn btn-secondary" onclick="resetContextTimer()">Zerar</button></div><div id="timerStatus" class="context-footnote">Defina o tempo e inicie a contagem.</div>
-  </section>
-  <section class="context-card" id="contextCardAgenda" data-context-card="agenda" draggable="true" aria-labelledby="agendaCardTitle"><h2 class="context-card-head agenda-card-head" id="agendaCardTitle"><span><i class="fa-regular fa-calendar-days" aria-hidden="true"></i> Agenda do dia</span><button class="agenda-add-btn" type="button" onclick="addAgendaAnnotation()" title="Cadastrar Anotação" aria-label="Cadastrar Anotação">+</button></h2><div id="agendaAnnotations" class="agenda-annotations" aria-live="polite"></div><div class="birthday-section"><button class="birthday-section-title birthday-import-btn" type="button" onclick="openBirthdayImport()" title="Inserir imagem com aniversariantes"><i class="fa-solid fa-cake-candles" aria-hidden="true"></i> Aniversário(s)</button><div id="birthdayNamesList" class="birthday-names-list">Nenhum aniversariante importado.</div></div></section>
-  <section class="context-card" id="contextCardUrgency" data-context-card="urgency" draggable="true" aria-labelledby="urgencyCardTitle"><h2 class="context-card-head" id="urgencyCardTitle"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Radar de urgência</h2><div id="contextUrgencyContent" class="context-loading">Aguardando notícias coletadas…</div><div class="context-footnote">Destaques recentes da triagem; confirme a atualização na fonte original.</div></section>
-  <section class="context-card" id="contextCardRundown" data-context-card="rundown" draggable="true" aria-labelledby="rundownCardTitle"><h2 class="context-card-head" id="rundownCardTitle"><i class="fa-solid fa-stopwatch-20" aria-hidden="true"></i> Tempo estimado da pauta</h2><div id="contextRundownContent" class="context-loading">Nenhuma notícia processada.</div><div class="context-footnote">Estimativa baseada na duração dos comentários cadastrados no Radar.</div></section>
-  <section class="context-card" id="contextCardFootball" data-context-card="football" draggable="true" aria-labelledby="footballCardTitle">
-    <h2 class="context-card-head football-card-head" id="footballCardTitle"><span class="football-card-title"><i class="fa-solid fa-futbol" aria-hidden="true"></i> Futebol Brasileiro</span><span class="football-card-actions"><button class="football-refresh football-comment-btn" id="footballRoundCommentBtn" type="button" onclick="generateFootballRoundCard(this)" title="Comentar resumo da rodada" aria-label="Comentar resumo da rodada"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i></button><button class="football-refresh" id="footballRefreshBtn" type="button" onclick="loadFootballMatches(true)" title="Atualizar resultados de futebol" aria-label="Atualizar resultados de futebol"><i class="fa-solid fa-rotate" aria-hidden="true"></i></button></span></h2>
-    <div id="footballStatus" class="football-live-region" role="status" aria-live="polite">Preparando consulta de resultados…</div>
-    <div id="footballContent" aria-live="polite"></div>
-  </section>
+<aside class="sidebar">
+<button class="navbtn active" data-page="noticias" onclick="showPage('noticias')">📰 Notícias</button>
+<button class="navbtn" data-page="radar" onclick="showPage('radar')">📡 Radar</button>
+<button class="navbtn" data-page="fontes" onclick="showPage('fontes')">🔗 Fontes</button>
 </aside>
-<div id="newsEditModal" class="modal api-modal" role="dialog" aria-modal="true" aria-labelledby="newsEditModalTitle" onclick="if(event.target===this)closeNewsEditModal()">
-  <div class="modalbox news-edit-modal-box">
-    <div class="api-modal-head"><h3 id="newsEditModalTitle">Editar notícia</h3><button type="button" class="api-modal-close" onclick="closeNewsEditModal()" aria-label="Fechar">×</button></div>
-    <div class="news-edit-modal-content">
-      <label for="newsModalTitle">Título</label><textarea id="newsModalTitle" rows="2"></textarea>
-      <label for="newsModalSummary">Resumo</label><textarea id="newsModalSummary" rows="4"></textarea>
-      <div id="newsModalCommentSection">
-        <label for="newsModalComment">Comentário</label><textarea id="newsModalComment" rows="6"></textarea>
-        <div class="ai-comment-instructions"><label for="newsModalAiInstructions">Instruções para a IA alterar o comentário</label><textarea id="newsModalAiInstructions" rows="3" placeholder="Ex.: reescreva em tom jornalístico, mais conciso, sem repetir o resumo e adequado para leitura no rádio."></textarea><button type="button" class="btn btn-secondary" id="newsModalApplyAi" onclick="applyAiCommentInstructions()">Aplicar instruções da IA</button><div id="newsModalAiStatus" class="small muted" aria-live="polite"></div></div>
-      </div>
-    </div>
-    <div class="toolbar news-edit-modal-actions"><button type="button" class="btn btn-primary" onclick="saveNewsEditModal()">Salvar</button><button type="button" class="btn btn-secondary" onclick="cancelNewsEditModal()">Cancelar</button></div>
-  </div>
+<main class="main">
+<div class="global-news-controls" id="globalNewsControls">
+<div class="card news-filter-card">
+<div class="editorial-pills-standalone">
+<div class="pill-row editorial-pills" id="editoriaPills"></div>
+<select aria-hidden="true" class="visually-hidden" id="filterEditoria" onchange="renderNews()" tabindex="-1"><option value="">Todas</option><option>Política</option><option>Cotidiano</option><option>Economia</option><option>Esportes</option><option>Cultura</option><option>Outros</option></select>
 </div>
-<div id="storyViewModal" class="modal story-view-modal" role="dialog" aria-modal="true" aria-labelledby="storyViewTitle" onclick="if(event.target===this)closeStoryView()">
-  <div class="modalbox story-view-modal-box">
-    <div class="api-modal-head"><h3 id="storyViewTitle">Visualizar notícia</h3><button type="button" class="api-modal-close" onclick="closeStoryView()" aria-label="Fechar">×</button></div>
-    <div id="storyViewMeta" class="story-view-meta"></div>
-    <div id="storyViewBody" class="story-view-body"></div>
-    <div class="toolbar story-view-actions"><button type="button" class="btn btn-secondary" onclick="closeStoryView()">Fechar</button><a id="storyViewSourceLink" class="btn btn-primary" href="#" target="_blank" rel="noopener" hidden>Ver Matéria</a></div>
-  </div>
+<div class="news-filter-layout">
+<div aria-label="Alternar entre Notícias e Radar" class="news-radar-segmented" role="group">
+<span aria-label="Quantidade de notícias no Radar" hidden="" id="radarCountBadge">0</span>
+<button aria-pressed="true" class="news-radar-tab active" data-page="noticias" onclick="showPage('noticias')" type="button"><span aria-hidden="true" class="header-icon fa-solid fa-newspaper"></span> Notícias</button>
+<button aria-pressed="false" class="news-radar-tab" data-page="radar" onclick="showPage('radar')" type="button"><span aria-hidden="true" class="header-icon fa-solid fa-satellite-dish"></span> Radar</button>
 </div>
-<div id="scriptReaderModal" class="modal story-view-modal" role="dialog" aria-modal="true" aria-labelledby="scriptReaderTitle" onclick="if(event.target===this)closeScriptReader()">
-  <div class="modalbox story-view-modal-box script-reader-modal-box">
-    <div class="api-modal-head"><h3 id="scriptReaderTitle">Roteiro</h3><button type="button" class="api-modal-close" onclick="closeScriptReader()" aria-label="Fechar roteiro">×</button></div>
-    <div id="scriptReaderMeta" class="story-view-meta"></div>
-    <div id="scriptReaderBody" class="story-view-body script-reader-body"></div>
-  </div>
+<div class="filter-bottom-grid" id="filterBottomGrid">
+<div aria-label="Abrangência" class="filter-block">
+<div aria-label="Filtrar por abrangência" class="pill-row" id="geoPills"></div>
+<select aria-hidden="true" class="visually-hidden" id="filterGeo" onchange="renderNews()" tabindex="-1"><option value="">Todas</option><option value="Nacional">Nacional</option><option value="Local">Local</option></select>
 </div>
-<div id="birthdayImportModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="birthdayImportTitle" onclick="if(event.target===this)closeBirthdayImport()"><div class="modalbox birthday-import-modal"><div class="api-modal-head"><h3 id="birthdayImportTitle">Importar aniversariantes</h3><button type="button" class="api-modal-close" onclick="closeBirthdayImport()" aria-label="Fechar">×</button></div><p class="birthday-help">Selecione um print da lista do Facebook. O reconhecimento é executado no navegador; revise os nomes antes de salvar.</p><label class="birthday-file-label" for="birthdayImageInput"><i class="fa-regular fa-image" aria-hidden="true"></i> Selecionar imagem (PNG, JPG ou JPEG)</label><input id="birthdayImageInput" type="file" accept="image/png,image/jpeg,image/webp" onchange="recognizeBirthdayImage(this.files?.[0])"><div id="birthdayOcrStatus" class="small muted" role="status" aria-live="polite">A imagem será processada localmente no navegador.</div><img id="birthdayImagePreview" class="birthday-image-preview" alt="Prévia do print selecionado" hidden><label for="birthdayNamesInput">Nomes reconhecidos (um por linha)</label><textarea id="birthdayNamesInput" rows="8" placeholder="Os nomes identificados aparecerão aqui para revisão…"></textarea><div class="toolbar birthday-modal-actions"><button type="button" class="btn btn-primary" onclick="saveBirthdayNames()">Confirmar e adicionar</button><button type="button" class="btn btn-secondary" onclick="closeBirthdayImport()">Cancelar</button></div></div></div>
-<div id="toast" class="toast"></div>
+<div aria-label="Ordenação" class="filter-block">
+<div aria-label="Ordenar notícias" class="pill-row" id="sortPills"></div>
+<select aria-hidden="true" class="visually-hidden" id="sortNews" onchange="renderNews()" tabindex="-1"><option value="priority">Relevância</option><option value="manual">Manual</option><option value="date">Recentes</option></select>
+</div>
+<div class="filter-block search-filter search-add-row">
+<input aria-label="Buscar notícias" id="searchNews" oninput="renderNews()" placeholder="Título, fonte ou palavra..." title="Buscar notícias por título, fonte ou palavra-chave"/>
+<button aria-label="Adicionar notícia por link" class="add-news-link-btn" onclick="openAddNewsLinkModal()" title="Adicionar notícia por link" type="button"><i aria-hidden="true" class="fa-solid fa-plus"></i></button>
+<button aria-label="Gerar PDF de todas as notícias desta aba" class="add-news-link-btn global-pdf-btn" onclick="downloadActivePagePdf()" title="Gerar PDF de todas as notícias desta aba" type="button"><i aria-hidden="true" class="fa-solid fa-file-pdf"></i></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section class="page active" id="page-noticias">
+<div class="card collection-card">
+<div class="mobile-drawer-head"><strong>Radar</strong><button aria-label="Fechar painel lateral" onclick="closeMobileSidebar()" title="Fechar" type="button">×</button></div>
+<div aria-label="Seção da barra lateral" class="sidebar-mode-switch" role="group">
+<button aria-pressed="true" class="sidebar-mode-tab active" data-sidebar-tab="coleta" onclick="switchSidebarTab('coleta')" type="button"><i aria-hidden="true" class="fa-solid fa-satellite-dish"></i><span>Coleta</span></button>
+<button aria-pressed="false" class="sidebar-mode-tab" data-sidebar-tab="definicoes" onclick="switchSidebarTab('definicoes')" type="button"><i aria-hidden="true" class="fa-solid fa-sliders"></i><span>Definições</span></button>
+</div>
+<div class="sidebar-mode-panel" id="sidebarCollectPanel">
+<div class="grid grid-4" style="margin-bottom:12px">
+<div><label>Coletar de</label><input id="dateFrom" type="date"/></div>
+<div><label>Até</label><input id="dateTo" type="date"/></div>
+<div><label>Filtrar</label><select id="collectGeo"><option value="">Todos</option><optgroup label="Editorias"><option value="editorial:Política">Política</option><option value="editorial:Cotidiano">Cotidiano</option><option value="editorial:Economia">Economia</option><option value="editorial:Esportes">Esportes</option><option value="editorial:Cultura">Cultura</option></optgroup><optgroup label="Abrangência"><option value="Nacional">Nacional</option><option value="Local">Local</option></optgroup></select></div>
+<div style="display:flex;align-items:end"><button class="btn btn-secondary" onclick="setTodayPeriod()" style="width:100%">Hoje</button></div>
+</div>
+<div class="toolbar sidebar-collect-toolbar">
+<button class="btn btn-primary collect-news-btn" onclick="collectNews()"><span aria-hidden="true" class="collect-news-icon"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M4 4h16v16H4z"></path><path d="M8 8h8M8 12h8M8 16h5"></path><path d="M2 7v12a1 1 0 0 0 1 1"></path></g></svg></span> Coletar notícias</button>
+<div class="sidebar-collect-secondary-actions">
+<button class="btn btn-danger clear-sidebar-btn clear-collection-top-btn" onclick="clearNews()"><i aria-hidden="true" class="fa-regular fa-newspaper"></i> Limpar</button>
+</div>
+</div>
+<div class="sidebar-actions-divider collect-actions-divider" role="separator"></div>
+<div class="sidebar-collection-progress">
+<div class="small" id="collectionStatus">Pronto para coletar.</div>
+<div class="progress"><i id="progressBar"></i></div>
+</div>
+<div class="sidebar-ai-row">
+<label class="ai-collect-control" title="Ativar ou desativar o uso de IA"><span>Usar IA</span><span class="switch"><input aria-label="Usar IA" id="aiCollectToggle" onchange="toggleAICollect(this.checked)" type="checkbox"/><span class="slider"></span></span></label>
+<button class="btn btn-secondary configure-api-btn" onclick="openApiConfigModal()" title="Configurar modelo Gemini e API" type="button"><i aria-hidden="true" class="fa-solid fa-sliders"></i> API</button>
+</div>
+<div aria-live="polite" class="small" id="geminiUsageMeter" style="margin-top:6px">Consumo Gemini: aguardando dados de uso da API.</div>
+<div class="sidebar-selection-actions">
+<div class="sidebar-selection-row">
+<button class="btn btn-secondary" onclick="selectAllVisible()">Selecionar tudo</button>
+<button class="btn btn-secondary" onclick="clearSelection()">Limpar seleção</button>
+</div>
+<button class="btn btn-yellow process-sidebar-btn" id="processBtn" onclick="processSelected()">Processar selecionadas (<span id="selCount">0</span>)</button>
+</div>
+</div><!-- /sidebarCollectPanel -->
+<div class="sidebar-mode-panel" hidden="" id="sidebarDefinitionsPanel">
+<div class="sidebar-pautas-section">
+<details class="editorial-settings-details">
+<summary><span aria-hidden="true" class="context-settings-chevron">▸</span><span class="sidebar-section-title">Notícias por Editoria</span></summary>
+<div class="editorial-settings-body">
+<div class="quota-compact-grid">
+<label>Política<input aria-label="Quantidade de notícias de Política" id="quotaPolitics" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
+<label>Cotidiano<input aria-label="Quantidade de notícias de Cotidiano" id="quotaDaily" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
+<label>Economia<input aria-label="Quantidade de notícias de Economia" id="quotaEconomy" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
+<label>Esportes<input aria-label="Quantidade de notícias de Esportes" id="quotaSports" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
+<label>Cultura<input aria-label="Quantidade de notícias de Cultura" id="quotaCulture" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
+</div>
+<button class="btn btn-secondary define-pautas-btn" onclick="openProfileEditorSection('Definir Pautas')" type="button"><i aria-hidden="true" class="fa-solid fa-list-check"></i> Definir Pautas</button>
+</div>
+</details>
+<details class="editorial-settings-details scoring-settings-details">
+<summary><span aria-hidden="true" class="context-settings-chevron">▸</span><span class="sidebar-section-title">Pontuação de relevância</span></summary>
+<div class="editorial-settings-body scoring-settings-body">
+<p class="footer-note">Ajuste os pesos usados na ordenação por Relevância. As alterações são aplicadas localmente, sem chamada de IA.</p>
+<div class="scoring-settings-grid">
+<label title="Pontos atribuídos a toda notícia antes de avaliar os demais critérios.">Base<input id="scoreBase" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="25"/></label>
+<label title="Pontos somados para cada correspondência entre a notícia e as pautas cadastradas na editoria.">Por pauta<input id="scoreTopicHit" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="8"/></label>
+<label title="Máximo de pontos que todas as correspondências com pautas podem acrescentar juntas.">Teto das pautas<input id="scoreTopicCap" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="30"/></label>
+<label title="Bônus aplicado quando a notícia é identificada como de abrangência local.">Bônus local<input id="scoreLocal" max="100" min="-100" onchange="saveScoringSettings()" step="1" type="number" value="15"/></label>
+<label title="Pontos adicionados quando a fonte está cadastrada com prioridade Alta.">Fonte alta<input id="scoreSourceHigh" max="100" min="-100" onchange="saveScoringSettings()" step="1" type="number" value="8"/></label>
+<label title="Pontos adicionados quando a fonte está cadastrada com prioridade Normal.">Fonte normal<input id="scoreSourceNormal" max="100" min="-100" onchange="saveScoringSettings()" step="1" type="number" value="4"/></label>
+<label title="Pontos adicionados (ou retirados, se o valor for negativo) quando a fonte tem prioridade Baixa.">Fonte baixa<input id="scoreSourceLow" max="100" min="-100" onchange="saveScoringSettings()" step="1" type="number" value="-3"/></label>
+<label title="Pontuação máxima concedida pela data da notícia. Notícias mais recentes recebem mais pontos; notícias antigas recebem menos.">Atualidade (máx.)<input id="scoreCurrentMax" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="10"/></label>
+<label title="Pontos por ocorrência de termos genéricos de acontecimentos relevantes, como aprovação, decisão, investigação ou inauguração.">Por acontecimento<input id="scoreEventHit" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="3"/></label>
+<label title="Limite total de pontos que os termos de acontecimentos relevantes podem acrescentar.">Teto<input id="scoreEventCap" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="12"/></label>
+<label title="Quantidade de pontos retirada quando a notícia corresponde a um assunto que o usuário marcou para descartar.">Desconto: descartados<input id="scoreDiscardPenalty" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="35"/></label>
+<label title="Quantidade de pontos retirada quando o sistema reconhece linguagem promocional ou publicitária.">Desconto: promocional<input id="scorePromoPenalty" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="20"/></label>
+</div>
+<button class="btn btn-secondary" onclick="resetScoringSettings()" type="button">Restaurar pontuação</button>
+</div>
+</details>
+<div class="context-card-settings">
+<details class="context-card-settings-details">
+<summary><span aria-hidden="true" class="context-settings-chevron">▸</span><span class="sidebar-section-title">Cards informativos</span></summary>
+<div class="context-card-settings-body">
+<p class="footer-note">Escolha quais cards serão exibidos. Arraste os cards na coluna direita para mudar a ordem.</p>
+<label class="context-setting-option"><input checked="" id="showContextClock" onchange="setContextCardVisibility('clock',this.checked)" type="checkbox"/> Data, hora e clima</label>
+<label class="context-setting-option"><input id="showContextTimer" onchange="setContextCardVisibility('timer',this.checked)" type="checkbox"/> Timer</label>
+<label class="context-setting-option"><input id="showContextUrgency" onchange="setContextCardVisibility('urgency',this.checked)" type="checkbox"/> Radar de urgência</label>
+<label class="context-setting-option"><input checked="" id="showContextAgenda" onchange="setContextCardVisibility('agenda',this.checked)" type="checkbox"/> Agenda do dia</label>
+<label class="context-setting-option"><input id="showContextRundown" onchange="setContextCardVisibility('rundown',this.checked)" type="checkbox"/> Tempo estimado da pauta</label>
+<label class="context-setting-option"><input checked="" id="showContextFootball" onchange="setContextCardVisibility('football',this.checked)" type="checkbox"/> Resultados de futebol</label>
+</div>
+</details>
+</div>
+<div class="sidebar-data-tools">
+<div class="sidebar-section-title">Dados do sistema</div>
+<button class="btn btn-primary save-data-btn" onclick="saveAllData()" type="button">Salvar dados</button>
+<button class="btn btn-danger clear-storage-data-btn" onclick="openClearStorageModal()" type="button">Limpar dados</button>
+</div>
+</div>
+</div><div class="card sidebar-active-profile-card"><div class="sidebar-active-profile-head">Perfil ativo</div><div class="sidebar-extra-settings">
+<label class="sidebar-section-title" for="sidebarEditorialProfileSelect">Perfil ativo</label>
+<select class="sidebar-profile-select" id="sidebarEditorialProfileSelect" onchange="switchEditorialProfile(this.value)"></select>
+<button class="btn btn-secondary rules-instructions-btn" onclick="openRulesInstructionsModal()" type="button"><i aria-hidden="true" class="fa-solid fa-user-pen"></i> Editar Perfis</button>
+</div></div>
+</div>
+<div id="newsList"></div>
+</section>
+<section class="page" id="page-radar">
+<div id="radarList"></div>
+</section>
+<section class="page" id="page-fontes">
+<div class="sources-back-row"><button aria-label="Voltar à página anterior" class="sources-back-btn" onclick="backFromSources()" title="Voltar" type="button"><i aria-hidden="true" class="fa-solid fa-arrow-left"></i><span>Voltar</span></button></div>
+<div class="card">
+<div class="toolbar source-toolbar" style="margin-top:0;display:flex;align-items:center;flex-wrap:wrap;gap:8px">
+<button class="btn btn-primary" onclick="openAddSourceModal()">+ Adicionar fonte</button>
+<span style="flex:1 1 auto"></span>
+<button aria-live="polite" class="btn btn-secondary small" id="sourceCatalogStatus" onclick="saveGlobalSourceCatalog()" title="Tentar sincronizar o catálogo" type="button">Catálogo sincronizado com o GitHub</button>
+</div>
+<div aria-live="polite" class="source-save-bar" hidden="" id="sourceSaveBar"></div><div class="tablewrap" style="margin-top:15px">
+<table class="source-table"><thead><tr><th>Fonte</th><th>Abrangência</th><th>Status</th><th>Ações</th></tr></thead><tbody id="sourceTable"></tbody></table>
+</div>
+<p class="footer-note">O cadastro global define origem, domínio, abrangência, peso editorial e método de coleta. A ativação das fontes é configurada exclusivamente em Editar Perfis.</p>
+</div>
+</section>
+</main>
+</div>
+<nav aria-label="Filtrar notícias por editoria" class="mobile-bottom" id="mobileBottomNav"></nav>
+<div aria-labelledby="addNewsLinkTitle" aria-modal="true" class="modal" id="addNewsLinkModal" onclick="if(event.target===this)closeAddNewsLinkModal()" role="dialog">
+<div class="modalbox">
+<h3 id="addNewsLinkTitle" style="margin-top:0">Adicionar notícia por link</h3>
+<p class="footer-note">Cole o endereço da notícia. O Radar tentará obter título, data de publicação e o início do texto diretamente da página, sem IA, usando o Worker. Se o site bloquear a leitura ou não disponibilizar esses dados, você ainda poderá adicionar o link e completar as informações manualmente.</p>
+<div style="margin-top:12px"><label for="manualNewsUrl">Link da notícia</label><input autocomplete="url" id="manualNewsUrl" inputmode="url" placeholder="https://..." type="url"/></div>
+<div style="margin-top:12px"><label for="manualNewsEditorial">Editoria</label><select id="manualNewsEditorial"><option>Política</option><option>Cotidiano</option><option>Economia</option><option>Esportes</option><option>Cultura</option><option>Outros</option></select></div>
+<div class="toolbar" style="margin-top:16px"><button class="btn btn-primary" id="addNewsLinkSubmit" onclick="addNewsFromLink()" type="button">Buscar e adicionar</button><button class="btn btn-secondary" onclick="closeAddNewsLinkModal()" type="button">Cancelar</button></div>
+</div>
+</div>
+<div aria-labelledby="clearStorageTitle" aria-modal="true" class="modal" id="clearStorageModal" onclick="if(event.target===this)closeClearStorageModal()" role="dialog">
+<div class="modalbox" style="width:min(540px,94vw);max-width:94vw">
+<h3 id="clearStorageTitle" style="margin-top:0">Limpar dados locais do Radar?</h3>
+<p><strong>Antes de continuar, exporte um backup JSON.</strong></p>
+<p>Esta ação apagará do armazenamento deste navegador os dados e preferências locais do Radar, incluindo notícias, itens do Radar, fontes personalizadas, configurações e credenciais locais relacionadas ao sistema. A ação não pode ser desfeita.</p>
+<p class="footer-note">Antes de prosseguir, clique em “Cancelar”, use “Exportar dados” e guarde o backup JSON em local seguro. Sem esse arquivo, os dados apagados não poderão ser recuperados.</p>
+<div class="toolbar" style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+<button class="btn btn-danger" onclick="confirmClearStorage()" type="button">Sim, limpar dados locais</button>
+<button class="btn btn-secondary" onclick="closeClearStorageModal()" type="button">Cancelar</button>
+</div>
+</div>
+</div>
+<div class="modal" id="newsClassificationModal">
+<div class="modalbox" style="width:min(520px,94vw);max-width:94vw">
+<h3 style="margin-top:0">Editar classificação da notícia</h3>
+<input id="classificationNewsId" type="hidden"/>
+<div><label for="classificationEditorial">Editoria</label><select id="classificationEditorial"><option>Política</option><option>Cotidiano</option><option>Economia</option><option>Esportes</option><option>Cultura</option><option>Outros</option></select></div>
+<div style="margin-top:12px"><label for="classificationGeo">Abrangência</label><select id="classificationGeo"><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div>
+<div class="toolbar" style="margin-top:16px"><button class="btn btn-primary" onclick="saveNewsClassification()">Salvar classificação</button><button class="btn btn-secondary" onclick="closeNewsClassification()">Cancelar</button></div>
+</div>
+</div>
+<div class="modal" id="sourceAddModal">
+<div class="modalbox">
+<h3 style="margin-top:0">Adicionar fonte</h3>
+<div class="edit-source-grid">
+<div class="edit-source-column">
+<div><label>Nome</label><input id="srcName" placeholder="Ex.: G1 — RN"/></div>
+<div><label>Abrangência padrão</label><select id="srcScope"><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div>
+<div><label>Método de coleta</label><select id="srcMethod" onchange="updateSourceMethodHelp('src')"><option selected="" value="auto">Automático (RSS + Site + Google Search com IA)</option><option value="rss">Somente RSS / Atom</option><option value="html">Somente página do site</option></select></div>
+<div><label>Site da Fonte <span class="small">(endereço principal do veículo)</span></label><input id="srcDomain" placeholder="ex.: g1.globo.com"/></div>
+</div>
+<div class="edit-source-column">
+<div style="display:flex;flex-direction:column;flex:1;min-height:0"><label id="srcUrlLabel">URLs RSS / Atom (uma por linha)</label><textarea id="srcUrl" placeholder="https://.../feed.xml" rows="12"></textarea><p class="footer-note" id="srcUrlHelp">Para fontes sem RSS, selecione “Página do site” e informe a URL de uma página pública de notícias ou editoria.</p></div>
+</div>
+</div>
+<p class="footer-note">As pautas de interesse são configuradas na seção Definições da barra lateral. A abrangência da fonte orienta a triagem geográfica.</p>
+<div class="toolbar" style="margin-top:12px">
+<button class="btn btn-primary" onclick="addSource()">Salvar fonte</button>
+<button class="btn btn-secondary" onclick="closeAddSourceModal()">Cancelar</button>
+</div>
+</div>
+</div>
+<div class="modal" id="sourceEditModal">
+<div class="modalbox">
+<h3 style="margin-top:0">Editar fonte</h3>
+<input id="editSourceId" type="hidden"/>
+<div class="edit-source-grid">
+<div class="edit-source-column">
+<div><label>Nome</label><input id="editSrcName"/></div>
+<div><label>Abrangência</label><select id="editSrcScope"><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div>
+<div><label>Método de coleta</label><select id="editSrcMethod" onchange="updateSourceMethodHelp('editSrc')"><option value="auto">Automático (RSS + Site + Google Search com IA)</option><option value="rss">Somente RSS / Atom</option><option value="html">Somente página do site</option></select></div>
+<div><label>Site da Fonte <span class="small">(endereço principal do veículo)</span></label><input id="editSrcDomain"/></div>
+</div>
+<div class="edit-source-column">
+<div style="display:flex;flex-direction:column;flex:1;min-height:0"><label id="editSrcUrlLabel">URLs RSS / Atom (uma por linha)</label><textarea id="editSrcUrl" rows="12"></textarea><p class="footer-note" id="editSrcUrlHelp">Para fontes sem RSS, informe uma página pública de notícias ou editoria.</p></div>
+</div>
+</div>
+<div class="toolbar" style="margin-top:12px">
+<button class="btn btn-primary" onclick="saveEditedSource()">Salvar alterações</button>
+<button class="btn btn-secondary" onclick="closeSourceEditor()">Cancelar</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="rulesInstructionsTitle" aria-modal="true" class="modal api-modal" id="rulesInstructionsModal" role="dialog">
+<div class="modalbox rules-instructions-modal-box profile-editor-modal-compact">
+<div class="api-modal-head"><h3 id="rulesInstructionsTitle">Editar Perfis</h3><button aria-label="Fechar" class="api-modal-close" onclick="requestCloseProfileEditor()" type="button">×</button></div>
+<div class="sidebar-prompt-section rules-instructions-content">
+<div class="editorial-profiles-toolbar">
+<div class="editorial-profile-picker"><label class="sidebar-section-title" for="editorialProfileSelect">Perfil em edição</label><select id="editorialProfileSelect" onchange="switchProfileInsideEditor(this.value)"></select></div>
+<div class="editorial-profile-actions"><button class="btn btn-secondary" onclick="addEditorialProfile()" type="button">Novo Perfil</button><button class="btn btn-secondary" onclick="renameEditorialProfile()" type="button">Renomear Perfil</button><button class="btn btn-secondary" onclick="deleteEditorialProfile()" type="button">Excluir Perfil</button><button class="btn btn-secondary" onclick="loadGitHubEditorialProfiles(true)" type="button">Carregar Perfis</button></div>
+</div>
+<p class="footer-note">As alterações nas seções abaixo serão salvas em conjunto no perfil selecionado.</p>
+<nav aria-label="Seções do perfil" class="profile-editor-tabs" role="tablist">
+<button aria-selected="true" class="profile-editor-tab active" data-tab="editorial" onclick="selectProfileEditorTab('editorial')" role="tab" type="button"><i class="fa-solid fa-compass"></i> Editorial</button>
+<button aria-selected="false" class="profile-editor-tab" data-tab="summary" onclick="selectProfileEditorTab('summary')" role="tab" type="button"><i class="fa-solid fa-align-left"></i> Resumo</button>
+<button aria-selected="false" class="profile-editor-tab" data-tab="comment" onclick="selectProfileEditorTab('comment')" role="tab" type="button"><i class="fa-solid fa-comment-dots"></i> Comentário</button>
+<button aria-selected="false" class="profile-editor-tab" data-tab="interests" onclick="selectProfileEditorTab('interests')" role="tab" type="button"><i class="fa-solid fa-list-check"></i> Pautas</button>
+<button aria-selected="false" class="profile-editor-tab" data-tab="sources" onclick="selectProfileEditorTab('sources')" role="tab" type="button"><i class="fa-solid fa-rss"></i> Fontes</button>
+</nav>
+<section class="profile-editor-pane active" data-pane="editorial" role="tabpanel"><label for="cfgEditorialProfile">Perfil Editorial</label><textarea id="cfgEditorialProfile" placeholder="Defina área de cobertura, público, prioridades temáticas, critérios de relevância e orientação editorial." rows="12"></textarea><p class="footer-note">Define a orientação editorial geral deste perfil.</p></section>
+<section class="profile-editor-pane" data-pane="summary" role="tabpanel"><label for="cfgSummaryPrompt">Regras para o Resumo</label><textarea id="cfgSummaryPrompt" placeholder="Defina linguagem, extensão, estrutura, contextualização e critérios para os resumos." rows="16"></textarea></section>
+<section class="profile-editor-pane" data-pane="comment" role="tabpanel"><label for="cfgCommentPrompt">Regras para o Comentário</label><textarea id="cfgCommentPrompt" placeholder="Defina voz, oralidade, análise, posicionamento, ritmo e encerramento dos comentários." rows="16"></textarea><div class="rules-processing-actions"><button class="btn btn-secondary" onclick="restoreDefaultCommentInstructions()" type="button">Restaurar perfil</button></div></section>
+<section class="profile-editor-pane" data-pane="interests" role="tabpanel"><p class="footer-note">Cadastre um assunto por linha. Essas pautas orientam a busca e a classificação das notícias.</p><div class="pautas-modal-grid">
+<div class="sidebar-pauta"><label for="interestPolitics">Política</label><textarea id="interestPolitics" placeholder="Eleições, partidos, reforma eleitoral" rows="5"></textarea></div>
+<div class="sidebar-pauta"><label for="interestDaily">Cotidiano</label><textarea id="interestDaily" placeholder="Transporte, mobilidade, serviços públicos" rows="5"></textarea></div>
+<div class="sidebar-pauta"><label for="interestEconomy">Economia</label><textarea id="interestEconomy" placeholder="Selic, PIB, impostos" rows="5"></textarea></div>
+<div class="sidebar-pauta"><label for="interestSports">Esportes</label><textarea id="interestSports" placeholder="Futebol potiguar, campeonatos" rows="5"></textarea></div>
+<div class="sidebar-pauta"><label for="interestCulture">Cultura</label><textarea id="interestCulture" placeholder="Música, teatro, cinema, cultura potiguar" rows="5"></textarea></div>
+<div class="sidebar-pauta"><label for="interestDiscard">Descartar Assuntos</label><textarea id="interestDiscard" placeholder="Assuntos a evitar, um por linha" rows="5"></textarea></div>
+</div></section>
+<section class="profile-editor-pane" data-pane="sources" role="tabpanel"><p class="footer-note">Selecione as fontes, defina a prioridade de cada uma e sua ativação neste perfil. O cadastro é administrado na página Fontes.</p><div class="profile-source-actions"><button class="btn btn-secondary" onclick="setProfileSourcesEnabled(true)" type="button">Ativar todas</button><button class="btn btn-secondary" onclick="setProfileSourcesEnabled(false)" type="button">Desativar todas</button></div><div class="tablewrap"><table class="source-table profile-source-table"><thead><tr><th>Fonte</th><th>Abrangência</th><th>Prioridade</th><th>Ativa</th></tr></thead><tbody id="profileSourceTable"></tbody></table></div></section>
 
+</div><div class="profile-editor-footer"><div class="profile-editor-context-actions"><button class="btn btn-secondary" id="profileEditorRestoreButton" onclick="restoreActiveProfileTabDefaults()" type="button">Restaurar padrão</button><button class="btn btn-secondary profile-source-footer-action" hidden="True" onclick="setProfileSourcesEnabled(true)" type="button">Ativar todas</button><button class="btn btn-secondary profile-source-footer-action" hidden="True" onclick="setProfileSourcesEnabled(false)" type="button">Desativar todas</button></div><span aria-live="polite" class="small muted" id="profileEditorStatus">Alterações ainda não salvas</span><div><button class="btn btn-secondary" onclick="requestCloseProfileEditor()" type="button">Fechar</button> <button class="btn btn-primary" id="saveEditorialProfileButton" onclick="saveProfileEditorAndClose()" type="button">Salvar perfil</button></div></div>
+</div>
+</div>
+<div aria-labelledby="apiConfigTitle" aria-modal="true" class="modal api-modal" id="apiConfigModal" role="dialog">
+<div class="modalbox">
+<div class="api-modal-head"><h3 id="apiConfigTitle">Configurar API</h3><button aria-label="Fechar" class="api-modal-close" onclick="closeApiConfigModal()" type="button">×</button></div>
+<div class="sidebar-gemini-section" style="margin:0;padding:0;border:0">
+<label class="sidebar-section-title" for="cfgModel">Modelo Gemini</label>
+<select aria-label="Modelo Gemini" id="cfgModel"></select>
+<label class="sidebar-section-title sidebar-api-label" for="cfgApi">API Key do Gemini</label>
+<input aria-label="API Key do Gemini" autocomplete="off" id="cfgApi" placeholder="Cole sua chave do Google AI Studio" type="password"/>
+<div class="sidebar-gemini-actions">
+<button class="btn btn-secondary" onclick="refreshGeminiModels()" title="Atualizar modelos" type="button">↻ Modelos</button>
+<button class="btn btn-secondary" onclick="testAI()" type="button">Testar conexão</button>
+</div>
+<div class="small sidebar-gemini-status" id="modelStatus"></div>
+<div class="small sidebar-gemini-status" id="aiStatus"></div>
+</div>
+<div class="toolbar" style="margin-top:16px"><button class="btn btn-primary" onclick="saveConfig();closeApiConfigModal()" type="button">Salvar e fechar</button></div>
+</div>
+</div>
+<aside aria-label="Painel de apoio editorial" class="context-rail">
+<section aria-labelledby="clockCardTitle" class="context-card context-clock-weather-card" data-context-card="clock" draggable="true" id="contextCardClock">
+<h2 class="context-card-head" id="clockCardTitle"><i aria-hidden="true" class="fa-regular fa-clock"></i> Data, hora e clima</h2>
+<div class="clock-weather-grid">
+<div class="clock-weather-time"><div class="context-clock" id="contextClock">--:--:--</div><div class="context-date" id="contextDate">Carregando data…</div></div>
+<div aria-live="polite" class="clock-weather-weather context-loading" id="weatherContent" role="status">Consultando clima…</div>
+</div>
+</section>
+<section aria-labelledby="timerCardTitle" class="context-card" data-context-card="timer" draggable="true" id="contextCardTimer">
+<h2 class="context-card-head" id="timerCardTitle"><i aria-hidden="true" class="fa-solid fa-stopwatch"></i> Timer</h2>
+<div class="timer-readout-row"><div class="context-clock" id="timerDisplay">05:00</div><input aria-label="Duração personalizada em minutos" id="timerMinutes" inputmode="numeric" maxlength="3" oninput="this.value=this.value.replace(/\D/g,'').slice(0,3);if(Number(this.value)&gt;180)this.value='180'" placeholder="min" type="text" value="5"/></div><div aria-label="Tempos rápidos" class="timer-presets"><button class="btn btn-secondary" onclick="setContextTimer(15)" type="button">15s</button><button class="btn btn-secondary" onclick="setContextTimer(30)" type="button">30s</button><button class="btn btn-secondary" onclick="setContextTimer(45)" type="button">45s</button><button class="btn btn-secondary" onclick="setContextTimer(60)" type="button">60s</button></div><div class="timer-controls"><button class="btn btn-primary" id="timerStartBtn" onclick="toggleContextTimer()" type="button">Iniciar</button><button class="btn btn-secondary" onclick="resetContextTimer()" type="button">Zerar</button></div><div class="context-footnote" id="timerStatus">Defina o tempo e inicie a contagem.</div>
+</section>
+<section aria-labelledby="agendaCardTitle" class="context-card" data-context-card="agenda" draggable="true" id="contextCardAgenda"><h2 class="context-card-head agenda-card-head" id="agendaCardTitle"><span><i aria-hidden="true" class="fa-regular fa-calendar-days"></i> Agenda do dia</span><button aria-label="Cadastrar Anotação" class="agenda-add-btn" onclick="addAgendaAnnotation()" title="Cadastrar Anotação" type="button">+</button></h2><div aria-live="polite" class="agenda-annotations" id="agendaAnnotations"></div><div class="birthday-section"><button class="birthday-section-title birthday-import-btn" onclick="openBirthdayImport()" title="Inserir imagem com aniversariantes" type="button"><i aria-hidden="true" class="fa-solid fa-cake-candles"></i> Aniversário(s)</button><div class="birthday-names-list" id="birthdayNamesList">Nenhum aniversariante importado.</div></div></section>
+<section aria-labelledby="urgencyCardTitle" class="context-card" data-context-card="urgency" draggable="true" id="contextCardUrgency"><h2 class="context-card-head" id="urgencyCardTitle"><i aria-hidden="true" class="fa-solid fa-bolt"></i> Radar de urgência</h2><div class="context-loading" id="contextUrgencyContent">Aguardando notícias coletadas…</div><div class="context-footnote">Destaques recentes da triagem; confirme a atualização na fonte original.</div></section>
+<section aria-labelledby="rundownCardTitle" class="context-card" data-context-card="rundown" draggable="true" id="contextCardRundown"><h2 class="context-card-head" id="rundownCardTitle"><i aria-hidden="true" class="fa-solid fa-stopwatch-20"></i> Tempo estimado da pauta</h2><div class="context-loading" id="contextRundownContent">Nenhuma notícia processada.</div><div class="context-footnote">Estimativa baseada na duração dos comentários cadastrados no Radar.</div></section>
+<section aria-labelledby="footballCardTitle" class="context-card" data-context-card="football" draggable="true" id="contextCardFootball">
+<h2 class="context-card-head football-card-head" id="footballCardTitle"><span class="football-card-title"><i aria-hidden="true" class="fa-solid fa-futbol"></i> Futebol Brasileiro</span><span class="football-card-actions"><button aria-label="Comentar resumo da rodada" class="football-refresh football-comment-btn" id="footballRoundCommentBtn" onclick="generateFootballRoundCard(this)" title="Comentar resumo da rodada" type="button"><i aria-hidden="true" class="fa-solid fa-comment-dots"></i></button><button aria-label="Atualizar resultados de futebol" class="football-refresh" id="footballRefreshBtn" onclick="loadFootballMatches(true)" title="Atualizar resultados de futebol" type="button"><i aria-hidden="true" class="fa-solid fa-rotate"></i></button></span></h2>
+<div aria-live="polite" class="football-live-region" id="footballStatus" role="status">Preparando consulta de resultados…</div>
+<div aria-live="polite" id="footballContent"></div>
+</section>
+</aside>
+<div aria-labelledby="newsEditModalTitle" aria-modal="true" class="modal api-modal" id="newsEditModal" onclick="if(event.target===this)closeNewsEditModal()" role="dialog">
+<div class="modalbox news-edit-modal-box">
+<div class="api-modal-head"><h3 id="newsEditModalTitle">Editar notícia</h3><button aria-label="Fechar" class="api-modal-close" onclick="closeNewsEditModal()" type="button">×</button></div>
+<div class="news-edit-modal-content">
+<label for="newsModalTitle">Título</label><textarea id="newsModalTitle" rows="2"></textarea>
+<label for="newsModalSummary">Resumo</label><textarea id="newsModalSummary" rows="4"></textarea>
+<div id="newsModalCommentSection">
+<label for="newsModalComment">Comentário</label><textarea id="newsModalComment" rows="6"></textarea>
+<div class="ai-comment-instructions"><label for="newsModalAiInstructions">Instruções para a IA alterar o comentário</label><textarea id="newsModalAiInstructions" placeholder="Ex.: reescreva em tom jornalístico, mais conciso, sem repetir o resumo e adequado para leitura no rádio." rows="3"></textarea><button class="btn btn-secondary" id="newsModalApplyAi" onclick="applyAiCommentInstructions()" type="button">Aplicar instruções da IA</button><div aria-live="polite" class="small muted" id="newsModalAiStatus"></div></div>
+</div>
+</div>
+<div class="toolbar news-edit-modal-actions"><button class="btn btn-primary" onclick="saveNewsEditModal()" type="button">Salvar</button><button class="btn btn-secondary" onclick="cancelNewsEditModal()" type="button">Cancelar</button></div>
+</div>
+</div>
+<div aria-labelledby="storyViewTitle" aria-modal="true" class="modal story-view-modal" id="storyViewModal" onclick="if(event.target===this)closeStoryView()" role="dialog">
+<div class="modalbox story-view-modal-box">
+<div class="api-modal-head"><h3 id="storyViewTitle">Visualizar notícia</h3><button aria-label="Fechar" class="api-modal-close" onclick="closeStoryView()" type="button">×</button></div>
+<div class="story-view-meta" id="storyViewMeta"></div>
+<div class="story-view-body" id="storyViewBody"></div>
+<div class="toolbar story-view-actions"><button class="btn btn-secondary" onclick="closeStoryView()" type="button">Fechar</button><a class="btn btn-primary" hidden="" href="#" id="storyViewSourceLink" rel="noopener" target="_blank">Ver Matéria</a></div>
+</div>
+</div>
+<div aria-labelledby="scriptReaderTitle" aria-modal="true" class="modal story-view-modal" id="scriptReaderModal" onclick="if(event.target===this)closeScriptReader()" role="dialog">
+<div class="modalbox story-view-modal-box script-reader-modal-box">
+<div class="api-modal-head"><h3 id="scriptReaderTitle">Roteiro</h3><button aria-label="Fechar roteiro" class="api-modal-close" onclick="closeScriptReader()" type="button">×</button></div>
+<div class="story-view-meta" id="scriptReaderMeta"></div>
+<div class="story-view-body script-reader-body" id="scriptReaderBody"></div>
+</div>
+</div>
+<div aria-labelledby="birthdayImportTitle" aria-modal="true" class="modal" id="birthdayImportModal" onclick="if(event.target===this)closeBirthdayImport()" role="dialog"><div class="modalbox birthday-import-modal"><div class="api-modal-head"><h3 id="birthdayImportTitle">Importar aniversariantes</h3><button aria-label="Fechar" class="api-modal-close" onclick="closeBirthdayImport()" type="button">×</button></div><p class="birthday-help">Selecione um print da lista do Facebook. O reconhecimento é executado no navegador; revise os nomes antes de salvar.</p><label class="birthday-file-label" for="birthdayImageInput"><i aria-hidden="true" class="fa-regular fa-image"></i> Selecionar imagem (PNG, JPG ou JPEG)</label><input accept="image/png,image/jpeg,image/webp" id="birthdayImageInput" onchange="recognizeBirthdayImage(this.files?.[0])" type="file"/><div aria-live="polite" class="small muted" id="birthdayOcrStatus" role="status">A imagem será processada localmente no navegador.</div><img alt="Prévia do print selecionado" class="birthday-image-preview" hidden="" id="birthdayImagePreview"/><label for="birthdayNamesInput">Nomes reconhecidos (um por linha)</label><textarea id="birthdayNamesInput" placeholder="Os nomes identificados aparecerão aqui para revisão…" rows="8"></textarea><div class="toolbar birthday-modal-actions"><button class="btn btn-primary" onclick="saveBirthdayNames()" type="button">Confirmar e adicionar</button><button class="btn btn-secondary" onclick="closeBirthdayImport()" type="button">Cancelar</button></div></div></div>
+<div class="toast" id="toast"></div>
 <script>
 const DEFAULT_EDITORIAL_PROFILE = `ABRANGÊNCIA GEOGRÁFICA
 Priorize notícias do Rio Grande do Norte, de Natal/RN e do Brasil. Dê preferência a fatos locais e estaduais, sem deixar de incluir notícias nacionais de grande relevância, especialmente aquelas com impacto político, econômico, social ou administrativo sobre o Brasil, o Rio Grande do Norte e seus municípios. Notícias de outros países, municípios, estados e federações não interessam, exceto quando houver reflexo para o RN ou para a população nacional.
@@ -4299,7 +4514,7 @@ function renderSources(){
     <td>
       <div class="source-actions-inline">
         <button class="btn btn-secondary" onclick="testSource('${s.id}')">Testar</button>
-        <button class="btn btn-secondary" onclick="editSource('${s.id}')">Editar</button>
+        <button class="btn btn-secondary" type="button" onclick="editSource(decodeURIComponent('${encodeURIComponent(String(s.id))}'))">Editar</button>
         <button class="btn btn-danger" onclick="removeSource('${s.id}')">Excluir</button>
       </div>
     </td>
@@ -4632,7 +4847,6 @@ document.addEventListener('DOMContentLoaded',initContextCards);
 // Sincroniza o acesso ao Radar com os dados salvos ao abrir o arquivo.
 updateNexoAccess();
 </script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
 async function downloadNexoCardPdf(id){
@@ -4766,7 +4980,6 @@ window.addEventListener('resize',syncMobileLayout,{passive:true});
 window.addEventListener('orientationchange',syncMobileLayout,{passive:true});
 syncMobileLayout();
 </script>
-
 <!-- V143: classifica abrangência separadamente da editoria no boletim Outlook e nos feeds RSS/Atom, com categorias explícitas e escopo da fonte como sinais. -->
 <!-- V145: aperfeiçoa a movimentação de cards, permite inserir antes/depois do alvo e inclui rolagem automática nas bordas durante o arraste. -->
 <!-- V158: titles open original URLs; card click below title opens modal; move handle relocated to upper-right. -->
@@ -4824,9 +5037,7 @@ async function recognizeBirthdayImage(file){const status=document.getElementById
 function saveBirthdayNames(){const input=document.getElementById('birthdayNamesInput');const candidates=String(input?.value||'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean);if(!candidates.length){const status=document.getElementById('birthdayOcrStatus');if(status)status.textContent='Nenhum nome para salvar. Faça o reconhecimento ou digite os nomes.';return}const store=readBirthdayStore(),key=localDayKey(),existing=Array.isArray(store[key])?store[key]:[],seen=new Set(existing.map(normalizeBirthdayName)),added=[];for(const raw of candidates){const name=raw.replace(/^[-–—•*\s]+|[-–—•*\s]+$/g,'').trim();const norm=normalizeBirthdayName(name);if(!name||norm.length<2||seen.has(norm))continue;seen.add(norm);added.push(name)}store[key]=[...existing,...added];try{localStorage.setItem(BIRTHDAY_STORAGE_KEY,JSON.stringify(store));renderBirthdayNames();closeBirthdayImport();if(typeof toast==='function')toast(added.length?`${added.length} aniversariante(s) adicionado(s).`: 'Nenhum nome novo: os nomes já estavam cadastrados.')}catch(e){alert('Não foi possível salvar os aniversariantes no armazenamento local do navegador.')}}
 try{document.addEventListener('DOMContentLoaded',renderBirthdayNames);renderBirthdayNames()}catch(e){}
 </script>
-
-<button type="button" id="backToTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Voltar ao topo" aria-label="Voltar ao topo"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
-
+<button aria-label="Voltar ao topo" id="backToTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Voltar ao topo" type="button"><i aria-hidden="true" class="fa-solid fa-arrow-up"></i></button>
 <script>
 /* V187: exibe o botão flutuante após rolagem significativa */
 (function(){
@@ -4981,7 +5192,6 @@ ${String(footballData?.updatedAt||'não informada')}`;
 }
 
 </script>
-
 <style id="radar-fix-rules-modal-width-final">
 /* Correção efetiva: o limite anterior vinha de .api-modal .modalbox (max-width:520px).
    Este seletor mais específico remove esse teto somente neste modal. */
@@ -5002,7 +5212,47 @@ ${String(footballData?.updatedAt||'não informada')}`;
 </style>
 <!-- Radar V1.35: limpeza da barra lateral e atualização imediata das fontes na troca de perfil. -->
 <!-- Radar V1.19: catálogo remoto de perfis editoriais no GitHub, carregado ao abrir Regras e Instruções. -->
-</body>
+<script>
+</script><script>
+function restoreActiveProfileTabDefaults(){
+  const activeTab=document.querySelector('#rulesInstructionsModal .profile-editor-tab.active')?.dataset.tab||'editorial';
+  const p=activeEditorialProfile();
+  if(!p){toast('Nenhum perfil selecionado.');return;}
+  if(activeTab==='editorial'){
+    p.editorialProfile=DEFAULT_EDITORIAL_PROFILE;
+    const el=document.getElementById('cfgEditorialProfile');if(el)el.value=DEFAULT_EDITORIAL_PROFILE;
+  }else if(activeTab==='summary'){
+    p.summaryPrompt=DEFAULT_SUMMARY_PROMPT;
+    const el=document.getElementById('cfgSummaryPrompt');if(el)el.value=DEFAULT_SUMMARY_PROMPT;
+  }else if(activeTab==='comment'){
+    p.commentPrompt=DEFAULT_RADIO_COMMENT_PROMPT;
+    const el=document.getElementById('cfgCommentPrompt');if(el)el.value=DEFAULT_RADIO_COMMENT_PROMPT;
+  }else if(activeTab==='interests'){
+    const defaults=JSON.parse(JSON.stringify(defaultState.config.interests||{}));
+    p.interests=defaults;
+    const map={politics:'interestPolitics',daily:'interestDaily',economy:'interestEconomy',sports:'interestSports',culture:'interestCulture',discard:'interestDiscard'};
+    Object.entries(map).forEach(([key,id])=>{const el=document.getElementById(id);if(el)el.value=Array.isArray(defaults[key])?defaults[key].join('\n'):(defaults[key]||'');});
+  }else if(activeTab==='sources'){
+    const defaults=defaultState.sources||[];
+    (state.sources||[]).forEach(src=>{
+      const original=defaults.find(item=>String(item.id)===String(src.id));
+      src.active=false;
+      if(original && original.weight)src.weight=original.weight;
+    });
+    renderProfileSourceToggles();
+  }
+  if(typeof renderConfig==='function')renderConfig();
+  markProfileEditorDirty();
+  const status=document.getElementById('profileEditorStatus');
+  if(status)status.textContent='Padrões restaurados nesta aba — salve o perfil para aplicar.';
+}
+document.addEventListener('click',function(event){
+  const tab=event.target.closest('#rulesInstructionsModal .profile-editor-tab');
+  if(!tab)return;
+  const sources=tab.dataset.tab==='sources';
+  document.querySelectorAll('#rulesInstructionsModal .profile-source-footer-action').forEach(el=>el.hidden=!sources);
+});
+</script></body>
 </html>
 <style id="v88-sidebar-import-width">
 /* V88: força o botão Importar Boletim a ocupar a largura útil da barra lateral. */
@@ -5040,7 +5290,6 @@ ${String(footballData?.updatedAt||'não informada')}`;
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style id="v96-center-main-column">
 /* V96: centraliza a coluna de notícias no espaço entre a barra de coleta e a barra informativa.
    As barras laterais permanecem fixas; largura e margem esquerda são calculadas em conjunto. */
@@ -5114,15 +5363,10 @@ body.radar-workspace-active .news-filter-card{display:flex!important;visibility:
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <!-- V142: preserva a editoria de seção no boletim Outlook e as categorias RSS/Atom; classifica primeiro pela fonte, mantendo inferência como fallback. -->
-
 <!-- V147: card lateral de futebol integrado à API Dados Futebol via Worker; chave em Secret; preserva V145/V146. -->
-
 <!-- V150: unifica o card Futebol nos resultados encerrados mais recentes; lembra o token de importação do Outlook após autorização válida. -->
-
 <!-- V152: card renomeado para Futebol Resultados, botão de atualização discreto no cabeçalho e atualização automática após coleta. -->
-
 <style id="v153-mobile-layout">
 /* V153 — composição mobile inspirada no mockup: menu lateral, Notícias/Radar, busca e editorias fixas no rodapé. */
 .mobile-header-action,.mobile-sidebar-backdrop,.mobile-drawer-head{display:none}
@@ -5212,10 +5456,8 @@ body.radar-workspace-active .news-filter-card{display:flex!important;visibility:
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <!-- V154: unifica abrangência em Nacional/Local na interface, classificadores, fontes, boletim e Worker; migra dados antigos do navegador. -->
 <!-- V156: oculta a barra inferior de editorias enquanto o menu lateral estiver aberto em dispositivos móveis. -->
-
 <!-- V155: mantém todos os filtros móveis (Todas, Nacional, Local, Editorial e Recentes) em uma única linha. -->
 <style id="v155-mobile-filters-one-line">
 @media(max-width:850px){
@@ -5282,14 +5524,9 @@ body.radar-workspace-active .news-filter-card{display:flex!important;visibility:
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
-
 <!-- V158: adiciona atalho móvel Fontes à direita do filtro no cabeçalho; reutiliza showPage('fontes'). -->
-
 <!-- V161: resultados variam conforme o dia da semana e a mesma consulta passa a incluir a agenda Jogos do Dia. -->
-
 <!-- V162: card Futebol Brasileiro; Jogos de Hoje antes de Resultados; oculta seções vazias e o card quando não há jogos. -->
-
 <style>
 /* V188: cor azul da aba ativa e botão voltar ao topo centralizado. */
 .news-radar-tab.active,.news-radar-tab[aria-pressed="true"]{background:#2F6FAE!important;border-color:#2F6FAE!important;color:#fff!important}
@@ -5311,7 +5548,6 @@ body.radar-workspace-active .news-filter-card{display:flex!important;visibility:
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style>
 /* V189: troca experimental das cores dos seletores ativos. */
 .global-news-controls .news-radar-tab.active{background:#172f4a!important;border-color:#172f4a!important;color:#fff!important;box-shadow:0 2px 5px rgba(16,42,67,.12)!important}
@@ -5341,7 +5577,6 @@ body.radar-workspace-active .news-filter-card{display:flex!important;visibility:
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style>
 /* V190: metadados mais discretos e pílulas editoriais sem borda. */
 #page-noticias .meta .tag,
@@ -5376,7 +5611,6 @@ body.radar-workspace-active .news-filter-card{display:flex!important;visibility:
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style>
 #page-noticias .notice-actions{display:flex!important;justify-content:flex-start!important;align-items:center!important;gap:6px!important}
 #page-noticias .notice-actions .btn-comment{order:0!important;margin-left:0!important}
@@ -5395,7 +5629,6 @@ body.radar-workspace-active .news-filter-card{display:flex!important;visibility:
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style>
 #page-radar .radar-num.radar-move-handle{cursor:grab!important;user-select:none!important;touch-action:pan-y!important}
 #page-radar .radar-num.radar-move-handle:active{cursor:grabbing!important}
@@ -5413,8 +5646,6 @@ body.radar-workspace-active .news-filter-card{display:flex!important;visibility:
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
-
 <style>
 /* V190 final: botão Comentar no início da linha, alinhado à esquerda. */
 #page-noticias .notice-actions{display:flex!important;justify-content:flex-start!important;align-items:center!important;gap:6px!important}
@@ -5437,7 +5668,6 @@ body.radar-workspace-active .news-filter-card{display:flex!important;visibility:
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style>
 /* V191: as pílulas de editoria preservam integralmente suas cores originais.
    Apenas a borda e o peso excessivo da tipografia são removidos. */
@@ -5486,8 +5716,6 @@ body.radar-workspace-active .news-filter-card{display:flex!important;visibility:
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
-
 <style id="radar-v192-filter-style">
 /* V192: filtros com fundo neutro e destaque ativo por contorno azul-escuro. */
 .global-news-controls .filter-pill,
@@ -5530,8 +5758,6 @@ body.radar-workspace-active .news-filter-card{display:flex!important;visibility:
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
-
 <style id="radar-v193-filter-correction">
 /* V193: neutraliza também os estilos específicos das pílulas editoriais,
    geográficas e de ordenação que sobrescreviam a regra geral da V192. */
@@ -5577,8 +5803,6 @@ body .mobile-bottom #editoriaPills .filter-pill.active .editorial-pill-count {
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
-
 <style id="radar-v194-interface-adjustments">
 /* V194: ícone PDF na identidade azul-escura. */
 .global-news-controls .global-pdf-btn,
@@ -5612,8 +5836,6 @@ body .mobile-bottom #editoriaPills .filter-pill.active .editorial-pill-count {
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
-
 <style id="radar-v195-ui-adjustments">
 /* Espaçamento compacto entre Coletar, Limpar e Importar. */
 #page-noticias .sidebar-collect-toolbar{gap:3px!important}
@@ -5657,8 +5879,6 @@ body .mobile-bottom #editoriaPills .filter-pill.active .editorial-pill-count {
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
-
 <style id="radar-v196-compact-collection-buttons">
 /* V196: espaçamento realmente compacto entre os três botões de coleta. */
 #page-noticias .sidebar-collect-toolbar{
@@ -5698,7 +5918,6 @@ body .mobile-bottom #editoriaPills .filter-pill.active .editorial-pill-count {
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style id="radar-v197-comment-navigation">
 #radarList .radar-item.radar-card-focus{
   outline:2px solid #172F4A!important;
@@ -5719,7 +5938,6 @@ body .mobile-bottom #editoriaPills .filter-pill.active .editorial-pill-count {
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style id="radar-v198-editorial-active-border-only">
 /* V198: o card ativo mantém as cores próprias da editoria.
    A borda usa a mesma cor do ícone e do nome; o ícone fica sem fundo. */
@@ -5757,7 +5975,6 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style id="radar-brand-and-sidebar-actions">
 /* Marca RADAR e assinatura */
 .topbar .brand {
@@ -5837,7 +6054,6 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style id="radar-official-slogan">
 .topbar .brand .brand-tagline {
   font-style: normal !important;
@@ -5857,7 +6073,6 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style id="radar-fix-spacing-collection-actions">
 /* Correção definitiva: distância real entre Coletar notícias e a dupla de ações. */
 #page-noticias .sidebar-collect-toolbar {
@@ -5895,7 +6110,6 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style id="radar-fix-spacing-collection-actions-uniform">
 /* Mesmo intervalo vertical usado entre os demais controles da barra lateral. */
 #page-noticias .sidebar-collect-toolbar {
@@ -5933,7 +6147,6 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style id="radar-collection-icon-corrected">
 #page-noticias .sidebar-collect-toolbar .collect-news-btn {
   display: inline-flex !important;
@@ -5968,7 +6181,6 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style id="radar-football-round-summary">
 .context-card-head.football-card-head { display:flex; align-items:center; gap:6px; }
 .football-card-actions { margin-left:auto; display:inline-flex; align-items:center; gap:5px; }
@@ -5989,7 +6201,6 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style id="radar-2026v1-ajustes-aniversario">
 .birthday-section-title.birthday-import-btn{
   appearance:none;width:100%;border:0;background:transparent;color:var(--text,#263449);
@@ -6013,7 +6224,6 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style id="radar-agenda-annotations">
 .agenda-card-head{justify-content:space-between}
 .agenda-card-head>span{display:inline-flex;align-items:center;gap:8px}
@@ -6043,7 +6253,6 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
 @media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
 
 </style>
-
 <style id="radar-v132-sidebar-and-profile-switch">
 /* V1.32: removeu-se o botão Boletim; Limpar ocupa toda a largura disponível. */
 #page-noticias .sidebar-collect-secondary-actions {
