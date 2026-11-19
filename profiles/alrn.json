@@ -271,7 +271,7 @@
       ],
       "scope": "Local",
       "weight": "Alta",
-      "active": false,
+      "active": true,
       "status": "OK — Automático: RSS (40)",
       "id": "dy8bzy6gbh8c"
     },
@@ -354,7 +354,7 @@
       "queries": [],
       "scope": "Local",
       "weight": "Baixa",
-      "active": false,
+      "active": true,
       "status": "OK — Automático: Site (8); fonte sem RSS",
       "siteUrls": []
     },
@@ -561,7 +561,7 @@
       ],
       "scope": "Nacional",
       "weight": "Alta",
-      "active": false,
+      "active": true,
       "status": "OK — Automático: RSS (96)",
       "id": "hp3r1j7ibh8c"
     },
@@ -596,7 +596,7 @@
       ],
       "scope": "Nacional",
       "weight": "Alta",
-      "active": false,
+      "active": true,
       "status": "OK — Automático: RSS (104)",
       "id": "58max175bh8c"
     },
@@ -825,7 +825,7 @@
       ],
       "scope": "Local",
       "weight": "Alta",
-      "active": false,
+      "active": true,
       "status": "OK — Automático: RSS (56)",
       "id": "q223dyarbh8c"
     },
@@ -978,7 +978,7 @@
       ],
       "scope": "Local",
       "weight": "Alta",
-      "active": false,
+      "active": true,
       "status": "Não testada",
       "id": "syb1youkbh8c"
     },
@@ -1048,7 +1048,7 @@
       ],
       "scope": "Local",
       "weight": "Alta",
-      "active": false,
+      "active": true,
       "status": "OK — Automático: RSS (20)",
       "id": "uiwlne7rbh8c"
     },
