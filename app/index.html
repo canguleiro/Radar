@@ -833,6 +833,8 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
 .profile-editor-pane[data-pane="interests"] .pautas-modal-grid{margin-top:12px}
 .profile-source-priority{min-width:112px;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--text)}
 @media(max-width:760px){.profile-editor-tab{padding:10px 9px;font-size:12px}.profile-editor-pane{min-height:250px}.profile-editor-pane>textarea{min-height:220px}}
+
+.source-catalog-status{display:inline-flex;align-items:center;min-height:32px;padding:0 10px;border:1px solid #dbe3ec;border-radius:8px;background:#f7f9fc;color:#52647a;font-size:12px;font-weight:600;white-space:nowrap}.source-catalog-status[data-pending="true"]{background:#fff8e8;border-color:#f0d69b;color:#805b12}.source-catalog-status[data-saving="true"]{opacity:.8}
 </style>
 <!-- Radar V98: ações reorganizadas, notícias por editoria recolhíveis e indicador de processamento -->
 <style>
@@ -1637,7 +1639,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <div class="toolbar source-toolbar" style="margin-top:0;display:flex;align-items:center;flex-wrap:wrap;gap:8px">
 <button class="btn btn-primary" onclick="openAddSourceModal()">+ Adicionar fonte</button>
 <span style="flex:1 1 auto"></span>
-<button aria-live="polite" class="btn btn-secondary small" id="sourceCatalogStatus" onclick="saveGlobalSourceCatalog()" title="Tentar sincronizar o catálogo" type="button">Catálogo sincronizado com o GitHub</button>
+<span aria-live="polite" class="source-catalog-status" id="sourceCatalogStatus" role="status" title="Indica a situação de sincronização do catálogo">Catálogo sincronizado com o GitHub</span>
 </div>
 <div aria-live="polite" class="source-save-bar" hidden="" id="sourceSaveBar"></div><div class="tablewrap" style="margin-top:15px">
 <table class="source-table"><thead><tr><th>Fonte</th><th>Abrangência</th><th>Status</th><th>Ações</th></tr></thead><tbody id="sourceTable"></tbody></table>
@@ -1738,7 +1740,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 </nav>
 <section class="profile-editor-pane active" data-pane="editorial" role="tabpanel"><label for="cfgEditorialProfile">Perfil Editorial</label><textarea id="cfgEditorialProfile" placeholder="Defina área de cobertura, público, prioridades temáticas, critérios de relevância e orientação editorial." rows="12"></textarea><p class="footer-note">Define a orientação editorial geral deste perfil.</p></section>
 <section class="profile-editor-pane" data-pane="summary" role="tabpanel"><label for="cfgSummaryPrompt">Regras para o Resumo</label><textarea id="cfgSummaryPrompt" placeholder="Defina linguagem, extensão, estrutura, contextualização e critérios para os resumos." rows="16"></textarea></section>
-<section class="profile-editor-pane" data-pane="comment" role="tabpanel"><label for="cfgCommentPrompt">Regras para o Comentário</label><textarea id="cfgCommentPrompt" placeholder="Defina voz, oralidade, análise, posicionamento, ritmo e encerramento dos comentários." rows="16"></textarea><div class="rules-processing-actions"><button class="btn btn-secondary" onclick="restoreDefaultCommentInstructions()" type="button">Restaurar perfil</button></div></section>
+<section class="profile-editor-pane" data-pane="comment" role="tabpanel"><label for="cfgCommentPrompt">Regras para o Comentário</label><textarea id="cfgCommentPrompt" placeholder="Defina voz, oralidade, análise, posicionamento, ritmo e encerramento dos comentários." rows="16"></textarea></section>
 <section class="profile-editor-pane" data-pane="interests" role="tabpanel"><p class="footer-note">Cadastre um assunto por linha. Essas pautas orientam a busca e a classificação das notícias.</p><div class="pautas-modal-grid">
 <div class="sidebar-pauta"><label for="interestPolitics">Política</label><textarea id="interestPolitics" placeholder="Eleições, partidos, reforma eleitoral" rows="5"></textarea></div>
 <div class="sidebar-pauta"><label for="interestDaily">Cotidiano</label><textarea id="interestDaily" placeholder="Transporte, mobilidade, serviços públicos" rows="5"></textarea></div>
@@ -1945,8 +1947,8 @@ function renderEditorialProfileSelector(){
   ensureEditorialProfiles();const options=state.config.editorialProfiles.map(p=>`<option value="${esc(p.id)}">${esc(p.name||'Perfil sem nome')}</option>`).join('');
   for(const id of ['editorialProfileSelect','sidebarEditorialProfileSelect']){const sel=document.getElementById(id);if(sel){sel.innerHTML=options;sel.value=state.config.activeEditorialProfileId||'';}}
 }
-const RADAR_GITHUB_PROFILE_API='https://api.github.com/repos/canguleiro/Radar/contents/profiles?ref=main';
-const RADAR_GITHUB_SOURCES_API='https://api.github.com/repos/canguleiro/Radar/contents/sources/catalog.json?ref=main';
+const RADAR_GITHUB_PROFILE_API='https://radar-api.camiloctorquato.workers.dev/api/github/profiles';
+const RADAR_GITHUB_SOURCES_API='https://radar-api.camiloctorquato.workers.dev/api/github/sources';
 const RADAR_GITHUB_SOURCES_WRITE_API='https://radar-api.camiloctorquato.workers.dev/api/sources/save';
 let sourceCatalogLoaded=false,sourceCatalogDirty=false,sourceSaveInProgress=false,sourceCatalogOriginal=[];
 let sourceAccessToken='';
@@ -1958,21 +1960,20 @@ function applyCatalogToProfile(profile){
 async function loadGitHubSourceCatalog(){
  // Busca o arquivo público diretamente no raw.githubusercontent.com. Evita a requisição
  // intermediária à API Contents e cabeçalhos personalizados que podem provocar preflight CORS.
- const rawUrl='https://raw.githubusercontent.com/canguleiro/Radar/main/sources/catalog.json';
- const response=await fetch(rawUrl,{cache:'no-store'});
- if(!response.ok)throw new Error(`Não foi possível carregar o catálogo de fontes (HTTP ${response.status}).`);
+ const response=await fetch(RADAR_GITHUB_SOURCES_API,{cache:'no-store',headers:{'Accept':'application/json'}});
+ if(!response.ok)throw new Error(`Não foi possível carregar o catálogo de fontes pelo Worker (HTTP ${response.status}).`);
  const data=await response.json();if(data?.type!=='radar-source-catalog'||!Array.isArray(data.sources))throw new Error('Formato do catálogo de fontes inválido.');
  sourceCatalogOriginal=data.sources.map(x=>({...x}));sourceCatalogLoaded=true;sourceCatalogDirty=false;
  const p=activeEditorialProfile();if(p)applyCatalogToProfile(p);else state.sources=sourceCatalogOriginal.map(x=>({...x,active:false}));
  renderSources();return data.sources.length;
 }
 function markSourceCatalogDirty(){sourceCatalogDirty=true;renderSourceSaveBar();scheduleCatalogAutoSave()}
-function renderSourceSaveBar(){const el=document.getElementById('sourceCatalogStatus');if(!el)return;el.textContent=sourceSaveInProgress?'Salvando catálogo no GitHub…':sourceCatalogDirty?'Alterações do catálogo aguardando sincronização':'Catálogo sincronizado com o GitHub';el.dataset.pending=sourceCatalogDirty?'true':'false'}
+function renderSourceSaveBar(){const el=document.getElementById('sourceCatalogStatus');if(!el)return;el.textContent=sourceSaveInProgress?'Sincronizando catálogo com o GitHub…':sourceCatalogDirty?'Alterações aguardando sincronização com o GitHub':'Catálogo sincronizado com o GitHub';el.dataset.pending=sourceCatalogDirty?'true':'false';el.dataset.saving=sourceSaveInProgress?'true':'false'}
 let profileSourceStatesDirty=false,sourceAutoSaveTimer=null;
 function scheduleCatalogAutoSave(){clearTimeout(sourceAutoSaveTimer);sourceAutoSaveTimer=setTimeout(()=>saveGlobalSourceCatalog(),350)}
 async function saveGlobalSourceCatalog(){
  if(!sourceCatalogDirty||sourceSaveInProgress)return;const token=sourceAccessToken||prompt('Informe o token de acesso do Radar para publicar a alteração no catálogo global:');if(!token){renderSourceSaveBar();return;}sourceAccessToken=token.trim();sourceSaveInProgress=true;renderSourceSaveBar();
- try{const snapshot=state.sources.map(({active,status,...src})=>({...src}));const response=await fetch(RADAR_GITHUB_SOURCES_WRITE_API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+sourceAccessToken},body:JSON.stringify({sources:snapshot})});const result=await response.json().catch(()=>({}));if(response.status===401){sourceAccessToken='';throw new Error('Token inválido.');}if(!response.ok||!result.ok)throw new Error(result.error||`Falha ao salvar catálogo (HTTP ${response.status}).`);sourceCatalogOriginal=snapshot;const current=JSON.stringify(state.sources.map(({active,status,...src})=>src));sourceCatalogDirty=current!==JSON.stringify(snapshot);renderSourceSaveBar();toast('Catálogo de fontes atualizado no GitHub.');if(sourceCatalogDirty)scheduleCatalogAutoSave();return !sourceCatalogDirty;}
+ try{const snapshot=state.sources.map(({active,status,...src})=>({...src}));const response=await fetch(RADAR_GITHUB_SOURCES_WRITE_API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+sourceAccessToken},body:JSON.stringify({sources:snapshot})});const result=await response.json().catch(()=>({}));if(response.status===401){sourceAccessToken='';throw new Error('Token inválido.');}if(!response.ok||!result.ok)throw new Error(result.error||`Falha ao salvar catálogo (HTTP ${response.status}).`);sourceCatalogOriginal=snapshot;const current=JSON.stringify(state.sources.map(({active,status,...src})=>src));sourceCatalogDirty=current!==JSON.stringify(snapshot);renderSourceSaveBar();toast('Alteração confirmada no GitHub. Pode levar alguns minutos para aparecer em todas as sessões do Radar.');if(sourceCatalogDirty)scheduleCatalogAutoSave();return !sourceCatalogDirty;}
  catch(error){renderSourceSaveBar();toast(`Não foi possível atualizar o catálogo. A alteração permanece nesta sessão. ${error.message||''}`);return false;}
  finally{sourceSaveInProgress=false;renderSourceSaveBar()}
 }
@@ -1988,15 +1989,13 @@ async function loadGitHubEditorialProfiles(showFeedback=false){
   const button=[...document.querySelectorAll('.editorial-profile-actions button')].find(b=>b.textContent.trim()==='Carregar Perfis');
   if(button){button.disabled=true;button.textContent='Carregando…';}
   try{
-    const response=await fetch(RADAR_GITHUB_PROFILE_API,{headers:{'Accept':'application/vnd.github+json'}});
-    if(!response.ok)throw new Error(response.status===404?'Repositório ou pasta profiles ainda não publicados.':`GitHub respondeu HTTP ${response.status}.`);
-    const files=await response.json();
-    const jsonFiles=Array.isArray(files)?files.filter(f=>f.type==='file'&&f.name.toLowerCase().endsWith('.json')&&!f.name.toLowerCase().endsWith('.template.json')):[];
+    const response=await fetch(RADAR_GITHUB_PROFILE_API,{cache:'no-store',headers:{'Accept':'application/json'}});
+    if(!response.ok)throw new Error(response.status===404?'Repositório ou pasta profiles ainda não publicados.':`Worker respondeu HTTP ${response.status}.`);
+    const payload=await response.json();
+    const jsonFiles=Array.isArray(payload?.files)?payload.files:[];
     const syncedProfiles=[];
     for(const file of jsonFiles){
-      const raw=await fetch(file.download_url);
-      if(!raw.ok)continue;
-      const data=await raw.json();
+      const data=file.profile;
       if(data?.type!=='radar-editorial-profile'||!String(data.name||'').trim()||!String(data.editorialProfile||'').trim())continue;
       if(!data.interests||typeof data.interests!=='object'||!Array.isArray(data.interests['Política'])||!Array.isArray(data.interests['Descartar Assuntos']))continue;
       const id='github-profile-'+file.name.replace(/[^a-z0-9_-]/gi,'-').toLowerCase();
@@ -2104,7 +2103,7 @@ async function saveEditorialProfileToGitHub(mode,tokenOverride=''){
     if(response.status===401)throw new Error('Token de acesso inválido. Confira o token RADAR_IMPORT_TOKEN cadastrado no Cloudflare.');
     if(!response.ok||!result.ok)throw new Error(result.error||`Worker respondeu HTTP ${response.status}.`);
     p.source='github';p.sourcePath=result.path||path;persist();
-    toast(mode==='update'?'Perfil atualizado no GitHub.':'Novo perfil publicado no GitHub.');return true;
+    toast((mode==='update'?'Perfil atualizado':'Novo perfil publicado')+' no GitHub. A mudança pode levar alguns minutos para aparecer nas demais sessões do Radar.');return true;
   }catch(error){console.error('Publicação de perfil no GitHub',error);toast(error.message||'Não foi possível salvar o perfil no GitHub.');return false;}
 }
 async function renameEditorialProfile(){
@@ -2121,7 +2120,7 @@ async function renameEditorialProfile(){
     await loadGitHubEditorialProfiles(false);
     const renamed=state.config.editorialProfiles.find(x=>x.sourcePath===result.path);
     if(renamed){state.config.activeEditorialProfileId=renamed.id;persist();renderConfig();}
-    toast(`Perfil renomeado no GitHub: ${result.path}`);
+    toast(`Perfil renomeado no GitHub: ${result.path}. A mudança pode levar alguns minutos para aparecer nas demais sessões do Radar.`);
   }catch(error){console.error('Renomeação de perfil no GitHub',error);toast(error.message||'Não foi possível renomear o perfil no GitHub.');}
 }
 async function deleteEditorialProfile(){
@@ -2135,7 +2134,7 @@ async function deleteEditorialProfile(){
     if(response.status===401)throw new Error('Token de acesso inválido.');
     if(!response.ok||!result.ok)throw new Error(result.error||`Worker respondeu HTTP ${response.status}.`);
     await loadGitHubEditorialProfiles(false);
-    toast(`Perfil excluído do GitHub: ${result.path}`);
+    toast(`Perfil excluído do GitHub: ${result.path}. A mudança pode levar alguns minutos para desaparecer das demais sessões do Radar.`);
   }catch(error){console.error('Exclusão de perfil no GitHub',error);toast(error.message||'Não foi possível excluir o perfil do GitHub.');}
 }
 
@@ -4506,6 +4505,8 @@ async function addNewsFromLink(){
 
 function renderSources(){
   renderSourceSaveBar();
+  const sourceTable=document.getElementById('sourceTable');
+  if(sourceTable&&!sourceTable.dataset.editHandlerBound){sourceTable.dataset.editHandlerBound='1';sourceTable.addEventListener('click',event=>{const button=event.target.closest('[data-source-edit]');if(!button||!sourceTable.contains(button))return;event.preventDefault();event.stopPropagation();editSource(button.getAttribute('data-source-edit'));});}
   state.sources.sort((a,b)=>String(a.name||'').localeCompare(String(b.name||''),'pt-BR',{sensitivity:'base'}));
   const table=document.getElementById('sourceTable');if(!table)return;table.innerHTML=state.sources.map(s=>`<tr>
     <td><b>${esc(s.name)}</b><br><span class="small">${esc(s.domain||s.url||'')}</span></td>
@@ -4514,7 +4515,7 @@ function renderSources(){
     <td>
       <div class="source-actions-inline">
         <button class="btn btn-secondary" onclick="testSource('${s.id}')">Testar</button>
-        <button class="btn btn-secondary" type="button" onclick="editSource(decodeURIComponent('${encodeURIComponent(String(s.id))}'))">Editar</button>
+        <button class="btn btn-secondary" type="button" data-source-edit="${esc(String(s.id))}">Editar</button>
         <button class="btn btn-danger" onclick="removeSource('${s.id}')">Excluir</button>
       </div>
     </td>
@@ -4536,17 +4537,16 @@ function toggleSource(id,v){const s=state.sources.find(x=>x.id===id);if(s)s.acti
 function toggleAllSources(enabled){state.sources.forEach(s=>s.active=!!enabled);const p=activeEditorialProfile();if(p){p.sourceStates=state.sources.map(x=>({id:x.id,active:x.active===true,weight:x.weight||'Média',priority:x.weight||'Média'}));profileSourceStatesDirty=true;}renderSources();renderSourceSaveBar();toast(enabled?'Todas as fontes foram ativadas.':'Todas as fontes foram desativadas.')} 
 function removeSource(id){const source=state.sources.find(x=>x.id===id);if(confirm(`Excluir “${source?.name||'esta fonte'}” do catálogo global? Ela deixará de aparecer em todos os perfis.`)){state.sources=state.sources.filter(x=>x.id!==id);markSourceCatalogDirty();renderSources();}}
 function editSource(id){
-  const s=state.sources.find(x=>x.id===id);if(!s)return;
+  const s=(state.sources||[]).find(x=>String(x.id)===String(id));if(!s){console.warn('Fonte não encontrada para edição:',id);toast('Não foi possível localizar esta fonte no catálogo. Atualize a lista e tente novamente.');return;}
   document.getElementById('editSourceId').value=s.id;
   document.getElementById('editSrcName').value=s.name||'';
   document.getElementById('editSrcUrl').value=(s.method==='html'?(s.siteUrls?.length?s.siteUrls:[s.url]):(s.feeds?.length?s.feeds:[s.url])).filter(Boolean).join('\n');
   document.getElementById('editSrcScope').value=normalizeSourceScope(s.scope,s.name,s.url);
-  document.getElementById('editSrcWeight').value=(s.weight==='Alta'?'Alta':s.weight==='Baixa'?'Baixa':'Normal');
   document.getElementById('editSrcDomain').value=s.domain||extractDomain(s.url||'');
   document.getElementById('editSrcMethod').value=s.method==='html'?'html':s.method==='rss'?'rss':'auto';updateSourceMethodHelp('editSrc');
-  document.getElementById('sourceEditModal').classList.add('open');
+  const modal=document.getElementById('sourceEditModal');if(!modal){toast('Janela de edição indisponível.');return;}modal.classList.add('open');modal.setAttribute('aria-hidden','false');
 }
-function closeSourceEditor(){document.getElementById('sourceEditModal').classList.remove('open')}
+function closeSourceEditor(){const modal=document.getElementById('sourceEditModal');if(modal){modal.classList.remove('open');modal.setAttribute('aria-hidden','true')}}
 function saveEditedSource(){
   const id=document.getElementById('editSourceId').value;
   const s=state.sources.find(x=>x.id===id);if(!s)return;
