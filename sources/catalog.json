@@ -34,7 +34,19 @@
       "scope": "Nacional",
       "weight": "Alta",
       "status": "OK — Automático (RSS → Google Notícias)",
-      "id": "native-source-1"
+      "id": "native-source-1",
+      "vehicleType": "Agência",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "Governo Federal",
+        "política",
+        "economia",
+        "segurança",
+        "saúde",
+        "esportes"
+      ]
     },
     {
       "name": "Agência Câmara",
@@ -76,7 +88,16 @@
       "scope": "Nacional",
       "weight": "Alta",
       "status": "OK — Automático (RSS → Google Notícias)",
-      "id": "native-source-2"
+      "id": "native-source-2",
+      "vehicleType": "Agência",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Câmara dos Deputados",
+        "Congresso Nacional",
+        "legislação",
+        "política nacional"
+      ]
     },
     {
       "name": "Agência FAPESP",
@@ -95,7 +116,15 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-3"
+      "id": "native-source-3",
+      "vehicleType": "Agência",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "ciência",
+        "pesquisa",
+        "saúde"
+      ]
     },
     {
       "name": "Agência Fiocruz",
@@ -114,7 +143,15 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-4"
+      "id": "native-source-4",
+      "vehicleType": "Agência",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "saúde",
+        "ciência",
+        "pesquisa"
+      ]
     },
     {
       "name": "Agência Senado",
@@ -135,36 +172,47 @@
       "scope": "Nacional",
       "weight": "Alta",
       "status": "Não testada",
-      "id": "native-source-5"
+      "id": "native-source-5",
+      "vehicleType": "Agência",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Senado Federal",
+        "Congresso Nacional",
+        "legislação",
+        "política nacional"
+      ]
     },
     {
       "name": "Agora RN",
       "url": "https://agorarn.com.br/feed/",
       "feeds": [
-        "https://agorarn.com.br/feed/",
-        "https://agorarn.com.br/politica/feed/",
-        "https://agorarn.com.br/economia/feed/",
-        "https://agorarn.com.br/editoria/esporte/feed/",
-        "https://agorarn.com.br/editoria/rn/feed/"
+        "https://agorarn.com.br/feed/"
       ],
-      "type": "web",
+      "type": "rss",
       "method": "auto",
       "domain": "agorarn.com.br",
       "queries": [
         "Rio Grande do Norte",
-        "Natal",
-        "política RN",
-        "Governo do RN",
-        "Assembleia Legislativa",
-        "Prefeitura de Natal",
-        "segurança RN",
-        "economia RN",
-        "esportes RN"
+        "RN",
+        "Natal"
       ],
       "scope": "Local",
       "weight": "Alta",
-      "status": "OK — Automático: RSS (40)",
-      "id": "native-source-6"
+      "status": "Não testada — RSS cadastrado; aguarda validação",
+      "id": "native-source-6",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "vehicleType": "Jornal / Portal",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Economia",
+        "Cotidiano",
+        "Segurança",
+        "Esportes"
+      ],
+      "siteUrls": []
     },
     {
       "id": "native-source-7",
@@ -180,7 +228,11 @@
       "queries": [],
       "scope": "Nacional",
       "weight": "Normal",
-      "status": "OK — Página HTML"
+      "status": "OK — Página HTML",
+      "vehicleType": "Blog / Coluna",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": []
     },
     {
       "name": "BBC News Brasil",
@@ -202,7 +254,17 @@
       "scope": "Nacional",
       "weight": "Alta",
       "status": "Não testada",
-      "id": "native-source-8"
+      "id": "native-source-8",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "mundo",
+        "política",
+        "economia",
+        "segurança"
+      ]
     },
     {
       "id": "native-source-9",
@@ -215,7 +277,11 @@
       "queries": [],
       "scope": "Nacional",
       "weight": "Normal",
-      "status": "OK — Automático: Site (8); fonte sem RSS"
+      "status": "OK — Automático: Site (8); fonte sem RSS",
+      "vehicleType": "Blog / Coluna",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": []
     },
     {
       "id": "native-source-10",
@@ -228,21 +294,40 @@
       "queries": [],
       "scope": "Nacional",
       "weight": "Normal",
-      "status": "OK — Automático: Site (8); fonte sem RSS"
+      "status": "OK — Automático: Site (8); fonte sem RSS",
+      "vehicleType": "Blog / Coluna",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": []
     },
     {
       "id": "native-source-11",
       "name": "Blog do BG",
       "url": "",
       "feeds": [],
-      "type": "web",
-      "method": "auto",
-      "domain": "https://www.blogdobg.com.br/",
-      "queries": [],
+      "type": "html",
+      "method": "html",
+      "domain": "blogdobg.com.br",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
       "scope": "Local",
       "weight": "Baixa",
-      "status": "OK — Automático: Site (8); fonte sem RSS",
-      "siteUrls": []
+      "status": "Não testada — coleta somente página/site",
+      "siteUrls": [
+        "https://www.blogdobg.com.br/"
+      ],
+      "locality": "Natal / Grande Natal",
+      "region": "Metropolitana",
+      "vehicleType": "Blog",
+      "profiles": [
+        "Política",
+        "Bastidores",
+        "Cotidiano",
+        "Segurança"
+      ]
     },
     {
       "name": "Brasil 247",
@@ -261,7 +346,15 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-12"
+      "id": "native-source-12",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "política",
+        "Brasil",
+        "Governo Federal"
+      ]
     },
     {
       "name": "Brasil de Fato",
@@ -280,7 +373,15 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-13"
+      "id": "native-source-13",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "política",
+        "sociedade",
+        "direitos sociais"
+      ]
     },
     {
       "name": "CartaCapital",
@@ -299,7 +400,15 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-14"
+      "id": "native-source-14",
+      "vehicleType": "Revista / Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "política",
+        "Brasil",
+        "sociedade"
+      ]
     },
     {
       "name": "CBN",
@@ -319,7 +428,16 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-15"
+      "id": "native-source-15",
+      "vehicleType": "Rádio",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "política",
+        "economia",
+        "segurança"
+      ]
     },
     {
       "name": "CNN Brasil",
@@ -339,7 +457,16 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-16"
+      "id": "native-source-16",
+      "vehicleType": "TV / Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "política",
+        "economia",
+        "segurança"
+      ]
     },
     {
       "name": "Congresso em Foco",
@@ -360,7 +487,17 @@
       "scope": "Nacional",
       "weight": "Alta",
       "status": "Não testada",
-      "id": "native-source-17"
+      "id": "native-source-17",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Congresso Nacional",
+        "Senado",
+        "Câmara dos Deputados",
+        "política nacional",
+        "STF"
+      ]
     },
     {
       "name": "Estadão",
@@ -385,7 +522,17 @@
       "scope": "Nacional",
       "weight": "Alta",
       "status": "Não testada",
-      "id": "native-source-18"
+      "id": "native-source-18",
+      "vehicleType": "Jornal / Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "política",
+        "economia",
+        "Congresso",
+        "segurança"
+      ]
     },
     {
       "name": "Exame",
@@ -408,7 +555,16 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-19"
+      "id": "native-source-19",
+      "vehicleType": "Revista / Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "economia",
+        "negócios",
+        "empresas",
+        "mercado"
+      ]
     },
     {
       "name": "Folha de S.Paulo",
@@ -440,7 +596,17 @@
       "scope": "Nacional",
       "weight": "Alta",
       "status": "OK — Automático: RSS (96)",
-      "id": "native-source-20"
+      "id": "native-source-20",
+      "vehicleType": "Jornal / Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "política",
+        "economia",
+        "cotidiano",
+        "segurança"
+      ]
     },
     {
       "name": "G1",
@@ -474,7 +640,18 @@
       "scope": "Nacional",
       "weight": "Alta",
       "status": "OK — Automático: RSS (104)",
-      "id": "native-source-21"
+      "id": "native-source-21",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "política",
+        "economia",
+        "segurança",
+        "Rio Grande do Norte",
+        "Natal"
+      ]
     },
     {
       "name": "Gazeta do Povo",
@@ -493,7 +670,15 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-22"
+      "id": "native-source-22",
+      "vehicleType": "Jornal / Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "política",
+        "economia"
+      ]
     },
     {
       "name": "Gazeta Esportiva",
@@ -512,7 +697,15 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-23"
+      "id": "native-source-23",
+      "vehicleType": "Portal / Esportes",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "esportes",
+        "futebol",
+        "Campeonato Brasileiro"
+      ]
     },
     {
       "name": "Globo Esporte",
@@ -536,7 +729,18 @@
       "weight": "Normal",
       "status": "OK — Automático: RSS (16)",
       "id": "native-source-24",
-      "siteUrls": []
+      "siteUrls": [],
+      "vehicleType": "Portal / Esportes",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "esportes",
+        "futebol",
+        "Série A",
+        "ABC",
+        "América-RN",
+        "Alecrim"
+      ]
     },
     {
       "id": "native-source-25",
@@ -545,16 +749,20 @@
       "feeds": [],
       "type": "html",
       "method": "html",
-      "domain": "https://ge.globo.com/",
+      "domain": "ge.globo.com",
       "queries": [],
-      "scope": "Nacional",
+      "scope": "Local",
       "weight": "Alta",
       "status": "OK — Página HTML",
       "siteUrls": [
-        "https://ge.globo.com/rn/futebol/campeonato-potiguar/",
-        "https://ge.globo.com/rn/futebol/abc/",
-        "https://ge.globo.com/rn/futebol/america-rn/",
         "https://ge.globo.com/rn/"
+      ],
+      "vehicleType": "Portal / Esportes",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "profiles": [
+        "Esportes",
+        "Futebol potiguar"
       ]
     },
     {
@@ -576,7 +784,17 @@
       "scope": "Nacional",
       "weight": "Alta",
       "status": "Não testada",
-      "id": "native-source-26"
+      "id": "native-source-26",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "economia",
+        "mercado",
+        "juros",
+        "inflação",
+        "investimentos"
+      ]
     },
     {
       "name": "Jornal da USP",
@@ -595,7 +813,15 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-27"
+      "id": "native-source-27",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "ciência",
+        "educação",
+        "pesquisa"
+      ]
     },
     {
       "name": "Jovem Pan",
@@ -614,7 +840,15 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-28"
+      "id": "native-source-28",
+      "vehicleType": "Rádio / Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "política",
+        "economia"
+      ]
     },
     {
       "name": "Metrópoles",
@@ -643,7 +877,16 @@
       "scope": "Nacional",
       "weight": "Baixa",
       "status": "OK — Automático: RSS (80)",
-      "id": "native-source-29"
+      "id": "native-source-29",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "política",
+        "economia",
+        "segurança"
+      ]
     },
     {
       "name": "Nexo Jornal",
@@ -662,38 +905,45 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-30"
+      "id": "native-source-30",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "análise",
+        "política",
+        "sociedade"
+      ]
     },
     {
       "name": "NOVO Notícias",
       "url": "https://novonoticias.com.br/feed",
       "feeds": [
-        "https://novonoticias.com.br/feed",
-        "https://novonoticias.com.br/categorias/ultimas/feed/",
-        "https://novonoticias.com.br/categorias/politica/feed/",
-        "https://novonoticias.com.br/categorias/economia/feed/",
-        "https://novonoticias.com.br/categorias/cotidiano/feed/",
-        "https://www.novonoticias.com.br/categorias/esporte/feed/",
-        "https://novonoticias.com.br/tags/natal/feed/"
+        "https://novonoticias.com.br/feed"
       ],
       "type": "rss",
       "method": "auto",
       "domain": "novonoticias.com.br",
       "queries": [
         "Rio Grande do Norte",
-        "Natal",
-        "política RN",
-        "Governo do RN",
-        "Assembleia Legislativa",
-        "Prefeitura de Natal",
-        "segurança RN",
-        "economia RN",
-        "esportes RN"
+        "RN",
+        "Natal"
       ],
       "scope": "Local",
       "weight": "Alta",
-      "status": "OK — Automático: RSS (56)",
-      "id": "native-source-31"
+      "status": "Não testada — RSS cadastrado; aguarda validação",
+      "id": "native-source-31",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "vehicleType": "Portal",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Economia",
+        "Cotidiano",
+        "Segurança"
+      ],
+      "siteUrls": []
     },
     {
       "name": "O Antagonista",
@@ -712,7 +962,15 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-32"
+      "id": "native-source-32",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "política",
+        "Brasil",
+        "Congresso"
+      ]
     },
     {
       "name": "O Globo",
@@ -733,7 +991,16 @@
       "scope": "Nacional",
       "weight": "Alta",
       "status": "OK — Automático (RSS → Google Notícias)",
-      "id": "native-source-33"
+      "id": "native-source-33",
+      "vehicleType": "Jornal / Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "política",
+        "economia",
+        "cotidiano"
+      ]
     },
     {
       "name": "Olhar Digital",
@@ -752,7 +1019,15 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-34"
+      "id": "native-source-34",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "tecnologia",
+        "ciência",
+        "inovação"
+      ]
     },
     {
       "name": "Poder360",
@@ -773,7 +1048,17 @@
       "scope": "Nacional",
       "weight": "Baixa",
       "status": "OK — Automático: RSS (8)",
-      "id": "native-source-35"
+      "id": "native-source-35",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "política nacional",
+        "Congresso",
+        "Governo Federal",
+        "STF",
+        "economia"
+      ]
     },
     {
       "name": "R7",
@@ -793,7 +1078,15 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-36"
+      "id": "native-source-36",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "política",
+        "cotidiano"
+      ]
     },
     {
       "name": "Revista Oeste",
@@ -812,10 +1105,18 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-37"
+      "id": "native-source-37",
+      "vehicleType": "Revista / Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "política",
+        "Brasil",
+        "atualidades"
+      ]
     },
     {
-      "name": "Saiba Mais (RN)",
+      "name": "Agência Saiba Mais",
       "url": "https://saibamais.jor.br/feed/",
       "feeds": [
         "https://saibamais.jor.br/feed/"
@@ -825,21 +1126,24 @@
       "domain": "saibamais.jor.br",
       "queries": [
         "Rio Grande do Norte",
-        "Natal",
-        "política RN",
-        "Governo do RN",
-        "Assembleia Legislativa",
-        "Prefeitura de Natal",
-        "direitos humanos",
-        "educação RN",
-        "saúde RN",
-        "segurança RN",
-        "cultura RN"
+        "RN",
+        "Natal"
       ],
       "scope": "Local",
-      "weight": "Alta",
-      "status": "Não testada",
-      "id": "native-source-38"
+      "weight": "Normal",
+      "status": "Não testada — RSS cadastrado; aguarda validação",
+      "id": "native-source-38",
+      "vehicleType": "Agência / Portal",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Economia",
+        "Direitos humanos",
+        "Cultura"
+      ],
+      "siteUrls": []
     },
     {
       "name": "Tecnoblog",
@@ -858,7 +1162,15 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-39"
+      "id": "native-source-39",
+      "vehicleType": "Portal especializado",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "tecnologia",
+        "internet",
+        "celulares"
+      ]
     },
     {
       "name": "Terra",
@@ -878,35 +1190,47 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "Não testada",
-      "id": "native-source-40"
+      "id": "native-source-40",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "política",
+        "economia",
+        "cotidiano"
+      ]
     },
     {
       "name": "Tribuna do Norte",
       "url": "https://tribunadonorte.com.br/categoria/politica/feed/",
       "feeds": [
-        "https://tribunadonorte.com.br/categoria/politica/feed/",
-        "https://tribunadonorte.com.br/categoria/economia/feed/",
-        "https://tribunadonorte.com.br/categoria/esportes/feed/",
-        "https://tribunadonorte.com.br/categoria/natal/feed/"
+        "https://tribunadonorte.com.br/categoria/politica/feed/"
       ],
-      "type": "web",
+      "type": "rss",
       "method": "auto",
       "domain": "tribunadonorte.com.br",
       "queries": [
         "Rio Grande do Norte",
-        "Natal",
-        "política RN",
-        "Governo do RN",
-        "Assembleia Legislativa",
-        "Prefeitura de Natal",
-        "segurança RN",
-        "economia RN",
-        "esportes RN"
+        "RN",
+        "Natal"
       ],
       "scope": "Local",
       "weight": "Alta",
-      "status": "OK — Automático: RSS (20)",
-      "id": "native-source-41"
+      "status": "Não testada — RSS cadastrado; aguarda validação",
+      "id": "native-source-41",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "vehicleType": "Jornal / Portal",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Economia",
+        "Cotidiano",
+        "Segurança",
+        "Esportes"
+      ],
+      "siteUrls": []
     },
     {
       "name": "UOL Notícias",
@@ -930,7 +1254,17 @@
       "scope": "Nacional",
       "weight": "Alta",
       "status": "OK — Automático (RSS → Google Notícias)",
-      "id": "native-source-42"
+      "id": "native-source-42",
+      "vehicleType": "Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "política",
+        "economia",
+        "segurança",
+        "esportes"
+      ]
     },
     {
       "name": "Valor Econômico",
@@ -950,7 +1284,16 @@
       "scope": "Nacional",
       "weight": "Alta",
       "status": "Não testada",
-      "id": "native-source-43"
+      "id": "native-source-43",
+      "vehicleType": "Jornal / Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "economia",
+        "negócios",
+        "mercado",
+        "empresas"
+      ]
     },
     {
       "name": "VEJA",
@@ -971,7 +1314,919 @@
       "scope": "Nacional",
       "weight": "Normal",
       "status": "OK — Automático (RSS → Google Notícias)",
-      "id": "native-source-44"
+      "id": "native-source-44",
+      "vehicleType": "Revista / Portal",
+      "locality": "Brasil",
+      "region": "Nacional",
+      "profiles": [
+        "Brasil",
+        "política",
+        "economia"
+      ]
+    },
+    {
+      "id": "rn-source-g1-rn",
+      "name": "G1 RN",
+      "scope": "Local",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "vehicleType": "Portal",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Cotidiano",
+        "Segurança",
+        "Economia",
+        "Esportes"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "https://g1.globo.com/rss/g1/rn/",
+      "feeds": [
+        "https://g1.globo.com/rss/g1/rn/"
+      ],
+      "siteUrls": [],
+      "type": "rss",
+      "method": "auto",
+      "domain": "g1.globo.com",
+      "status": "Não testada — RSS cadastrado; aguarda validação"
+    },
+    {
+      "id": "rn-source-blog-thaisa-galv-o",
+      "name": "Blog Thaisa Galvão",
+      "scope": "Local",
+      "locality": "Natal / Grande Natal",
+      "region": "Metropolitana",
+      "vehicleType": "Blog",
+      "profiles": [
+        "Política",
+        "Bastidores",
+        "Cotidiano"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://www.thaisagalvao.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "thaisagalvao.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-blog-do-robson-pires",
+      "name": "Blog do Robson Pires",
+      "scope": "Local",
+      "locality": "Caicó / Seridó",
+      "region": "Seridó",
+      "vehicleType": "Blog",
+      "profiles": [
+        "Política",
+        "Bastidores",
+        "Cotidiano",
+        "Interior"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Caicó"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://robsonpiresxerife.com/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "robsonpiresxerife.com",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-blog-do-barreto",
+      "name": "Blog do Barreto",
+      "scope": "Local",
+      "locality": "Mossoró / Oeste",
+      "region": "Oeste",
+      "vehicleType": "Blog",
+      "profiles": [
+        "Política",
+        "Economia",
+        "Cotidiano",
+        "Análise"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Mossoró"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://blogdobarreto.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "blogdobarreto.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-o-potiguar",
+      "name": "O Potiguar",
+      "scope": "Local",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "vehicleType": "Blog / Análise",
+      "profiles": [
+        "Política",
+        "Economia",
+        "Análise",
+        "Opinião"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://opotiguar.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "opotiguar.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-mossor-hoje",
+      "name": "Mossoró Hoje",
+      "scope": "Local",
+      "locality": "Mossoró / Oeste",
+      "region": "Oeste",
+      "vehicleType": "Portal",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Cotidiano",
+        "Segurança",
+        "Interior"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Mossoró"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://mossorohoje.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "mossorohoje.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-de-fato-rn",
+      "name": "De Fato RN",
+      "scope": "Local",
+      "locality": "Mossoró / Oeste",
+      "region": "Oeste",
+      "vehicleType": "Jornal / Portal",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Economia",
+        "Cotidiano",
+        "Interior"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Mossoró"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://defato.com/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "defato.com",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-blog-carlos-santos",
+      "name": "Blog Carlos Santos",
+      "scope": "Local",
+      "locality": "Mossoró / Oeste",
+      "region": "Oeste",
+      "vehicleType": "Blog",
+      "profiles": [
+        "Política",
+        "Bastidores",
+        "Cotidiano",
+        "Interior"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Mossoró"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://blogcarlossantos.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "blogcarlossantos.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-96-fm-natal",
+      "name": "96 FM Natal",
+      "scope": "Local",
+      "locality": "Natal / Grande Natal",
+      "region": "Metropolitana",
+      "vehicleType": "Rádio",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Cotidiano",
+        "Segurança",
+        "Esportes"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://96fm.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "96fm.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-98-fm-natal",
+      "name": "98 FM Natal",
+      "scope": "Local",
+      "locality": "Natal / Grande Natal",
+      "region": "Metropolitana",
+      "vehicleType": "Rádio",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Cotidiano",
+        "Segurança",
+        "Esportes"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://98fmnatal.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "98fmnatal.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-grande-ponto",
+      "name": "Grande Ponto",
+      "scope": "Local",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "vehicleType": "Portal",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Economia",
+        "Cotidiano",
+        "Segurança"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://www.grandeponto.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "grandeponto.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-portal-no-ar",
+      "name": "Portal no Ar",
+      "scope": "Local",
+      "locality": "Natal / Grande Natal",
+      "region": "Metropolitana",
+      "vehicleType": "Portal",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Cotidiano",
+        "Segurança"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://portalnoar.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "portalnoar.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-nominuto",
+      "name": "Nominuto",
+      "scope": "Local",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "vehicleType": "Portal",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Economia",
+        "Cotidiano"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://nominuto.com/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "nominuto.com",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-fim-da-linha",
+      "name": "Fim da Linha",
+      "scope": "Local",
+      "locality": "Mossoró / Oeste",
+      "region": "Oeste",
+      "vehicleType": "Portal",
+      "profiles": [
+        "Polícia",
+        "Segurança",
+        "Cotidiano",
+        "Interior"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Mossoró"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://fimdalinha.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "fimdalinha.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-blog-marcos-dantas",
+      "name": "Blog Marcos Dantas",
+      "scope": "Local",
+      "locality": "Caicó / Seridó",
+      "region": "Seridó",
+      "vehicleType": "Blog",
+      "profiles": [
+        "Política",
+        "Cotidiano",
+        "Interior",
+        "Região"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Caicó"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://marcosdantas.com/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "marcosdantas.com",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-di-rio-do-rn",
+      "name": "Diário do RN",
+      "scope": "Local",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "vehicleType": "Jornal / Portal",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Economia",
+        "Cotidiano"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://diariodorn.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "diariodorn.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-ponta-negra-news",
+      "name": "Ponta Negra News",
+      "scope": "Local",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "vehicleType": "Portal / TV",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Cotidiano",
+        "Segurança",
+        "Esportes"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://pontanegranews.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "pontanegranews.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-blog-do-dina",
+      "name": "Blog do Dina",
+      "scope": "Local",
+      "locality": "Natal / Grande Natal",
+      "region": "Metropolitana",
+      "vehicleType": "Blog",
+      "profiles": [
+        "Política",
+        "Segurança",
+        "Investigação",
+        "Cotidiano"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://blogdodina.com/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "blogdodina.com",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-gustavo-negreiros",
+      "name": "Gustavo Negreiros",
+      "scope": "Local",
+      "locality": "Natal / Grande Natal",
+      "region": "Metropolitana",
+      "vehicleType": "Blog",
+      "profiles": [
+        "Política",
+        "Bastidores",
+        "Opinião"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://gustavonegreiros.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "gustavonegreiros.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-bruno-ara-jo",
+      "name": "Bruno Araújo",
+      "scope": "Local",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "vehicleType": "Blog",
+      "profiles": [
+        "Política",
+        "Economia",
+        "Análise",
+        "Opinião"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://brunoaraujo.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "brunoaraujo.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-territ-rio-livre",
+      "name": "Território Livre",
+      "scope": "Local",
+      "locality": "Natal / Grande Natal",
+      "region": "Metropolitana",
+      "vehicleType": "Blog",
+      "profiles": [
+        "Política",
+        "Bastidores",
+        "Sociedade"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://blog.tribunadonorte.com.br/territoriolivre/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "blog.tribunadonorte.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-na-boca-da-noite",
+      "name": "Na Boca da Noite",
+      "scope": "Local",
+      "locality": "Mossoró / Oeste",
+      "region": "Oeste",
+      "vehicleType": "Blog / Portal",
+      "profiles": [
+        "Cotidiano",
+        "Segurança",
+        "Política",
+        "Interior"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Mossoró"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://nabocadanoite.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "nabocadanoite.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-costa-branca-news",
+      "name": "Costa Branca News",
+      "scope": "Local",
+      "locality": "Areia Branca / Costa Branca",
+      "region": "Costa Branca",
+      "vehicleType": "Portal / Blog",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Cotidiano",
+        "Interior"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Areia Branca"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://costabrancanews.com/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "costabrancanews.com",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-blog-do-vt",
+      "name": "Blog do VT",
+      "scope": "Local",
+      "locality": "Assú / Vale do Açu",
+      "region": "Vale do Açu",
+      "vehicleType": "Blog",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Cotidiano",
+        "Interior"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Assú"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://blogdovt.com/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "blogdovt.com",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-senadinho-maca-ba",
+      "name": "Senadinho Macaíba",
+      "scope": "Local",
+      "locality": "Macaíba / Grande Natal",
+      "region": "Metropolitana",
+      "vehicleType": "Blog / Portal",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Cotidiano",
+        "Interior"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Macaíba"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://senadinhomacaiba.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "senadinhomacaiba.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-focoelho",
+      "name": "Focoelho",
+      "scope": "Local",
+      "locality": "Assú / Vale do Açu",
+      "region": "Vale do Açu",
+      "vehicleType": "Blog / Portal",
+      "profiles": [
+        "Geral",
+        "Polícia",
+        "Cotidiano",
+        "Interior"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Assú"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://www.focoelho.com/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "focoelho.com",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-cardoso-silva",
+      "name": "Cardoso Silva",
+      "scope": "Local",
+      "locality": "Caicó / Seridó",
+      "region": "Seridó",
+      "vehicleType": "Blog",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Cotidiano",
+        "Interior"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Caicó"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://www.cardososilva.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "cardososilva.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-inter-tv-cabugi",
+      "name": "Inter TV Cabugi",
+      "scope": "Local",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "vehicleType": "TV",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Cotidiano",
+        "Segurança",
+        "Esportes"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://g1.globo.com/rn/rio-grande-do-norte/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "g1.globo.com",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-tv-ponta-negra",
+      "name": "TV Ponta Negra",
+      "scope": "Local",
+      "locality": "Natal / Grande Natal",
+      "region": "Metropolitana",
+      "vehicleType": "TV",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Cotidiano",
+        "Segurança"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://www.tvpontanegra.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "tvpontanegra.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-tv-tropical",
+      "name": "TV Tropical",
+      "scope": "Local",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "vehicleType": "TV",
+      "profiles": [
+        "Geral",
+        "Política",
+        "Cotidiano",
+        "Segurança"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://www.tvtropical.com.br/"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "tvtropical.com.br",
+      "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "rn-source-tv-assembleia-rn",
+      "name": "TV Assembleia RN",
+      "scope": "Local",
+      "locality": "Natal / cobertura estadual",
+      "region": "Estadual",
+      "vehicleType": "TV pública",
+      "profiles": [
+        "Política",
+        "Legislativo",
+        "Institucional"
+      ],
+      "weight": "Normal",
+      "queries": [
+        "Rio Grande do Norte",
+        "RN",
+        "Natal"
+      ],
+      "url": "",
+      "feeds": [],
+      "siteUrls": [
+        "https://www.al.rn.leg.br/tv-assembleia"
+      ],
+      "type": "html",
+      "method": "html",
+      "domain": "al.rn.leg.br",
+      "status": "Não testada — coleta somente página/site"
     }
   ]
 }
