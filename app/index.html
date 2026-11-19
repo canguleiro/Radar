@@ -1206,6 +1206,22 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
   .mobile-header-action { display: inline-flex; }
 }
 </style>
+
+<style id="radar-profile-editor-v135">
+.sidebar-profile-select{width:100%;margin:4px 0 8px;min-height:38px}
+.profile-editor-section{border:1px solid var(--border);border-radius:10px;margin:10px 0;background:var(--card);overflow:hidden}
+.profile-editor-section>summary{cursor:pointer;padding:13px 15px;font-weight:650;list-style:none;display:flex;align-items:center;justify-content:space-between}
+.profile-editor-section>summary::-webkit-details-marker{display:none}
+.profile-editor-section>summary:after{content:'＋';font-size:18px;color:var(--muted)}
+.profile-editor-section[open]>summary:after{content:'−'}
+.profile-editor-section-body{padding:0 14px 14px}
+.profile-editor-section-body textarea{width:100%;box-sizing:border-box}
+.profile-source-actions{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.profile-source-table{width:100%}
+.profile-editor-footer{position:sticky;bottom:0;background:var(--card);border-top:1px solid var(--border);padding:12px 0 2px;margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.rules-instructions-modal-box{max-height:90vh;overflow:auto}
+#sourceCatalogStatus[data-pending="true"]{color:var(--warning,#b7791f)}
+</style>
 </head>
 <body class="news-radar-workspace-active">
 <header class="topbar">
@@ -1299,7 +1315,9 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
         </div>
         <div class="small" id="geminiUsageMeter" aria-live="polite" style="margin-top:6px">Consumo Gemini: aguardando dados de uso da API.</div>
         <div class="sidebar-extra-settings">
-          <button class="btn btn-secondary rules-instructions-btn" type="button" onclick="openRulesInstructionsModal()"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Regras e Instruções</button>
+          <label class="sidebar-section-title" for="sidebarEditorialProfileSelect">Perfil ativo</label>
+          <select id="sidebarEditorialProfileSelect" class="sidebar-profile-select" onchange="switchEditorialProfile(this.value)"></select>
+          <button class="btn btn-secondary rules-instructions-btn" type="button" onclick="openRulesInstructionsModal()"><i class="fa-solid fa-user-pen" aria-hidden="true"></i> Editar Perfis</button>
         </div>
         <div class="sidebar-actions-divider rules-instructions-divider" role="separator"></div>
         <div class="sidebar-selection-actions">
@@ -1322,7 +1340,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
                   <label>Esportes<input id="quotaSports" aria-label="Quantidade de notícias de Esportes" type="number" min="0" max="100" step="1" value="10" onchange="saveEditorialCounts()"></label>
                   <label>Cultura<input id="quotaCulture" aria-label="Quantidade de notícias de Cultura" type="number" min="0" max="100" step="1" value="10" onchange="saveEditorialCounts()"></label>
                 </div>
-                <button class="btn btn-secondary define-pautas-btn" type="button" onclick="openPautasModal()"><i class="fa-solid fa-list-check" aria-hidden="true"></i> Definir Pautas</button>
+                <button class="btn btn-secondary define-pautas-btn" type="button" onclick="openProfileEditorSection('Definir Pautas')"><i class="fa-solid fa-list-check" aria-hidden="true"></i> Definir Pautas</button>
               </div>
             </details>
             <details class="editorial-settings-details scoring-settings-details">
@@ -1384,15 +1402,12 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
           <button class="btn btn-primary" onclick="openAddSourceModal()">+ Adicionar fonte</button>
           
           <span style="flex:1 1 auto"></span>
-          <span id="activeSourcesCounter" class="active-sources-counter" title="Quantidade de fontes atualmente ativadas">Fontes ativadas: 0</span>
-          <button class="btn btn-secondary" onclick="exportData()">Exportar</button>
-          <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">Importar</button>
-          <input id="importFile" type="file" accept=".json" class="hidden" onchange="importData(event)">
+          <button type="button" id="sourceCatalogStatus" class="btn btn-secondary small" onclick="saveGlobalSourceCatalog()" aria-live="polite" title="Tentar sincronizar o catálogo">Catálogo sincronizado com o GitHub</button>
         </div>
-        <div id="sourceSaveBar" class="source-save-bar" hidden style="position:sticky;bottom:12px;z-index:20;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-top:12px;box-shadow:0 4px 18px #0002;display:flex;align-items:center;justify-content:space-between;gap:12px"><span data-pending>Alterações pendentes</span><button class="btn btn-primary" onclick="saveSourceChangesAndLeave()">Salvar alterações e sair</button></div><div class="tablewrap" style="margin-top:15px">
-          <table class="source-table"><thead><tr><th>Fonte</th><th>Abrangência</th><th>Prioridade</th><th>Status</th><th><span style="display:inline-flex;align-items:center;gap:8px;white-space:nowrap">Ações<label class="switch" title="Habilitar/desabilitar todas as fontes" style="vertical-align:middle;margin:0"><input id="toggleAllSources" type="checkbox" aria-label="Habilitar ou desabilitar todas as fontes" onchange="toggleAllSources(this.checked)"><span class="slider"></span></label></span></th></tr></thead><tbody id="sourceTable"></tbody></table>
+        <div id="sourceSaveBar" class="source-save-bar" hidden aria-live="polite"></div><div class="tablewrap" style="margin-top:15px">
+          <table class="source-table"><thead><tr><th>Fonte</th><th>Abrangência</th><th>Prioridade</th><th>Status</th><th>Ações</th></tr></thead><tbody id="sourceTable"></tbody></table>
         </div>
-        <p class="footer-note">O cadastro define a origem, o domínio, a abrangência padrão e o peso editorial. O método de pesquisa é escolhido na barra lateral no momento da coleta.</p>
+        <p class="footer-note">O cadastro global define origem, domínio, abrangência, peso editorial e método de coleta. A ativação das fontes é configurada exclusivamente em Editar Perfis.</p>
       </div>
 
 
@@ -1476,42 +1491,28 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
     </div>
   </div>
 </div>
-<div id="pautasModal" class="modal api-modal" role="dialog" aria-modal="true" aria-labelledby="pautasModalTitle">
-  <div class="modalbox pautas-modal-box">
-    <div class="api-modal-head"><h3 id="pautasModalTitle">Definir Pautas</h3><button type="button" class="api-modal-close" onclick="closePautasModal()" aria-label="Fechar">×</button></div>
-    <p class="footer-note">Cadastre um assunto por linha. Essas pautas orientam a busca e a classificação das notícias.</p>
-    <div class="pautas-modal-grid">
-      <div class="sidebar-pauta"><label for="interestPolitics">Política</label><textarea id="interestPolitics" aria-label="Pautas de Política" rows="5" placeholder="Eleições 2026&#10;Partidos políticos&#10;Reforma eleitoral"></textarea></div>
-      <div class="sidebar-pauta"><label for="interestDaily">Cotidiano</label><textarea id="interestDaily" aria-label="Pautas de Cotidiano" rows="5" placeholder="Transporte&#10;Mobilidade&#10;Serviços públicos"></textarea></div>
-      <div class="sidebar-pauta"><label for="interestEconomy">Economia</label><textarea id="interestEconomy" aria-label="Pautas de Economia" rows="5" placeholder="Selic&#10;PIB&#10;Impostos"></textarea></div>
-      <div class="sidebar-pauta"><label for="interestSports">Esportes</label><textarea id="interestSports" aria-label="Pautas de Esportes" rows="5" placeholder="Futebol potiguar&#10;Campeonato Potiguar"></textarea></div>
-      <div class="sidebar-pauta"><label for="interestCulture">Cultura</label><textarea id="interestCulture" aria-label="Pautas de Cultura" rows="5" placeholder="Música, teatro, cinema, cultura potiguar"></textarea></div>
-      <div class="sidebar-pauta"><label for="interestDiscard">Descartar Assuntos</label><textarea id="interestDiscard" aria-label="Assuntos a descartar" rows="5" placeholder="Assuntos a evitar, um por linha"></textarea></div>
-    </div>
-    <div class="toolbar" style="margin-top:14px"><button class="btn btn-primary" type="button" onclick="saveInterests();closePautasModal()">Salvar pautas</button><button class="btn btn-secondary" type="button" onclick="closePautasModal()">Fechar</button></div>
-  </div>
-</div>
 <div id="rulesInstructionsModal" class="modal api-modal" role="dialog" aria-modal="true" aria-labelledby="rulesInstructionsTitle">
   <div class="modalbox rules-instructions-modal-box">
-    <div class="api-modal-head"><h3 id="rulesInstructionsTitle">Regras e Instruções</h3><button type="button" class="api-modal-close" onclick="closeRulesInstructionsModal()" aria-label="Fechar">×</button></div>
+    <div class="api-modal-head"><h3 id="rulesInstructionsTitle">Editar Perfis</h3><button type="button" class="api-modal-close" onclick="requestCloseProfileEditor()" aria-label="Fechar">×</button></div>
     <div class="sidebar-prompt-section rules-instructions-content">
       <div class="editorial-profiles-toolbar">
-        <div class="editorial-profile-picker"><label for="editorialProfileSelect" class="sidebar-section-title">Perfil em uso</label><select id="editorialProfileSelect" onchange="switchEditorialProfile(this.value)"></select></div>
-        <div class="editorial-profile-actions"><button class="btn btn-secondary" type="button" onclick="addEditorialProfile()">Novo Perfil</button><button class="btn btn-secondary" type="button" onclick="saveEditorialProfileToGitHub('update')">Atualizar Perfil</button><button class="btn btn-secondary" type="button" onclick="renameEditorialProfile()">Renomear Perfil</button><button class="btn btn-secondary" type="button" onclick="deleteEditorialProfile()">Excluir Perfil</button><button class="btn btn-secondary" type="button" onclick="loadGitHubEditorialProfiles(true)">Carregar Perfis</button></div>
+        <div class="editorial-profile-picker"><label for="editorialProfileSelect" class="sidebar-section-title">Perfil em edição</label><select id="editorialProfileSelect" onchange="switchProfileInsideEditor(this.value)"></select></div>
+        <div class="editorial-profile-actions"><button class="btn btn-secondary" type="button" onclick="addEditorialProfile()">Novo Perfil</button><button class="btn btn-secondary" type="button" onclick="renameEditorialProfile()">Renomear Perfil</button><button class="btn btn-secondary" type="button" onclick="deleteEditorialProfile()">Excluir Perfil</button><button class="btn btn-secondary" type="button" onclick="loadGitHubEditorialProfiles(true)">Carregar Perfis</button></div>
       </div>
-      <p class="footer-note">Cada perfil guarda suas próprias instruções. Apenas um perfil fica ativo por vez e suas três regras são aplicadas em conjunto.</p>
-      <label for="cfgEditorialProfile" class="sidebar-section-title">1. Perfil Editorial</label>
-      <textarea id="cfgEditorialProfile" rows="7" placeholder="Defina área de cobertura, público, prioridades temáticas, critérios de relevância e orientação editorial."></textarea>
-      <p class="footer-note">Define a orientação editorial geral deste perfil.</p>
-      <div class="editorial-rules-grid">
-        <div><label for="cfgSummaryPrompt" class="sidebar-section-title">2. Regras para o Resumo</label><textarea id="cfgSummaryPrompt" rows="12" placeholder="Defina linguagem, extensão, estrutura, contextualização e critérios para os resumos."></textarea></div>
-        <div><label for="cfgCommentPrompt" class="sidebar-section-title">3. Regras para o Comentário</label><textarea id="cfgCommentPrompt" rows="12" placeholder="Defina voz, oralidade, análise, posicionamento, ritmo e encerramento dos comentários."></textarea></div>
-      </div>
-      <p class="footer-note">As regras do Resumo e do Comentário são independentes. O Perfil Editorial orienta ambas. Instruções específicas inseridas durante a edição de uma notícia continuam complementares.</p>
-      <div class="rules-processing-actions">
-        <button class="btn btn-secondary" type="button" onclick="restoreDefaultCommentInstructions()"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Restaurar perfil</button>
-        <button class="btn btn-secondary rules-pautas-bottom-btn" type="button" onclick="closeRulesInstructionsModal();openPautasModal()"><i class="fa-solid fa-list-check" aria-hidden="true"></i> Editar pautas</button>
-      </div>
+      <p class="footer-note">As alterações nas seções abaixo serão salvas em conjunto no perfil selecionado.</p>
+      <details class="profile-editor-section" open><summary>Perfil Editorial</summary><div class="profile-editor-section-body"><textarea id="cfgEditorialProfile" rows="7" placeholder="Defina área de cobertura, público, prioridades temáticas, critérios de relevância e orientação editorial."></textarea><p class="footer-note">Define a orientação editorial geral deste perfil.</p></div></details>
+      <details class="profile-editor-section"><summary>Regras para o Resumo</summary><div class="profile-editor-section-body"><textarea id="cfgSummaryPrompt" rows="12" placeholder="Defina linguagem, extensão, estrutura, contextualização e critérios para os resumos."></textarea></div></details>
+      <details class="profile-editor-section"><summary>Regras para o Comentário</summary><div class="profile-editor-section-body"><textarea id="cfgCommentPrompt" rows="12" placeholder="Defina voz, oralidade, análise, posicionamento, ritmo e encerramento dos comentários."></textarea><div class="rules-processing-actions"><button class="btn btn-secondary" type="button" onclick="restoreDefaultCommentInstructions()">Restaurar perfil</button></div></div></details>
+      <details class="profile-editor-section" data-profile-section="Definir Pautas"><summary>Definir Pautas</summary><div class="profile-editor-section-body"><p class="footer-note">Cadastre um assunto por linha. Essas pautas orientam a busca e a classificação das notícias.</p><div class="pautas-modal-grid">
+        <div class="sidebar-pauta"><label for="interestPolitics">Política</label><textarea id="interestPolitics" rows="5" placeholder="Eleições, partidos, reforma eleitoral"></textarea></div>
+        <div class="sidebar-pauta"><label for="interestDaily">Cotidiano</label><textarea id="interestDaily" rows="5" placeholder="Transporte, mobilidade, serviços públicos"></textarea></div>
+        <div class="sidebar-pauta"><label for="interestEconomy">Economia</label><textarea id="interestEconomy" rows="5" placeholder="Selic, PIB, impostos"></textarea></div>
+        <div class="sidebar-pauta"><label for="interestSports">Esportes</label><textarea id="interestSports" rows="5" placeholder="Futebol potiguar, campeonatos"></textarea></div>
+        <div class="sidebar-pauta"><label for="interestCulture">Cultura</label><textarea id="interestCulture" rows="5" placeholder="Música, teatro, cinema, cultura potiguar"></textarea></div>
+        <div class="sidebar-pauta"><label for="interestDiscard">Descartar Assuntos</label><textarea id="interestDiscard" rows="5" placeholder="Assuntos a evitar, um por linha"></textarea></div>
+      </div></div></details>
+      <details class="profile-editor-section" data-profile-section="Fontes"><summary>Fontes</summary><div class="profile-editor-section-body"><p class="footer-note">Selecione as fontes utilizadas por este perfil. Para cadastrar, editar ou excluir fontes, acesse a página Fontes.</p><div class="profile-source-actions"><button class="btn btn-secondary" type="button" onclick="setProfileSourcesEnabled(true)">Ativar todas</button><button class="btn btn-secondary" type="button" onclick="setProfileSourcesEnabled(false)">Desativar todas</button></div><div class="tablewrap"><table class="source-table profile-source-table"><thead><tr><th>Fonte</th><th>Abrangência</th><th>Ativa</th></tr></thead><tbody id="profileSourceTable"></tbody></table></div></div></details>
+      <div class="profile-editor-footer"><span id="profileEditorStatus" class="small muted" aria-live="polite">Alterações ainda não salvas</span><div><button class="btn btn-secondary" type="button" onclick="requestCloseProfileEditor()">Fechar</button> <button class="btn btn-primary" id="saveEditorialProfileButton" type="button" onclick="saveProfileEditorAndClose()">Salvar perfil</button></div></div>
     </div>
   </div>
 </div>
@@ -1706,8 +1707,8 @@ function saveActiveEditorialProfile(){
 function applyProfileSources(profile){if(sourceCatalogLoaded)applyCatalogToProfile(profile);else state.sources=[];return true;}
 
 function renderEditorialProfileSelector(){
-  ensureEditorialProfiles();const sel=document.getElementById('editorialProfileSelect');if(!sel)return;
-  sel.innerHTML=state.config.editorialProfiles.map(p=>`<option value="${esc(p.id)}">${esc(p.name||'Perfil sem nome')}</option>`).join('');sel.value=state.config.activeEditorialProfileId||'';
+  ensureEditorialProfiles();const options=state.config.editorialProfiles.map(p=>`<option value="${esc(p.id)}">${esc(p.name||'Perfil sem nome')}</option>`).join('');
+  for(const id of ['editorialProfileSelect','sidebarEditorialProfileSelect']){const sel=document.getElementById(id);if(sel){sel.innerHTML=options;sel.value=state.config.activeEditorialProfileId||'';}}
 }
 const RADAR_GITHUB_PROFILE_API='https://api.github.com/repos/canguleiro/Radar/contents/profiles?ref=main';
 const RADAR_GITHUB_SOURCES_API='https://api.github.com/repos/canguleiro/Radar/contents/sources/catalog.json?ref=main';
@@ -1730,19 +1731,16 @@ async function loadGitHubSourceCatalog(){
  const p=activeEditorialProfile();if(p)applyCatalogToProfile(p);else state.sources=sourceCatalogOriginal.map(x=>({...x,active:false}));
  renderSources();return data.sources.length;
 }
-function markSourceCatalogDirty(){sourceCatalogDirty=true;renderSourceSaveBar()}
-function renderSourceSaveBar(){let bar=document.getElementById('sourceSaveBar');if(!bar)return;const pending=sourceCatalogDirty||profileSourceStatesDirty;bar.hidden=!pending;const label=bar.querySelector('[data-pending]');if(label)label.textContent=[sourceCatalogDirty?'Catálogo de fontes':'',profileSourceStatesDirty?'Ativações do perfil':''].filter(Boolean).join(' + ')+' pendente(s)';const btn=bar.querySelector('button');if(btn)btn.disabled=sourceSaveInProgress}
-let profileSourceStatesDirty=false;
-async function saveSourceChangesAndLeave(){
- if(sourceSaveInProgress)return;const token=sourceAccessToken||prompt('Informe o token de acesso do Radar para salvar as alterações de fontes:');if(!token)return;sourceAccessToken=token.trim();sourceSaveInProgress=true;renderSourceSaveBar();
- try{
-  if(sourceCatalogDirty){const r=await fetch(RADAR_GITHUB_SOURCES_WRITE_API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+sourceAccessToken},body:JSON.stringify({sources:state.sources.map(({active,status,...src})=>src)})});const d=await r.json().catch(()=>({}));if(!r.ok||!d.ok)throw new Error(d.error||`Falha ao salvar catálogo (HTTP ${r.status}).`);sourceCatalogOriginal=state.sources.map(({active,status,...src})=>({...src}));sourceCatalogDirty=false;}
-  if(profileSourceStatesDirty){const p=activeEditorialProfile();if(!p)throw new Error('Nenhum perfil ativo para salvar as ativações.');p.sourceStates=state.sources.map(x=>({id:x.id,active:x.active===true}));const profileSaved=await saveEditorialProfileToGitHub('update',sourceAccessToken);if(!profileSaved)throw new Error('O catálogo foi salvo, mas não foi possível atualizar o estado das fontes no perfil.');profileSourceStatesDirty=false;}
-  toast('Alterações de fontes salvas no GitHub.');renderSourceSaveBar();backFromSources();
- }catch(e){toast(`Não foi possível salvar. As alterações foram mantidas nesta sessão. ${e.message||''}`);}
+function markSourceCatalogDirty(){sourceCatalogDirty=true;renderSourceSaveBar();scheduleCatalogAutoSave()}
+function renderSourceSaveBar(){const el=document.getElementById('sourceCatalogStatus');if(!el)return;el.textContent=sourceSaveInProgress?'Salvando catálogo no GitHub…':sourceCatalogDirty?'Alterações do catálogo aguardando sincronização':'Catálogo sincronizado com o GitHub';el.dataset.pending=sourceCatalogDirty?'true':'false'}
+let profileSourceStatesDirty=false,sourceAutoSaveTimer=null;
+function scheduleCatalogAutoSave(){clearTimeout(sourceAutoSaveTimer);sourceAutoSaveTimer=setTimeout(()=>saveGlobalSourceCatalog(),350)}
+async function saveGlobalSourceCatalog(){
+ if(!sourceCatalogDirty||sourceSaveInProgress)return;const token=sourceAccessToken||prompt('Informe o token de acesso do Radar para publicar a alteração no catálogo global:');if(!token){renderSourceSaveBar();return;}sourceAccessToken=token.trim();sourceSaveInProgress=true;renderSourceSaveBar();
+ try{const snapshot=state.sources.map(({active,status,...src})=>({...src}));const response=await fetch(RADAR_GITHUB_SOURCES_WRITE_API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+sourceAccessToken},body:JSON.stringify({sources:snapshot})});const result=await response.json().catch(()=>({}));if(response.status===401){sourceAccessToken='';throw new Error('Token inválido.');}if(!response.ok||!result.ok)throw new Error(result.error||`Falha ao salvar catálogo (HTTP ${response.status}).`);sourceCatalogOriginal=snapshot;const current=JSON.stringify(state.sources.map(({active,status,...src})=>src));sourceCatalogDirty=current!==JSON.stringify(snapshot);renderSourceSaveBar();toast('Catálogo de fontes atualizado no GitHub.');if(sourceCatalogDirty)scheduleCatalogAutoSave();return !sourceCatalogDirty;}
+ catch(error){renderSourceSaveBar();toast(`Não foi possível atualizar o catálogo. A alteração permanece nesta sessão. ${error.message||''}`);return false;}
  finally{sourceSaveInProgress=false;renderSourceSaveBar()}
 }
-
 const RADAR_GITHUB_PROFILE_WRITE_API='https://radar-api.camiloctorquato.workers.dev/api/profiles/save';
 const RADAR_GITHUB_PROFILE_RENAME_API='https://radar-api.camiloctorquato.workers.dev/api/profiles/rename';
 const RADAR_GITHUB_PROFILE_DELETE_API='https://radar-api.camiloctorquato.workers.dev/api/profiles/delete';
@@ -2125,11 +2123,11 @@ function toast(msg,persistent=false){
   clearTimeout(window._toast);window._toastPersistent=!!persistent;
   if(!window._toastPersistent)window._toast=setTimeout(()=>{if(!window._collectionInProgress&&el.isConnected)el.style.display='none'},3200);
 }
-let previousPageBeforeSources='noticias';
+let previousPageBeforeSources='noticias',sourceNavigationApproved=false;
 function goHome(){showPage('noticias');window.scrollTo({top:0,behavior:'smooth'});}
 function backFromSources(){const target=previousPageBeforeSources&&previousPageBeforeSources!=='fontes'?previousPageBeforeSources:'noticias';showPage(target);window.scrollTo({top:0,behavior:'smooth'});}
 function showPage(page){
-  const currentForGuard=document.querySelector('.page.active');if(currentForGuard?.id==='page-fontes'&&page!=='fontes'&&(sourceCatalogDirty||profileSourceStatesDirty)){if(confirm('Há alterações de fontes não salvas. Deseja salvá-las no GitHub antes de sair?')){saveSourceChangesAndLeave();}return;}
+  const currentForGuard=document.querySelector('.page.active');if(!sourceNavigationApproved&&currentForGuard?.id==='page-fontes'&&page!=='fontes'&&sourceCatalogDirty){if(confirm('Há uma alteração do catálogo aguardando sincronização. Salvar no GitHub antes de sair?')){saveGlobalSourceCatalog().then(ok=>{if(ok&&!sourceCatalogDirty){sourceNavigationApproved=true;showPage(page);sourceNavigationApproved=false;}});}return;}
   if(page==='radar'&&(!state||!Array.isArray(state.radar)||state.radar.length===0)){updateNexoAccess();toast('O Radar está vazio. Processe ao menos uma notícia para acessá-lo.');return}
   const currentPage=document.querySelector('.page.active');
   const currentPageName=currentPage?currentPage.id.replace('page-',''):'';
@@ -3947,19 +3945,40 @@ function renderConfig(){
   const counts=c.editorialCounts||defaultState.config.editorialCounts;
   for(const [id,key] of [['quotaPolitics','Política'],['quotaDaily','Cotidiano'],['quotaEconomy','Economia'],['quotaSports','Esportes'],['quotaCulture','Cultura']]){const el=document.getElementById(id);if(el)el.value=counts[key]??10;}
   loadScoringSettingsIntoUI();
-  renderSources();
+  renderSources();renderProfileSourceToggles();
 }
 function restoreDefaultCommentInstructions(){
   const p=activeEditorialProfile();if(!p){toast('Nenhum perfil selecionado.');return;}p.editorialProfile=DEFAULT_EDITORIAL_PROFILE;p.summaryPrompt=DEFAULT_SUMMARY_PROMPT;p.commentPrompt=DEFAULT_RADIO_COMMENT_PROMPT;
-  ensureEditorialProfiles();persist();renderConfig();toast('As instruções do perfil ativo foram restauradas aos padrões.');
+  ensureEditorialProfiles();renderConfig();markProfileEditorDirty();toast('Padrões restaurados neste rascunho. Salve o perfil para publicar.');
 }
-function openRulesInstructionsModal(){
-  const modal=document.getElementById('rulesInstructionsModal');
-  if(!modal)return;
-  modal.classList.add('open');
+let profileEditorDirty=false,profileEditorOpening=false,profileEditorOriginal=null;
+function markProfileEditorDirty(){if(profileEditorOpening)return;profileEditorDirty=true;const el=document.getElementById('profileEditorStatus');if(el)el.textContent='Alterações não salvas';}
+function readProfileEditorIntoState(){
+ const p=activeEditorialProfile();if(!p)return false;
+ p.editorialProfile=document.getElementById('cfgEditorialProfile')?.value||'';p.summaryPrompt=document.getElementById('cfgSummaryPrompt')?.value||'';p.commentPrompt=document.getElementById('cfgCommentPrompt')?.value||'';
+ const parse=id=>{const el=document.getElementById(id);return el?[...new Set(el.value.split(/\r?\n|\r|\\n/).map(x=>x.trim()).filter(Boolean))]:[]};
+ p.interests={'Política':parse('interestPolitics'),'Cotidiano':parse('interestDaily'),'Economia':parse('interestEconomy'),'Esportes':parse('interestSports'),'Cultura':parse('interestCulture'),'Descartar Assuntos':parse('interestDiscard')};state.config.interests=JSON.parse(JSON.stringify(p.interests));
+ p.sourceStates=(state.sources||[]).map(x=>({id:x.id,active:x.active===true}));
+ state.config.editorialProfile=p.editorialProfile;state.config.summaryPrompt=p.summaryPrompt;state.config.commentPrompt=p.commentPrompt;state.config.processingPrompt=[p.summaryPrompt,p.commentPrompt].filter(Boolean).join('\n\n');return true;
 }
-function closeRulesInstructionsModal(){document.getElementById('rulesInstructionsModal')?.classList.remove('open')}
-document.getElementById('rulesInstructionsModal')?.addEventListener('click',e=>{if(e.target.id==='rulesInstructionsModal')closeRulesInstructionsModal()});
+function renderProfileSourceToggles(){const body=document.getElementById('profileSourceTable');if(!body)return;body.innerHTML=(state.sources||[]).map(src=>`<tr><td><b>${esc(src.name)}</b></td><td>${esc(normalizeSourceScope(src.scope,src.name,src.url))}</td><td><label class="switch"><input type="checkbox" ${src.active?'checked':''} aria-label="Ativar ${esc(src.name)} neste perfil" onchange="toggleProfileSource(decodeURIComponent('${encodeURIComponent(String(src.id))}'),this.checked)"><span class="slider"></span></label></td></tr>`).join('');}
+function toggleProfileSource(id,enabled){const src=state.sources.find(x=>String(x.id)===String(id));if(!src)return;src.active=!!enabled;const p=activeEditorialProfile();if(p)p.sourceStates=state.sources.map(x=>({id:x.id,active:x.active===true}));renderProfileSourceToggles();markProfileEditorDirty();}
+function setProfileSourcesEnabled(enabled){(state.sources||[]).forEach(x=>x.active=!!enabled);const p=activeEditorialProfile();if(p)p.sourceStates=state.sources.map(x=>({id:x.id,active:x.active===true}));renderProfileSourceToggles();markProfileEditorDirty();}
+async function switchProfileInsideEditor(id){if(id===state.config.activeEditorialProfileId)return;if(profileEditorDirty){const save=confirm('Há alterações não salvas neste perfil. Deseja salvá-las antes de trocar?\n\nOK = Salvar\nCancelar = descartar e trocar.');if(save){const ok=await saveProfileEditorAndClose();if(!ok)return;}else{const discard=confirm('Descartar as alterações deste perfil e trocar?');if(!discard)return;restoreProfileEditorSnapshot();profileEditorOpening=true;renderConfig();profileEditorOpening=false;}}switchEditorialProfile(id);profileEditorOpening=true;renderConfig();profileEditorOpening=false;renderProfileSourceToggles();profileEditorDirty=false;captureProfileEditorSnapshot();document.getElementById('rulesInstructionsModal')?.classList.add('open');}
+function captureProfileEditorSnapshot(){const p=activeEditorialProfile();profileEditorOriginal=p?JSON.parse(JSON.stringify({editorialProfile:p.editorialProfile,summaryPrompt:p.summaryPrompt,commentPrompt:p.commentPrompt,interests:p.interests,sourceStates:p.sourceStates})):null;}
+function restoreProfileEditorSnapshot(){const p=activeEditorialProfile();if(p&&profileEditorOriginal){Object.assign(p,JSON.parse(JSON.stringify(profileEditorOriginal)));applyCatalogToProfile(p);state.config.interests=JSON.parse(JSON.stringify(p.interests||defaultState.config.interests));}}
+function openRulesInstructionsModal(){const modal=document.getElementById('rulesInstructionsModal');if(!modal)return;profileEditorOpening=true;renderConfig();profileEditorOpening=false;profileEditorDirty=false;captureProfileEditorSnapshot();const status=document.getElementById('profileEditorStatus');if(status)status.textContent='Nenhuma alteração pendente';modal.classList.add('open');}
+function openProfileEditorSection(section){openRulesInstructionsModal();const details=[...document.querySelectorAll('#rulesInstructionsModal .profile-editor-section')].find(d=>d.dataset.profileSection===section);if(details){details.open=true;details.scrollIntoView({block:'nearest',behavior:'smooth'});}}
+async function saveProfileEditorAndClose(){
+ if(!readProfileEditorIntoState())return false;const p=activeEditorialProfile();if(!p?.sourcePath){toast('Este perfil ainda não foi publicado no GitHub. Publique-o antes de atualizar.');return false;}
+ const token=sourceAccessToken||prompt('Informe o token de acesso do Radar para salvar este perfil:');if(!token)return false;sourceAccessToken=token.trim();const btn=document.getElementById('saveEditorialProfileButton');if(btn){btn.disabled=true;btn.textContent='Salvando…'}
+ try{const payload=editorialProfilePayload(p);payload.sourcePath=p.sourcePath;const response=await fetch(RADAR_GITHUB_PROFILE_WRITE_API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+sourceAccessToken},body:JSON.stringify({mode:'update',path:p.sourcePath,profile:payload})});const result=await response.json().catch(()=>({}));if(response.status===401)throw new Error('Token inválido. Confira RADAR_IMPORT_TOKEN.');if(!response.ok||!result.ok)throw new Error(result.error||`Worker respondeu HTTP ${response.status}.`);p.source='github';profileEditorDirty=false;persist();const status=document.getElementById('profileEditorStatus');if(status)status.textContent='Perfil salvo no GitHub';toast('Perfil atualizado no GitHub, incluindo pautas e fontes.');captureProfileEditorSnapshot();document.getElementById('rulesInstructionsModal')?.classList.remove('open');return true;}
+ catch(error){toast(`Não foi possível salvar o perfil. As alterações continuam abertas. ${error.message||''}`);return false;}
+ finally{if(btn){btn.disabled=false;btn.textContent='Salvar perfil'}}
+}
+async function requestCloseProfileEditor(){if(!profileEditorDirty){document.getElementById('rulesInstructionsModal')?.classList.remove('open');return;}const save=confirm('Existem alterações não salvas. Deseja salvar o perfil antes de fechar?\n\nOK = Salvar\nCancelar = escolher se deseja descartar.');if(save){await saveProfileEditorAndClose();return;}const discard=confirm('Descartar todas as alterações não salvas e fechar o editor?');if(discard){restoreProfileEditorSnapshot();renderConfig();profileEditorDirty=false;document.getElementById('rulesInstructionsModal')?.classList.remove('open');}}
+['cfgEditorialProfile','cfgSummaryPrompt','cfgCommentPrompt','interestPolitics','interestDaily','interestEconomy','interestSports','interestCulture','interestDiscard'].forEach(id=>document.getElementById(id)?.addEventListener('input',markProfileEditorDirty));
+document.getElementById('rulesInstructionsModal')?.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();requestCloseProfileEditor();}});
 
 function openPautasModal(){
   const modal=document.getElementById('pautasModal');
@@ -3998,12 +4017,7 @@ function saveInterests(){
   setTextContent('interestStatus','Assuntos salvos neste navegador.');
   toast('Assuntos de interesse salvos.');
 }
-document.addEventListener('input',e=>{
-  if(['interestPolitics','interestDaily','interestSports','interestEconomy','interestCulture','interestDiscard'].includes(e.target.id)){
-    clearTimeout(window._interestSaveTimer);
-    window._interestSaveTimer=setTimeout(saveInterests,500);
-  }
-});
+// As pautas agora são salvas em conjunto pelo editor de perfis; não há gravação local automática.
 function saveEditorialCounts(){
   state.config.editorialCounts={'Política':Number(document.getElementById('quotaPolitics').value)||0,'Cotidiano':Number(document.getElementById('quotaDaily').value)||0,'Economia':Number(document.getElementById('quotaEconomy').value)||0,'Esportes':Number(document.getElementById('quotaSports').value)||0,'Cultura':Number(document.getElementById('quotaCulture').value)||0};
   state.config.count=Object.values(state.config.editorialCounts).reduce((a,b)=>a+b,0);persist();
@@ -4193,7 +4207,7 @@ function addSource(){
   if(method==='auto'&&!url&&!domain){toast('Informe pelo menos um feed RSS/Atom ou o domínio do site.');return}
 
   state.sources.push({id:uid(),name,url:method==='html'?'':url,feeds:method==='html'?[]:feeds,siteUrls:method==='html'?siteUrls:[],type:method==='html'?'html':'web',method,domain,queries,scope,weight,active:false,status:'Não testada'});
-  markSourceCatalogDirty();closeAddSourceModal();clearSourceForm();renderSources();toast('Fonte adicionada ao catálogo. Salve as alterações para publicar no GitHub.');
+  markSourceCatalogDirty();closeAddSourceModal();clearSourceForm();renderSources();toast('Fonte adicionada. Publicando no catálogo global…');
 }
 function clearSourceForm(){
   ['srcName','srcUrl','srcDomain'].forEach(id=>{const e=document.getElementById(id);if(e)e.value=''});if(document.getElementById('srcMethod')){document.getElementById('srcMethod').value='auto';updateSourceMethodHelp('src')}
@@ -4255,12 +4269,8 @@ async function addNewsFromLink(){
 
 function renderSources(){
   renderSourceSaveBar();
-  const activeCount=state.sources.filter(x=>x.active).length;
-  const counter=document.getElementById('activeSourcesCounter');
-  if(counter){counter.textContent=`Fontes ativadas: ${activeCount}`;counter.title=`${activeCount} de ${state.sources.length} fontes estão ativadas`;}
-  const master=document.getElementById('toggleAllSources');if(master){master.checked=state.sources.length>0&&state.sources.every(x=>x.active);master.indeterminate=state.sources.some(x=>x.active)&&!master.checked}
   state.sources.sort((a,b)=>String(a.name||'').localeCompare(String(b.name||''),'pt-BR',{sensitivity:'base'}));
-  document.getElementById('sourceTable').innerHTML=state.sources.map(s=>`<tr>
+  const table=document.getElementById('sourceTable');if(!table)return;table.innerHTML=state.sources.map(s=>`<tr>
     <td><b>${esc(s.name)}</b><br><span class="small">${esc(s.domain||s.url||'')}</span></td>
     <td>${esc(normalizeSourceScope(s.scope,s.name,s.url))}</td><td>${esc(s.weight||'Normal')}</td>
     <td>${statusBadge(s)}</td>
@@ -4269,7 +4279,6 @@ function renderSources(){
         <button class="btn btn-secondary" onclick="testSource('${s.id}')">Testar</button>
         <button class="btn btn-secondary" onclick="editSource('${s.id}')">Editar</button>
         <button class="btn btn-danger" onclick="removeSource('${s.id}')">Excluir</button>
-        <label class="switch" title="${s.active?'Desativar fonte':'Ativar fonte'}"><input type="checkbox" ${s.active?'checked':''} aria-label="${s.active?'Desativar':'Ativar'} ${esc(s.name)}" onchange="toggleSource('${s.id}',this.checked)"><span class="slider"></span></label>
       </div>
     </td>
   </tr>`).join('');
@@ -4288,7 +4297,7 @@ function syncActiveProfileSources(){
 }
 function toggleSource(id,v){const s=state.sources.find(x=>x.id===id);if(s)s.active=v;const p=activeEditorialProfile();if(p){p.sourceStates=state.sources.map(x=>({id:x.id,active:x.active===true}));profileSourceStatesDirty=true;}renderSources();renderSourceSaveBar()}
 function toggleAllSources(enabled){state.sources.forEach(s=>s.active=!!enabled);const p=activeEditorialProfile();if(p){p.sourceStates=state.sources.map(x=>({id:x.id,active:x.active===true}));profileSourceStatesDirty=true;}renderSources();renderSourceSaveBar();toast(enabled?'Todas as fontes foram ativadas.':'Todas as fontes foram desativadas.')} 
-function removeSource(id){const source=state.sources.find(x=>x.id===id);if(confirm(`Excluir “${source?.name||'esta fonte'}” do catálogo global? Ela será removida de todos os perfis.`)){state.sources=state.sources.filter(x=>x.id!==id);const p=activeEditorialProfile();if(p){p.sourceStates=state.sources.map(x=>({id:x.id,active:x.active===true}));profileSourceStatesDirty=true;}markSourceCatalogDirty();renderSources();}}
+function removeSource(id){const source=state.sources.find(x=>x.id===id);if(confirm(`Excluir “${source?.name||'esta fonte'}” do catálogo global? Ela deixará de aparecer em todos os perfis.`)){state.sources=state.sources.filter(x=>x.id!==id);markSourceCatalogDirty();renderSources();}}
 function editSource(id){
   const s=state.sources.find(x=>x.id===id);if(!s)return;
   document.getElementById('editSourceId').value=s.id;
@@ -4322,7 +4331,7 @@ function saveEditedSource(){
   s.type=method==='html'?'html':'web';
   s.domain=domain;
   s.status='Não testada';
-  markSourceCatalogDirty();renderSources();closeSourceEditor();toast('Fonte alterada no catálogo. Salve as alterações para publicar no GitHub.');
+  markSourceCatalogDirty();renderSources();closeSourceEditor();toast('Fonte alterada. Publicando no catálogo global…');
 }
 function shortError(e){
   const msg=String(e?.message||e||'Erro').replace(/\s+/g,' ').trim();
@@ -4970,7 +4979,7 @@ ${String(footballData?.updatedAt||'não informada')}`;
   }
 }
 </style>
-<!-- Radar V1.34: limpeza da barra lateral e atualização imediata das fontes na troca de perfil. -->
+<!-- Radar V1.35: limpeza da barra lateral e atualização imediata das fontes na troca de perfil. -->
 <!-- Radar V1.19: catálogo remoto de perfis editoriais no GitHub, carregado ao abrir Regras e Instruções. -->
 </body>
 </html>
