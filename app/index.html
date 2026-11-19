@@ -78,7 +78,7 @@ button{cursor:pointer}
 #page-noticias .collection-card .progress{height:6px}
 
 /* V47: prompt e quantidades por editoria ficam na barra lateral, abaixo do progresso. */
-#page-noticias .sidebar-mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:3px;border-radius:9px;background:var(--surface-soft);border:1px solid var(--line);margin-bottom:10px}
+#page-noticias .sidebar-mode-switch{display:none!important;grid-template-columns:1fr 1fr;grid-template-columns:1fr 1fr;gap:4px;padding:3px;border-radius:9px;background:var(--surface-soft);border:1px solid var(--line);margin-bottom:10px}
 #page-noticias .sidebar-mode-tab{display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;border:0;border-radius:6px;padding:7px 5px;background:transparent;color:var(--muted);font-size:11px;font-weight:650;line-height:1.1}
 #page-noticias .sidebar-mode-tab i{font-size:12px}
 #page-noticias .sidebar-mode-tab.active{background:var(--navy);color:#fff;box-shadow:0 1px 3px rgba(16,42,67,.16)}
@@ -835,6 +835,36 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
 @media(max-width:760px){.profile-editor-tab{padding:10px 9px;font-size:12px}.profile-editor-pane{min-height:250px}.profile-editor-pane>textarea{min-height:220px}}
 
 .source-catalog-status{display:inline-flex;align-items:center;min-height:32px;padding:0 10px;border:1px solid #dbe3ec;border-radius:8px;background:#f7f9fc;color:#52647a;font-size:12px;font-weight:600;white-space:nowrap}.source-catalog-status[data-pending="true"]{background:#fff8e8;border-color:#f0d69b;color:#805b12}.source-catalog-status[data-saving="true"]{opacity:.8}
+
+
+/* V1.53: preserva as três colunas em escalas ampliadas e refina ações da barra lateral. */
+@media(min-width:901px){
+  .layout:has(#page-noticias.active) .main,
+  .layout:has(#page-fontes.active) .main{
+    width:min(1056px,calc(100vw - 520px))!important;
+    max-width:1056px!important;
+    margin-left:max(270px,calc((100vw - 1056px)/2))!important;
+    margin-right:250px!important;
+    box-sizing:border-box;
+    min-width:0;
+  }
+}
+#page-noticias #geminiUsageMeter{
+  padding-bottom:9px!important;
+  margin-bottom:9px!important;
+  border-bottom:1px solid var(--line)!important;
+}
+#page-noticias .sidebar-selection-row .btn{
+  min-height:36px!important;
+  height:36px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:0 7px!important;
+  line-height:1.15!important;
+  box-sizing:border-box!important;
+}
+
 </style>
 <!-- Radar V98: ações reorganizadas, notícias por editoria recolhíveis e indicador de processamento -->
 <style>
@@ -1263,14 +1293,23 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
   font-weight:600!important;border-radius:7px!important;flex:0 0 auto!important;
 }
 #rulesInstructionsModal .profile-editor-tabs{
-  display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;
-  gap:2px!important;margin:12px 0 14px!important;
+  display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:4px!important;margin:12px 0 14px!important;padding:0 0 6px!important;
   border-bottom:1px solid var(--line)!important;overflow:visible!important;
 }
 #rulesInstructionsModal .profile-editor-tab{
-  min-width:0!important;min-height:40px!important;padding:8px 10px!important;
-  font-size:13px!important;font-weight:650!important;border-bottom:2px solid transparent!important;
-  white-space:nowrap!important;
+  min-width:0!important;min-height:40px!important;padding:8px 6px!important;
+  font-size:12px!important;font-weight:650!important;border:1px solid transparent!important;
+  border-bottom:3px solid transparent!important;border-radius:7px 7px 0 0!important;
+  white-space:nowrap!important;background:transparent!important;
+}
+#rulesInstructionsModal .profile-editor-tab.active{
+  color:var(--primary)!important;background:color-mix(in srgb,var(--primary) 9%,var(--card))!important;
+  border-color:var(--line)!important;border-bottom-color:var(--primary)!important;
+}
+#rulesInstructionsModal .profile-editor-tab:not(.active):hover{
+  background:color-mix(in srgb,var(--primary) 5%,transparent)!important;
+  border-color:var(--line)!important;
 }
 #rulesInstructionsModal .profile-editor-tab i{margin-right:5px!important;font-size:12px!important}
 #rulesInstructionsModal .profile-editor-pane{
@@ -1304,21 +1343,22 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
   border-top:1px solid var(--line)!important;
 }
 #rulesInstructionsModal .profile-editor-footer>div{display:flex!important;gap:7px!important}
-.sidebar-active-profile-card{
-  margin-top:10px!important;padding:12px!important;
-  border:1px solid var(--line)!important;border-radius:12px!important;
+.sidebar-active-profile-section{
+  display:block!important;position:relative!important;width:100%!important;box-sizing:border-box!important;
+  margin:0 0 10px!important;padding:0 0 11px!important;
+  border:0!important;border-bottom:1px solid var(--line)!important;
 }
 .sidebar-active-profile-head{
   font-size:12px!important;font-weight:700!important;color:var(--muted)!important;
   margin-bottom:8px!important;
 }
-.sidebar-active-profile-card .sidebar-extra-settings{
+.sidebar-active-profile-section .sidebar-extra-settings{
   display:flex!important;flex-direction:column!important;gap:8px!important;
   margin:0!important;padding:0!important;border:0!important;
 }
-.sidebar-active-profile-card .sidebar-section-title{margin:0!important}
-.sidebar-active-profile-card .sidebar-profile-select{width:100%!important;min-height:36px!important}
-.sidebar-active-profile-card .rules-instructions-btn{
+.sidebar-active-profile-section .sidebar-section-title{margin:0!important}
+.sidebar-active-profile-section .sidebar-profile-select{width:100%!important;min-height:36px!important}
+.sidebar-active-profile-section .rules-instructions-btn{
   width:100%!important;min-height:34px!important;padding:7px 10px!important;
   font-size:12px!important;border-radius:7px!important;
 }
@@ -1390,15 +1430,15 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 #rulesInstructionsModal .profile-editor-pane[data-pane="sources"]>.footer-note{
   font-size:11px!important;margin:2px 0 8px!important;
 }
-#page-noticias .sidebar-active-profile-card{
+#page-noticias .sidebar-active-profile-section{
   grid-column:1!important;grid-row:auto!important;width:100%!important;
   box-sizing:border-box!important;margin:9px 0 0!important;align-self:start!important;
 }
 #page-noticias .collection-card{grid-column:1!important}
-#page-noticias .sidebar-active-profile-card .sidebar-extra-settings{gap:7px!important}
-#page-noticias .sidebar-active-profile-card .sidebar-section-title{font-size:10px!important}
-#page-noticias .sidebar-active-profile-card .sidebar-profile-select{min-height:32px!important;font-size:11px!important}
-#page-noticias .sidebar-active-profile-card .rules-instructions-btn{min-height:32px!important;font-size:11px!important}
+#page-noticias .sidebar-active-profile-section .sidebar-extra-settings{gap:7px!important}
+#page-noticias .sidebar-active-profile-section .sidebar-section-title{font-size:10px!important}
+#page-noticias .sidebar-active-profile-section .sidebar-profile-select{min-height:32px!important;font-size:11px!important}
+#page-noticias .sidebar-active-profile-section .rules-instructions-btn{min-height:32px!important;font-size:11px!important}
 @media(max-width:760px){
  #rulesInstructionsModal .profile-editor-footer{margin:0 -14px -14px!important;padding:9px 10px!important;gap:6px!important;flex-wrap:wrap!important}
  #rulesInstructionsModal .profile-editor-context-actions{gap:4px!important}
@@ -1471,13 +1511,162 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
   }
   #rulesInstructionsModal .profile-editor-footer{flex-wrap:nowrap!important;gap:6px!important}
 }
-</style></head>
+</style>
+<style id="radar-v146-profile-section-in-single-sidebar-card">
+/* V1.47 — Perfil ativo integrado ao único card da barra lateral. */
+#page-noticias>.collection-card{top:86px!important;height:calc(100vh - 98px)!important}
+#page-noticias .sidebar-active-profile-section{
+  display:block!important;position:relative!important;inset:auto!important;float:none!important;clear:both!important;
+  width:100%!important;max-width:100%!important;box-sizing:border-box!important;
+  margin:0 0 10px!important;padding:0 0 11px!important;
+  border:0!important;border-bottom:1px solid var(--line)!important;
+}
+#page-noticias .sidebar-active-profile-section .sidebar-active-profile-head{margin:0 0 7px!important}
+#page-noticias .sidebar-active-profile-section .sidebar-extra-settings{margin:0!important;padding:0!important;border:0!important;gap:7px!important}
+#page-noticias .sidebar-active-profile-section .sidebar-profile-select{min-height:32px!important;font-size:11px!important}
+#page-noticias .sidebar-active-profile-section .rules-instructions-btn{min-height:32px!important;font-size:11px!important}
+@media(max-width:760px){
+  #page-noticias>.collection-card{top:auto!important;height:auto!important}
+  #page-noticias .sidebar-active-profile-section{margin-bottom:10px!important}
+}
+</style>
+<style id="radar-profile-definitions-tab">
+#rulesInstructionsModal .profile-definitions-grid{display:grid;grid-template-columns:1fr;gap:16px;max-height:58vh;overflow:auto;padding:2px 3px 12px}
+#rulesInstructionsModal .profile-definition-group{border:1px solid var(--line);border-radius:10px;padding:13px 15px;background:var(--surface)}
+#rulesInstructionsModal .profile-definition-group h4{margin:0 0 5px;font-size:14px;color:var(--text)}
+#rulesInstructionsModal .profile-definition-group .footer-note{margin:4px 0 10px}
+#rulesInstructionsModal .profile-definition-group .quota-compact-grid{display:grid;grid-template-columns:repeat(5,minmax(75px,1fr));gap:8px}
+#rulesInstructionsModal .profile-definition-group .scoring-settings-grid{display:grid;grid-template-columns:repeat(4,minmax(110px,1fr));gap:9px}
+#rulesInstructionsModal .profile-definition-group label{font-size:12px}
+#rulesInstructionsModal .profile-definition-group input[type=number]{width:100%;min-width:0}
+#rulesInstructionsModal .profile-context-options{display:grid;grid-template-columns:repeat(3,minmax(150px,1fr));gap:8px 16px}
+#rulesInstructionsModal .profile-context-options .context-setting-option{display:flex;align-items:center;gap:7px}
+@media(max-width:760px){#rulesInstructionsModal .profile-definition-group .quota-compact-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#rulesInstructionsModal .profile-definition-group .scoring-settings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#rulesInstructionsModal .profile-context-options{grid-template-columns:1fr 1fr}}
+</style>
+<style id="radar-profile-tabs-single-row-v149">
+#rulesInstructionsModal .profile-editor-tabs{
+  display:grid!important;
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:0!important;
+  margin:10px 0 13px!important;
+  overflow:visible!important;
+  width:100%!important;
+}
+#rulesInstructionsModal .profile-editor-tab{
+  min-width:0!important;
+  min-height:36px!important;
+  padding:7px 3px!important;
+  font-size:11.5px!important;
+  line-height:1.15!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+}
+#rulesInstructionsModal .profile-editor-tab i{
+  margin-right:3px!important;
+  font-size:11px!important;
+}
+@media(max-width:760px){
+  #rulesInstructionsModal .profile-editor-tabs{
+    grid-template-columns:repeat(6,minmax(82px,1fr))!important;
+    overflow-x:auto!important;
+  }
+}
+
+/* V1.51: data, hora e clima integrados ao centro do cabeçalho. */
+.header-context-slot{flex:1 1 auto;min-width:0;display:flex;align-items:center;justify-content:center}
+.header-clock-weather{display:flex;align-items:center;justify-content:center;gap:clamp(9px,1.35vw,20px);min-width:0;max-width:100%;padding:4px 12px;color:#fff;white-space:nowrap}
+.header-clock-weather[hidden]{display:none!important}
+.header-clock-time{font-size:20px;font-weight:750;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:.15px;color:#fff}
+.header-context-date{font-size:11px;line-height:1.2;color:rgba(255,255,255,.82);margin:0;text-transform:capitalize}
+.header-weather{font-size:11px;line-height:1.2;color:rgba(255,255,255,.9);min-width:0}
+.header-weather .weather-compact{display:flex;flex-direction:row;align-items:center;gap:7px;white-space:nowrap}
+.header-weather .weather-icon{font-size:22px;line-height:1;color:#f6d77a;flex:0 0 auto;filter:drop-shadow(0 1px 2px rgba(0,0,0,.18))}
+.header-weather .weather-temp{font-size:17px;line-height:1;font-weight:750;color:#fff}
+.header-weather .weather-condition{font-size:10px;font-weight:600;color:rgba(255,255,255,.92);line-height:1.15}
+.header-weather .weather-summary{font-size:10px;line-height:1.15;color:rgba(255,255,255,.72);margin:0}
+.header-weather .weather-compact-error{font-size:10px;color:rgba(255,255,255,.75)}
+@media(max-width:850px){
+ .topbar{flex-wrap:wrap;row-gap:2px;padding-top:6px;padding-bottom:6px}
+ .header-context-slot{order:10;flex:1 0 100%;width:100%;min-height:25px}
+ .header-clock-weather{gap:10px;padding:2px 4px;white-space:normal;flex-wrap:wrap}
+ .header-clock-time{font-size:17px}
+ .header-context-date{font-size:10px}
+ .header-weather .weather-temp{font-size:15px}
+ .header-weather .weather-condition,.header-weather .weather-summary{font-size:9px}
+}
+@media(max-width:480px){.header-clock-weather{gap:7px}.header-context-date{max-width:135px}.header-weather .weather-compact{gap:5px}}
+</style>
+
+<style id="radar-v154-zoom-layout-final">
+/* V1.54: calcula a coluna central no espaço lógico disponível após o zoom.
+   Este bloco fica por último para prevalecer sobre regras responsivas antigas. */
+@media (min-width: 901px) {
+  .layout:has(#page-noticias.active) .main,
+  .layout:has(#page-fontes.active) .main {
+    box-sizing: border-box !important;
+    width: min(1056px, calc((100vw / var(--radar-view-zoom, 1)) - 524px)) !important;
+    max-width: 1056px !important;
+    margin-left: max(270px, calc(((100vw / var(--radar-view-zoom, 1)) - min(1056px, calc((100vw / var(--radar-view-zoom, 1)) - 524px)) + 16px) / 2)) !important;
+    margin-right: 0 !important;
+    min-width: 0 !important;
+  }
+}
+#page-noticias #geminiUsageMeter {
+  padding-bottom: 9px !important;
+  margin-bottom: 9px !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+#page-noticias .sidebar-selection-row .btn {
+  min-height: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 7px !important;
+  line-height: 1.15 !important;
+  box-sizing: border-box !important;
+}
+</style>
+
+<style id="radar-v156-responsive-layout-fix">
+/* V1.56 — o zoom continua com padrão de 100%; o layout central ocupa
+   somente a faixa entre a coleta fixa (esquerda) e o painel contextual (direita).
+   O problema anterior ocorria porque, acima de 1399px, .main voltava a ser centralizado
+   na viewport inteira, ignorando as duas colunas fixas. */
+@media (min-width: 1400px) {
+  .layout > main.main {
+    box-sizing: border-box !important;
+    width: min(1056px, calc(100vw - 520px)) !important;
+    max-width: 1056px !important;
+    margin-left: calc(270px + max(0px, (100vw - 1576px) / 2)) !important;
+    margin-right: 0 !important;
+    min-width: 0 !important;
+  }
+  .layout > main.main > *,
+  .layout > main.main .page,
+  .layout > main.main .card {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+/* Em telas menores, mantém o comportamento responsivo já existente. */
+@media (max-width: 1399px) {
+  .layout > main.main { width: auto !important; max-width: none !important; }
+}
+</style>
+</head>
 <body class="news-radar-workspace-active">
 <header class="topbar">
 <button aria-expanded="false" aria-label="Abrir painel lateral" class="mobile-header-action mobile-menu-toggle" id="mobileSidebarToggle" onclick="toggleMobileSidebar()" title="Menu" type="button"><i aria-hidden="true" class="fa-solid fa-bars"></i></button>
 <button aria-label="Voltar à página inicial" class="brand" onclick="goHome()" title="Página inicial" type="button"><span class="brand-name">RADAR</span><span class="brand-dot">.</span><span class="brand-tagline">Notícias Integradas</span></button>
 <button aria-expanded="false" aria-label="Mostrar filtros" class="mobile-header-action mobile-filter-toggle" id="mobileFilterToggle" onclick="toggleMobileFilters()" title="Filtros" type="button"><i aria-hidden="true" class="fa-solid fa-filter"></i></button>
 <button aria-label="Abrir página de fontes" class="mobile-header-action mobile-sources-toggle" id="mobileSourcesToggle" onclick="showPage('fontes')" title="Fontes" type="button"><i aria-hidden="true" class="fa-solid fa-rss"></i></button>
+<div class="header-context-slot" aria-label="Data, hora e clima"><section aria-label="Data, hora e clima" class="header-clock-weather" data-context-card="clock" id="contextCardClock">
+<div class="header-clock-time context-clock" id="contextClock">--:--:--</div>
+<div class="header-context-date context-date" id="contextDate">Carregando data…</div>
+<div aria-live="polite" class="header-weather context-loading" id="weatherContent" role="status">Consultando clima…</div>
+</section></div>
 <div class="top-actions">
 <button aria-label="Notícias" class="active" data-page="noticias" onclick="showPage('noticias')"><span aria-hidden="true" class="header-icon fa-solid fa-newspaper"></span> Notícias</button>
 <button aria-label="Radar" data-page="radar" onclick="showPage('radar')"><span aria-hidden="true" class="header-icon fa-solid fa-satellite-dish"></span> Radar</button>
@@ -1531,9 +1720,16 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <section class="page active" id="page-noticias">
 <div class="card collection-card">
 <div class="mobile-drawer-head"><strong>Radar</strong><button aria-label="Fechar painel lateral" onclick="closeMobileSidebar()" title="Fechar" type="button">×</button></div>
+<div class="sidebar-active-profile-section">
+  <div class="sidebar-active-profile-head">Perfil ativo</div>
+  <div class="sidebar-extra-settings">
+    <select class="sidebar-profile-select" id="sidebarEditorialProfileSelect" onchange="switchEditorialProfile(this.value)"></select>
+    <button class="btn btn-secondary rules-instructions-btn" onclick="openRulesInstructionsModal()" type="button"><i aria-hidden="true" class="fa-solid fa-user-pen"></i> Editar Perfis</button>
+  </div>
+</div>
 <div aria-label="Seção da barra lateral" class="sidebar-mode-switch" role="group">
 <button aria-pressed="true" class="sidebar-mode-tab active" data-sidebar-tab="coleta" onclick="switchSidebarTab('coleta')" type="button"><i aria-hidden="true" class="fa-solid fa-satellite-dish"></i><span>Coleta</span></button>
-<button aria-pressed="false" class="sidebar-mode-tab" data-sidebar-tab="definicoes" onclick="switchSidebarTab('definicoes')" type="button"><i aria-hidden="true" class="fa-solid fa-sliders"></i><span>Definições</span></button>
+
 </div>
 <div class="sidebar-mode-panel" id="sidebarCollectPanel">
 <div class="grid grid-4" style="margin-bottom:12px">
@@ -1566,67 +1762,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <button class="btn btn-yellow process-sidebar-btn" id="processBtn" onclick="processSelected()">Processar selecionadas (<span id="selCount">0</span>)</button>
 </div>
 </div><!-- /sidebarCollectPanel -->
-<div class="sidebar-mode-panel" hidden="" id="sidebarDefinitionsPanel">
-<div class="sidebar-pautas-section">
-<details class="editorial-settings-details">
-<summary><span aria-hidden="true" class="context-settings-chevron">▸</span><span class="sidebar-section-title">Notícias por Editoria</span></summary>
-<div class="editorial-settings-body">
-<div class="quota-compact-grid">
-<label>Política<input aria-label="Quantidade de notícias de Política" id="quotaPolitics" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
-<label>Cotidiano<input aria-label="Quantidade de notícias de Cotidiano" id="quotaDaily" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
-<label>Economia<input aria-label="Quantidade de notícias de Economia" id="quotaEconomy" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
-<label>Esportes<input aria-label="Quantidade de notícias de Esportes" id="quotaSports" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
-<label>Cultura<input aria-label="Quantidade de notícias de Cultura" id="quotaCulture" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
-</div>
-<button class="btn btn-secondary define-pautas-btn" onclick="openProfileEditorSection('Definir Pautas')" type="button"><i aria-hidden="true" class="fa-solid fa-list-check"></i> Definir Pautas</button>
-</div>
-</details>
-<details class="editorial-settings-details scoring-settings-details">
-<summary><span aria-hidden="true" class="context-settings-chevron">▸</span><span class="sidebar-section-title">Pontuação de relevância</span></summary>
-<div class="editorial-settings-body scoring-settings-body">
-<p class="footer-note">Ajuste os pesos usados na ordenação por Relevância. As alterações são aplicadas localmente, sem chamada de IA.</p>
-<div class="scoring-settings-grid">
-<label title="Pontos atribuídos a toda notícia antes de avaliar os demais critérios.">Base<input id="scoreBase" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="25"/></label>
-<label title="Pontos somados para cada correspondência entre a notícia e as pautas cadastradas na editoria.">Por pauta<input id="scoreTopicHit" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="8"/></label>
-<label title="Máximo de pontos que todas as correspondências com pautas podem acrescentar juntas.">Teto das pautas<input id="scoreTopicCap" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="30"/></label>
-<label title="Bônus aplicado quando a notícia é identificada como de abrangência local.">Bônus local<input id="scoreLocal" max="100" min="-100" onchange="saveScoringSettings()" step="1" type="number" value="15"/></label>
-<label title="Pontos adicionados quando a fonte está cadastrada com prioridade Alta.">Fonte alta<input id="scoreSourceHigh" max="100" min="-100" onchange="saveScoringSettings()" step="1" type="number" value="8"/></label>
-<label title="Pontos adicionados quando a fonte está cadastrada com prioridade Normal.">Fonte normal<input id="scoreSourceNormal" max="100" min="-100" onchange="saveScoringSettings()" step="1" type="number" value="4"/></label>
-<label title="Pontos adicionados (ou retirados, se o valor for negativo) quando a fonte tem prioridade Baixa.">Fonte baixa<input id="scoreSourceLow" max="100" min="-100" onchange="saveScoringSettings()" step="1" type="number" value="-3"/></label>
-<label title="Pontuação máxima concedida pela data da notícia. Notícias mais recentes recebem mais pontos; notícias antigas recebem menos.">Atualidade (máx.)<input id="scoreCurrentMax" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="10"/></label>
-<label title="Pontos por ocorrência de termos genéricos de acontecimentos relevantes, como aprovação, decisão, investigação ou inauguração.">Por acontecimento<input id="scoreEventHit" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="3"/></label>
-<label title="Limite total de pontos que os termos de acontecimentos relevantes podem acrescentar.">Teto<input id="scoreEventCap" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="12"/></label>
-<label title="Quantidade de pontos retirada quando a notícia corresponde a um assunto que o usuário marcou para descartar.">Desconto: descartados<input id="scoreDiscardPenalty" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="35"/></label>
-<label title="Quantidade de pontos retirada quando o sistema reconhece linguagem promocional ou publicitária.">Desconto: promocional<input id="scorePromoPenalty" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="20"/></label>
-</div>
-<button class="btn btn-secondary" onclick="resetScoringSettings()" type="button">Restaurar pontuação</button>
-</div>
-</details>
-<div class="context-card-settings">
-<details class="context-card-settings-details">
-<summary><span aria-hidden="true" class="context-settings-chevron">▸</span><span class="sidebar-section-title">Cards informativos</span></summary>
-<div class="context-card-settings-body">
-<p class="footer-note">Escolha quais cards serão exibidos. Arraste os cards na coluna direita para mudar a ordem.</p>
-<label class="context-setting-option"><input checked="" id="showContextClock" onchange="setContextCardVisibility('clock',this.checked)" type="checkbox"/> Data, hora e clima</label>
-<label class="context-setting-option"><input id="showContextTimer" onchange="setContextCardVisibility('timer',this.checked)" type="checkbox"/> Timer</label>
-<label class="context-setting-option"><input id="showContextUrgency" onchange="setContextCardVisibility('urgency',this.checked)" type="checkbox"/> Radar de urgência</label>
-<label class="context-setting-option"><input checked="" id="showContextAgenda" onchange="setContextCardVisibility('agenda',this.checked)" type="checkbox"/> Agenda do dia</label>
-<label class="context-setting-option"><input id="showContextRundown" onchange="setContextCardVisibility('rundown',this.checked)" type="checkbox"/> Tempo estimado da pauta</label>
-<label class="context-setting-option"><input checked="" id="showContextFootball" onchange="setContextCardVisibility('football',this.checked)" type="checkbox"/> Resultados de futebol</label>
-</div>
-</details>
-</div>
-<div class="sidebar-data-tools">
-<div class="sidebar-section-title">Dados do sistema</div>
-<button class="btn btn-primary save-data-btn" onclick="saveAllData()" type="button">Salvar dados</button>
-<button class="btn btn-danger clear-storage-data-btn" onclick="openClearStorageModal()" type="button">Limpar dados</button>
-</div>
-</div>
-</div><div class="card sidebar-active-profile-card"><div class="sidebar-active-profile-head">Perfil ativo</div><div class="sidebar-extra-settings">
-<label class="sidebar-section-title" for="sidebarEditorialProfileSelect">Perfil ativo</label>
-<select class="sidebar-profile-select" id="sidebarEditorialProfileSelect" onchange="switchEditorialProfile(this.value)"></select>
-<button class="btn btn-secondary rules-instructions-btn" onclick="openRulesInstructionsModal()" type="button"><i aria-hidden="true" class="fa-solid fa-user-pen"></i> Editar Perfis</button>
-</div></div>
+
 </div>
 <div id="newsList"></div>
 </section>
@@ -1732,13 +1868,14 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 </div>
 <p class="footer-note">As alterações nas seções abaixo serão salvas em conjunto no perfil selecionado.</p>
 <nav aria-label="Seções do perfil" class="profile-editor-tabs" role="tablist">
-<button aria-selected="true" class="profile-editor-tab active" data-tab="editorial" onclick="selectProfileEditorTab('editorial')" role="tab" type="button"><i class="fa-solid fa-compass"></i> Editorial</button>
+<button aria-selected="true" class="profile-editor-tab active" data-tab="definitions" onclick="selectProfileEditorTab('definitions')" role="tab" type="button"><i class="fa-solid fa-sliders"></i> Definições</button>
+<button aria-selected="false" class="profile-editor-tab" data-tab="editorial" onclick="selectProfileEditorTab('editorial')" role="tab" type="button"><i class="fa-solid fa-compass"></i> Editorial</button>
 <button aria-selected="false" class="profile-editor-tab" data-tab="summary" onclick="selectProfileEditorTab('summary')" role="tab" type="button"><i class="fa-solid fa-align-left"></i> Resumo</button>
 <button aria-selected="false" class="profile-editor-tab" data-tab="comment" onclick="selectProfileEditorTab('comment')" role="tab" type="button"><i class="fa-solid fa-comment-dots"></i> Comentário</button>
 <button aria-selected="false" class="profile-editor-tab" data-tab="interests" onclick="selectProfileEditorTab('interests')" role="tab" type="button"><i class="fa-solid fa-list-check"></i> Pautas</button>
 <button aria-selected="false" class="profile-editor-tab" data-tab="sources" onclick="selectProfileEditorTab('sources')" role="tab" type="button"><i class="fa-solid fa-rss"></i> Fontes</button>
 </nav>
-<section class="profile-editor-pane active" data-pane="editorial" role="tabpanel"><label for="cfgEditorialProfile">Perfil Editorial</label><textarea id="cfgEditorialProfile" placeholder="Defina área de cobertura, público, prioridades temáticas, critérios de relevância e orientação editorial." rows="12"></textarea><p class="footer-note">Define a orientação editorial geral deste perfil.</p></section>
+<section class="profile-editor-pane" data-pane="editorial" role="tabpanel"><label for="cfgEditorialProfile">Perfil Editorial</label><textarea id="cfgEditorialProfile" placeholder="Defina área de cobertura, público, prioridades temáticas, critérios de relevância e orientação editorial." rows="12"></textarea><p class="footer-note">Define a orientação editorial geral deste perfil.</p></section>
 <section class="profile-editor-pane" data-pane="summary" role="tabpanel"><label for="cfgSummaryPrompt">Regras para o Resumo</label><textarea id="cfgSummaryPrompt" placeholder="Defina linguagem, extensão, estrutura, contextualização e critérios para os resumos." rows="16"></textarea></section>
 <section class="profile-editor-pane" data-pane="comment" role="tabpanel"><label for="cfgCommentPrompt">Regras para o Comentário</label><textarea id="cfgCommentPrompt" placeholder="Defina voz, oralidade, análise, posicionamento, ritmo e encerramento dos comentários." rows="16"></textarea></section>
 <section class="profile-editor-pane" data-pane="interests" role="tabpanel"><p class="footer-note">Cadastre um assunto por linha. Essas pautas orientam a busca e a classificação das notícias.</p><div class="pautas-modal-grid">
@@ -1750,8 +1887,43 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <div class="sidebar-pauta"><label for="interestDiscard">Descartar Assuntos</label><textarea id="interestDiscard" placeholder="Assuntos a evitar, um por linha" rows="5"></textarea></div>
 </div></section>
 <section class="profile-editor-pane" data-pane="sources" role="tabpanel"><p class="footer-note">Selecione as fontes, defina a prioridade de cada uma e sua ativação neste perfil. O cadastro é administrado na página Fontes.</p><div class="profile-source-actions"><button class="btn btn-secondary" onclick="setProfileSourcesEnabled(true)" type="button">Ativar todas</button><button class="btn btn-secondary" onclick="setProfileSourcesEnabled(false)" type="button">Desativar todas</button></div><div class="tablewrap"><table class="source-table profile-source-table"><thead><tr><th>Fonte</th><th>Abrangência</th><th>Prioridade</th><th>Ativa</th></tr></thead><tbody id="profileSourceTable"></tbody></table></div></section>
+<section class="profile-editor-pane active" data-pane="definitions" role="tabpanel">
+ <div class="profile-definitions-grid">
+  <section class="profile-definition-group"><h4>Notícias por Editoria</h4><p class="footer-note">Defina a quantidade de notícias desejada em cada editoria.</p><div class="quota-compact-grid">
+   <label>Política<input id="quotaPolitics" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
+   <label>Cotidiano<input id="quotaDaily" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
+   <label>Economia<input id="quotaEconomy" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
+   <label>Esportes<input id="quotaSports" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
+   <label>Cultura<input id="quotaCulture" max="100" min="0" onchange="saveEditorialCounts()" step="1" type="number" value="10"/></label>
+  </div><div class="small muted" id="profileQuotaTotal"></div></section>
+  <section class="profile-definition-group"><h4>Pontuação de Relevância</h4><p class="footer-note">Ajuste os pesos usados na ordenação por relevância. As alterações são aplicadas sem chamada de IA.</p><div class="scoring-settings-grid">
+   <label title="Pontos atribuídos a toda notícia antes de avaliar os demais critérios.">Base<input id="scoreBase" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="25"/></label>
+   <label title="Pontos somados para cada correspondência entre a notícia e as pautas cadastradas na editoria.">Por pauta<input id="scoreTopicHit" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="8"/></label>
+   <label title="Máximo de pontos que todas as correspondências com pautas podem acrescentar juntas.">Teto das pautas<input id="scoreTopicCap" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="30"/></label>
+   <label title="Bônus aplicado quando a notícia é identificada como de abrangência local.">Bônus local<input id="scoreLocal" max="100" min="-100" onchange="saveScoringSettings()" step="1" type="number" value="15"/></label>
+   <label title="Pontos adicionados quando a fonte está cadastrada com prioridade Alta.">Fonte alta<input id="scoreSourceHigh" max="100" min="-100" onchange="saveScoringSettings()" step="1" type="number" value="8"/></label>
+   <label title="Pontos adicionados quando a fonte está cadastrada com prioridade Normal.">Fonte normal<input id="scoreSourceNormal" max="100" min="-100" onchange="saveScoringSettings()" step="1" type="number" value="4"/></label>
+   <label title="Pontos adicionados (ou retirados) quando a fonte tem prioridade Baixa.">Fonte baixa<input id="scoreSourceLow" max="100" min="-100" onchange="saveScoringSettings()" step="1" type="number" value="-3"/></label>
+   <label title="Pontuação máxima concedida pela data da notícia.">Atualidade (máx.)<input id="scoreCurrentMax" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="10"/></label>
+   <label title="Pontos por ocorrência de termos genéricos de acontecimentos relevantes.">Por acontecimento<input id="scoreEventHit" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="3"/></label>
+   <label title="Limite total de pontos que os termos de acontecimentos relevantes podem acrescentar.">Teto<input id="scoreEventCap" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="12"/></label>
+   <label title="Pontos retirados quando a notícia corresponde a assunto marcado para descarte.">Desconto: descartados<input id="scoreDiscardPenalty" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="35"/></label>
+   <label title="Pontos retirados quando o sistema reconhece linguagem promocional.">Desconto: promocional<input id="scorePromoPenalty" max="100" min="0" onchange="saveScoringSettings()" step="1" type="number" value="20"/></label>
+  </div></section>
+  <section class="profile-definition-group"><h4>Cards Informativos</h4><p class="footer-note">Escolha quais cards serão exibidos na coluna lateral.</p>
+   <div class="profile-context-options">
+    <label class="context-setting-option"><input checked id="showContextClock" onchange="setContextCardVisibility('clock',this.checked)" type="checkbox"/> Data, hora e clima</label>
+    <label class="context-setting-option"><input id="showContextTimer" onchange="setContextCardVisibility('timer',this.checked)" type="checkbox"/> Timer</label>
+    <label class="context-setting-option"><input id="showContextUrgency" onchange="setContextCardVisibility('urgency',this.checked)" type="checkbox"/> Radar de urgência</label>
+    <label class="context-setting-option"><input checked id="showContextAgenda" onchange="setContextCardVisibility('agenda',this.checked)" type="checkbox"/> Agenda do dia</label>
+    <label class="context-setting-option"><input id="showContextRundown" onchange="setContextCardVisibility('rundown',this.checked)" type="checkbox"/> Tempo estimado da pauta</label>
+    <label class="context-setting-option"><input checked id="showContextFootball" onchange="setContextCardVisibility('football',this.checked)" type="checkbox"/> Resultados de futebol</label>
+   </div>
+  </section>
+ </div>
+</section>
 
-</div><div class="profile-editor-footer"><div class="profile-editor-context-actions"><button class="btn btn-secondary" id="profileEditorRestoreButton" onclick="restoreActiveProfileTabDefaults()" type="button">Restaurar padrão</button><button class="btn btn-secondary profile-source-footer-action" hidden="True" onclick="setProfileSourcesEnabled(true)" type="button">Ativar todas</button><button class="btn btn-secondary profile-source-footer-action" hidden="True" onclick="setProfileSourcesEnabled(false)" type="button">Desativar todas</button></div><span aria-live="polite" class="small muted" id="profileEditorStatus">Alterações ainda não salvas</span><div><button class="btn btn-secondary" onclick="requestCloseProfileEditor()" type="button">Fechar</button> <button class="btn btn-primary" id="saveEditorialProfileButton" onclick="saveProfileEditorAndClose()" type="button">Salvar perfil</button></div></div>
+</div><div class="profile-editor-footer"><div class="profile-editor-context-actions"><button class="btn btn-secondary" id="profileEditorRestoreButton" onclick="restoreActiveProfileTabDefaults()" type="button">Restaurar padrão</button><button class="btn btn-secondary profile-source-footer-action" hidden="True" onclick="setProfileSourcesEnabled(true)" type="button">Ativar todas</button><button class="btn btn-secondary profile-source-footer-action" hidden="True" onclick="setProfileSourcesEnabled(false)" type="button">Desativar todas</button></div><span aria-live="polite" class="profile-source-count" id="profileSourceCount" hidden>0/0</span><span aria-live="polite" class="small muted" id="profileEditorStatus">Alterações ainda não salvas</span><div><button class="btn btn-secondary" onclick="requestCloseProfileEditor()" type="button">Fechar</button> <button class="btn btn-primary" id="saveEditorialProfileButton" onclick="saveProfileEditorAndClose()" type="button">Salvar perfil</button></div></div>
 </div>
 </div>
 <div aria-labelledby="apiConfigTitle" aria-modal="true" class="modal api-modal" id="apiConfigModal" role="dialog">
@@ -1773,13 +1945,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 </div>
 </div>
 <aside aria-label="Painel de apoio editorial" class="context-rail">
-<section aria-labelledby="clockCardTitle" class="context-card context-clock-weather-card" data-context-card="clock" draggable="true" id="contextCardClock">
-<h2 class="context-card-head" id="clockCardTitle"><i aria-hidden="true" class="fa-regular fa-clock"></i> Data, hora e clima</h2>
-<div class="clock-weather-grid">
-<div class="clock-weather-time"><div class="context-clock" id="contextClock">--:--:--</div><div class="context-date" id="contextDate">Carregando data…</div></div>
-<div aria-live="polite" class="clock-weather-weather context-loading" id="weatherContent" role="status">Consultando clima…</div>
-</div>
-</section>
+
 <section aria-labelledby="timerCardTitle" class="context-card" data-context-card="timer" draggable="true" id="contextCardTimer">
 <h2 class="context-card-head" id="timerCardTitle"><i aria-hidden="true" class="fa-solid fa-stopwatch"></i> Timer</h2>
 <div class="timer-readout-row"><div class="context-clock" id="timerDisplay">05:00</div><input aria-label="Duração personalizada em minutos" id="timerMinutes" inputmode="numeric" maxlength="3" oninput="this.value=this.value.replace(/\D/g,'').slice(0,3);if(Number(this.value)&gt;180)this.value='180'" placeholder="min" type="text" value="5"/></div><div aria-label="Tempos rápidos" class="timer-presets"><button class="btn btn-secondary" onclick="setContextTimer(15)" type="button">15s</button><button class="btn btn-secondary" onclick="setContextTimer(30)" type="button">30s</button><button class="btn btn-secondary" onclick="setContextTimer(45)" type="button">45s</button><button class="btn btn-secondary" onclick="setContextTimer(60)" type="button">60s</button></div><div class="timer-controls"><button class="btn btn-primary" id="timerStartBtn" onclick="toggleContextTimer()" type="button">Iniciar</button><button class="btn btn-secondary" onclick="resetContextTimer()" type="button">Zerar</button></div><div class="context-footnote" id="timerStatus">Defina o tempo e inicie a contagem.</div>
@@ -1900,10 +2066,45 @@ function splitLegacyProcessingPrompt(value){
   if(idx<0)return {summary:DEFAULT_SUMMARY_PROMPT,comment:raw};
   return {summary:raw.slice(0,idx).replace(/^INSTRUÇÕES PARA GERAÇÃO DE RESUMOS JORNALÍSTICOS E COMENTÁRIOS\s*1\. RESUMO JORNALÍSTICO\s*/,'').trim(),comment:raw.slice(idx).trim()};
 }
+const CONTEXT_CARD_IDS={clock:'contextCardClock',timer:'contextCardTimer',urgency:'contextCardUrgency',agenda:'contextCardAgenda',rundown:'contextCardRundown',football:'contextCardFootball'};
+const CONTEXT_CHECK_IDS={clock:'showContextClock',timer:'showContextTimer',urgency:'showContextUrgency',agenda:'showContextAgenda',rundown:'showContextRundown',football:'showContextFootball'};
+const DEFAULT_PROFILE_DEFINITIONS={
+ editorialCounts:{'Política':10,'Cotidiano':10,'Economia':10,'Esportes':10,'Cultura':10},
+ scoring:{base:25,topicHit:8,topicCap:30,local:15,sourceHigh:8,sourceNormal:4,sourceLow:-3,currentMax:10,eventHit:3,eventCap:12,discardPenalty:35,promoPenalty:20},
+ contextCards:{visibility:{clock:true,timer:false,urgency:false,agenda:true,rundown:false,football:true},order:['clock','timer','agenda','football','urgency','rundown']}
+};
+function normalizeProfileDefinitions(value){
+ const d=value&&typeof value==='object'?value:{};const counts={...DEFAULT_PROFILE_DEFINITIONS.editorialCounts,...(d.editorialCounts||{})};
+ const scoring={...DEFAULT_PROFILE_DEFINITIONS.scoring,...(d.scoring||{})};
+ const context=d.contextCards||{};const visibility={...DEFAULT_PROFILE_DEFINITIONS.contextCards.visibility,...(context.visibility||{})};
+ const order=Array.isArray(context.order)?context.order.slice():DEFAULT_PROFILE_DEFINITIONS.contextCards.order.slice();
+ return {editorialCounts:counts,scoring,contextCards:{visibility,order}};
+}
+function applyProfileDefinitions(profile=activeEditorialProfile()){
+ const defs=normalizeProfileDefinitions(profile?.definitions);if(profile)profile.definitions=JSON.parse(JSON.stringify(defs));
+ state.config.editorialCounts=JSON.parse(JSON.stringify(defs.editorialCounts));state.config.count=Object.values(defs.editorialCounts).reduce((a,b)=>a+(Number(b)||0),0);
+ state.config.scoring=JSON.parse(JSON.stringify(defs.scoring));state.config.contextCards=JSON.parse(JSON.stringify(defs.contextCards));
+ loadScoringSettingsIntoUI();renderProfileDefinitionsUI();
+ if(typeof initContextCardPreferences==='function')initContextCardPreferences();
+}
+function renderProfileDefinitionsUI(){
+ const c=state.config||{};const counts=c.editorialCounts||DEFAULT_PROFILE_DEFINITIONS.editorialCounts;
+ for(const [id,key] of [['quotaPolitics','Política'],['quotaDaily','Cotidiano'],['quotaEconomy','Economia'],['quotaSports','Esportes'],['quotaCulture','Cultura']]){const el=document.getElementById(id);if(el)el.value=counts[key]??10;}
+ const total=Object.values(counts).reduce((a,b)=>a+(Number(b)||0),0);const totalEl=document.getElementById('profileQuotaTotal');if(totalEl)totalEl.textContent=`Total previsto: ${total} notícias`;
+ const vis=c.contextCards?.visibility||DEFAULT_PROFILE_DEFINITIONS.contextCards.visibility;for(const [key,id] of Object.entries(CONTEXT_CHECK_IDS||{})){const el=document.getElementById(id);if(el)el.checked=vis[key]!==false;}
+}
+function readProfileDefinitionsFromUI(){
+ const counts={};for(const [id,key] of [['quotaPolitics','Política'],['quotaDaily','Cotidiano'],['quotaEconomy','Economia'],['quotaSports','Esportes'],['quotaCulture','Cultura']]){const el=document.getElementById(id);counts[key]=Math.max(0,Number(el?.value??state.config.editorialCounts?.[key]??10)||0);}
+ const scoring={...DEFAULT_PROFILE_DEFINITIONS.scoring};for(const [key,id] of Object.entries(scoringInputMap())){const el=document.getElementById(id);scoring[key]=Number.isFinite(Number(el?.value))?Number(el.value):DEFAULT_PROFILE_DEFINITIONS.scoring[key];}
+ const visibility={...DEFAULT_PROFILE_DEFINITIONS.contextCards.visibility};for(const [key,id] of Object.entries(CONTEXT_CHECK_IDS)){const el=document.getElementById(id);if(el)visibility[key]=!!el.checked;}
+ const order=Array.isArray(state.config.contextCards?.order)?state.config.contextCards.order.slice():DEFAULT_PROFILE_DEFINITIONS.contextCards.order.slice();
+ return {editorialCounts:counts,scoring,contextCards:{visibility,order}};
+}
 function ensureEditorialProfiles(){
   const c=state.config;
   if(!Array.isArray(c.editorialProfiles))c.editorialProfiles=[];
   c.editorialProfiles.forEach(p=>{
+    p.definitions=normalizeProfileDefinitions(p.definitions);
     if(!p.interests||typeof p.interests!=='object')p.interests=JSON.parse(JSON.stringify(c.interests||defaultState.config.interests));
     if(p.id===c.activeEditorialProfileId)p.sources=JSON.parse(JSON.stringify(state.sources||[]));
     else if(Array.isArray(p.sources)){
@@ -1936,7 +2137,8 @@ function saveActiveEditorialProfile(){
   p.summaryPrompt=document.getElementById('cfgSummaryPrompt')?.value||'';
   p.commentPrompt=document.getElementById('cfgCommentPrompt')?.value||'';
   p.interests=JSON.parse(JSON.stringify(state.config.interests||defaultState.config.interests));
-  p.sourceStates=(state.sources||[]).map(source=>({id:source.id,active:source.active===true}));
+  p.sourceStates=(state.sources||[]).map(source=>({id:source.id,active:source.active===true,weight:source.weight||'Média',priority:source.weight||'Média'}));
+  p.definitions=readProfileDefinitionsFromUI();state.config.editorialCounts=JSON.parse(JSON.stringify(p.definitions.editorialCounts));state.config.scoring=JSON.parse(JSON.stringify(p.definitions.scoring));state.config.contextCards=JSON.parse(JSON.stringify(p.definitions.contextCards));
   state.config.editorialProfile=p.editorialProfile;state.config.summaryPrompt=p.summaryPrompt;state.config.commentPrompt=p.commentPrompt;
   state.config.processingPrompt=[p.summaryPrompt,p.commentPrompt].filter(Boolean).join('\n\n');persist();
 }
@@ -1948,6 +2150,7 @@ function renderEditorialProfileSelector(){
   for(const id of ['editorialProfileSelect','sidebarEditorialProfileSelect']){const sel=document.getElementById(id);if(sel){sel.innerHTML=options;sel.value=state.config.activeEditorialProfileId||'';}}
 }
 const RADAR_GITHUB_PROFILE_API='https://radar-api.camiloctorquato.workers.dev/api/github/profiles';
+const RADAR_GITHUB_PROFILE_READ_API='https://radar-api.camiloctorquato.workers.dev/api/github/profile';
 const RADAR_GITHUB_SOURCES_API='https://radar-api.camiloctorquato.workers.dev/api/github/sources';
 const RADAR_GITHUB_SOURCES_WRITE_API='https://radar-api.camiloctorquato.workers.dev/api/sources/save';
 let sourceCatalogLoaded=false,sourceCatalogDirty=false,sourceSaveInProgress=false,sourceCatalogOriginal=[];
@@ -1992,20 +2195,36 @@ async function loadGitHubEditorialProfiles(showFeedback=false){
     const response=await fetch(RADAR_GITHUB_PROFILE_API,{cache:'no-store',headers:{'Accept':'application/json'}});
     if(!response.ok)throw new Error(response.status===404?'Repositório ou pasta profiles ainda não publicados.':`Worker respondeu HTTP ${response.status}.`);
     const payload=await response.json();
-    const jsonFiles=Array.isArray(payload?.files)?payload.files:[];
+    if(payload?.ok===false)throw new Error(payload.error||'O Worker não conseguiu consultar os perfis no GitHub.');
+    // O Worker V167 retorna um array de metadados. Versões anteriores podem
+    // retornar {files:[...]}; aceitamos ambos os formatos para compatibilidade.
+    const jsonFiles=Array.isArray(payload)?payload:(Array.isArray(payload?.files)?payload.files:[]);
     const syncedProfiles=[];
     for(const file of jsonFiles){
-      const data=file.profile;
+      const fileName=String(file.name||String(file.path||'').split('/').pop()||'');
+      const filePath=String(file.path||('profiles/'+fileName));
+      let data=file.profile||null;
+      // A listagem contém apenas metadados; busca o JSON completo pela rota
+      // autenticada do Worker antes de validar e montar o perfil.
+      if(!data){
+        const profileUrl=RADAR_GITHUB_PROFILE_READ_API+'?path='+encodeURIComponent(filePath);
+        const profileResponse=await fetch(profileUrl,{cache:'no-store',headers:{'Accept':'application/json'}});
+        if(!profileResponse.ok){
+          const detail=await profileResponse.json().catch(()=>({}));
+          throw new Error(detail.error||`Falha ao carregar ${fileName} (HTTP ${profileResponse.status}).`);
+        }
+        data=await profileResponse.json();
+        if(data?.ok===false)throw new Error(data.error||`Falha ao ler ${fileName} no GitHub.`);
+      }
       if(data?.type!=='radar-editorial-profile'||!String(data.name||'').trim()||!String(data.editorialProfile||'').trim())continue;
       if(!data.interests||typeof data.interests!=='object'||!Array.isArray(data.interests['Política'])||!Array.isArray(data.interests['Descartar Assuntos']))continue;
-      const id='github-profile-'+file.name.replace(/[^a-z0-9_-]/gi,'-').toLowerCase();
-      const existing=state.config.editorialProfiles.find(p=>p.id===id);
-      syncedProfiles.push({id,name:String(data.name).trim(),editorialProfile:String(data.editorialProfile),summaryPrompt:String(data.summaryPrompt||DEFAULT_SUMMARY_PROMPT),commentPrompt:String(data.commentPrompt||DEFAULT_RADIO_COMMENT_PROMPT),scopeFilter:data.scopeFilter?JSON.parse(JSON.stringify(data.scopeFilter)):null,interests:JSON.parse(JSON.stringify(data.interests)),sourceStates:Array.isArray(data.sourceStates)?JSON.parse(JSON.stringify(data.sourceStates)):(Array.isArray(data.sources)?data.sources.map(x=>({id:x.id,active:x.active===true})):[]),source:'github',sourcePath:file.path});
+      const id='github-profile-'+fileName.replace(/[^a-z0-9_-]/gi,'-').toLowerCase();
+      syncedProfiles.push({id,name:String(data.name).trim(),editorialProfile:String(data.editorialProfile),summaryPrompt:String(data.summaryPrompt||DEFAULT_SUMMARY_PROMPT),commentPrompt:String(data.commentPrompt||DEFAULT_RADIO_COMMENT_PROMPT),definitions:normalizeProfileDefinitions(data.definitions||((`github-profile-${fileName.replace(/[^a-z0-9_-]/gi,'-').toLowerCase()}`===previousActiveId)?{editorialCounts:state.config.editorialCounts,scoring:state.config.scoring,contextCards:state.config.contextCards}:DEFAULT_PROFILE_DEFINITIONS)),scopeFilter:data.scopeFilter?JSON.parse(JSON.stringify(data.scopeFilter)):null,interests:JSON.parse(JSON.stringify(data.interests)),sourceStates:Array.isArray(data.sourceStates)?JSON.parse(JSON.stringify(data.sourceStates)):(Array.isArray(data.sources)?data.sources.map(x=>({id:x.id,active:x.active===true})):[]),source:'github',sourcePath:filePath});
     }
     state.config.editorialProfiles=syncedProfiles;
     const selected=state.config.editorialProfiles.find(p=>p.id===previousActiveId)||state.config.editorialProfiles[0]||null;
     state.config.activeEditorialProfileId=selected?.id||'';
-    if(selected){if(selected.interests)state.config.interests=JSON.parse(JSON.stringify(selected.interests));if(sourceCatalogLoaded)applyCatalogToProfile(selected);}
+    if(selected){if(selected.interests)state.config.interests=JSON.parse(JSON.stringify(selected.interests));if(sourceCatalogLoaded)applyCatalogToProfile(selected);applyProfileDefinitions(selected);}
     else{state.config.editorialProfile='';state.config.summaryPrompt='';state.config.commentPrompt='';state.config.processingPrompt='';}
     persist();renderConfig();
     if(showFeedback)toast(syncedProfiles.length?`${syncedProfiles.length} perfil(is) sincronizado(s) com o GitHub.`:'Nenhum perfil JSON publicado foi encontrado no GitHub.');
@@ -2017,7 +2236,7 @@ function switchEditorialProfile(id){
   state.config.activeEditorialProfileId=id;ensureEditorialProfiles();
   const selected=state.config.editorialProfiles.find(x=>x.id===id);
   if(selected?.interests)state.config.interests=JSON.parse(JSON.stringify(selected.interests));
-  applyProfileSources(selected);profileSourceStatesDirty=false;
+  applyProfileSources(selected);applyProfileDefinitions(selected);profileSourceStatesDirty=false;
   // Atualiza imediatamente a tabela de fontes com o conjunto do perfil recém-selecionado.
   // renderConfig também atualiza fontes, mas a chamada explícita evita depender da ordem
   // de renderização dos painéis/modal e garante a troca visual no mesmo evento.
@@ -2029,8 +2248,8 @@ function cleanEditorialProfileName(value){return String(value||'').trim().replac
 function addEditorialProfile(){
   saveActiveEditorialProfile();const name=cleanEditorialProfileName(prompt('Nome do novo perfil:'));if(!name)return;
   const id='profile-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7);
-  state.config.editorialProfiles.push({id,name,editorialProfile:DEFAULT_EDITORIAL_PROFILE,summaryPrompt:DEFAULT_SUMMARY_PROMPT,commentPrompt:DEFAULT_RADIO_COMMENT_PROMPT,sourceStates:(state.sources||[]).map(x=>({id:x.id,active:x.active===true}))});
-  state.config.activeEditorialProfileId=id;ensureEditorialProfiles();persist();renderConfig();toast('Novo perfil criado. Vamos publicá-lo no GitHub.');saveEditorialProfileToGitHub('create');
+  state.config.editorialProfiles.push({id,name,editorialProfile:DEFAULT_EDITORIAL_PROFILE,summaryPrompt:DEFAULT_SUMMARY_PROMPT,commentPrompt:DEFAULT_RADIO_COMMENT_PROMPT,definitions:normalizeProfileDefinitions(DEFAULT_PROFILE_DEFINITIONS),sourceStates:(state.sources||[]).map(x=>({id:x.id,active:x.active===true}))});
+  state.config.activeEditorialProfileId=id;ensureEditorialProfiles();applyProfileDefinitions(state.config.editorialProfiles.find(x=>x.id===id));persist();renderConfig();toast('Novo perfil criado. Vamos publicá-lo no GitHub.');saveEditorialProfileToGitHub('create');
 }
 function importEditorialProfile(input){
   const file=input?.files?.[0];if(!file)return;
@@ -2059,7 +2278,7 @@ function importEditorialProfile(input){
       state.config.activeEditorialProfileId=id;
       ensureEditorialProfiles();
       state.config.interests=JSON.parse(JSON.stringify(profile.interests));
-      applyProfileSources(profile);
+      applyProfileSources(profile);applyProfileDefinitions(profile);
       persist();
       renderConfig();
       toast(profile.scopeFilter?'Perfil importado, ativado e com filtro exclusivo de entidades.':'Perfil editorial importado e ativado.');
@@ -2077,7 +2296,8 @@ function editorialProfilePayload(profile=activeEditorialProfile()){
   saveActiveEditorialProfile();
   // Fonte de verdade do estado de ativação é a tabela atualmente exibida no perfil ativo.
   profile.sourceStates=(state.sources||[]).map(source=>({id:source.id,active:source.active===true,weight:source.weight||'Média',priority:source.weight||'Média'}));
-  return {version:3,type:'radar-editorial-profile',name:String(profile.name||'Perfil sem nome'),editorialProfile:String(profile.editorialProfile||''),summaryPrompt:String(profile.summaryPrompt||DEFAULT_SUMMARY_PROMPT),commentPrompt:String(profile.commentPrompt||DEFAULT_RADIO_COMMENT_PROMPT),scopeFilter:profile.scopeFilter||null,interests:JSON.parse(JSON.stringify(profile.interests||state.config.interests||defaultState.config.interests)),sourceStates:profile.sourceStates||[],sources:(profile.sourceStates||[]).map(x=>({id:x.id,active:x.active===true,weight:x.weight||'Média',priority:x.weight||'Média'})),sourcePath:profile.sourcePath||undefined};
+  profile.definitions=normalizeProfileDefinitions(profile.definitions||readProfileDefinitionsFromUI());
+  return {version:4,type:'radar-editorial-profile',name:String(profile.name||'Perfil sem nome'),editorialProfile:String(profile.editorialProfile||''),summaryPrompt:String(profile.summaryPrompt||DEFAULT_SUMMARY_PROMPT),commentPrompt:String(profile.commentPrompt||DEFAULT_RADIO_COMMENT_PROMPT),definitions:JSON.parse(JSON.stringify(profile.definitions)),scopeFilter:profile.scopeFilter||null,interests:JSON.parse(JSON.stringify(profile.interests||state.config.interests||defaultState.config.interests)),sourceStates:profile.sourceStates||[],sources:(profile.sourceStates||[]).map(x=>({id:x.id,active:x.active===true,weight:x.weight||'Média',priority:x.weight||'Média'})),sourcePath:profile.sourcePath||undefined};
 }
 function profileFileSlug(name){return String(name||'perfil').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70)||'perfil';}
 async function saveEditorialProfileToGitHub(mode,tokenOverride=''){
@@ -2311,6 +2531,7 @@ function persist(){
   snapshot.config.activeEditorialProfileId='';
   snapshot.config.editorialProfile='';snapshot.config.summaryPrompt='';snapshot.config.commentPrompt='';snapshot.config.processingPrompt='';
   snapshot.config.interests=JSON.parse(JSON.stringify(defaultState.config.interests));
+  snapshot.config.editorialCounts=JSON.parse(JSON.stringify(DEFAULT_PROFILE_DEFINITIONS.editorialCounts));snapshot.config.scoring=JSON.parse(JSON.stringify(DEFAULT_PROFILE_DEFINITIONS.scoring));snapshot.config.contextCards=JSON.parse(JSON.stringify(DEFAULT_PROFILE_DEFINITIONS.contextCards));
   snapshot.sources=JSON.parse(JSON.stringify(defaultState.sources));
   try{localStorage.setItem(KEY,JSON.stringify(snapshot));}catch(e){console.warn('Não foi possível salvar os dados locais do Radar',e)}
   try{const id=String(state.config.activeEditorialProfileId||'');if(id)localStorage.setItem(ACTIVE_PROFILE_KEY,id)}catch(e){}
@@ -2337,6 +2558,7 @@ function toggleTheme(){const next=document.documentElement.dataset.theme==='dark
 function setViewZoom(value){
   const zoom=Math.max(50,Math.min(150,Math.round(Number(value)/5)*5));
   document.documentElement.style.zoom=(zoom/100).toString();
+  document.documentElement.style.setProperty('--radar-view-zoom',(zoom/100).toString());
   localStorage.setItem('radar_view_zoom',String(zoom));
   const output=document.getElementById('viewZoomValue');
   if(output)output.textContent=zoom+'%';
@@ -3155,11 +3377,11 @@ function saveScoringSettings(showToast=true){
   const values={};
   for(const [key,id] of Object.entries(scoringInputMap())){const el=document.getElementById(id);if(el){const n=Number(el.value);values[key]=Number.isFinite(n)?n:DEFAULT_SCORING_SETTINGS[key]}}
   state.config.scoring={...DEFAULT_SCORING_SETTINGS,...values};
-  persist();renderNews();if(showToast)toast('Pontuação de relevância salva neste navegador.');
+  const p=activeEditorialProfile();if(p)p.definitions=normalizeProfileDefinitions({...p.definitions,scoring:state.config.scoring});markProfileEditorDirty();renderNews();if(showToast)toast('Pontuação atualizada no rascunho do perfil. Salve o perfil para publicar.');
 }
 function resetScoringSettings(){
   state.config.scoring={...DEFAULT_SCORING_SETTINGS};
-  loadScoringSettingsIntoUI();persist();renderNews();toast('Pontuação padrão restaurada.');
+  loadScoringSettingsIntoUI();const p=activeEditorialProfile();if(p)p.definitions=normalizeProfileDefinitions({...p.definitions,scoring:state.config.scoring});markProfileEditorDirty();renderNews();toast('Pontuação padrão restaurada neste rascunho. Salve o perfil para publicar.');
 }
 loadScoringSettingsIntoUI();
 function applySourceMetadata(item,source){
@@ -4178,7 +4400,7 @@ function renderConfig(){
   const discardEl=document.getElementById('interestDiscard');if(discardEl)discardEl.value=(interests['Descartar Assuntos']||[]).join('\n');
   const counts=c.editorialCounts||defaultState.config.editorialCounts;
   for(const [id,key] of [['quotaPolitics','Política'],['quotaDaily','Cotidiano'],['quotaEconomy','Economia'],['quotaSports','Esportes'],['quotaCulture','Cultura']]){const el=document.getElementById(id);if(el)el.value=counts[key]??10;}
-  loadScoringSettingsIntoUI();
+  loadScoringSettingsIntoUI();renderProfileDefinitionsUI();
   renderSources();renderProfileSourceToggles();
 }
 function restoreDefaultCommentInstructions(){
@@ -4193,27 +4415,31 @@ function readProfileEditorIntoState(){
  const parse=id=>{const el=document.getElementById(id);return el?[...new Set(el.value.split(/\r?\n|\r|\\n/).map(x=>x.trim()).filter(Boolean))]:[]};
  p.interests={'Política':parse('interestPolitics'),'Cotidiano':parse('interestDaily'),'Economia':parse('interestEconomy'),'Esportes':parse('interestSports'),'Cultura':parse('interestCulture'),'Descartar Assuntos':parse('interestDiscard')};state.config.interests=JSON.parse(JSON.stringify(p.interests));
  p.sourceStates=(state.sources||[]).map(x=>({id:x.id,active:x.active===true,weight:x.weight||'Média',priority:x.weight||'Média'}));
+ p.definitions=readProfileDefinitionsFromUI();
+ state.config.editorialCounts=JSON.parse(JSON.stringify(p.definitions.editorialCounts));state.config.scoring=JSON.parse(JSON.stringify(p.definitions.scoring));state.config.contextCards=JSON.parse(JSON.stringify(p.definitions.contextCards));
  state.config.editorialProfile=p.editorialProfile;state.config.summaryPrompt=p.summaryPrompt;state.config.commentPrompt=p.commentPrompt;state.config.processingPrompt=[p.summaryPrompt,p.commentPrompt].filter(Boolean).join('\n\n');return true;
 }
-function renderProfileSourceToggles(){const body=document.getElementById('profileSourceTable');if(!body)return;body.innerHTML=(state.sources||[]).map(src=>`<tr><td><b>${esc(src.name)}</b></td><td>${esc(normalizeSourceScope(src.scope,src.name,src.url))}</td><td><select class="profile-source-priority" aria-label="Prioridade de ${esc(src.name)}" onchange="setProfileSourcePriority(decodeURIComponent('${encodeURIComponent(String(src.id))}'),this.value)"><option value="Alta" ${(src.weight||'Média')==='Alta'?'selected':''}>Alta</option><option value="Média" ${(src.weight||'Média')==='Média'?'selected':''}>Média</option><option value="Baixa" ${(src.weight||'Média')==='Baixa'?'selected':''}>Baixa</option></select></td><td><label class="switch"><input type="checkbox" ${src.active?'checked':''} aria-label="Ativar ${esc(src.name)} neste perfil" onchange="toggleProfileSource(decodeURIComponent('${encodeURIComponent(String(src.id))}'),this.checked)"><span class="slider"></span></label></td></tr>`).join('');}
+function renderProfileSourceToggles(){const body=document.getElementById('profileSourceTable');if(!body)return;body.innerHTML=(state.sources||[]).map(src=>`<tr><td><b>${esc(src.name)}</b></td><td>${esc(normalizeSourceScope(src.scope,src.name,src.url))}</td><td><select class="profile-source-priority" aria-label="Prioridade de ${esc(src.name)}" onchange="setProfileSourcePriority(decodeURIComponent('${encodeURIComponent(String(src.id))}'),this.value)"><option value="Alta" ${(src.weight||'Média')==='Alta'?'selected':''}>Alta</option><option value="Média" ${(src.weight||'Média')==='Média'?'selected':''}>Média</option><option value="Baixa" ${(src.weight||'Média')==='Baixa'?'selected':''}>Baixa</option></select></td><td><label class="switch"><input type="checkbox" ${src.active?'checked':''} aria-label="Ativar ${esc(src.name)} neste perfil" onchange="toggleProfileSource(decodeURIComponent('${encodeURIComponent(String(src.id))}'),this.checked)"><span class="slider"></span></label></td></tr>`).join('');updateProfileSourceCount();}
 function setProfileSourcePriority(id,value){const src=state.sources.find(x=>String(x.id)===String(id));if(!src)return;src.weight=value;const p=activeEditorialProfile();if(p)p.sourceStates=state.sources.map(x=>({id:x.id,active:x.active===true,weight:x.weight||'Média',priority:x.weight||'Média'}));markProfileEditorDirty();}
 function toggleProfileSource(id,enabled){const src=state.sources.find(x=>String(x.id)===String(id));if(!src)return;src.active=!!enabled;const p=activeEditorialProfile();if(p)p.sourceStates=state.sources.map(x=>({id:x.id,active:x.active===true,weight:x.weight||'Média',priority:x.weight||'Média'}));renderProfileSourceToggles();markProfileEditorDirty();}
 function setProfileSourcesEnabled(enabled){(state.sources||[]).forEach(x=>x.active=!!enabled);const p=activeEditorialProfile();if(p)p.sourceStates=state.sources.map(x=>({id:x.id,active:x.active===true,weight:x.weight||'Média',priority:x.weight||'Média'}));renderProfileSourceToggles();markProfileEditorDirty();}
 async function switchProfileInsideEditor(id){if(id===state.config.activeEditorialProfileId)return;if(profileEditorDirty){const save=confirm('Há alterações não salvas neste perfil. Deseja salvá-las antes de trocar?\n\nOK = Salvar\nCancelar = descartar e trocar.');if(save){const ok=await saveProfileEditorAndClose();if(!ok)return;}else{const discard=confirm('Descartar as alterações deste perfil e trocar?');if(!discard)return;restoreProfileEditorSnapshot();profileEditorOpening=true;renderConfig();profileEditorOpening=false;}}switchEditorialProfile(id);profileEditorOpening=true;renderConfig();profileEditorOpening=false;renderProfileSourceToggles();profileEditorDirty=false;captureProfileEditorSnapshot();document.getElementById('rulesInstructionsModal')?.classList.add('open');}
-function captureProfileEditorSnapshot(){const p=activeEditorialProfile();profileEditorOriginal=p?JSON.parse(JSON.stringify({editorialProfile:p.editorialProfile,summaryPrompt:p.summaryPrompt,commentPrompt:p.commentPrompt,interests:p.interests,sourceStates:p.sourceStates})):null;}
-function restoreProfileEditorSnapshot(){const p=activeEditorialProfile();if(p&&profileEditorOriginal){Object.assign(p,JSON.parse(JSON.stringify(profileEditorOriginal)));applyCatalogToProfile(p);state.config.interests=JSON.parse(JSON.stringify(p.interests||defaultState.config.interests));}}
-function selectProfileEditorTab(tab){document.querySelectorAll('#rulesInstructionsModal .profile-editor-tab').forEach(el=>{const active=el.dataset.tab===tab;el.classList.toggle('active',active);el.setAttribute('aria-selected',active?'true':'false');});document.querySelectorAll('#rulesInstructionsModal .profile-editor-pane').forEach(el=>el.classList.toggle('active',el.dataset.pane===tab));}
-function openRulesInstructionsModal(){const modal=document.getElementById('rulesInstructionsModal');if(!modal)return;profileEditorOpening=true;renderConfig();profileEditorOpening=false;profileEditorDirty=false;captureProfileEditorSnapshot();selectProfileEditorTab('editorial');const status=document.getElementById('profileEditorStatus');if(status)status.textContent='Nenhuma alteração pendente';modal.classList.add('open');}
+function captureProfileEditorSnapshot(){const p=activeEditorialProfile();profileEditorOriginal=p?JSON.parse(JSON.stringify({editorialProfile:p.editorialProfile,summaryPrompt:p.summaryPrompt,commentPrompt:p.commentPrompt,interests:p.interests,sourceStates:p.sourceStates,definitions:normalizeProfileDefinitions(p.definitions)})):null;}
+function restoreProfileEditorSnapshot(){const p=activeEditorialProfile();if(p&&profileEditorOriginal){Object.assign(p,JSON.parse(JSON.stringify(profileEditorOriginal)));applyCatalogToProfile(p);state.config.interests=JSON.parse(JSON.stringify(p.interests||defaultState.config.interests));applyProfileDefinitions(p);renderConfig();}}
+function updateProfileSourceCount(){const el=document.getElementById('profileSourceCount');if(!el)return;const list=state.sources||[];const active=list.filter(x=>x.active===true).length;el.textContent=`${active}/${list.length}`;el.hidden=(document.querySelector('#rulesInstructionsModal .profile-editor-tab.active')?.dataset.tab!=='sources');}
+function selectProfileEditorTab(tab){document.querySelectorAll('#rulesInstructionsModal .profile-editor-tab').forEach(el=>{const active=el.dataset.tab===tab;el.classList.toggle('active',active);el.setAttribute('aria-selected',active?'true':'false');});document.querySelectorAll('#rulesInstructionsModal .profile-editor-pane').forEach(el=>el.classList.toggle('active',el.dataset.pane===tab));updateProfileSourceCount();const content=document.querySelector('#rulesInstructionsModal .rules-instructions-content');if(content)content.scrollTop=0;}
+function openRulesInstructionsModal(){const modal=document.getElementById('rulesInstructionsModal');if(!modal)return;profileEditorOpening=true;renderConfig();profileEditorOpening=false;profileEditorDirty=false;captureProfileEditorSnapshot();selectProfileEditorTab('definitions');const status=document.getElementById('profileEditorStatus');if(status)status.textContent='Nenhuma alteração pendente';modal.classList.add('open');}
 function openProfileEditorSection(section){openRulesInstructionsModal();const details=[...document.querySelectorAll('#rulesInstructionsModal .profile-editor-section')].find(d=>d.dataset.profileSection===section);if(details){details.open=true;details.scrollIntoView({block:'nearest',behavior:'smooth'});}}
 async function saveProfileEditorAndClose(){
  if(!readProfileEditorIntoState())return false;const p=activeEditorialProfile();if(!p?.sourcePath){toast('Este perfil ainda não foi publicado no GitHub. Publique-o antes de atualizar.');return false;}
  const token=sourceAccessToken||prompt('Informe o token de acesso do Radar para salvar este perfil:');if(!token)return false;sourceAccessToken=token.trim();const btn=document.getElementById('saveEditorialProfileButton');if(btn){btn.disabled=true;btn.textContent='Salvando…'}
- try{const payload=editorialProfilePayload(p);payload.sourcePath=p.sourcePath;const response=await fetch(RADAR_GITHUB_PROFILE_WRITE_API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+sourceAccessToken},body:JSON.stringify({mode:'update',path:p.sourcePath,profile:payload})});const result=await response.json().catch(()=>({}));if(response.status===401)throw new Error('Token inválido. Confira RADAR_IMPORT_TOKEN.');if(!response.ok||!result.ok)throw new Error(result.error||`Worker respondeu HTTP ${response.status}.`);p.source='github';profileEditorDirty=false;persist();const status=document.getElementById('profileEditorStatus');if(status)status.textContent='Perfil salvo no GitHub';toast('Perfil atualizado no GitHub, incluindo pautas e fontes.');captureProfileEditorSnapshot();document.getElementById('rulesInstructionsModal')?.classList.remove('open');return true;}
+ try{const payload=editorialProfilePayload(p);payload.sourcePath=p.sourcePath;const response=await fetch(RADAR_GITHUB_PROFILE_WRITE_API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+sourceAccessToken},body:JSON.stringify({mode:'update',path:p.sourcePath,profile:payload})});const result=await response.json().catch(()=>({}));if(response.status===401)throw new Error('Token inválido. Confira RADAR_IMPORT_TOKEN.');if(!response.ok||!result.ok)throw new Error(result.error||`Worker respondeu HTTP ${response.status}.`);p.source='github';profileEditorDirty=false;persist();const status=document.getElementById('profileEditorStatus');if(status)status.textContent='Perfil salvo no GitHub';toast('Perfil atualizado no GitHub, incluindo pautas, fontes e definições.');captureProfileEditorSnapshot();document.getElementById('rulesInstructionsModal')?.classList.remove('open');return true;}
  catch(error){toast(`Não foi possível salvar o perfil. As alterações continuam abertas. ${error.message||''}`);return false;}
  finally{if(btn){btn.disabled=false;btn.textContent='Salvar perfil'}}
 }
 async function requestCloseProfileEditor(){if(!profileEditorDirty){document.getElementById('rulesInstructionsModal')?.classList.remove('open');return;}const save=confirm('Existem alterações não salvas. Deseja salvar o perfil antes de fechar?\n\nOK = Salvar\nCancelar = escolher se deseja descartar.');if(save){await saveProfileEditorAndClose();return;}const discard=confirm('Descartar todas as alterações não salvas e fechar o editor?');if(discard){restoreProfileEditorSnapshot();renderConfig();profileEditorDirty=false;document.getElementById('rulesInstructionsModal')?.classList.remove('open');}}
-['cfgEditorialProfile','cfgSummaryPrompt','cfgCommentPrompt','interestPolitics','interestDaily','interestEconomy','interestSports','interestCulture','interestDiscard'].forEach(id=>document.getElementById(id)?.addEventListener('input',markProfileEditorDirty));
+['cfgEditorialProfile','cfgSummaryPrompt','cfgCommentPrompt','interestPolitics','interestDaily','interestEconomy','interestSports','interestCulture','interestDiscard','quotaPolitics','quotaDaily','quotaEconomy','quotaSports','quotaCulture','scoreBase','scoreTopicHit','scoreTopicCap','scoreLocal','scoreSourceHigh','scoreSourceNormal','scoreSourceLow','scoreCurrentMax','scoreEventHit','scoreEventCap','scoreDiscardPenalty','scorePromoPenalty','showContextClock','showContextTimer','showContextUrgency','showContextAgenda','showContextRundown','showContextFootball'].forEach(id=>document.getElementById(id)?.addEventListener('input',markProfileEditorDirty));
+document.getElementById('rulesInstructionsModal')?.addEventListener('change',e=>{if(e.target.matches('#rulesInstructionsModal input[type=checkbox],#rulesInstructionsModal input[type=number]'))markProfileEditorDirty();});
 document.getElementById('rulesInstructionsModal')?.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();requestCloseProfileEditor();}});
 
 function openPautasModal(){
@@ -4255,9 +4481,7 @@ function saveInterests(){
 }
 // As pautas agora são salvas em conjunto pelo editor de perfis; não há gravação local automática.
 function saveEditorialCounts(){
-  state.config.editorialCounts={'Política':Number(document.getElementById('quotaPolitics').value)||0,'Cotidiano':Number(document.getElementById('quotaDaily').value)||0,'Economia':Number(document.getElementById('quotaEconomy').value)||0,'Esportes':Number(document.getElementById('quotaSports').value)||0,'Cultura':Number(document.getElementById('quotaCulture').value)||0};
-  state.config.count=Object.values(state.config.editorialCounts).reduce((a,b)=>a+b,0);persist();
-  toast('Quantidades por editoria salvas. Total previsto: '+state.config.count+' notícias.');
+ state.config.editorialCounts={'Política':Number(document.getElementById('quotaPolitics')?.value)||0,'Cotidiano':Number(document.getElementById('quotaDaily')?.value)||0,'Economia':Number(document.getElementById('quotaEconomy')?.value)||0,'Esportes':Number(document.getElementById('quotaSports')?.value)||0,'Cultura':Number(document.getElementById('quotaCulture')?.value)||0};state.config.count=Object.values(state.config.editorialCounts).reduce((a,b)=>a+b,0);const total=document.getElementById('profileQuotaTotal');if(total)total.textContent=`Total previsto: ${state.config.count} notícias`;markProfileEditorDirty();
 }
 function cssSafe(s){return s.replace(/[^a-zA-Z0-9]/g,'_')}
 function setPct(k,v){state.config.percentages[k]=Number(v);document.getElementById('pct-'+cssSafe(k)).textContent=v+'%';updatePctTotal();persist()}
@@ -4419,7 +4643,6 @@ function updateSourceMethodHelp(prefix){
 function openAddSourceModal(){
   clearSourceForm();
   document.getElementById('srcScope').value='Nacional';
-  document.getElementById('srcWeight').value='Normal';
   document.getElementById('srcMethod').value='auto';updateSourceMethodHelp('src');
   document.getElementById('sourceAddModal').classList.add('open');
 }
@@ -4668,13 +4891,14 @@ function updateContextClock(){
   if(date)date.textContent=new Intl.DateTimeFormat('pt-BR',{timeZone:'America/Fortaleza',weekday:'long',day:'2-digit',month:'long',year:'numeric'}).format(now);
 }
 function weatherLabel(code){const m={0:'Céu limpo',1:'Predominantemente limpo',2:'Parcialmente nublado',3:'Nublado',45:'Neblina',48:'Neblina com geada',51:'Garoa fraca',53:'Garoa moderada',55:'Garoa intensa',61:'Chuva fraca',63:'Chuva moderada',65:'Chuva forte',80:'Pancadas fracas',81:'Pancadas moderadas',82:'Pancadas fortes',95:'Trovoada',96:'Trovoada com granizo',99:'Trovoada forte'};return m[code]||'Condição variável'}
+function weatherIcon(code){const m={0:'fa-sun',1:'fa-cloud-sun',2:'fa-cloud-sun',3:'fa-cloud',45:'fa-smog',48:'fa-smog',51:'fa-cloud-rain',53:'fa-cloud-rain',55:'fa-cloud-showers-heavy',61:'fa-cloud-rain',63:'fa-cloud-showers-water',65:'fa-cloud-showers-heavy',80:'fa-cloud-sun-rain',81:'fa-cloud-showers-water',82:'fa-cloud-showers-heavy',95:'fa-cloud-bolt',96:'fa-cloud-bolt',99:'fa-cloud-bolt'};return m[code]||'fa-cloud'}
 async function loadContextWeather(){
  const el=document.getElementById('weatherContent');if(!el)return;
  try{
   const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-5.7793&longitude=-35.2009&current=temperature_2m,apparent_temperature,weather_code&timezone=America%2FFortaleza');
   if(!r.ok)throw new Error('HTTP '+r.status);const d=await r.json(),c=d.current;
   el.classList.remove('context-loading');
-  el.innerHTML=`<div class="weather-compact"><div class="weather-temp">${Math.round(c.temperature_2m)}°C</div><div class="weather-condition">${weatherLabel(c.weather_code)}</div><div class="weather-summary">Sensação ${Math.round(c.apparent_temperature)}°C</div></div>`;
+  el.innerHTML=`<div class="weather-compact"><i aria-hidden="true" class="fa-solid ${weatherIcon(c.weather_code)} weather-icon"></i><div class="weather-temp">${Math.round(c.temperature_2m)}°C</div><div class="weather-condition">${weatherLabel(c.weather_code)}</div><div class="weather-summary">Sensação ${Math.round(c.apparent_temperature)}°C</div></div>`;
  }catch(e){el.classList.remove('context-loading');el.innerHTML='<span class="weather-compact-error">Clima indisponível</span>'}
 }
 async function loadContextTides(){
@@ -4699,19 +4923,17 @@ async function loadContextTides(){
   el.innerHTML='<div class="tide-list">'+unique.slice(0,6).map(x=>`<div class="tide-row"><span><i class="fa-solid fa-water" aria-hidden="true" style="color:var(--blue);margin-right:5px"></i>${x.hour}${x.kind?' · '+String(x.kind):''}</span><span class="tide-level">${x.level!==undefined&&x.level!==null?String(x.level).replace('.',',')+' m':'—'}</span></div>`).join('')+'</div>';
  }catch(e){el.innerHTML='<span>Não foi possível carregar os horários de maré para hoje. <a href="https://tabuamare.api.br/docs" target="_blank" rel="noopener">Consultar a fonte da tábua</a>.</span>'}
 }
-const CONTEXT_CARD_IDS={clock:'contextCardClock',timer:'contextCardTimer',urgency:'contextCardUrgency',agenda:'contextCardAgenda',rundown:'contextCardRundown',football:'contextCardFootball'};
-const CONTEXT_CHECK_IDS={clock:'showContextClock',timer:'showContextTimer',urgency:'showContextUrgency',agenda:'showContextAgenda',rundown:'showContextRundown',football:'showContextFootball'};
 function saveContextCardPreferences(){
  const cfg=state.config.contextCards||(state.config.contextCards={visibility:{clock:true,timer:false,urgency:false,agenda:true,rundown:false,football:true},order:['clock','timer','agenda','football','urgency','rundown']});
  cfg.visibility=cfg.visibility||{};
  Object.entries(CONTEXT_CHECK_IDS).forEach(([key,id])=>{const cb=document.getElementById(id);if(cb)cfg.visibility[key]=!!cb.checked;});
  const rail=document.querySelector('.context-rail');if(rail)cfg.order=Array.from(rail.querySelectorAll('[data-context-card]')).map(x=>x.dataset.contextCard);
- persist();
+ const p=activeEditorialProfile();if(p)p.definitions=normalizeProfileDefinitions({...p.definitions,contextCards:cfg});markProfileEditorDirty();
 }
 function setContextCardVisibility(key,visible){
  const card=document.getElementById(CONTEXT_CARD_IDS[key]);if(card)card.hidden=!visible;
  const cfg=state.config.contextCards||(state.config.contextCards={visibility:{},order:[]});cfg.visibility=cfg.visibility||{};cfg.visibility[key]=!!visible;if(key==='clock')cfg.visibility.weather=!!visible;
- persist();if(key==='football'&&visible)loadFootballMatches(false);
+ const p=activeEditorialProfile();if(p)p.definitions=normalizeProfileDefinitions({...p.definitions,contextCards:cfg});markProfileEditorDirty();if(key==='football'&&visible)loadFootballMatches(false);
 }
 function initContextCardPreferences(){
  const cfg=state.config.contextCards||defaultState.config.contextCards;const visibility=cfg.visibility||{};
@@ -4720,7 +4942,7 @@ function initContextCardPreferences(){
   else visible=Object.prototype.hasOwnProperty.call(visibility,key)?visibility[key]===true:(key==='agenda'||key==='football');
   if(cb)cb.checked=visible;const card=document.getElementById(id);if(card)card.hidden=!visible;});
  const rail=document.querySelector('.context-rail');if(rail){const defaults=Array.from(rail.querySelectorAll('[data-context-card]')).map(x=>x.dataset.contextCard);const preferred=['clock','timer','agenda','football','urgency','rundown'];const baseOrder=preferred.filter(k=>defaults.includes(k));const saved=Array.isArray(cfg.order)?cfg.order:[];const ordered=saved.length?[...saved.filter(k=>defaults.includes(k)),...baseOrder.filter(k=>!saved.includes(k))]:baseOrder;ordered.forEach(key=>{const card=rail.querySelector(`[data-context-card="${key}"]`);if(card)rail.appendChild(card)});
- let dragged=null;rail.querySelectorAll('[data-context-card]').forEach(card=>{card.addEventListener('dragstart',e=>{dragged=card;card.classList.add('dragging');e.dataTransfer.effectAllowed='move';try{e.dataTransfer.setData('text/plain',card.dataset.contextCard)}catch(_){}});card.addEventListener('dragend',()=>{card.classList.remove('dragging');rail.querySelectorAll('.drag-over').forEach(x=>x.classList.remove('drag-over'));dragged=null;saveContextCardPreferences()});card.addEventListener('dragover',e=>{if(!dragged||dragged===card)return;e.preventDefault();card.classList.add('drag-over');e.dataTransfer.dropEffect='move'});card.addEventListener('dragleave',()=>card.classList.remove('drag-over'));card.addEventListener('drop',e=>{e.preventDefault();card.classList.remove('drag-over');if(!dragged||dragged===card)return;const r=card.getBoundingClientRect();if(e.clientY-r.top>r.height/2)card.after(dragged);else card.before(dragged);});});}
+ if(rail.dataset.radarDndInitialized!=='1'){rail.dataset.radarDndInitialized='1';let dragged=null;rail.querySelectorAll('[data-context-card]').forEach(card=>{card.addEventListener('dragstart',e=>{dragged=card;card.classList.add('dragging');e.dataTransfer.effectAllowed='move';try{e.dataTransfer.setData('text/plain',card.dataset.contextCard)}catch(_){}});card.addEventListener('dragend',()=>{card.classList.remove('dragging');rail.querySelectorAll('.drag-over').forEach(x=>x.classList.remove('drag-over'));dragged=null;saveContextCardPreferences()});card.addEventListener('dragover',e=>{if(!dragged||dragged===card)return;e.preventDefault();card.classList.add('drag-over');e.dataTransfer.dropEffect='move'});card.addEventListener('dragleave',()=>card.classList.remove('drag-over'));card.addEventListener('drop',e=>{e.preventDefault();card.classList.remove('drag-over');if(!dragged||dragged===card)return;const r=card.getBoundingClientRect();if(e.clientY-r.top>r.height/2)card.after(dragged);else card.before(dragged);});});}}
  renderAgendaAnnotations();
  const legacyAgenda=localStorage.getItem('radar_context_agenda');
  if(legacyAgenda&&legacyAgenda.trim()){let current=[];try{current=JSON.parse(localStorage.getItem('radar_context_agenda_items')||'[]')}catch(e){}if(!Array.isArray(current)||!current.length)localStorage.setItem('radar_context_agenda_items',JSON.stringify([{id:'legacy-'+Date.now(),text:legacyAgenda.trim()}]));localStorage.removeItem('radar_context_agenda');renderAgendaAnnotations();}
@@ -5232,6 +5454,8 @@ function restoreActiveProfileTabDefaults(){
     p.interests=defaults;
     const map={politics:'interestPolitics',daily:'interestDaily',economy:'interestEconomy',sports:'interestSports',culture:'interestCulture',discard:'interestDiscard'};
     Object.entries(map).forEach(([key,id])=>{const el=document.getElementById(id);if(el)el.value=Array.isArray(defaults[key])?defaults[key].join('\n'):(defaults[key]||'');});
+  }else if(activeTab==='definitions'){
+    p.definitions=normalizeProfileDefinitions(DEFAULT_PROFILE_DEFINITIONS);applyProfileDefinitions(p);renderProfileDefinitionsUI();
   }else if(activeTab==='sources'){
     const defaults=defaultState.sources||[];
     (state.sources||[]).forEach(src=>{
@@ -5252,7 +5476,208 @@ document.addEventListener('click',function(event){
   const sources=tab.dataset.tab==='sources';
   document.querySelectorAll('#rulesInstructionsModal .profile-source-footer-action').forEach(el=>el.hidden=!sources);
 });
-</script></body>
+</script>
+<script id="radar-v157-zoom-adaptive-layout">
+/* V1.57 — zoom limitado pela largura real entre as colunas laterais.
+   O conteúdo central é recentralizado no espaço livre entre coleta e painel contextual. */
+(function(){
+  const MIN_ZOOM=50, STEP=5, MAX_ZOOM=150, MIN_CENTER_WIDTH=780, MAX_CENTER_WIDTH=1056, SIDE_GAP=16;
+  const root=document.documentElement;
+  function getMain(){return document.querySelector('.layout > main.main');}
+  function getRails(){
+    return {
+      left:document.querySelector('#page-noticias .collection-card'),
+      right:document.querySelector('.context-rail')
+    };
+  }
+  function clearAdaptiveLayout(){
+    const main=getMain();
+    if(!main)return;
+    ['width','max-width','margin-left','margin-right','box-sizing'].forEach(k=>main.style.removeProperty(k));
+  }
+  function fitCenterColumn(zoom){
+    const main=getMain();
+    const page=document.getElementById('page-noticias');
+    if(!main||!page||!page.classList.contains('active')||window.innerWidth<901){
+      clearAdaptiveLayout();
+      return {fit:true,width:Infinity};
+    }
+    const rails=getRails();
+    if(!rails.left||!rails.right)return {fit:true,width:Infinity};
+    const scale=zoom/100;
+    const leftRect=rails.left.getBoundingClientRect();
+    const rightRect=rails.right.getBoundingClientRect();
+    const gap=SIDE_GAP*scale;
+    const start=leftRect.right+gap;
+    const end=rightRect.left-gap;
+    const availablePx=Math.max(0,end-start);
+    const availableCss=availablePx/scale;
+    const width=Math.min(MAX_CENTER_WIDTH,availableCss);
+    const marginLeft=(start+Math.max(0,(availablePx-width*scale)/2))/scale;
+    main.style.setProperty('box-sizing','border-box','important');
+    main.style.setProperty('width',width+'px','important');
+    main.style.setProperty('max-width',width+'px','important');
+    main.style.setProperty('min-width','0','important');
+    main.style.setProperty('margin-left',marginLeft+'px','important');
+    main.style.setProperty('margin-right','0px','important');
+    const rect=main.getBoundingClientRect();
+    const fits=rect.left>=leftRect.right+gap-2 && rect.right<=rightRect.left-gap+2;
+    return {fit:fits,width:availableCss};
+  }
+  function applyRawZoom(zoom){
+    root.style.zoom=String(zoom/100);
+    root.style.setProperty('--radar-view-zoom',String(zoom/100));
+    return fitCenterColumn(zoom);
+  }
+  function calculateAllowedZoom(requested){
+    const wanted=Math.max(MIN_ZOOM,Math.min(MAX_ZOOM,Math.round(Number(requested)/STEP)*STEP));
+    if(wanted<=100)return wanted;
+    for(let candidate=wanted;candidate>=100;candidate-=STEP){
+      const result=applyRawZoom(candidate);
+      if(result.fit && result.width>=MIN_CENTER_WIDTH)return candidate;
+    }
+    applyRawZoom(100);
+    return 100;
+  }
+  window.setViewZoom=function(value){
+    const wanted=Math.max(MIN_ZOOM,Math.min(MAX_ZOOM,Math.round(Number(value)/STEP)*STEP));
+    const allowed=calculateAllowedZoom(MAX_ZOOM);
+    const actual=wanted>100?Math.min(wanted,allowed):wanted;
+    applyRawZoom(actual);
+    localStorage.setItem('radar_view_zoom',String(actual));
+    const output=document.getElementById('viewZoomValue');
+    if(output)output.textContent=actual+'%';
+    const stepper=document.querySelector('.zoom-stepper');
+    if(stepper){
+      const buttons=stepper.querySelectorAll('.zoom-step');
+      if(buttons[0])buttons[0].disabled=actual<=MIN_ZOOM;
+      if(buttons[1])buttons[1].disabled=actual>=allowed && wanted>100;
+    }
+    return actual;
+  };
+  window.stepViewZoom=function(delta){
+    const current=Number(localStorage.getItem('radar_view_zoom')||100);
+    window.setViewZoom(current+Number(delta||0));
+  };
+  window.initViewControls=function(){
+    window.setViewZoom(localStorage.getItem('radar_view_zoom')||'100');
+  };
+  let resizeFrame=0;
+  window.addEventListener('resize',function(){
+    if(resizeFrame)cancelAnimationFrame(resizeFrame);
+    resizeFrame=requestAnimationFrame(function(){
+      resizeFrame=0;
+      window.setViewZoom(localStorage.getItem('radar_view_zoom')||100);
+    });
+  },{passive:true});
+  // Reaplica após a inicialização original e depois que os painéis estiverem no DOM.
+  window.setViewZoom(localStorage.getItem('radar_view_zoom')||100);
+})();
+</script>
+
+<style id="radar-profile-tabs-pastel-v158">
+/* V1.58 — abas com identidade cromática discreta, sempre em uma única linha. */
+#rulesInstructionsModal .profile-editor-tabs{
+  display:grid!important;
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  align-items:stretch!important;
+  gap:6px!important;
+  width:100%!important;
+  margin:10px 0 14px!important;
+  padding:0 0 9px!important;
+  border-bottom:1px solid var(--line)!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  scrollbar-width:thin!important;
+}
+#rulesInstructionsModal .profile-editor-tab{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  min-width:0!important;
+  min-height:37px!important;
+  padding:7px 5px!important;
+  border:1px solid transparent!important;
+  border-bottom:2px solid transparent!important;
+  border-radius:8px!important;
+  font-size:clamp(10px, .78vw, 12px)!important;
+  line-height:1.1!important;
+  font-weight:650!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+  transition:background-color .15s ease,border-color .15s ease,color .15s ease,box-shadow .15s ease!important;
+}
+#rulesInstructionsModal .profile-editor-tab i{
+  margin:0!important;
+  flex:0 0 auto!important;
+  font-size:11px!important;
+}
+/* Tons suaves por categoria: mantêm a navegação identificável sem competir com o conteúdo. */
+#rulesInstructionsModal .profile-editor-tab[data-tab="definitions"]{color:#315f91!important;background:#edf3fb!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="editorial"]{color:#287451!important;background:#edf6f0!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="summary"]{color:#a34e48!important;background:#fbefed!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="comment"]{color:#74549b!important;background:#f3eff9!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="interests"]{color:#966317!important;background:#fbf4e7!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="sources"]{color:#376f89!important;background:#edf4f7!important}
+#rulesInstructionsModal .profile-editor-tab.active{
+  font-weight:750!important;
+  box-shadow:inset 0 0 0 1px currentColor!important;
+  border-bottom-width:3px!important;
+}
+#rulesInstructionsModal .profile-editor-tab[data-tab="definitions"].active{background:#dce8f7!important;border-color:#b8cce6!important;border-bottom-color:#315f91!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="editorial"].active{background:#dcefe2!important;border-color:#b8dbc5!important;border-bottom-color:#287451!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="summary"].active{background:#f7e1de!important;border-color:#ebc5c0!important;border-bottom-color:#a34e48!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="comment"].active{background:#e9e0f4!important;border-color:#d2c2e7!important;border-bottom-color:#74549b!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="interests"].active{background:#f5e9ce!important;border-color:#e9d6ad!important;border-bottom-color:#966317!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="sources"].active{background:#dcebf1!important;border-color:#bdd5df!important;border-bottom-color:#376f89!important}
+#rulesInstructionsModal .profile-editor-tab:not(.active):hover{filter:brightness(.97)!important;border-color:currentColor!important}
+#rulesInstructionsModal .profile-editor-tab:focus-visible{outline:2px solid var(--primary)!important;outline-offset:2px!important}
+@media(max-width:760px){
+  #rulesInstructionsModal .profile-editor-tabs{
+    display:flex!important;flex-wrap:nowrap!important;gap:5px!important;
+    overflow-x:auto!important;overscroll-behavior-x:contain!important;
+    scroll-snap-type:x proximity!important;
+  }
+  #rulesInstructionsModal .profile-editor-tab{
+    flex:0 0 auto!important;min-width:94px!important;
+    font-size:11px!important;padding:7px 8px!important;scroll-snap-align:start!important;
+  }
+}
+</style>
+
+
+<style id="radar-v160-fontes-tab-layer-counter">
+/* V1.60 — navegação das abas sempre acima da tabela de fontes e contador contextual no rodapé. */
+#rulesInstructionsModal .profile-editor-tabs{
+  position:relative!important;z-index:30!important;isolation:isolate!important;
+  display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  flex-wrap:nowrap!important;white-space:nowrap!important;
+  overflow:visible!important;background:var(--card,#fff)!important;
+}
+#rulesInstructionsModal .profile-editor-tab{position:relative!important;z-index:31!important;
+  white-space:nowrap!important;min-width:0!important;}
+#rulesInstructionsModal .profile-editor-pane{position:relative!important;z-index:1!important;}
+#rulesInstructionsModal .profile-editor-pane[data-pane="sources"] .tablewrap{
+  position:relative!important;z-index:0!important;isolation:isolate!important;
+  margin-top:6px!important;padding-top:2px!important;
+}
+#rulesInstructionsModal .profile-source-table thead,
+#rulesInstructionsModal .profile-source-table thead tr,
+#rulesInstructionsModal .profile-source-table thead th{
+  position:static!important;z-index:auto!important;
+}
+#rulesInstructionsModal .profile-source-count{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:42px;height:28px;padding:0 9px;box-sizing:border-box;
+  border:1px solid var(--line,#dbe3eb);border-radius:7px;
+  background:#f3f6f9;color:#526579;font-size:11px;font-weight:700;
+  font-variant-numeric:tabular-nums;letter-spacing:.02em;
+}
+#rulesInstructionsModal .profile-source-count[hidden]{display:none!important}
+</style>
+
+</body>
 </html>
 <style id="v88-sidebar-import-width">
 /* V88: força o botão Importar Boletim a ocupar a largura útil da barra lateral. */
@@ -6264,5 +6689,20 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
   width: 100% !important;
   min-width: 0 !important;
   grid-column: 1 / -1 !important;
+}
+
+/* V1.55: a área central ocupa somente o espaço livre entre as laterais.
+   Evita que o zoom do navegador faça o conteúdo central invadir o trilho contextual. */
+@media (min-width:1400px){
+  .layout:has(#page-noticias.active) .main{
+    box-sizing:border-box !important;
+    width:min(1280px, calc(100vw - 520px)) !important;
+    max-width:none !important;
+    margin-left:270px !important;
+    margin-right:auto !important;
+    padding-left:18px !important;
+    padding-right:18px !important;
+    min-width:0 !important;
+  }
 }
 </style>
