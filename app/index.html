@@ -1702,7 +1702,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <div class="filter-bottom-grid" id="filterBottomGrid">
 <div aria-label="Abrangência" class="filter-block">
 <div aria-label="Filtrar por abrangência" class="pill-row" id="geoPills"></div>
-<select aria-hidden="true" class="visually-hidden" id="filterGeo" onchange="renderNews()" tabindex="-1"><option value="">Todas</option><option value="Nacional">Nacional</option><option value="Local">Local</option></select>
+<select aria-hidden="true" class="visually-hidden" id="filterGeo" onchange="renderNews()" tabindex="-1"><option value="">Todas</option><option value="Internacional">Internacional</option><option value="Nacional">Nacional</option><option value="Local">Local</option></select>
 </div>
 <div aria-label="Ordenação" class="filter-block">
 <div aria-label="Ordenar notícias" class="pill-row" id="sortPills"></div>
@@ -1812,7 +1812,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <h3 style="margin-top:0">Editar classificação da notícia</h3>
 <input id="classificationNewsId" type="hidden"/>
 <div><label for="classificationEditorial">Editoria</label><select id="classificationEditorial"><option>Política</option><option>Cotidiano</option><option>Economia</option><option>Esportes</option><option>Cultura</option><option>Outros</option></select></div>
-<div style="margin-top:12px"><label for="classificationGeo">Abrangência</label><select id="classificationGeo"><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div>
+<div style="margin-top:12px"><label for="classificationGeo">Abrangência</label><select id="classificationGeo"><option value="Internacional">Internacional</option><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div>
 <div class="toolbar" style="margin-top:16px"><button class="btn btn-primary" onclick="saveNewsClassification()">Salvar classificação</button><button class="btn btn-secondary" onclick="closeNewsClassification()">Cancelar</button></div>
 </div>
 </div>
@@ -1822,7 +1822,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <div class="edit-source-grid">
 <div class="edit-source-column">
 <div><label>Nome</label><input id="srcName" placeholder="Ex.: G1 — RN"/></div>
-<div><label>Abrangência padrão</label><select id="srcScope"><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div><div><label>Tipo de veículo</label><select id="srcVehicleType"><option>Portal</option><option>Jornal / Portal</option><option>Jornal</option><option>Blog</option><option>Blog / Portal</option><option>Rádio</option><option>TV</option><option>Agência / Portal</option><option>Portal / TV</option><option>Portal / Esportes</option><option>Blog / Análise</option><option>Blog / Coluna</option><option>TV pública</option><option>Agência</option><option>Rádio / Portal</option><option>TV / Portal</option><option>Revista / Portal</option><option>Portal especializado</option></select></div>
+<div><label>Abrangência padrão</label><select id="srcScope"><option value="Internacional">Internacional</option><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div><div><label>Tipo de veículo</label><select id="srcVehicleType"><option>Portal</option><option>Jornal / Portal</option><option>Jornal</option><option>Blog</option><option>Blog / Portal</option><option>Rádio</option><option>TV</option><option>Agência / Portal</option><option>Portal / TV</option><option>Portal / Esportes</option><option>Blog / Análise</option><option>Blog / Coluna</option><option>TV pública</option><option>Agência</option><option>Rádio / Portal</option><option>TV / Portal</option><option>Revista / Portal</option><option>Portal especializado</option></select></div>
 <div><label>Método de coleta</label><select id="srcMethod" onchange="updateSourceMethodHelp('src')"><option selected="" value="auto">Automático (RSS + Site + Google Search com IA)</option><option value="rss">Somente RSS / Atom</option><option value="html">Somente página do site</option></select></div>
 <div><label>Site da Fonte <span class="small">(endereço principal do veículo)</span></label><input id="srcDomain" placeholder="ex.: g1.globo.com"/></div>
 </div>
@@ -1844,7 +1844,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <div class="edit-source-grid">
 <div class="edit-source-column">
 <div><label>Nome</label><input id="editSrcName"/></div>
-<div><label>Abrangência</label><select id="editSrcScope"><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div><div><label>Tipo de veículo</label><select id="editSrcVehicleType"><option>Portal</option><option>Jornal / Portal</option><option>Jornal</option><option>Blog</option><option>Blog / Portal</option><option>Rádio</option><option>TV</option><option>Agência / Portal</option><option>Portal / TV</option><option>Blog / Análise</option><option>Blog / Coluna</option><option>TV pública</option><option>Agência</option><option>Rádio / Portal</option><option>TV / Portal</option><option>Revista / Portal</option><option>Portal especializado</option></select></div>
+<div><label>Abrangência</label><select id="editSrcScope"><option value="Internacional">Internacional</option><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div><div><label>Tipo de veículo</label><select id="editSrcVehicleType"><option>Portal</option><option>Jornal / Portal</option><option>Jornal</option><option>Blog</option><option>Blog / Portal</option><option>Rádio</option><option>TV</option><option>Agência / Portal</option><option>Portal / TV</option><option>Blog / Análise</option><option>Blog / Coluna</option><option>TV pública</option><option>Agência</option><option>Rádio / Portal</option><option>TV / Portal</option><option>Revista / Portal</option><option>Portal especializado</option></select></div>
 <div><label>Método de coleta</label><select id="editSrcMethod" onchange="updateSourceMethodHelp('editSrc')"><option value="auto">Automático (RSS + Site + Google Search com IA)</option><option value="rss">Somente RSS / Atom</option><option value="html">Somente página do site</option></select></div>
 <div><label>Site da Fonte <span class="small">(endereço principal do veículo)</span></label><input id="editSrcDomain"/></div>
 </div>
@@ -2787,6 +2787,7 @@ function renderNewsFilterPills(){
   }).join('');
   const geos=[
     {value:'',label:'Todas'},
+    {value:'Internacional',label:'Internacional'},
     {value:'Nacional',label:'Nacional'},
     {value:'Local',label:'Local'}
   ];
@@ -4750,7 +4751,7 @@ function renderSources(){
  if(!sourceTable)return;
  sourceTable.innerHTML=visible.map(s=>`<tr>
   <td><b>${esc(s.name)}</b><br><span class="small">${esc(s.domain||s.url||s.siteUrls?.[0]||'')}</span></td>
-  <td>${esc(normalizeSourceScope(s.scope,s.name,s.url)==='Local'?'Local (RN)':'Nacional')}</td>
+  <td>${esc(normalizeSourceScope(s.scope,s.name,s.url)==='Local'?'Local (RN)':normalizeSourceScope(s.scope,s.name,s.url))}</td>
   <td>${esc(s.vehicleType||'Não classificado')}</td>
   <td>${statusBadge(s)}<br><span class="small">${esc(s.method==='html'?'Somente página/site':'Automático')}</span></td>
   <td><div class="source-actions-inline"><button class="btn btn-secondary" onclick="testSource('${s.id}')">Testar</button><button class="btn btn-secondary" type="button" data-source-edit="${esc(String(s.id))}">Editar</button><button class="btn btn-danger" onclick="removeSource('${s.id}')">Excluir</button></div></td>
