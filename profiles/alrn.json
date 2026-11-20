@@ -364,7 +364,7 @@
     },
     {
       "id": "native-source-37",
-      "active": false,
+      "active": true,
       "weight": "Média",
       "priority": "Média"
     },
@@ -409,6 +409,192 @@
       "active": false,
       "weight": "Média",
       "priority": "Média"
+    },
+    {
+      "id": "rn-source-g1-rn",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-blog-thaisa-galv-o",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-robson-pires",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-barreto",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-o-potiguar",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-mossor-hoje",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-de-fato-rn",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-blog-carlos-santos",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-96-fm-natal",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-98-fm-natal",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-grande-ponto",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-portal-no-ar",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-nominuto",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-fim-da-linha",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-marcos-dantas",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-di-rio-do-rn",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-ponta-negra-news",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-dina",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-gustavo-negreiros",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-bruno-ara-jo",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-territ-rio-livre",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-na-boca-da-noite",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-costa-branca-news",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-vt",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-senadinho-maca-ba",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-focoelho",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-cardoso-silva",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-inter-tv-cabugi",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-tv-ponta-negra",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-tv-tropical",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-tv-assembleia-rn",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
     }
   ],
   "sources": [
@@ -630,7 +816,7 @@
     },
     {
       "id": "native-source-37",
-      "active": false,
+      "active": true,
       "weight": "Média",
       "priority": "Média"
     },
@@ -675,6 +861,192 @@
       "active": false,
       "weight": "Média",
       "priority": "Média"
+    },
+    {
+      "id": "rn-source-g1-rn",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-blog-thaisa-galv-o",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-robson-pires",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-barreto",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-o-potiguar",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-mossor-hoje",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-de-fato-rn",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-blog-carlos-santos",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-96-fm-natal",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-98-fm-natal",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-grande-ponto",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-portal-no-ar",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-nominuto",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-fim-da-linha",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-marcos-dantas",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-di-rio-do-rn",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-ponta-negra-news",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-dina",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-gustavo-negreiros",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-bruno-ara-jo",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-territ-rio-livre",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-na-boca-da-noite",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-costa-branca-news",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-vt",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-senadinho-maca-ba",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-focoelho",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-cardoso-silva",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-inter-tv-cabugi",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-tv-ponta-negra",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-tv-tropical",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "rn-source-tv-assembleia-rn",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
     }
   ],
   "sourcePath": "profiles/alrn.json"
