@@ -1777,7 +1777,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <span style="flex:1 1 auto"></span>
 <span aria-live="polite" class="source-catalog-status" id="sourceCatalogStatus" role="status" title="Indica a situação de sincronização do catálogo">Catálogo sincronizado com o GitHub</span>
 </div>
-<div aria-live="polite" class="source-save-bar" hidden="" id="sourceSaveBar"></div><div class="source-catalog-filters" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:8px;margin-top:14px"><input id="sourceSearchFilter" placeholder="Buscar fonte..." oninput="renderSources()"/><select id="sourceScopeFilter" onchange="renderSources()"><option value="">Todas as abrangências</option><option value="Internacional">Internacional</option><option value="Nacional">Nacional</option><option value="Local">Local (RN)</option></select><select id="sourceTypeFilter" onchange="renderSources()"><option value="">Todos os tipos</option><option>Portal</option><option>Jornal / Portal</option><option>Blog</option><option>Blog / Portal</option><option>Rádio</option><option>TV</option><option>Agência / Portal</option><option>Jornal</option><option>Portal / TV</option><option>Portal / Esportes</option><option>Blog / Análise</option><option>Blog / Coluna</option><option>TV pública</option><option>Agência</option><option>Rádio / Portal</option><option>TV / Portal</option><option>Revista / Portal</option><option>Portal especializado</option><option>Revista</option></select></div><div class="tablewrap" style="margin-top:12px">
+<div aria-live="polite" class="source-save-bar" hidden="" id="sourceSaveBar"></div><div class="source-catalog-filters" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:8px;margin-top:14px"><input id="sourceSearchFilter" placeholder="Buscar fonte..." oninput="renderSources()"/><select id="sourceScopeFilter" onchange="renderSources()"><option value="">Todas as abrangências</option><option value="Internacional">Internacional</option><option value="Nacional">Nacional</option><option value="Local">Local (RN)</option></select><select id="sourceTypeFilter" onchange="renderSources()"><option value="">Todos os tipos</option><option>Portal</option><option>Blog</option><option>Agência</option><option>Coluna</option></select></div><div class="tablewrap" style="margin-top:12px">
 <table class="source-table"><thead><tr><th>Fonte</th><th>Abrangência</th><th>Tipo</th><th>Status</th><th>Ações</th></tr></thead><tbody id="sourceTable"></tbody></table><p class="footer-note" id="sourceFilterCount" style="margin-top:8px"></p>
 </div>
 <p class="footer-note">O catálogo organiza as fontes por abrangência (Internacional, Nacional ou Local — RN), tipo de veículo e método de coleta. A ativação das fontes é configurada exclusivamente em Editar Perfis.</p>
@@ -1822,7 +1822,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <div class="edit-source-grid">
 <div class="edit-source-column">
 <div><label>Nome</label><input id="srcName" placeholder="Ex.: G1 — RN"/></div>
-<div><label>Abrangência padrão</label><select id="srcScope"><option value="Internacional">Internacional</option><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div><div><label>Tipo de veículo</label><select id="srcVehicleType"><option>Portal</option><option>Jornal / Portal</option><option>Jornal</option><option>Blog</option><option>Blog / Portal</option><option>Rádio</option><option>TV</option><option>Agência / Portal</option><option>Portal / TV</option><option>Portal / Esportes</option><option>Blog / Análise</option><option>Blog / Coluna</option><option>TV pública</option><option>Agência</option><option>Rádio / Portal</option><option>TV / Portal</option><option>Revista / Portal</option><option>Portal especializado</option></select></div>
+<div><label>Abrangência padrão</label><select id="srcScope"><option value="Internacional">Internacional</option><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div><div><label>Tipo de veículo</label><select id="srcVehicleType"><option>Portal</option><option>Blog</option><option>Agência</option><option>Coluna</option></select></div>
 <div><label>Método de coleta</label><select id="srcMethod" onchange="updateSourceMethodHelp('src')"><option selected="" value="auto">Automático (RSS + Site + Google Search com IA)</option><option value="rss">Somente RSS / Atom</option><option value="html">Somente página do site</option></select></div>
 <div><label>Site da Fonte <span class="small">(endereço principal do veículo)</span></label><input id="srcDomain" placeholder="ex.: g1.globo.com"/></div>
 </div>
@@ -1886,7 +1886,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <div class="sidebar-pauta"><label for="interestCulture">Cultura</label><textarea id="interestCulture" placeholder="Música, teatro, cinema, cultura potiguar" rows="5"></textarea></div>
 <div class="sidebar-pauta"><label for="interestDiscard">Descartar Assuntos</label><textarea id="interestDiscard" placeholder="Assuntos a evitar, um por linha" rows="5"></textarea></div>
 </div></section>
-<section class="profile-editor-pane" data-pane="sources" role="tabpanel"><p class="footer-note">Selecione as fontes, defina a prioridade de cada uma e sua ativação neste perfil. O cadastro é administrado na página Fontes.</p><div class="profile-source-filters" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:8px;margin:12px 0"><input id="profileSourceSearch" placeholder="Buscar fonte..." oninput="renderProfileSourceToggles()"><select id="profileSourceScope" onchange="renderProfileSourceToggles()"><option value="">Todas as abrangências</option><option value="Internacional">Internacional</option><option value="Nacional">Nacional</option><option value="Local">Local (RN)</option></select><select id="profileSourceType" onchange="renderProfileSourceToggles()"><option value="">Todos os tipos</option><option value="Agência">Agência</option><option value="Portal">Portal</option><option value="Jornal">Jornal</option><option value="Blog">Blog</option><option value="Rádio">Rádio</option><option value="TV">TV</option><option value="Revista">Revista</option></select></div><div class="profile-source-actions"><button class="btn btn-secondary" onclick="setProfileSourcesEnabled(true)" type="button">Ativar todas</button><button class="btn btn-secondary" onclick="setProfileSourcesEnabled(false)" type="button">Desativar todas</button></div><div class="tablewrap"><table class="source-table profile-source-table"><thead><tr><th>Fonte</th><th>Abrangência</th><th>Prioridade</th><th>Ativa</th></tr></thead><tbody id="profileSourceTable"></tbody></table></div></section>
+<section class="profile-editor-pane" data-pane="sources" role="tabpanel"><p class="footer-note">Selecione as fontes, defina a prioridade de cada uma e sua ativação neste perfil. O cadastro é administrado na página Fontes.</p><div class="profile-source-filters" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:8px;margin:12px 0"><input id="profileSourceSearch" placeholder="Buscar fonte..." oninput="renderProfileSourceToggles()"><select id="profileSourceScope" onchange="renderProfileSourceToggles()"><option value="">Todas as abrangências</option><option value="Internacional">Internacional</option><option value="Nacional">Nacional</option><option value="Local">Local (RN)</option></select><select id="profileSourceType" onchange="renderProfileSourceToggles()"><option value="">Todos os tipos</option><option value="Portal">Portal</option><option value="Blog">Blog</option><option value="Agência">Agência</option><option value="Coluna">Coluna</option></select></div><div class="profile-source-actions"><button class="btn btn-secondary" onclick="setProfileSourcesEnabled(true)" type="button">Ativar todas</button><button class="btn btn-secondary" onclick="setProfileSourcesEnabled(false)" type="button">Desativar todas</button></div><div class="tablewrap"><table class="source-table profile-source-table"><thead><tr><th>Fonte</th><th>Abrangência</th><th>Prioridade</th><th>Ativa</th></tr></thead><tbody id="profileSourceTable"></tbody></table></div></section>
 <section class="profile-editor-pane active" data-pane="definitions" role="tabpanel">
  <div class="profile-definitions-grid">
   <section class="profile-definition-group"><h4>Notícias por Editoria</h4><p class="footer-note">Defina a quantidade de notícias desejada em cada editoria.</p><div class="quota-compact-grid">
@@ -2158,7 +2158,7 @@ let sourceAccessToken='';
 function sourceProfileStates(profile=activeEditorialProfile()){return Array.isArray(profile?.sourceStates)?profile.sourceStates:[]}
 function applyCatalogToProfile(profile){
  const states=new Map(sourceProfileStates(profile).map(x=>[String(x.id),x]));
- state.sources=(sourceCatalogOriginal||[]).map(src=>{const st=states.get(String(src.id))||{};const rawPriority=st.weight||st.priority||src.weight||'Normal';const priority=rawPriority==='Normal'?'Média':rawPriority==='Extra'?'Alta':rawPriority;return {...JSON.parse(JSON.stringify(src)),active:st.active===true,weight:priority,status:src.status||'Não testada'};});
+ state.sources=(sourceCatalogOriginal||[]).map(src=>{const st=states.get(String(src.id))||{};const rawPriority=st.weight||st.priority||src.weight||'Normal';const priority=rawPriority==='Normal'?'Média':rawPriority==='Extra'?'Alta':rawPriority;return {...JSON.parse(JSON.stringify(src)),vehicleType:normalizeVehicleType(src.vehicleType,src.name),active:st.active===true,weight:priority,status:src.status||'Não testada'};});
 }
 async function loadGitHubSourceCatalog(){
  // Busca o arquivo público diretamente no raw.githubusercontent.com. Evita a requisição
@@ -2479,7 +2479,15 @@ if(state.config.percentages['Cotidiano e Segurança']!=null){state.config.percen
 if(state.config.interests['Cotidiano e Segurança']){state.config.interests['Cotidiano']=[...new Set([...(state.config.interests['Cotidiano']||[]),...state.config.interests['Cotidiano e Segurança']])];delete state.config.interests['Cotidiano e Segurança'];}
 if(state.config.percentages['Cultura']==null)state.config.percentages['Cultura']=0;
 // V154: migra abrangências antigas para o modelo binário Nacional/Local sem perder notícias já armazenadas.
-state.sources=(state.sources||[]).map(s=>({...s,scope:normalizeSourceScope(s.scope,s.name,s.url)}));
+function normalizeVehicleType(value,name=''){
+ const raw=String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR');
+ const combined=(raw+' '+String(name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR'));
+ if(/\b(agencia|agency|press)\b/.test(raw))return 'Agência';
+ if(/\b(coluna|colunista|column)\b/.test(combined))return 'Coluna';
+ if(/\b(blog| blogue)\b/.test(raw))return 'Blog';
+ return 'Portal';
+}
+state.sources=(state.sources||[]).map(s=>({...s,scope:normalizeSourceScope(s.scope,s.name,s.url),vehicleType:normalizeVehicleType(s.vehicleType,s.name)}));
 function sourceScopeForSavedItem(item){
   const sourceText=String(item?.source||'').toLocaleLowerCase('pt-BR');
   const found=(state.sources||[]).find(s=>String(s.name||'').trim()&&sourceText.includes(String(s.name).toLocaleLowerCase('pt-BR')));
@@ -5687,6 +5695,11 @@ document.addEventListener('click',function(event){
   font-variant-numeric:tabular-nums;letter-spacing:.02em;
 }
 #rulesInstructionsModal .profile-source-count[hidden]{display:none!important}
+</style>
+
+<style id="radar-profile-source-typography">
+#rulesInstructionsModal .profile-source-table td:first-child b{font-weight:700!important}
+#rulesInstructionsModal .profile-source-table td:first-child .small{font-weight:600!important}
 </style>
 
 </body>
