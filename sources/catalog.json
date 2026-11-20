@@ -2227,6 +2227,276 @@
       "method": "html",
       "domain": "al.rn.leg.br",
       "status": "Não testada — coleta somente página/site"
+    },
+    {
+      "id": "catalog-agency-folhapress",
+      "name": "Folhapress",
+      "url": "https://folhapress.folha.com.br/",
+      "siteUrls": [
+        "https://folhapress.folha.com.br/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "folhapress.folha.com.br",
+      "queries": [],
+      "scope": "Nacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
+    },
+    {
+      "id": "catalog-agency-ag-ncia-estado-broadcast",
+      "name": "Agência Estado / Broadcast",
+      "url": "https://broadcast.com.br/",
+      "siteUrls": [
+        "https://broadcast.com.br/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "broadcast.com.br",
+      "queries": [],
+      "scope": "Nacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
+    },
+    {
+      "id": "catalog-agency-ag-ncia-o-globo",
+      "name": "Agência O Globo",
+      "url": "https://www.agenciaoglobo.com.br/",
+      "siteUrls": [
+        "https://www.agenciaoglobo.com.br/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "agenciaoglobo.com.br",
+      "queries": [],
+      "scope": "Nacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
+    },
+    {
+      "id": "catalog-agency-ag-ncia-infra",
+      "name": "Agência iNFRA",
+      "url": "https://agenciainfra.com/",
+      "siteUrls": [
+        "https://agenciainfra.com/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "agenciainfra.com",
+      "queries": [],
+      "scope": "Nacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
+    },
+    {
+      "id": "catalog-agency-ag-ncia-safras",
+      "name": "Agência Safras",
+      "url": "https://safras.com.br/",
+      "siteUrls": [
+        "https://safras.com.br/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "safras.com.br",
+      "queries": [],
+      "scope": "Nacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
+    },
+    {
+      "id": "catalog-agency-anba",
+      "name": "ANBA",
+      "url": "https://anba.com.br/",
+      "siteUrls": [
+        "https://anba.com.br/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "anba.com.br",
+      "queries": [],
+      "scope": "Nacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
+    },
+    {
+      "id": "catalog-agency-gazeta-press",
+      "name": "Gazeta Press",
+      "url": "https://gazetapress.com/",
+      "siteUrls": [
+        "https://gazetapress.com/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "gazetapress.com",
+      "queries": [],
+      "scope": "Nacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
+    },
+    {
+      "id": "catalog-agency-ag-ncia-p-blica",
+      "name": "Agência Pública",
+      "url": "https://apublica.org/",
+      "siteUrls": [
+        "https://apublica.org/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "apublica.org",
+      "queries": [],
+      "scope": "Nacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
+    },
+    {
+      "id": "catalog-agency-reuters",
+      "name": "Reuters",
+      "url": "https://www.reuters.com/world/americas/",
+      "siteUrls": [
+        "https://www.reuters.com/world/americas/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "reuters.com",
+      "queries": [],
+      "scope": "Internacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
+    },
+    {
+      "id": "catalog-agency-agence-france-presse-afp",
+      "name": "Agence France-Presse (AFP)",
+      "url": "https://www.afp.com/",
+      "siteUrls": [
+        "https://www.afp.com/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "afp.com",
+      "queries": [],
+      "scope": "Internacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
+    },
+    {
+      "id": "catalog-agency-associated-press-ap",
+      "name": "Associated Press (AP)",
+      "url": "https://apnews.com/",
+      "siteUrls": [
+        "https://apnews.com/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "apnews.com",
+      "queries": [],
+      "scope": "Internacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
+    },
+    {
+      "id": "catalog-agency-efe",
+      "name": "EFE",
+      "url": "https://efe.com/",
+      "siteUrls": [
+        "https://efe.com/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "efe.com",
+      "queries": [],
+      "scope": "Internacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
+    },
+    {
+      "id": "catalog-agency-bloomberg",
+      "name": "Bloomberg",
+      "url": "https://www.bloomberg.com/",
+      "siteUrls": [
+        "https://www.bloomberg.com/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "bloomberg.com",
+      "queries": [],
+      "scope": "Internacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
+    },
+    {
+      "id": "catalog-agency-ansa",
+      "name": "ANSA",
+      "url": "https://www.ansa.it/english/",
+      "siteUrls": [
+        "https://www.ansa.it/english/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "ansa.it",
+      "queries": [],
+      "scope": "Internacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
+    },
+    {
+      "id": "catalog-agency-deutsche-presse-agentur-dpa",
+      "name": "Deutsche Presse-Agentur (DPA)",
+      "url": "https://www.dpa.com/",
+      "siteUrls": [
+        "https://www.dpa.com/"
+      ],
+      "feeds": [],
+      "type": "html",
+      "method": "html",
+      "domain": "dpa.com",
+      "queries": [],
+      "scope": "Internacional",
+      "weight": "Média",
+      "status": "Não testada — página/site; verificar acesso e extração",
+      "vehicleType": "Agência",
+      "active": false
     }
   ]
 }
