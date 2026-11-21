@@ -127,6 +127,426 @@
       "priority": "Alta"
     },
     {
+      "id": "native-source-6",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-7",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-8",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-9",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-10",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-11",
+      "active": false,
+      "weight": "Baixa",
+      "priority": "Baixa"
+    },
+    {
+      "id": "native-source-12",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-13",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-14",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-15",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-16",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-17",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-18",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-19",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-20",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-21",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-22",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-23",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-24",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-25",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-26",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-27",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-28",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-29",
+      "active": false,
+      "weight": "Baixa",
+      "priority": "Baixa"
+    },
+    {
+      "id": "native-source-30",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-31",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-32",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-33",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-34",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-35",
+      "active": false,
+      "weight": "Baixa",
+      "priority": "Baixa"
+    },
+    {
+      "id": "native-source-36",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-37",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-38",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-39",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-40",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-41",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-42",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-43",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-44",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-g1-rn",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-thaisa-galv-o",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-robson-pires",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-barreto",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-o-potiguar",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-mossor-hoje",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-de-fato-rn",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-carlos-santos",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-96-fm-natal",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-98-fm-natal",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-grande-ponto",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-portal-no-ar",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-nominuto",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-fim-da-linha",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-marcos-dantas",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-di-rio-do-rn",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-ponta-negra-news",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-dina",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-gustavo-negreiros",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-bruno-ara-jo",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-territ-rio-livre",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-na-boca-da-noite",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-costa-branca-news",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-vt",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-senadinho-maca-ba",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-focoelho",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-cardoso-silva",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-inter-tv-cabugi",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-tv-ponta-negra",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-tv-tropical",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-tv-assembleia-rn",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
       "id": "catalog-agency-folhapress",
       "active": true,
       "weight": "Média",
@@ -247,6 +667,426 @@
       "active": true,
       "weight": "Alta",
       "priority": "Alta"
+    },
+    {
+      "id": "native-source-6",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-7",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-8",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-9",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-10",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-11",
+      "active": false,
+      "weight": "Baixa",
+      "priority": "Baixa"
+    },
+    {
+      "id": "native-source-12",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-13",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-14",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-15",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-16",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-17",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-18",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-19",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-20",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-21",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-22",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-23",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-24",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-25",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-26",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-27",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-28",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-29",
+      "active": false,
+      "weight": "Baixa",
+      "priority": "Baixa"
+    },
+    {
+      "id": "native-source-30",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-31",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-32",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-33",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-34",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-35",
+      "active": false,
+      "weight": "Baixa",
+      "priority": "Baixa"
+    },
+    {
+      "id": "native-source-36",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-37",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-38",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-39",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-40",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-41",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-42",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-43",
+      "active": false,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-44",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-g1-rn",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-thaisa-galv-o",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-robson-pires",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-barreto",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-o-potiguar",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-mossor-hoje",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-de-fato-rn",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-carlos-santos",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-96-fm-natal",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-98-fm-natal",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-grande-ponto",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-portal-no-ar",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-nominuto",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-fim-da-linha",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-marcos-dantas",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-di-rio-do-rn",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-ponta-negra-news",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-dina",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-gustavo-negreiros",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-bruno-ara-jo",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-territ-rio-livre",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-na-boca-da-noite",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-costa-branca-news",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-blog-do-vt",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-senadinho-maca-ba",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-focoelho",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-cardoso-silva",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-inter-tv-cabugi",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-tv-ponta-negra",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-tv-tropical",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "rn-source-tv-assembleia-rn",
+      "active": false,
+      "weight": "Média",
+      "priority": "Média"
     },
     {
       "id": "catalog-agency-folhapress",
