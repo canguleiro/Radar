@@ -29,12 +29,12 @@
     },
     "contextCards": {
       "visibility": {
-        "clock": false,
+        "clock": true,
         "timer": false,
-        "urgency": false,
+        "urgency": true,
         "agenda": false,
         "rundown": false,
-        "football": false
+        "football": true
       },
       "order": []
     }
