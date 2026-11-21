@@ -105,8 +105,8 @@
     {
       "id": "native-source-2",
       "active": true,
-      "weight": "Alta",
-      "priority": "Alta"
+      "weight": "Média",
+      "priority": "Média"
     },
     {
       "id": "native-source-3",
@@ -123,8 +123,8 @@
     {
       "id": "native-source-5",
       "active": true,
-      "weight": "Alta",
-      "priority": "Alta"
+      "weight": "Média",
+      "priority": "Média"
     },
     {
       "id": "native-source-6",
@@ -549,8 +549,8 @@
     {
       "id": "catalog-agency-folhapress",
       "active": true,
-      "weight": "Média",
-      "priority": "Média"
+      "weight": "Alta",
+      "priority": "Alta"
     },
     {
       "id": "catalog-agency-ag-ncia-estado-broadcast",
@@ -561,8 +561,8 @@
     {
       "id": "catalog-agency-ag-ncia-o-globo",
       "active": true,
-      "weight": "Média",
-      "priority": "Média"
+      "weight": "Alta",
+      "priority": "Alta"
     },
     {
       "id": "catalog-agency-ag-ncia-infra",
@@ -647,8 +647,8 @@
     {
       "id": "native-source-2",
       "active": true,
-      "weight": "Alta",
-      "priority": "Alta"
+      "weight": "Média",
+      "priority": "Média"
     },
     {
       "id": "native-source-3",
@@ -665,8 +665,8 @@
     {
       "id": "native-source-5",
       "active": true,
-      "weight": "Alta",
-      "priority": "Alta"
+      "weight": "Média",
+      "priority": "Média"
     },
     {
       "id": "native-source-6",
@@ -1091,8 +1091,8 @@
     {
       "id": "catalog-agency-folhapress",
       "active": true,
-      "weight": "Média",
-      "priority": "Média"
+      "weight": "Alta",
+      "priority": "Alta"
     },
     {
       "id": "catalog-agency-ag-ncia-estado-broadcast",
@@ -1103,8 +1103,8 @@
     {
       "id": "catalog-agency-ag-ncia-o-globo",
       "active": true,
-      "weight": "Média",
-      "priority": "Média"
+      "weight": "Alta",
+      "priority": "Alta"
     },
     {
       "id": "catalog-agency-ag-ncia-infra",
