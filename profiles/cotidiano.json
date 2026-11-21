@@ -7,11 +7,11 @@
   "commentPrompt": "COMENTÁRIO DESATIVADO\nEste perfil não produz comentários jornalísticos, análises autorais, opiniões ou interpretações. Gere somente o resumo jornalístico. Não preencha nem tente produzir o campo de comentário.",
   "definitions": {
     "editorialCounts": {
-      "Política": 10,
-      "Cotidiano": 10,
-      "Economia": 10,
-      "Esportes": 10,
-      "Cultura": 10
+      "Política": 15,
+      "Cotidiano": 15,
+      "Economia": 15,
+      "Esportes": 15,
+      "Cultura": 15
     },
     "scoring": {
       "base": 25,
