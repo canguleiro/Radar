@@ -2964,6 +2964,217 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
   }
 }
 </style>
+
+<!-- Folhas de estilo movidas do fim do documento para o HEAD para evitar flash de layout. -->
+<style id="birthday-import-styles">
+.birthday-section{margin-top:10px;padding-top:10px;border-top:1px solid var(--border,#d7dde5)}.birthday-section-title{font-size:12px;font-weight:750;display:flex;align-items:center;gap:7px;margin-bottom:6px}.birthday-names-list{font-size:12px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--text,#263449);margin-bottom:8px}.birthday-import-btn{width:100%;font-size:11px!important;padding:7px 8px!important}.birthday-import-modal{width:min(620px,calc(100vw - 28px));max-height:88vh;overflow:auto}.birthday-help{font-size:13px;line-height:1.5;color:var(--muted,#667085)}.birthday-import-modal input[type=file]{display:block;width:100%;margin:8px 0 12px;font-size:12px}.birthday-file-label,.birthday-import-modal>label[for=birthdayNamesInput]{display:block;font-size:12px;font-weight:700;margin-top:12px}.birthday-image-preview{display:block;max-width:100%;max-height:220px;object-fit:contain;margin:8px auto;border:1px solid var(--border,#d7dde5);border-radius:8px}.birthday-modal-actions{justify-content:flex-end;margin-top:12px;flex-wrap:wrap}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-fix-rules-modal-width-final">
+/* Correção efetiva: o limite anterior vinha de .api-modal .modalbox (max-width:520px).
+   Este seletor mais específico remove esse teto somente neste modal. */
+#rulesInstructionsModal .rules-instructions-modal-box {
+  width: min(960px, calc(100vw - 64px)) !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+@media (max-width: 760px) {
+  #rulesInstructionsModal .rules-instructions-modal-box {
+    width: calc(100vw - 16px) !important;
+    max-width: none !important;
+    min-height: 92vh;
+    padding: 12px !important;
+  }
+}
+</style>
+<style id="radar-profile-tabs-pastel-v158">
+/* V1.58 — abas com identidade cromática discreta, sempre em uma única linha. */
+#rulesInstructionsModal .profile-editor-tabs{
+  display:grid!important;
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  align-items:stretch!important;
+  gap:6px!important;
+  width:100%!important;
+  margin:10px 0 14px!important;
+  padding:0 0 9px!important;
+  border-bottom:1px solid var(--line)!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  scrollbar-width:thin!important;
+}
+#rulesInstructionsModal .profile-editor-tab{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  min-width:0!important;
+  min-height:37px!important;
+  padding:7px 5px!important;
+  border:1px solid transparent!important;
+  border-bottom:2px solid transparent!important;
+  border-radius:8px!important;
+  font-size:clamp(10px, .78vw, 12px)!important;
+  line-height:1.1!important;
+  font-weight:650!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+  transition:background-color .15s ease,border-color .15s ease,color .15s ease,box-shadow .15s ease!important;
+}
+#rulesInstructionsModal .profile-editor-tab i{
+  margin:0!important;
+  flex:0 0 auto!important;
+  font-size:11px!important;
+}
+/* Tons suaves por categoria: mantêm a navegação identificável sem competir com o conteúdo. */
+#rulesInstructionsModal .profile-editor-tab[data-tab="definitions"]{color:#315f91!important;background:#edf3fb!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="editorial"]{color:#287451!important;background:#edf6f0!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="summary"]{color:#a34e48!important;background:#fbefed!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="comment"]{color:#74549b!important;background:#f3eff9!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="interests"]{color:#966317!important;background:#fbf4e7!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="sources"]{color:#376f89!important;background:#edf4f7!important}
+#rulesInstructionsModal .profile-editor-tab.active{
+  font-weight:750!important;
+  box-shadow:inset 0 0 0 1px currentColor!important;
+  border-bottom-width:3px!important;
+}
+#rulesInstructionsModal .profile-editor-tab[data-tab="definitions"].active{background:#dce8f7!important;border-color:#b8cce6!important;border-bottom-color:#315f91!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="editorial"].active{background:#dcefe2!important;border-color:#b8dbc5!important;border-bottom-color:#287451!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="summary"].active{background:#f7e1de!important;border-color:#ebc5c0!important;border-bottom-color:#a34e48!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="comment"].active{background:#e9e0f4!important;border-color:#d2c2e7!important;border-bottom-color:#74549b!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="interests"].active{background:#f5e9ce!important;border-color:#e9d6ad!important;border-bottom-color:#966317!important}
+#rulesInstructionsModal .profile-editor-tab[data-tab="sources"].active{background:#dcebf1!important;border-color:#bdd5df!important;border-bottom-color:#376f89!important}
+#rulesInstructionsModal .profile-editor-tab:not(.active):hover{filter:brightness(.97)!important;border-color:currentColor!important}
+#rulesInstructionsModal .profile-editor-tab:focus-visible{outline:2px solid var(--primary)!important;outline-offset:2px!important}
+@media(max-width:760px){
+  #rulesInstructionsModal .profile-editor-tabs{
+    display:flex!important;flex-wrap:nowrap!important;gap:5px!important;
+    overflow-x:auto!important;overscroll-behavior-x:contain!important;
+    scroll-snap-type:x proximity!important;
+  }
+  #rulesInstructionsModal .profile-editor-tab{
+    flex:0 0 auto!important;min-width:94px!important;
+    font-size:11px!important;padding:7px 8px!important;scroll-snap-align:start!important;
+  }
+}
+</style>
+<style id="radar-v160-fontes-tab-layer-counter">
+/* V1.60 — navegação das abas sempre acima da tabela de fontes e contador contextual no rodapé. */
+#rulesInstructionsModal .profile-editor-tabs{
+  position:relative!important;z-index:30!important;isolation:isolate!important;
+  display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  flex-wrap:nowrap!important;white-space:nowrap!important;
+  overflow:visible!important;background:var(--card,#fff)!important;
+}
+#rulesInstructionsModal .profile-editor-tab{position:relative!important;z-index:31!important;
+  white-space:nowrap!important;min-width:0!important;}
+#rulesInstructionsModal .profile-editor-pane{position:relative!important;z-index:1!important;}
+#rulesInstructionsModal .profile-editor-pane[data-pane="sources"] .tablewrap{
+  position:relative!important;z-index:0!important;isolation:isolate!important;
+  margin-top:6px!important;padding-top:2px!important;
+}
+#rulesInstructionsModal .profile-source-table thead,
+#rulesInstructionsModal .profile-source-table thead tr,
+#rulesInstructionsModal .profile-source-table thead th{
+  position:static!important;z-index:auto!important;
+}
+#rulesInstructionsModal .profile-source-count{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:42px;height:28px;padding:0 9px;box-sizing:border-box;
+  border:1px solid var(--line,#dbe3eb);border-radius:7px;
+  background:#f3f6f9;color:#526579;font-size:11px;font-weight:700;
+  font-variant-numeric:tabular-nums;letter-spacing:.02em;
+}
+#rulesInstructionsModal .profile-source-count[hidden]{display:none!important}
+</style>
+<style id="radar-profile-source-typography">
+#rulesInstructionsModal .profile-source-table td:first-child b{font-weight:700!important}
+#rulesInstructionsModal .profile-source-table td:first-child .small{font-weight:600!important}
+</style>
+<style id="radar-toolbar-right-alignment-final">
+/* V5.1 — alinhamento estrutural da barra superior. Escopo exclusivo da barra global. */
+@media (min-width: 851px) {
+  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 296px 390px !important;
+    grid-template-rows: auto !important;
+    align-items: center !important;
+    column-gap: 12px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > .radar-quick-controls {
+    grid-column: 1 !important; grid-row: 1 !important;
+    justify-self: start !important; width: max-content !important; min-width: 0 !important;
+  }
+  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > .news-radar-segmented {
+    grid-column: 2 !important; grid-row: 1 !important;
+    justify-self: center !important; width: 296px !important; max-width: 296px !important;
+    min-width: 0 !important; margin: 0 !important;
+  }
+  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > #filterBottomGrid {
+    grid-column: 3 !important; grid-row: 1 !important;
+    justify-self: end !important; align-self: center !important;
+    display: block !important; width: 390px !important; max-width: 390px !important;
+    min-width: 390px !important; margin: 0 !important; padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+  #globalNewsControls #filterBottomGrid > .filter-block.search-filter.search-add-row {
+    display: flex !important; flex-flow: row nowrap !important;
+    align-items: center !important; justify-content: flex-end !important;
+    gap: 8px !important; width: 100% !important; min-width: 0 !important;
+    margin: 0 !important; padding: 0 !important; box-sizing: border-box !important;
+  }
+  #globalNewsControls #filterBottomGrid #searchNews {
+    display: block !important; flex: 0 0 294px !important;
+    width: 294px !important; min-width: 294px !important; max-width: 294px !important;
+    margin: 0 !important; box-sizing: border-box !important;
+  }
+  #globalNewsControls #filterBottomGrid .add-news-link-btn,
+  #globalNewsControls #filterBottomGrid .global-pdf-btn {
+    display: inline-flex !important; flex: 0 0 40px !important;
+    width: 40px !important; min-width: 40px !important; max-width: 40px !important;
+    height: 40px !important; margin: 0 !important; box-sizing: border-box !important;
+  }
+}
+@media (min-width: 851px) and (max-width: 1200px) {
+  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout {
+    grid-template-columns: minmax(0, 1fr) 250px 350px !important; column-gap: 8px !important;
+  }
+  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > .news-radar-segmented {
+    width: 250px !important; max-width: 250px !important;
+  }
+  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > #filterBottomGrid {
+    width: 350px !important; min-width: 350px !important; max-width: 350px !important;
+  }
+  #globalNewsControls #filterBottomGrid #searchNews {
+    flex-basis: 254px !important; width: 254px !important; min-width: 254px !important; max-width: 254px !important;
+  }
+}
+</style>
+<style id="radar-search-width-final-override">
+@media (min-width: 851px) {
+  html body #globalNewsControls #filterBottomGrid input#searchNews {
+    flex: 0 0 200px !important;
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+    box-sizing: border-box !important;
+  }
+}
+</style>
 </head>
 <body class="news-radar-workspace-active">
 <header class="topbar">
@@ -3878,22 +4089,6 @@ function applyTheme(theme){
   const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=dark?'#081a2b':'#102a43';
 }
 function toggleTheme(){const next=document.documentElement.dataset.theme==='dark'?'light':'dark';localStorage.setItem('radar_theme',next);applyTheme(next)}
-function setViewZoom(value){
-  const zoom=Math.max(50,Math.min(150,Math.round(Number(value)/5)*5));
-  document.documentElement.style.zoom=(zoom/100).toString();
-  document.documentElement.style.setProperty('--radar-view-zoom',(zoom/100).toString());
-  localStorage.setItem('radar_view_zoom',String(zoom));
-  const output=document.getElementById('viewZoomValue');
-  if(output)output.textContent=zoom+'%';
-}
-function stepViewZoom(delta){
-  const current=Number(localStorage.getItem('radar_view_zoom')||100);
-  setViewZoom(current+delta);
-}
-
-function initViewControls(){
-  setViewZoom(localStorage.getItem('radar_view_zoom')||'100');
-}
 function setTextContent(id,value){const el=document.getElementById(id);if(el)el.textContent=String(value??'')}
 function toast(msg,persistent=false){
   const el=document.getElementById('toast');
@@ -6248,8 +6443,7 @@ loadGitHubSourceCatalog().catch(e=>{console.error('Catálogo global de fontes',e
 loadGitHubEditorialProfiles(false).catch(e=>{console.error('Perfis editoriais do GitHub',e);toast('Não foi possível carregar os perfis do GitHub: '+e.message);});
 initCollectionDates();
 </script>
-<script>applyTheme(localStorage.getItem('radar_theme')==='dark'?'dark':'light');initViewControls();
-// V59: cards contextuais de data/hora, previsão do tempo e tábua de marés.
+<script>applyTheme(localStorage.getItem('radar_theme')==='dark'?'dark':'light'); // V59: cards contextuais de data/hora, previsão do tempo e tábua de marés.
 function updateContextClock(){
   const now=new Date();
   const time=document.getElementById('contextClock');
@@ -6576,22 +6770,7 @@ syncMobileLayout();
 <!-- V164: reduz a tipografia do clima para manter relógio/data em destaque. -->
 <!-- V170: pontuação editorial universal, parametrizada pelas pautas, abrangência, peso da fonte e assuntos a descartar; sem IA. -->
 <!-- V171: contador de fontes ativadas e inclusão manual de notícias por link. -->
-<style id="birthday-import-styles">
-.birthday-section{margin-top:10px;padding-top:10px;border-top:1px solid var(--border,#d7dde5)}.birthday-section-title{font-size:12px;font-weight:750;display:flex;align-items:center;gap:7px;margin-bottom:6px}.birthday-names-list{font-size:12px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--text,#263449);margin-bottom:8px}.birthday-import-btn{width:100%;font-size:11px!important;padding:7px 8px!important}.birthday-import-modal{width:min(620px,calc(100vw - 28px));max-height:88vh;overflow:auto}.birthday-help{font-size:13px;line-height:1.5;color:var(--muted,#667085)}.birthday-import-modal input[type=file]{display:block;width:100%;margin:8px 0 12px;font-size:12px}.birthday-file-label,.birthday-import-modal>label[for=birthdayNamesInput]{display:block;font-size:12px;font-weight:700;margin-top:12px}.birthday-image-preview{display:block;max-width:100%;max-height:220px;object-fit:contain;margin:8px auto;border:1px solid var(--border,#d7dde5);border-radius:8px}.birthday-modal-actions{justify-content:flex-end;margin-top:12px;flex-wrap:wrap}
 
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
 <script id="birthday-import-logic">
 const BIRTHDAY_STORAGE_KEY='radar_birthday_names_by_day_v1';
 function localDayKey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
@@ -6781,24 +6960,7 @@ ${String(footballData?.updatedAt||'não informada')}`;
 }
 
 </script>
-<style id="radar-fix-rules-modal-width-final">
-/* Correção efetiva: o limite anterior vinha de .api-modal .modalbox (max-width:520px).
-   Este seletor mais específico remove esse teto somente neste modal. */
-#rulesInstructionsModal .rules-instructions-modal-box {
-  width: min(960px, calc(100vw - 64px)) !important;
-  max-width: none !important;
-  min-width: 0 !important;
-  box-sizing: border-box !important;
-}
-@media (max-width: 760px) {
-  #rulesInstructionsModal .rules-instructions-modal-box {
-    width: calc(100vw - 16px) !important;
-    max-width: none !important;
-    min-height: 92vh;
-    padding: 12px !important;
-  }
-}
-</style>
+
 <!-- Radar V1.35: limpeza da barra lateral e atualização imediata das fontes na troca de perfil. -->
 <!-- Radar V1.19: catálogo remoto de perfis editoriais no GitHub, carregado ao abrir Regras e Instruções. -->
 <script>
@@ -6848,7 +7010,7 @@ document.addEventListener('click',function(event){
 /* V1.57 — zoom limitado pela largura real entre as colunas laterais.
    O conteúdo central é recentralizado no espaço livre entre coleta e painel contextual. */
 (function(){
-  const MIN_ZOOM=50, STEP=5, MAX_ZOOM=150, MIN_CENTER_WIDTH=780, MAX_CENTER_WIDTH=1056, SIDE_GAP=16;
+  const MIN_ZOOM=50, STEP=5, MAX_ZOOM=150, MIN_CENTER_WIDTH=780, MAX_CENTER_WIDTH=1056, SIDE_GAP=8;
   const root=document.documentElement;
   function getMain(){return document.querySelector('.layout > main.main');}
   function getRails(){
@@ -6942,187 +7104,17 @@ document.addEventListener('click',function(event){
 })();
 </script>
 
-<style id="radar-profile-tabs-pastel-v158">
-/* V1.58 — abas com identidade cromática discreta, sempre em uma única linha. */
-#rulesInstructionsModal .profile-editor-tabs{
-  display:grid!important;
-  grid-template-columns:repeat(6,minmax(0,1fr))!important;
-  align-items:stretch!important;
-  gap:6px!important;
-  width:100%!important;
-  margin:10px 0 14px!important;
-  padding:0 0 9px!important;
-  border-bottom:1px solid var(--line)!important;
-  overflow-x:auto!important;
-  overflow-y:hidden!important;
-  scrollbar-width:thin!important;
-}
-#rulesInstructionsModal .profile-editor-tab{
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:5px!important;
-  min-width:0!important;
-  min-height:37px!important;
-  padding:7px 5px!important;
-  border:1px solid transparent!important;
-  border-bottom:2px solid transparent!important;
-  border-radius:8px!important;
-  font-size:clamp(10px, .78vw, 12px)!important;
-  line-height:1.1!important;
-  font-weight:650!important;
-  white-space:nowrap!important;
-  text-align:center!important;
-  transition:background-color .15s ease,border-color .15s ease,color .15s ease,box-shadow .15s ease!important;
-}
-#rulesInstructionsModal .profile-editor-tab i{
-  margin:0!important;
-  flex:0 0 auto!important;
-  font-size:11px!important;
-}
-/* Tons suaves por categoria: mantêm a navegação identificável sem competir com o conteúdo. */
-#rulesInstructionsModal .profile-editor-tab[data-tab="definitions"]{color:#315f91!important;background:#edf3fb!important}
-#rulesInstructionsModal .profile-editor-tab[data-tab="editorial"]{color:#287451!important;background:#edf6f0!important}
-#rulesInstructionsModal .profile-editor-tab[data-tab="summary"]{color:#a34e48!important;background:#fbefed!important}
-#rulesInstructionsModal .profile-editor-tab[data-tab="comment"]{color:#74549b!important;background:#f3eff9!important}
-#rulesInstructionsModal .profile-editor-tab[data-tab="interests"]{color:#966317!important;background:#fbf4e7!important}
-#rulesInstructionsModal .profile-editor-tab[data-tab="sources"]{color:#376f89!important;background:#edf4f7!important}
-#rulesInstructionsModal .profile-editor-tab.active{
-  font-weight:750!important;
-  box-shadow:inset 0 0 0 1px currentColor!important;
-  border-bottom-width:3px!important;
-}
-#rulesInstructionsModal .profile-editor-tab[data-tab="definitions"].active{background:#dce8f7!important;border-color:#b8cce6!important;border-bottom-color:#315f91!important}
-#rulesInstructionsModal .profile-editor-tab[data-tab="editorial"].active{background:#dcefe2!important;border-color:#b8dbc5!important;border-bottom-color:#287451!important}
-#rulesInstructionsModal .profile-editor-tab[data-tab="summary"].active{background:#f7e1de!important;border-color:#ebc5c0!important;border-bottom-color:#a34e48!important}
-#rulesInstructionsModal .profile-editor-tab[data-tab="comment"].active{background:#e9e0f4!important;border-color:#d2c2e7!important;border-bottom-color:#74549b!important}
-#rulesInstructionsModal .profile-editor-tab[data-tab="interests"].active{background:#f5e9ce!important;border-color:#e9d6ad!important;border-bottom-color:#966317!important}
-#rulesInstructionsModal .profile-editor-tab[data-tab="sources"].active{background:#dcebf1!important;border-color:#bdd5df!important;border-bottom-color:#376f89!important}
-#rulesInstructionsModal .profile-editor-tab:not(.active):hover{filter:brightness(.97)!important;border-color:currentColor!important}
-#rulesInstructionsModal .profile-editor-tab:focus-visible{outline:2px solid var(--primary)!important;outline-offset:2px!important}
-@media(max-width:760px){
-  #rulesInstructionsModal .profile-editor-tabs{
-    display:flex!important;flex-wrap:nowrap!important;gap:5px!important;
-    overflow-x:auto!important;overscroll-behavior-x:contain!important;
-    scroll-snap-type:x proximity!important;
-  }
-  #rulesInstructionsModal .profile-editor-tab{
-    flex:0 0 auto!important;min-width:94px!important;
-    font-size:11px!important;padding:7px 8px!important;scroll-snap-align:start!important;
-  }
-}
-</style>
 
 
-<style id="radar-v160-fontes-tab-layer-counter">
-/* V1.60 — navegação das abas sempre acima da tabela de fontes e contador contextual no rodapé. */
-#rulesInstructionsModal .profile-editor-tabs{
-  position:relative!important;z-index:30!important;isolation:isolate!important;
-  display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;
-  flex-wrap:nowrap!important;white-space:nowrap!important;
-  overflow:visible!important;background:var(--card,#fff)!important;
-}
-#rulesInstructionsModal .profile-editor-tab{position:relative!important;z-index:31!important;
-  white-space:nowrap!important;min-width:0!important;}
-#rulesInstructionsModal .profile-editor-pane{position:relative!important;z-index:1!important;}
-#rulesInstructionsModal .profile-editor-pane[data-pane="sources"] .tablewrap{
-  position:relative!important;z-index:0!important;isolation:isolate!important;
-  margin-top:6px!important;padding-top:2px!important;
-}
-#rulesInstructionsModal .profile-source-table thead,
-#rulesInstructionsModal .profile-source-table thead tr,
-#rulesInstructionsModal .profile-source-table thead th{
-  position:static!important;z-index:auto!important;
-}
-#rulesInstructionsModal .profile-source-count{
-  display:inline-flex;align-items:center;justify-content:center;
-  min-width:42px;height:28px;padding:0 9px;box-sizing:border-box;
-  border:1px solid var(--line,#dbe3eb);border-radius:7px;
-  background:#f3f6f9;color:#526579;font-size:11px;font-weight:700;
-  font-variant-numeric:tabular-nums;letter-spacing:.02em;
-}
-#rulesInstructionsModal .profile-source-count[hidden]{display:none!important}
-</style>
-
-<style id="radar-profile-source-typography">
-#rulesInstructionsModal .profile-source-table td:first-child b{font-weight:700!important}
-#rulesInstructionsModal .profile-source-table td:first-child .small{font-weight:600!important}
-</style>
 
 
-<style id="radar-toolbar-right-alignment-final">
-/* V5.1 — alinhamento estrutural da barra superior. Escopo exclusivo da barra global. */
-@media (min-width: 851px) {
-  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 296px 390px !important;
-    grid-template-rows: auto !important;
-    align-items: center !important;
-    column-gap: 12px !important;
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > .radar-quick-controls {
-    grid-column: 1 !important; grid-row: 1 !important;
-    justify-self: start !important; width: max-content !important; min-width: 0 !important;
-  }
-  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > .news-radar-segmented {
-    grid-column: 2 !important; grid-row: 1 !important;
-    justify-self: center !important; width: 296px !important; max-width: 296px !important;
-    min-width: 0 !important; margin: 0 !important;
-  }
-  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > #filterBottomGrid {
-    grid-column: 3 !important; grid-row: 1 !important;
-    justify-self: end !important; align-self: center !important;
-    display: block !important; width: 390px !important; max-width: 390px !important;
-    min-width: 390px !important; margin: 0 !important; padding: 0 !important;
-    box-sizing: border-box !important;
-  }
-  #globalNewsControls #filterBottomGrid > .filter-block.search-filter.search-add-row {
-    display: flex !important; flex-flow: row nowrap !important;
-    align-items: center !important; justify-content: flex-end !important;
-    gap: 8px !important; width: 100% !important; min-width: 0 !important;
-    margin: 0 !important; padding: 0 !important; box-sizing: border-box !important;
-  }
-  #globalNewsControls #filterBottomGrid #searchNews {
-    display: block !important; flex: 0 0 294px !important;
-    width: 294px !important; min-width: 294px !important; max-width: 294px !important;
-    margin: 0 !important; box-sizing: border-box !important;
-  }
-  #globalNewsControls #filterBottomGrid .add-news-link-btn,
-  #globalNewsControls #filterBottomGrid .global-pdf-btn {
-    display: inline-flex !important; flex: 0 0 40px !important;
-    width: 40px !important; min-width: 40px !important; max-width: 40px !important;
-    height: 40px !important; margin: 0 !important; box-sizing: border-box !important;
-  }
-}
-@media (min-width: 851px) and (max-width: 1200px) {
-  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout {
-    grid-template-columns: minmax(0, 1fr) 250px 350px !important; column-gap: 8px !important;
-  }
-  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > .news-radar-segmented {
-    width: 250px !important; max-width: 250px !important;
-  }
-  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > #filterBottomGrid {
-    width: 350px !important; min-width: 350px !important; max-width: 350px !important;
-  }
-  #globalNewsControls #filterBottomGrid #searchNews {
-    flex-basis: 254px !important; width: 254px !important; min-width: 254px !important; max-width: 254px !important;
-  }
-}
-</style>
 
-<style id="radar-search-width-final-override">
-@media (min-width: 851px) {
-  html body #globalNewsControls #filterBottomGrid input#searchNews {
-    flex: 0 0 200px !important;
-    width: 200px !important;
-    min-width: 200px !important;
-    max-width: 200px !important;
-    box-sizing: border-box !important;
-  }
-}
-</style>
+
+
+
+
+
+
 
 </body>
 </html>
