@@ -1,0 +1,343 @@
+{
+  "version": 4,
+  "type": "radar-editorial-profile",
+  "name": "Cotidiano",
+  "editorialProfile": "PERFIL EDITORIAL — COTIDIANO DIGITAL\n\nOBJETIVO E RECORTE\nEste perfil existe para coletar, selecionar e organizar notícias destinadas ao portal Cotidiano Digital. É um perfil geral de notícias, com prioridade para o Rio Grande do Norte, seguido pelo Brasil e pelo noticiário internacional. Não é um perfil de comentários, análise ou opinião.\n\nABRANGÊNCIA GEOGRÁFICA E ORDEM DE PRIORIDADE\n1. LOCAL — RIO GRANDE DO NORTE: prioridade máxima. Inclua notícias de Natal e dos demais municípios potiguares, considerando fatos, serviços, decisões, acontecimentos e impactos locais.\n2. NACIONAL — BRASIL: segunda prioridade. Inclua fatos de interesse público e repercussão nacional, bem como notícias de outros estados quando tiverem relevância jornalística para o público brasileiro.\n3. INTERNACIONAL: terceira prioridade. Inclua acontecimentos internacionais de relevância jornalística, especialmente quando houver impacto político, econômico, social, científico, ambiental ou humanitário relevante.\n\nA ordem geográfica orienta a seleção e a apresentação, mas não substitui a relevância jornalística. Uma notícia nacional ou internacional de grande impacto pode superar uma notícia local de pouca relevância. Não invente impacto para o RN quando a notícia não o demonstrar.\n\nSITUAÇÃO DA COBERTURA LOCAL\nO catálogo atual não contém fonte com vehicleType exatamente igual a Agência e abrangência Local/RN. Não flexibilize a restrição para incluir portais, blogs ou fontes híbridas (por exemplo, Agência / Portal). Enquanto não houver agência local cadastrada e operacional, informe a lacuna de cobertura local; não simule cobertura potiguar nem reclassifique fontes.\n\nFONTES — RESTRIÇÃO OBRIGATÓRIA\nUtilize exclusivamente fontes cadastradas cuja tipologia seja Agência. Não utilize Portais, Blogs, Colunas ou outras tipologias. A restrição deve ser aplicada à fonte cadastrada, não apenas ao conteúdo da matéria. Considere somente agências ativas e com coleta funcional. Fonte cadastrada, mas não testada, indisponível ou sem extração confiável, não deve ser tratada como operacional.\n\nPRIORIDADES EDITORIAIS\nSelecione notícias de interesse público nas áreas de:\n- Brasil e assuntos nacionais;\n- Cidades e administração municipal;\n- Cotidiano, serviços públicos e direitos do cidadão;\n- Concursos e oportunidades;\n- Cultura, lazer e patrimônio;\n- Economia, emprego, trabalho, comércio e finanças públicas;\n- Educação e ciência;\n- Esporte;\n- Justiça e decisões judiciais;\n- Mundo e relações internacionais;\n- Política e administração pública;\n- Saúde;\n- Segurança pública.\n\nDê atenção especial a fatos que afetem diretamente a população, serviços essenciais, direitos, mobilidade, infraestrutura, meio ambiente, saúde, educação, segurança, emprego e custo de vida.\n\nCRITÉRIOS DE SELEÇÃO\nPriorize fatos recentes, concretos e verificáveis; decisões oficiais; mudanças em serviços; indicadores; investigações; ocorrências relevantes; políticas públicas; impactos sociais e econômicos. Avalie relevância pública, abrangência, consequências e interesse jornalístico, não apenas popularidade ou apelo da manchete.\n- Evite duplicações, inclusive quando a mesma pauta for distribuída por diferentes agências.\n- Não confunda matérias diferentes apenas por tratarem do mesmo tema.\n- Agrupe notícias somente quando houver correspondência factual ou afinidade temática específica e comprovável.\n- Evite publicidade, conteúdo promocional, publieditoriais, rumores sem confirmação e textos sem informação factual suficiente.\n- Não descarte uma notícia apenas porque o título não contém a palavra-chave esperada; considere título, linha fina, resumo e conteúdo textual.\n- Não presuma relações, causas ou impactos regionais sem sustentação no material.\n\nCLASSIFICAÇÃO\nClassifique cada notícia em uma única editoria principal, conforme o assunto central. Classifique também a abrangência como Local (RN), Nacional (Brasil) ou Internacional. Para notícias sobre outros estados brasileiros, utilize Nacional, salvo se a estrutura de abrangência do Radar exigir outra classificação.\n\nEXCLUSÕES\n- Conteúdo publicitário, promocional ou institucional sem fato jornalístico relevante.\n- Rumores, especulações e alegações não verificadas apresentados como fatos.\n- Notícias antigas sem atualização factual relevante.\n- Duplicatas ou republicações sem informação nova.\n- Conteúdo de fontes que não sejam do tipo Agência.\n- Matérias sem procedência verificável ou sem conteúdo suficiente para identificar o fato.\n\nDIRETRIZ GERAL\nProduza uma seleção diversificada, factual e útil ao trabalho editorial do Cotidiano Digital. A prioridade é RN, depois Brasil e Internacional, sempre ponderada pela relevância jornalística. Este perfil não deve gerar comentário, análise autoral ou opinião.",
+  "summaryPrompt": "Produza um resumo jornalístico claro, objetivo, informativo e suficientemente contextualizado.\n\nLINGUAGEM E TAMANHO\n- Use português brasileiro natural, fluido e acessível, com padrão de texto de portal de notícias.\n- Seja conciso, mas não telegráfico. Como referência, produza normalmente entre 70 e 130 palavras, ajustando à complexidade e importância da notícia.\n- Comece pelo fato principal, sem introduções genéricas.\n- Preserve nomes, números, datas, valores, cargos, instituições, prazos, locais e demais informações relevantes presentes na fonte.\n- Organize as informações em sequência lógica: fato principal, detalhes, contexto e consequências conhecidas.\n- Evite repetições, adjetivos desnecessários, frases burocráticas e expressões artificiais. Prefira parágrafos corridos, não listas.\n- Reescreva com suas próprias palavras, sem copiar extensos trechos.\n- Não acrescente informações externas, datas, números, explicações ou conclusões sem sustentação na notícia ou em fontes consultadas.\n- Não apresente suspeitas como fatos nem atribua intenções sem evidências. Explicite contradições, incertezas e alegações não comprovadas.\n- Se a matéria original não trouxer informação suficiente, não complete lacunas por inferência.",
+  "commentPrompt": "COMENTÁRIO DESATIVADO\nEste perfil não produz comentários jornalísticos, análises autorais, opiniões ou interpretações. Gere somente o resumo jornalístico. Não preencha nem tente produzir o campo de comentário.",
+  "definitions": {
+    "editorialCounts": {
+      "Política": 10,
+      "Cotidiano": 10,
+      "Economia": 10,
+      "Esportes": 10,
+      "Cultura": 10
+    },
+    "scoring": {
+      "base": 25,
+      "topicHit": 8,
+      "topicCap": 30,
+      "local": 15,
+      "sourceHigh": 8,
+      "sourceNormal": 4,
+      "sourceLow": -3,
+      "currentMax": 10,
+      "eventHit": 3,
+      "eventCap": 12,
+      "discardPenalty": 35,
+      "promoPenalty": 20
+    },
+    "contextCards": {
+      "visibility": {
+        "clock": false,
+        "timer": false,
+        "urgency": false,
+        "agenda": false,
+        "rundown": false,
+        "football": false
+      },
+      "order": []
+    }
+  },
+  "scopeFilter": null,
+  "interests": {
+    "Política": [
+      "Política do Rio Grande do Norte",
+      "Governo do Rio Grande do Norte e administrações municipais",
+      "Política nacional e decisões dos poderes públicos",
+      "Eleição, partidos e instituições políticas",
+      "Decisões legislativas e políticas públicas de interesse coletivo"
+    ],
+    "Cotidiano": [
+      "Cidades do Rio Grande do Norte",
+      "Serviços públicos e direitos do cidadão",
+      "Mobilidade urbana, transporte e trânsito",
+      "Infraestrutura, obras e problemas urbanos",
+      "Meio ambiente, clima, chuvas e desastres",
+      "Saúde pública e vigilância sanitária",
+      "Educação, escolas e universidades",
+      "Segurança pública e ocorrências relevantes",
+      "Justiça e decisões judiciais de interesse público",
+      "Concursos, emprego e oportunidades",
+      "Turismo, cultura, lazer e patrimônio",
+      "Fatos do cotidiano com impacto social"
+    ],
+    "Economia": [
+      "Economia do Rio Grande do Norte",
+      "Economia brasileira e indicadores econômicos",
+      "Emprego, trabalho e renda",
+      "Comércio, serviços, indústria e turismo",
+      "Inflação, preços, combustíveis e energia",
+      "Finanças públicas, impostos e orçamento",
+      "Negócios e atividade econômica"
+    ],
+    "Esportes": [
+      "Esporte potiguar",
+      "América-RN e ABC",
+      "Futebol brasileiro e competições nacionais",
+      "Seleções e atletas brasileiros",
+      "Competições esportivas de grande relevância"
+    ],
+    "Cultura": [
+      "Cultura potiguar",
+      "Música, teatro, cinema e literatura",
+      "Festivais, exposições e eventos culturais",
+      "Patrimônio histórico e manifestações culturais",
+      "Cultura e lazer no Brasil e no mundo"
+    ],
+    "Descartar Assuntos": [
+      "Publicidade, propaganda e conteúdo promocional",
+      "Publieditorial apresentado como notícia",
+      "Rumores e alegações sem confirmação",
+      "Conteúdo sem autoria ou procedência verificável",
+      "Notícias antigas sem atualização factual relevante",
+      "Duplicatas sem informação nova",
+      "Conteúdo originado em fontes que não sejam do tipo Agência"
+    ]
+  },
+  "sourceStates": [
+    {
+      "id": "native-source-1",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-2",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-3",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-4",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-5",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "catalog-agency-folhapress",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-ag-ncia-estado-broadcast",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-ag-ncia-o-globo",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-ag-ncia-infra",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-ag-ncia-safras",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-anba",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-gazeta-press",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-ag-ncia-p-blica",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-reuters",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-agence-france-presse-afp",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-associated-press-ap",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-efe",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-bloomberg",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-ansa",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-deutsche-presse-agentur-dpa",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    }
+  ],
+  "sources": [
+    {
+      "id": "native-source-1",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-2",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "native-source-3",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-4",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "native-source-5",
+      "active": true,
+      "weight": "Alta",
+      "priority": "Alta"
+    },
+    {
+      "id": "catalog-agency-folhapress",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-ag-ncia-estado-broadcast",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-ag-ncia-o-globo",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-ag-ncia-infra",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-ag-ncia-safras",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-anba",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-gazeta-press",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-ag-ncia-p-blica",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-reuters",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-agence-france-presse-afp",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-associated-press-ap",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-efe",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-bloomberg",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-ansa",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    },
+    {
+      "id": "catalog-agency-deutsche-presse-agentur-dpa",
+      "active": true,
+      "weight": "Média",
+      "priority": "Média"
+    }
+  ],
+  "sourcePath": "profiles/cotidiano.json"
+}
