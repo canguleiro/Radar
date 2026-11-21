@@ -865,6 +865,33 @@ body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-
   box-sizing:border-box!important;
 }
 
+
+
+/* V184: alinhamento à direita da busca e ações da barra principal. */
+@media(min-width:851px){
+  .global-news-controls .radar-toolbar-layout{
+    grid-template-columns:minmax(150px,1fr) minmax(220px,270px) minmax(390px,1.25fr)!important;
+  }
+  .global-news-controls .radar-search-grid{
+    justify-self:end!important;
+    width:100%!important;
+    max-width:430px!important;
+    margin-left:auto!important;
+  }
+  .global-news-controls .radar-search-grid>.search-filter{
+    display:flex!important;
+    width:100%!important;
+    justify-content:flex-end!important;
+    gap:8px!important;
+  }
+  .global-news-controls .radar-search-grid #searchNews{
+    flex:1 1 270px!important;
+    width:270px!important;
+    min-width:250px!important;
+    max-width:none!important;
+  }
+}
+
 </style>
 <!-- Radar V98: ações reorganizadas, notícias por editoria recolhíveis e indicador de processamento -->
 <style>
@@ -1655,6 +1682,1288 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
   .layout > main.main { width: auto !important; max-width: none !important; }
 }
 </style>
+
+<style id="radar-toolbar-final-centered-grid">
+/* Barra de filtros: três colunas simétricas; seletor no centro geométrico. */
+@media (min-width: 901px) {
+  #globalNewsControls > .card.news-filter-card > .news-filter-layout.radar-toolbar-layout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 296px minmax(0, 1fr) !important;
+    align-items: center !important;
+    column-gap: 12px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  #globalNewsControls > .card.news-filter-card > .news-filter-layout.radar-toolbar-layout > .radar-quick-controls {
+    grid-column: 1 !important;
+    justify-self: start !important;
+    width: max-content !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+  #globalNewsControls > .card.news-filter-card > .news-filter-layout.radar-toolbar-layout > .news-radar-segmented {
+    grid-column: 2 !important;
+    justify-self: center !important;
+    width: 296px !important;
+    min-width: 296px !important;
+    max-width: 296px !important;
+    margin: 0 !important;
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+  }
+  #globalNewsControls > .card.news-filter-card > .news-filter-layout.radar-toolbar-layout > #filterBottomGrid {
+    grid-column: 3 !important;
+    justify-self: end !important;
+    width: 296px !important;
+    min-width: 296px !important;
+    max-width: 296px !important;
+    margin: 0 !important;
+  }
+}
+</style>
+
+
+<style id="v88-sidebar-import-width">
+/* V88: força o botão Importar Boletim a ocupar a largura útil da barra lateral. */
+#page-noticias .sidebar-collect-toolbar,
+#page-noticias .sidebar-collect-toolbar > #outlookImportBtn,
+#page-noticias #outlookImportBtn {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
+#page-noticias .sidebar-collect-toolbar {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+#page-noticias #outlookImportBtn {
+  display: block !important;
+  flex: 0 0 auto !important;
+  align-self: stretch !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="v96-center-main-column">
+/* V96: centraliza a coluna de notícias no espaço entre a barra de coleta e a barra informativa.
+   As barras laterais permanecem fixas; largura e margem esquerda são calculadas em conjunto. */
+@media (min-width: 1400px) {
+  .layout:has(#page-noticias.active) .main {
+    box-sizing: border-box !important;
+    width: min(1056px, calc(100vw - 524px)) !important;
+    max-width: 1056px !important;
+    margin-left: calc((100vw - min(1056px, calc(100vw - 524px)) + 16px) / 2) !important;
+    margin-right: 0 !important;
+  }
+  .layout:has(#page-fontes.active) .main {
+    box-sizing: border-box !important;
+    width: min(1056px, calc(100vw - 524px)) !important;
+    max-width: 1056px !important;
+    margin-left: calc((100vw - min(1056px, calc(100vw - 524px)) + 16px) / 2) !important;
+    margin-right: 0 !important;
+  }
+}
+@media (min-width: 901px) and (max-width: 1399px) {
+  .layout:has(#page-noticias.active) .main {
+    box-sizing: border-box !important;
+    width: calc(100vw - 300px) !important;
+    max-width: 1056px !important;
+    margin-left: 270px !important;
+    margin-right: 18px !important;
+  }
+}
+@media (max-width: 900px) {
+  .layout:has(#page-noticias.active) .main {
+    width: 100% !important;
+    max-width: 1056px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* V106: ampliar as áreas de texto e manter o acesso às pautas na base do modal. */
+.rules-instructions-modal-box{display:flex;flex-direction:column}
+.rules-instructions-content{flex:1;display:flex;flex-direction:column}
+.rules-instructions-content textarea{min-height:170px;height:170px;max-height:360px}
+.rules-instructions-content .rules-pautas-bottom-btn{margin-top:auto;flex-shrink:0;width:100%;}
+@media(max-width:760px){.rules-instructions-content textarea{min-height:130px;height:130px;max-height:260px}}
+
+/* V109: mantém as editorias e a barra de filtros visíveis também na aba Radar. */
+/* V110: fixa barra de dados do Radar e remove Observação da IA e seu processamento. */
+body.radar-workspace-active body body .global-news-controls .editorial-pills-standalone{display:block!important;visibility:visible!important;position:sticky;top:64px;z-index:16;}
+body.radar-workspace-active .global-news-controls .news-filter-card{display:flex!important;visibility:visible!important;position:sticky;top:124px;z-index:15;}
+@media(max-width:900px){body.radar-workspace-active body body .global-news-controls .editorial-pills-standalone{top:58px}body.radar-workspace-active .global-news-controls .news-filter-card{top:118px}}
+/* V115: controles editoriais globais compartilhados pelas abas Notícias e Radar. */
+.global-news-controls{display:block;width:100%;}
+body:not(.news-radar-workspace-active):not(.radar-workspace-active) .global-news-controls{display:none!important;}
+body.sources-workspace-active .global-news-controls{display:none!important;}
+
+/* V112: os filtros são irmãos de #page-noticias e #page-radar; aplicar sticky no estado Radar sem alterar aparência. */
+body.radar-workspace-active .editorial-pills-standalone{display:block!important;visibility:visible!important;position:sticky!important;top:64px!important;z-index:16!important;}
+body.radar-workspace-active .news-filter-card{display:flex!important;visibility:visible!important;position:sticky!important;top:124px!important;z-index:15!important;}
+@media(max-width:900px){body.radar-workspace-active .editorial-pills-standalone{top:58px!important;}body.radar-workspace-active .news-filter-card{top:118px!important;}}
+.priority-score-tag{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<!-- V142: preserva a editoria de seção no boletim Outlook e as categorias RSS/Atom; classifica primeiro pela fonte, mantendo inferência como fallback. -->
+<!-- V147: card lateral de futebol integrado à API Dados Futebol via Worker; chave em Secret; preserva V145/V146. -->
+<!-- V150: unifica o card Futebol nos resultados encerrados mais recentes; lembra o token de importação do Outlook após autorização válida. -->
+<!-- V152: card renomeado para Futebol Resultados, botão de atualização discreto no cabeçalho e atualização automática após coleta. -->
+<style id="v153-mobile-layout">
+/* V153 — composição mobile inspirada no mockup: menu lateral, Notícias/Radar, busca e editorias fixas no rodapé. */
+.mobile-header-action,.mobile-sidebar-backdrop,.mobile-drawer-head{display:none}
+@media(max-width:850px){
+  html,body{max-width:100%;overflow-x:hidden}
+  body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+  .topbar{position:sticky!important;top:0!important;z-index:70!important;display:flex!important;gap:12px!important;padding:0 12px!important;min-height:58px!important;height:58px!important}
+  .mobile-header-action{display:inline-flex!important;align-items:center;justify-content:center;flex:0 0 38px;width:38px;height:38px;min-width:38px;padding:0!important;border:0!important;border-radius:9px!important;background:transparent!important;color:#fff!important;font-size:20px!important;box-shadow:none!important}
+  .mobile-header-action:active,.mobile-header-action.is-open{background:rgba(255,255,255,.14)!important}
+  .mobile-menu-toggle{margin-left:0!important}
+  .brand{left:0!important;margin:0!important;font-size:20px!important;flex:0 1 auto;white-space:nowrap;letter-spacing:.1px}
+  .brand small{display:none!important}
+  .mobile-filter-toggle{margin-left:auto!important}
+  .top-actions{display:none!important}
+  .layout{display:block!important;min-height:calc(100dvh - 58px)!important}
+  .layout:has(#page-noticias.active) .main,.layout:has(#page-fontes.active) .main{width:100%!important;max-width:none!important;margin:0!important;padding:0 0 calc(78px + env(safe-area-inset-bottom))!important;box-sizing:border-box!important}
+  .global-news-controls{display:block!important;position:relative!important;top:auto!important;z-index:10!important;width:100%!important;margin:0!important;padding:0!important;background:var(--card)!important;border-bottom:1px solid var(--line);box-shadow:0 3px 10px rgba(16,42,67,.05)}
+  body.sources-workspace-active .global-news-controls{display:none!important}
+  body.sources-workspace-active .mobile-filter-toggle{display:none!important}
+  .global-news-controls .news-filter-card{display:flex!important;flex-direction:column!important;gap:0!important;position:relative!important;top:auto!important;margin:0!important;padding:10px 14px 12px!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:var(--card)!important}
+  .global-news-controls .editorial-pills-standalone{display:none!important;position:static!important;top:auto!important;height:0!important;margin:0!important;padding:0!important;visibility:hidden!important}
+  .global-news-controls .news-filter-layout{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:10px!important;width:100%!important}
+  .global-news-controls .news-radar-segmented{order:0!important;display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important;max-width:none!important;min-width:0!important;min-height:52px!important;padding:4px!important;gap:4px!important;border:1px solid #d8e0e9!important;border-radius:13px!important;background:#eef2f7!important}
+  .global-news-controls .news-radar-tab{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;width:100%!important;min-width:0!important;height:42px!important;padding:7px 6px!important;border:1px solid transparent!important;border-radius:10px!important;font-size:15px!important;font-weight:700!important;white-space:nowrap!important;color:#40546a!important}
+  .global-news-controls .news-radar-tab.active{background:#2F6FAE!important;border-color:#2F6FAE!important;color:#fff!important;box-shadow:0 1px 3px rgba(16,42,67,.15)!important}
+  .global-news-controls .news-radar-tab .header-icon{width:19px!important;height:19px!important;font-size:17px!important}
+  .global-news-controls .news-filter-card .filter-bottom-grid{order:1!important;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-areas:"search search" "geo sort"!important;gap:8px!important;width:100%!important;margin:0!important;padding:0!important;border:0!important}
+  .global-news-controls .news-filter-card .filter-bottom-grid>.search-filter{grid-area:search!important;display:block!important;min-width:0!important;width:100%!important;margin:0!important}
+  .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:first-child{grid-area:geo!important;display:none!important;min-width:0!important}
+  .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:nth-child(2){grid-area:sort!important;display:none!important;min-width:0!important}
+  body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:first-child,body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:nth-child(2){display:block!important}
+  .global-news-controls .news-filter-card .search-filter input{width:100%!important;min-width:0!important;height:48px!important;min-height:48px!important;padding:9px 14px 9px 44px!important;border:1px solid #d7e0ea!important;border-radius:14px!important;background-color:var(--card)!important;color:var(--text)!important;font-size:16px!important;line-height:1.25!important;box-shadow:none!important}
+  .global-news-controls .news-filter-card .search-filter{position:relative!important}
+  .global-news-controls .news-filter-card .search-filter:before{content:"";position:absolute;left:17px;top:16px;width:13px;height:13px;border:2px solid #8793a1;border-radius:50%;pointer-events:none}
+  .global-news-controls .news-filter-card .search-filter:after{content:"";position:absolute;left:30px;top:29px;width:7px;height:2px;background:#8793a1;transform:rotate(45deg);transform-origin:left center;pointer-events:none}
+  .global-news-controls .news-filter-card .filter-block .pill-row{display:flex!important;flex-wrap:wrap!important;gap:6px!important;min-height:0!important;align-items:center!important}
+  .global-news-controls .news-filter-card .filter-bottom-grid .filter-pill{width:auto!important;min-width:0!important;min-height:34px!important;height:auto!important;padding:6px 10px!important;border:1px solid var(--line)!important;border-radius:999px!important;font-size:12px!important;background:var(--surface-soft)!important;color:var(--text)!important}
+  .global-news-controls .news-filter-card .filter-bottom-grid .filter-pill.active{background:var(--navy)!important;border-color:var(--navy)!important;color:#fff!important}
+  .mobile-bottom{display:block!important;position:fixed!important;left:0!important;right:0!important;bottom:0!important;z-index:80!important;width:100%!important;margin:0!important;padding:5px 6px calc(5px + env(safe-area-inset-bottom))!important;background:var(--card)!important;border-top:1px solid var(--line)!important;box-shadow:0 -5px 18px rgba(16,42,67,.08)!important}
+  .mobile-bottom #editoriaPills{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;align-items:stretch!important;justify-content:stretch!important;gap:2px!important;width:100%!important;overflow:visible!important;padding:0!important;margin:0!important}
+  .mobile-bottom #editoriaPills .filter-pill{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;width:100%!important;min-width:0!important;height:58px!important;min-height:58px!important;padding:3px 1px!important;margin:0!important;border:1px solid transparent!important;border-radius:11px!important;background:transparent!important;color:var(--pill-color,#526579)!important;box-shadow:none!important;font-size:10px!important;line-height:1.15!important;font-weight:650!important;white-space:normal!important;overflow:hidden!important}
+  .mobile-bottom #editoriaPills .filter-pill.active{background:var(--pill-bg,#eef2f6)!important;border-color:transparent!important;color:var(--pill-color,#526579)!important;box-shadow:none!important}
+  .mobile-bottom #editoriaPills .filter-pill .pill-icon{display:flex!important;align-items:center!important;justify-content:center!important;width:25px!important;height:25px!important;min-height:25px!important;margin:0!important;background:transparent!important;border-radius:0!important;color:var(--pill-color,#526579)!important}
+  .mobile-bottom #editoriaPills .filter-pill .pill-icon svg{display:block!important;width:23px!important;height:23px!important}
+  .mobile-bottom #editoriaPills .filter-pill .editorial-pill-label{display:block!important;width:100%!important;max-width:100%!important;overflow:hidden!important;text-align:center!important;text-overflow:clip!important;white-space:nowrap!important;font-size:clamp(8px,2.4vw,10px)!important;line-height:1.15!important;font-weight:650!important}
+  .mobile-bottom #editoriaPills .filter-pill .editorial-pill-count{display:none!important}
+  .mobile-bottom #editoriaPills .filter-pill .pill-icon{flex:none!important}
+  #page-noticias .collection-card{position:fixed!important;left:0!important;top:58px!important;bottom:0!important;width:min(350px,88vw)!important;max-width:88vw!important;height:calc(100dvh - 58px)!important;max-height:none!important;margin:0!important;padding:14px!important;border-radius:0 16px 0 0!important;overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior:contain!important;z-index:62!important;transform:translateX(-110%);visibility:hidden;transition:transform .22s ease,visibility .22s ease;box-shadow:8px 0 28px rgba(4,18,31,.22)!important;background:var(--card)!important}
+  body.mobile-sidebar-open #page-noticias .collection-card{transform:translateX(0)!important;visibility:visible!important}
+  .mobile-sidebar-backdrop{display:block;position:fixed;left:0;right:0;top:58px;bottom:0;z-index:60;background:rgba(4,16,29,.48);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease}
+  body.mobile-sidebar-open .mobile-sidebar-backdrop{opacity:1;visibility:visible}
+  body.mobile-sidebar-open{overflow:hidden!important}
+  .mobile-drawer-head{display:flex!important;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px;padding:0 0 10px;border-bottom:1px solid var(--line);color:var(--text);font-size:15px}
+  .mobile-drawer-head button{border:1px solid var(--line)!important;background:var(--surface-soft)!important;color:var(--text)!important;border-radius:9px!important;width:34px!important;height:34px!important;padding:0!important;font-size:24px!important;line-height:1!important}
+  #page-noticias #newsList,#page-radar #radarList{padding:12px 12px 8px!important;min-width:0!important}
+  .notice,.radar-item{max-width:100%!important;min-width:0!important;overflow-wrap:anywhere}
+  .notice{padding:12px!important;border-radius:15px!important;margin-bottom:12px!important}
+  .notice-head{min-width:0!important;gap:8px!important}
+  .notice-title-row{min-width:0!important}
+  .notice h3{font-size:16px!important;line-height:1.3!important;overflow-wrap:anywhere}
+  .lead{font-size:14px!important;line-height:1.45!important}
+  .notice-actions{gap:5px!important;flex-wrap:wrap!important}
+  .mobile-bottom button{cursor:pointer}
+  /* V156: oculta a barra fixa de editorias enquanto a gaveta lateral estiver aberta no celular. */
+  body.mobile-sidebar-open .mobile-bottom{display:none!important}
+  body.sources-workspace-active .mobile-bottom{display:none!important}
+  .toast{left:12px!important;right:12px!important;bottom:calc(82px + env(safe-area-inset-bottom))!important;max-width:none!important}
+}
+@media(max-width:360px){
+  .topbar{gap:7px!important;padding:0 8px!important}
+  .brand{font-size:18px!important}
+  .mobile-header-action{flex-basis:34px;width:34px;height:34px;min-width:34px}
+  .mobile-bottom #editoriaPills .filter-pill .editorial-pill-label{font-size:8px!important}
+}
+:root[data-theme="dark"] .mobile-bottom{background:var(--card)!important;border-color:var(--line)!important}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<!-- V154: unifica abrangência em Nacional/Local na interface, classificadores, fontes, boletim e Worker; migra dados antigos do navegador. -->
+<!-- V156: oculta a barra inferior de editorias enquanto o menu lateral estiver aberto em dispositivos móveis. -->
+<!-- V155: mantém todos os filtros móveis (Todas, Nacional, Local, Editorial e Recentes) em uma única linha. -->
+<style id="v155-mobile-filters-one-line">
+@media(max-width:850px){
+  body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid{
+    display:grid!important;
+    grid-template-columns:.95fr 1.2fr .8fr 1.1fr 1.1fr!important;
+    grid-template-rows:auto auto!important;
+    grid-template-areas:none!important;
+    column-gap:5px!important;
+    row-gap:8px!important;
+    align-items:center!important;
+  }
+  body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid>.search-filter{
+    grid-area:1 / 1 / 2 / 6!important;
+    grid-column:1 / -1!important;
+    grid-row:1!important;
+  }
+  body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:first-child,
+  body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:nth-child(2){
+    display:contents!important;
+    grid-area:auto!important;
+  }
+  body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:first-child #geoPills,
+  body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:nth-child(2) #sortPills{
+    display:contents!important;
+  }
+  body.mobile-filters-open #geoPills .geo-choice,
+  body.mobile-filters-open #sortPills .sort-choice{
+    grid-row:2!important;
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    min-height:34px!important;
+    height:34px!important;
+    padding:5px 1px!important;
+    gap:0!important;
+    font-size:clamp(9px,2.7vw,11px)!important;
+    line-height:1.1!important;
+    white-space:nowrap!important;
+    overflow:hidden!important;
+    text-overflow:clip!important;
+    box-sizing:border-box!important;
+  }
+  body.mobile-filters-open #geoPills .geo-choice:nth-child(1){grid-column:1!important}
+  body.mobile-filters-open #geoPills .geo-choice:nth-child(2){grid-column:2!important}
+  body.mobile-filters-open #geoPills .geo-choice:nth-child(3){grid-column:3!important}
+  body.mobile-filters-open #sortPills .sort-choice:nth-child(1){grid-column:4!important}
+  body.mobile-filters-open #sortPills .sort-choice:nth-child(2){grid-column:5!important}
+}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<!-- V158: adiciona atalho móvel Fontes à direita do filtro no cabeçalho; reutiliza showPage('fontes'). -->
+<!-- V161: resultados variam conforme o dia da semana e a mesma consulta passa a incluir a agenda Jogos do Dia. -->
+<!-- V162: card Futebol Brasileiro; Jogos de Hoje antes de Resultados; oculta seções vazias e o card quando não há jogos. -->
+<style>
+/* V188: cor azul da aba ativa e botão voltar ao topo centralizado. */
+.news-radar-tab.active,.news-radar-tab[aria-pressed="true"]{background:#2F6FAE!important;border-color:#2F6FAE!important;color:#fff!important}
+.news-radar-tab.active .header-icon,.news-radar-tab[aria-pressed="true"] .header-icon{color:#fff!important}
+#backToTopBtn{left:50%!important;right:auto!important;transform:translateX(-50%)!important}
+#backToTopBtn:hover{transform:translate(-50%,-2px)!important}
+@media(max-width:600px){#backToTopBtn{left:50%!important;right:auto!important}}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style>
+/* V189: troca experimental das cores dos seletores ativos. */
+.global-news-controls .news-radar-tab.active{background:#172f4a!important;border-color:#172f4a!important;color:#fff!important;box-shadow:0 2px 5px rgba(16,42,67,.12)!important}
+.global-news-controls .news-radar-tab.active .header-icon{color:#fff!important}
+.global-news-controls .filter-pill.active,.global-news-controls .filter-pill.active.editorial-choice,.global-news-controls .filter-pill.geo-choice.active,.global-news-controls .filter-pill.sort-choice.active{background:#2F6FAE!important;border-color:#2F6FAE!important;color:#fff!important}
+.global-news-controls .filter-pill.active .pill-icon{background:rgba(255,255,255,.18)!important;color:#fff!important}
+.news-radar-segmented{position:relative}
+#radarCountBadge{position:absolute;right:-7px;top:-9px;z-index:5;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:#D64545;color:#fff;border:2px solid #fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;line-height:1;box-shadow:0 2px 5px rgba(16,42,67,.18);pointer-events:none}
+#radarCountBadge[hidden]{display:none!important}
+#page-noticias .notice{cursor:pointer}
+#page-noticias .notice .check{display:none!important}
+#page-noticias .notice.selected{border-color:#2F6FAE!important;box-shadow:0 0 0 2px rgba(47,111,174,.18)!important;background:#f7fbff}
+#page-noticias .notice .notice-title-row{display:block}
+#page-noticias .notice .notice-title-row .notice-classifiers{display:none!important}
+#page-noticias .notice .meta .notice-classifiers{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap;margin-right:3px}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style>
+/* V190: metadados mais discretos e pílulas editoriais sem borda. */
+#page-noticias .meta .tag,
+#page-radar .meta .tag,
+#page-radar .radar-meta .tag{
+  background:#F7F9FB!important;
+  border:0!important;
+  box-shadow:none!important;
+  color:#263746!important;
+  font-weight:500!important;
+}
+#page-noticias .meta .tag.editorial-tag,
+#page-radar .meta .tag.editorial-tag,
+#page-radar .radar-meta .tag.editorial-tag{
+  border:0!important;
+  font-weight:600!important;
+}
+/* Rótulos de editoria preservam suas cores próprias. */
+#page-noticias .meta .tag.editorial-tag{filter:none!important}
+#radarCountBadge{background:#D64545!important}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style>
+#page-noticias .notice-actions{display:flex!important;justify-content:flex-start!important;align-items:center!important;gap:6px!important}
+#page-noticias .notice-actions .btn-comment{order:0!important;margin-left:0!important}
+#page-noticias .notice-actions .btn{margin-left:0!important}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style>
+#page-radar .radar-num.radar-move-handle{cursor:grab!important;user-select:none!important;touch-action:pan-y!important}
+#page-radar .radar-num.radar-move-handle:active{cursor:grabbing!important}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style>
+/* V190 final: botão Comentar no início da linha, alinhado à esquerda. */
+#page-noticias .notice-actions{display:flex!important;justify-content:flex-start!important;align-items:center!important;gap:6px!important}
+#page-noticias .notice-actions .comment-single-action{order:0!important;margin:0!important;align-self:flex-start!important}
+#page-noticias .notice-actions button{margin-left:0!important}
+#page-radar .radar-num.radar-move-handle{cursor:grab!important;user-select:none!important;touch-action:none!important}
+#page-radar .radar-num.radar-move-handle:active{cursor:grabbing!important}
+#page-radar .card-move-top-radar{display:none!important}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style>
+/* V191: as pílulas de editoria preservam integralmente suas cores originais.
+   Apenas a borda e o peso excessivo da tipografia são removidos. */
+#page-noticias .meta .tag.editorial-tag,
+#page-radar .meta .tag.editorial-tag,
+#page-radar .radar-meta .tag.editorial-tag{
+  border:0!important;
+  box-shadow:none!important;
+  font-weight:500!important;
+}
+#page-noticias .meta .tag.editorial-tag.ed-politica,
+#page-radar .meta .tag.editorial-tag.ed-politica{background:#eaf0fb!important;color:#315ea8!important}
+#page-noticias .meta .tag.editorial-tag.ed-cotidiano,
+#page-radar .meta .tag.editorial-tag.ed-cotidiano{background:#fdecec!important;color:#c62828!important}
+#page-noticias .meta .tag.editorial-tag.ed-economia,
+#page-radar .meta .tag.editorial-tag.ed-economia{background:#fff5df!important;color:#95670d!important}
+#page-noticias .meta .tag.editorial-tag.ed-esportes,
+#page-radar .meta .tag.editorial-tag.ed-esportes{background:#e7f7ef!important;color:#16845b!important}
+#page-noticias .meta .tag.editorial-tag.ed-cultura,
+#page-radar .meta .tag.editorial-tag.ed-cultura{background:#f4ebfa!important;color:#8b4bb0!important}
+#page-noticias .meta .tag.editorial-tag.ed-outros,
+#page-radar .meta .tag.editorial-tag.ed-outros{background:#eef1f4!important;color:#667085!important}
+:root[data-theme="dark"] #page-noticias .meta .tag.editorial-tag.ed-politica,
+:root[data-theme="dark"] #page-radar .meta .tag.editorial-tag.ed-politica{background:#263b5c!important;color:#a9c7ff!important}
+:root[data-theme="dark"] #page-noticias .meta .tag.editorial-tag.ed-cotidiano,
+:root[data-theme="dark"] #page-radar .meta .tag.editorial-tag.ed-cotidiano{background:#4a292d!important;color:#ffaaa5!important}
+:root[data-theme="dark"] #page-noticias .meta .tag.editorial-tag.ed-economia,
+:root[data-theme="dark"] #page-radar .meta .tag.editorial-tag.ed-economia{background:#4a3b20!important;color:#f5d28a!important}
+:root[data-theme="dark"] #page-noticias .meta .tag.editorial-tag.ed-esportes,
+:root[data-theme="dark"] #page-radar .meta .tag.editorial-tag.ed-esportes{background:#1e4035!important;color:#8ce0bd!important}
+:root[data-theme="dark"] #page-noticias .meta .tag.editorial-tag.ed-cultura,
+:root[data-theme="dark"] #page-radar .meta .tag.editorial-tag.ed-cultura{background:#3d294a!important;color:#d9b5f0!important}
+:root[data-theme="dark"] #page-noticias .meta .tag.editorial-tag.ed-outros,
+:root[data-theme="dark"] #page-radar .meta .tag.editorial-tag.ed-outros{background:#303943!important;color:#c1cad4!important}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-v192-filter-style">
+/* V192: filtros com fundo neutro e destaque ativo por contorno azul-escuro. */
+.global-news-controls .filter-pill,
+.mobile-bottom #editoriaPills .filter-pill {
+  background: #EEF2F6 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: #526579 !important;
+  box-sizing: border-box !important;
+}
+.global-news-controls .filter-pill.active,
+.mobile-bottom #editoriaPills .filter-pill.active {
+  background: #EEF2F6 !important;
+  border: 2px solid #172F4A !important;
+  color: #172F4A !important;
+  box-shadow: none !important;
+}
+.global-news-controls .filter-pill.active .pill-icon,
+.mobile-bottom #editoriaPills .filter-pill.active .pill-icon {
+  color: #172F4A !important;
+  background: transparent !important;
+}
+.global-news-controls .filter-pill.active .editorial-pill-label,
+.global-news-controls .filter-pill.active .editorial-pill-count,
+.mobile-bottom #editoriaPills .filter-pill.active .editorial-pill-label,
+.mobile-bottom #editoriaPills .filter-pill.active .editorial-pill-count {
+  color: #172F4A !important;
+}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-v193-filter-correction">
+/* V193: neutraliza também os estilos específicos das pílulas editoriais,
+   geográficas e de ordenação que sobrescreviam a regra geral da V192. */
+body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill,
+body .global-news-controls .news-filter-card .filter-bottom-grid .filter-pill,
+body .mobile-bottom #editoriaPills .filter-pill {
+  background: #EEF2F6 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+}
+body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.active,
+body .global-news-controls .news-filter-card .filter-bottom-grid .filter-pill.active,
+body .mobile-bottom #editoriaPills .filter-pill.active {
+  background: #EEF2F6 !important;
+  border: 2px solid #172F4A !important;
+  color: #172F4A !important;
+  box-shadow: none !important;
+}
+body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.active .pill-icon,
+body .global-news-controls .news-filter-card .filter-bottom-grid .filter-pill.active .pill-icon,
+body .mobile-bottom #editoriaPills .filter-pill.active .pill-icon {
+  background: transparent !important;
+  color: #172F4A !important;
+}
+body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.active .editorial-pill-label,
+body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.active .editorial-pill-count,
+body .mobile-bottom #editoriaPills .filter-pill.active .editorial-pill-label,
+body .mobile-bottom #editoriaPills .filter-pill.active .editorial-pill-count {
+  color: #172F4A !important;
+}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-v194-interface-adjustments">
+/* V194: ícone PDF na identidade azul-escura. */
+.global-news-controls .global-pdf-btn,
+.global-news-controls .global-pdf-btn i {
+  color: #172F4A !important;
+}
+/* Ordem vertical dos comandos de coleta. */
+#page-noticias .sidebar-collect-toolbar .clear-collection-top-btn,
+#page-noticias .sidebar-collect-toolbar .outlook-import-btn {
+  width: 100% !important;
+  display: block !important;
+  margin-top: 6px !important;
+}
+/* Lista de aniversariantes com remoção individual. */
+.birthday-names-list{display:flex;flex-wrap:wrap;gap:5px 8px;align-items:center}
+.birthday-name-item{display:inline-flex;align-items:center;gap:3px;max-width:100%;white-space:nowrap}
+.birthday-name-label{overflow-wrap:anywhere;white-space:normal}
+.birthday-name-remove{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;min-width:16px;padding:0;border:0;border-radius:50%;background:#EEF2F6;color:#526579;font-size:13px;font-weight:700;line-height:1;cursor:pointer}
+.birthday-name-remove:hover{background:#FDECEC;color:#B42318}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-v195-ui-adjustments">
+/* Espaçamento compacto entre Coletar, Limpar e Importar. */
+#page-noticias .sidebar-collect-toolbar{gap:3px!important}
+#page-noticias .sidebar-collect-toolbar .clear-collection-top-btn{
+  background:#D64545!important;
+  border-color:#D64545!important;
+  color:#fff!important;
+  font-weight:700!important;
+}
+#page-noticias .sidebar-collect-toolbar .clear-collection-top-btn:hover{
+  background:#bd3535!important;
+  border-color:#bd3535!important;
+  color:#fff!important;
+}
+/* Ações de restauração e edição de pautas lado a lado no modal de regras. */
+#rulesInstructionsModal .rules-processing-actions{
+  display:flex;gap:8px;align-items:stretch;width:100%;margin-top:4px
+}
+#rulesInstructionsModal .rules-processing-actions .btn{
+  flex:1 1 0;min-width:0;white-space:normal
+}
+@media(max-width:520px){
+  #rulesInstructionsModal .rules-processing-actions{gap:6px}
+}
+/* Botão Comentar indisponível quando a notícia já está no Radar. */
+#page-noticias .notice-actions .comment-single-action:disabled{
+  opacity:.42!important;filter:grayscale(1);cursor:not-allowed!important;
+  background:#eef2f6!important;border-color:#d8e0e8!important;color:#718096!important
+}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-v196-compact-collection-buttons">
+/* V196: espaçamento realmente compacto entre os três botões de coleta. */
+#page-noticias .sidebar-collect-toolbar{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  gap:2px!important;
+  row-gap:2px!important;
+}
+#page-noticias .sidebar-collect-toolbar .collect-news-btn,
+#page-noticias .sidebar-collect-toolbar .clear-collection-top-btn,
+#page-noticias .sidebar-collect-toolbar .outlook-import-btn{
+  display:block!important;
+  width:100%!important;
+  margin:0!important;
+}
+#page-noticias .sidebar-collect-toolbar .clear-collection-top-btn{
+  margin-top:0!important;
+  margin-bottom:0!important;
+}
+#page-noticias .sidebar-collect-toolbar #outlookImportStatus:empty{
+  display:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-v197-comment-navigation">
+#radarList .radar-item.radar-card-focus{
+  outline:2px solid #172F4A!important;
+  outline-offset:3px!important;
+  transition:outline-color .2s ease;
+}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-v198-editorial-active-border-only">
+/* V198: o card ativo mantém as cores próprias da editoria.
+   A borda usa a mesma cor do ícone e do nome; o ícone fica sem fundo. */
+body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice,
+body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice.active {
+  background: var(--pill-bg, #EEF2F6) !important;
+  color: var(--pill-color, #526579) !important;
+  box-shadow: none !important;
+}
+body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice.active {
+  border: 2px solid var(--pill-color, #526579) !important;
+}
+body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice .pill-icon,
+body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice.active .pill-icon {
+  background: transparent !important;
+  color: var(--pill-color, #526579) !important;
+}
+body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice .editorial-pill-label,
+body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice .editorial-pill-count,
+body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice.active .editorial-pill-label,
+body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice.active .editorial-pill-count {
+  color: var(--pill-color, #526579) !important;
+}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-brand-and-sidebar-actions">
+/* Marca RADAR e assinatura */
+.topbar .brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  white-space: nowrap;
+}
+.topbar .brand .brand-name {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 850;
+  letter-spacing: 1px;
+}
+.topbar .brand .brand-dot {
+  color: #F2C94C !important;
+  font-size: inherit;
+  font-weight: 850;
+  margin-right: 9px;
+}
+.topbar .brand .brand-tagline {
+  color: rgba(255,255,255,.82);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: .1px;
+}
+/* Ação principal em cima; ações secundárias alinhadas e com espaçamento uniforme */
+#page-noticias .sidebar-collect-toolbar {
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+#page-noticias .sidebar-collect-toolbar .collect-news-btn {
+  width: 100%;
+  display: block;
+  margin: 0 0 22px !important;
+}
+#page-noticias .sidebar-collect-secondary-actions {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: 8px;
+  width: 100%;
+}
+#page-noticias .sidebar-collect-secondary-actions .outlook-import-btn,
+#page-noticias .sidebar-collect-secondary-actions .clear-collection-top-btn {
+  width: 100%;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: 0 !important;
+  white-space: nowrap;
+}
+#page-noticias .sidebar-collect-secondary-actions .outlook-import-btn i,
+#page-noticias .sidebar-collect-secondary-actions .clear-collection-top-btn i {
+  font-size: 12px;
+}
+#page-noticias .sidebar-collect-toolbar #outlookImportStatus {
+  margin-top: 6px;
+}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-official-slogan">
+.topbar .brand .brand-tagline {
+  font-style: normal !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-fix-spacing-collection-actions">
+/* Correção definitiva: distância real entre Coletar notícias e a dupla de ações. */
+#page-noticias .sidebar-collect-toolbar {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  row-gap: 0 !important;
+}
+#page-noticias .sidebar-collect-toolbar > .collect-news-btn {
+  margin: 0 !important;
+}
+#page-noticias .sidebar-collect-toolbar > .sidebar-collect-secondary-actions {
+  margin-top: 30px !important;
+  padding-top: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+#page-noticias .sidebar-collect-toolbar > .sidebar-collect-secondary-actions > button {
+  margin: 0 !important;
+}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-fix-spacing-collection-actions-uniform">
+/* Mesmo intervalo vertical usado entre os demais controles da barra lateral. */
+#page-noticias .sidebar-collect-toolbar {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+  row-gap: 8px !important;
+}
+#page-noticias .sidebar-collect-toolbar > .collect-news-btn {
+  margin: 0 !important;
+}
+#page-noticias .sidebar-collect-toolbar > .sidebar-collect-secondary-actions {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+#page-noticias .sidebar-collect-toolbar > .sidebar-collect-secondary-actions > button {
+  margin: 0 !important;
+}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-collection-icon-corrected">
+#page-noticias .sidebar-collect-toolbar .collect-news-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+#page-noticias .sidebar-collect-toolbar .collect-news-btn .collect-news-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+}
+#page-noticias .sidebar-collect-toolbar .collect-news-btn .collect-news-icon svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-football-round-summary">
+.context-card-head.football-card-head { display:flex; align-items:center; gap:6px; }
+.football-card-actions { margin-left:auto; display:inline-flex; align-items:center; gap:5px; }
+.context-card-head.football-card-head .football-refresh { margin-left:0; }
+.context-card-head.football-card-head .football-comment-btn { flex:0 0 24px; }
+.radar-item .radar-title-plain { color:var(--navy); }
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-2026v1-ajustes-aniversario">
+.birthday-section-title.birthday-import-btn{
+  appearance:none;width:100%;border:0;background:transparent;color:var(--text,#263449);
+  font:inherit;font-size:12px;font-weight:750;display:flex;align-items:center;
+  gap:7px;text-align:left;margin:0 0 6px;padding:0;cursor:pointer;
+}
+.birthday-section-title.birthday-import-btn:hover{color:var(--accent,#245b91)}
+.birthday-section-title.birthday-import-btn:focus-visible{outline:2px solid var(--accent,#245b91);outline-offset:3px;border-radius:3px}
+.birthday-section .birthday-names-list{margin-bottom:0}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-agenda-annotations">
+.agenda-card-head{justify-content:space-between}
+.agenda-card-head>span{display:inline-flex;align-items:center;gap:8px}
+.agenda-add-btn{flex:0 0 22px;width:22px;height:22px;padding:0;border:1px solid var(--line);border-radius:5px;background:var(--surface-soft);color:var(--blue);font-size:19px;line-height:18px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.agenda-add-btn:hover{border-color:var(--blue);background:var(--surface)}
+.agenda-annotations{display:flex;flex-direction:column;gap:5px;margin:0 0 8px}
+.agenda-annotation,.agenda-annotation-editor{display:flex;align-items:flex-start;gap:6px;padding:5px 6px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.agenda-annotation-text{flex:1;min-width:0;font-size:11px;line-height:1.45;color:var(--text);white-space:pre-wrap;overflow-wrap:anywhere}
+.agenda-remove-btn,.agenda-cancel-btn{flex:0 0 19px;width:19px;height:19px;padding:0;border:0;border-radius:4px;background:transparent;color:var(--muted);font-size:17px;line-height:17px;cursor:pointer}
+.agenda-remove-btn:hover,.agenda-cancel-btn:hover{background:var(--surface-soft);color:var(--danger,#b42318)}
+.agenda-annotation-editor{align-items:flex-start}
+.agenda-annotation-editor textarea{flex:1;min-width:0;min-height:42px;max-height:70px;resize:vertical;font-size:11px;padding:6px}
+.agenda-editor-actions{display:flex;gap:3px;flex:0 0 auto}
+.agenda-confirm-btn{width:21px;height:21px;padding:0;border:0;border-radius:4px;background:var(--surface-soft);color:var(--success,#16803c);cursor:pointer}
+.agenda-confirm-btn:hover{background:var(--line)}
+
+/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
+.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
+.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
+.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
+.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
+.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
+.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.editorial-rules-grid textarea{height:260px;max-height:42vh}
+@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
+
+</style>
+<style id="radar-v132-sidebar-and-profile-switch">
+/* V1.32: removeu-se o botão Boletim; Limpar ocupa toda a largura disponível. */
+#page-noticias .sidebar-collect-secondary-actions {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  width: 100% !important;
+}
+#page-noticias .sidebar-collect-secondary-actions .clear-collection-top-btn {
+  width: 100% !important;
+  min-width: 0 !important;
+  grid-column: 1 / -1 !important;
+}
+
+/* V1.55: a área central ocupa somente o espaço livre entre as laterais.
+   Evita que o zoom do navegador faça o conteúdo central invadir o trilho contextual. */
+@media (min-width:1400px){
+  .layout:has(#page-noticias.active) .main{
+    box-sizing:border-box !important;
+    width:min(1280px, calc(100vw - 520px)) !important;
+    max-width:none !important;
+    margin-left:270px !important;
+    margin-right:auto !important;
+    padding-left:18px !important;
+    padding-right:18px !important;
+    min-width:0 !important;
+  }
+}
+
+/* V184: barra de filtros em uma única linha; ordenação aproximada da busca. */
+@media(min-width:901px){
+  .global-news-controls .news-filter-layout{
+    grid-template-columns:172px minmax(0,1fr)!important;
+    gap:12px!important;
+  }
+  .global-news-controls .news-filter-card .filter-bottom-grid{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto minmax(270px,330px)!important;
+    align-items:center!important;
+    gap:10px!important;
+    min-width:0!important;
+  }
+  .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:first-child{
+    min-width:0!important;
+  }
+  .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:nth-child(2){
+    justify-self:end!important;
+    white-space:nowrap!important;
+  }
+  .global-news-controls .news-filter-card .filter-bottom-grid>.search-filter{
+    min-width:0!important;
+    display:flex!important;
+    flex-flow:row nowrap!important;
+    align-items:center!important;
+    gap:6px!important;
+  }
+  .global-news-controls .news-filter-card .search-add-row input#searchNews{
+    flex:1 1 0!important;width:0!important;min-width:80px!important;
+  }
+}
+
+/* Radar toolbar: intervenção restrita à barra de filtros; não altera cards nem layout externo. */
+.global-news-controls .radar-toolbar-layout{display:grid!important;grid-template-columns:minmax(210px,1fr) minmax(220px,270px) minmax(250px,1fr)!important;align-items:center!important;gap:18px!important;width:100%!important;min-width:0!important}
+.global-news-controls .radar-quick-controls{position:relative;display:flex;align-items:center;justify-content:flex-start;gap:8px;min-width:0}
+.global-news-controls .radar-quick-item{position:relative;display:flex;align-items:center}
+.global-news-controls .radar-quick-item>.radar-quick-menu{top:100%!important}
+.global-news-controls .radar-quick-item:hover .radar-quick-btn{background:#e8eff7;border-color:#bdcddd}
+.global-news-controls .radar-quick-btn{display:inline-flex;align-items:center;justify-content:center;flex:0 0 40px;width:40px;height:40px;padding:0;border:1px solid #d8e1eb;border-radius:11px;background:#f4f7fb;color:#294b6a;font-size:16px;cursor:pointer}
+.global-news-controls .radar-quick-btn:hover,.global-news-controls .radar-quick-btn[aria-expanded="true"]{background:#e8eff7;border-color:#bdcddd}
+.global-news-controls .radar-quick-menu{position:absolute;top:calc(100% + 8px);left:0;z-index:40;min-width:180px;padding:9px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(16,42,67,.16)}
+.global-news-controls .radar-quick-menu[hidden]{display:none!important}
+.global-news-controls .radar-quick-item:focus-within .radar-quick-menu{display:block}
+.global-news-controls #radarSortMenu,.global-news-controls #radarSourceMenu{left:0}
+.global-news-controls .radar-quick-menu .pill-row{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;gap:4px!important}
+.global-news-controls .radar-quick-menu .radar-menu-option{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;width:100%!important;min-height:36px!important;padding:7px 10px!important;border:1px solid transparent!important;border-radius:8px!important;background:transparent!important;color:var(--text,#26384a)!important;text-align:left!important;font:inherit!important;font-size:13px!important;white-space:nowrap!important;cursor:pointer!important}
+.global-news-controls .radar-quick-menu .radar-menu-option i{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:17px!important;flex:0 0 17px!important;color:#526f8c!important;font-size:14px!important}
+.global-news-controls .radar-quick-menu .radar-menu-option:hover{background:#eef3f8!important;border-color:#dce5ee!important}
+.global-news-controls .radar-quick-menu .radar-menu-option.active{background:#e8eff7!important;border-color:#c8d8e8!important;color:#173653!important;font-weight:700!important}
+.global-news-controls .radar-quick-menu .filter-pill{height:32px;min-height:32px;padding:5px 10px;white-space:nowrap}
+.global-news-controls .radar-search-grid{display:flex!important;align-items:center!important;justify-content:flex-end!important;min-width:0!important;margin:0!important;padding:0!important;border:0!important}
+.global-news-controls .radar-search-grid>.search-filter{display:flex!important;align-items:center!important;gap:8px!important;width:100%!important;min-width:0!important}
+.global-news-controls .radar-search-grid #searchNews{flex:1 1 auto!important;width:auto!important;min-width:0!important}
+.global-news-controls .news-radar-segmented{width:100%;max-width:270px;justify-self:center}
+@media(max-width:1050px){.global-news-controls .radar-toolbar-layout{grid-template-columns:minmax(120px,1fr) minmax(190px,230px) minmax(220px,1fr)!important;gap:10px!important}.global-news-controls .radar-quick-btn{flex-basis:36px;width:36px;height:36px}}
+@media(max-width:850px){.global-news-controls .radar-toolbar-layout{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:10px!important}.global-news-controls .radar-quick-controls{order:1}.global-news-controls .news-radar-segmented{order:0;max-width:none}.global-news-controls .radar-search-grid{order:2;width:100%!important}.global-news-controls .radar-search-grid>.search-filter{width:100%!important}}
+@media(min-width:851px){
+.global-news-controls .radar-toolbar-layout{grid-template-columns:minmax(210px,1fr) minmax(220px,270px) minmax(330px,360px)!important;}
+.global-news-controls .radar-search-grid{justify-self:end!important;width:100%!important;}
+.global-news-controls .radar-search-grid>.search-filter{width:100%!important;}
+.global-news-controls .radar-search-grid #searchNews{flex:1 1 220px!important;width:220px!important;min-width:190px!important;}
+}
+.global-news-controls .radar-search-grid .add-news-link-btn{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ flex:0 0 40px!important;width:40px!important;height:40px!important;min-width:40px!important;
+ padding:0!important;border:1px solid #d8e1eb!important;border-radius:11px!important;
+ background:#f4f7fb!important;color:#294b6a!important;font-size:16px!important;cursor:pointer!important;
+ box-shadow:none!important;
+}
+.global-news-controls .radar-search-grid .add-news-link-btn:hover{background:#e8eff7!important;border-color:#bdcddd!important;}
+.global-news-controls .radar-quick-menu{display:block;}
+.global-news-controls .radar-quick-menu[hidden]{display:none!important;}
+.global-news-controls .radar-quick-menu .filter-block{display:block!important;visibility:visible!important;opacity:1!important;}
+@media(max-width:850px){.global-news-controls .radar-search-grid #searchNews{width:auto!important;min-width:0!important;}}
+
+</style>
+<style data-restored="yes">
+/* V4.1 — correção definitiva do trilho direito da barra de filtros.
+   Escopo exclusivo: barra global; não altera cards, coleta ou barra lateral. */
+@media (min-width: 901px) {
+  #globalNewsControls .radar-toolbar-layout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 270px minmax(360px, 390px) !important;
+    align-items: center !important;
+    column-gap: 16px !important;
+    row-gap: 10px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  #globalNewsControls .radar-quick-controls {
+    grid-column: 1 !important;
+    justify-self: start !important;
+    min-width: 0 !important;
+  }
+  #globalNewsControls .news-radar-segmented {
+    grid-column: 2 !important;
+    justify-self: center !important;
+    width: 270px !important;
+    max-width: 270px !important;
+    min-width: 0 !important;
+  }
+  #globalNewsControls .radar-search-grid {
+    grid-column: 3 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    display: flex !important;
+    width: 100% !important;
+    max-width: 390px !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  #globalNewsControls .radar-search-grid > .search-filter.search-add-row {
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+  #globalNewsControls .radar-search-grid #searchNews {
+    display: block !important;
+    flex: 1 1 270px !important;
+    width: 270px !important;
+    min-width: 230px !important;
+    max-width: 270px !important;
+    box-sizing: border-box !important;
+  }
+  #globalNewsControls .radar-search-grid .add-news-link-btn,
+  #globalNewsControls .radar-search-grid .global-pdf-btn {
+    display: inline-flex !important;
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+}
+@media (min-width: 901px) and (max-width: 1250px) {
+  #globalNewsControls .radar-toolbar-layout {
+    grid-template-columns: minmax(0, 1fr) 230px minmax(330px, 350px) !important;
+    column-gap: 10px !important;
+  }
+  #globalNewsControls .news-radar-segmented {
+    width: 230px !important;
+    max-width: 230px !important;
+  }
+  #globalNewsControls .radar-search-grid #searchNews {
+    min-width: 200px !important;
+    width: 230px !important;
+    max-width: 230px !important;
+  }
+}
+</style>
+<style id="radar-toolbar-two-requested-adjustments">
+@media (min-width: 901px) {
+  #globalNewsControls .news-filter-layout.radar-toolbar-layout {
+    grid-template-columns: minmax(0, 1fr) 250px minmax(0, 1fr) !important;
+    column-gap: 8px !important;
+    align-items: center !important;
+  }
+  #globalNewsControls .news-filter-layout.radar-toolbar-layout > .news-radar-segmented {
+    grid-column: 2 !important;
+    justify-self: center !important;
+    width: 250px !important;
+    max-width: 250px !important;
+    margin: 0 !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+  }
+  #globalNewsControls .news-filter-layout.radar-toolbar-layout > #filterBottomGrid {
+    grid-column: 3 !important;
+    justify-self: end !important;
+    width: 296px !important;
+    min-width: 296px !important;
+    max-width: 296px !important;
+    margin: 0 !important;
+  }
+  #globalNewsControls #filterBottomGrid > .search-filter.search-add-row {
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  #globalNewsControls #filterBottomGrid #searchNews {
+    flex: 0 0 200px !important;
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+    box-sizing: border-box !important;
+  }
+}
+</style>
+
+<style id="radar-search-original-width-only">
+@media (min-width: 851px) {
+  #globalNewsControls #filterBottomGrid #searchNews {
+    flex: 0 0 200px !important;
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+  }
+}
+</style>
 </head>
 <body class="news-radar-workspace-active">
 <header class="topbar">
@@ -1669,7 +2978,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 </section></div>
 <div class="top-actions">
 <button aria-label="Notícias" class="active" data-page="noticias" onclick="showPage('noticias')"><span aria-hidden="true" class="header-icon fa-solid fa-newspaper"></span> Notícias</button>
-<button aria-label="Radar" data-page="radar" onclick="showPage('radar')"><span aria-hidden="true" class="header-icon fa-solid fa-satellite-dish"></span> Radar</button>
+<button aria-label="Comentários" data-page="radar" onclick="showPage('radar')"><span aria-hidden="true" class="header-icon fa-solid fa-comments"></span> Comentários</button>
 <button aria-label="Fontes" class="icon-action" data-page="fontes" onclick="showPage('fontes')" title="Fontes"><span aria-hidden="true" class="header-icon fa-solid fa-rss"></span></button>
 <button aria-label="Ativar modo escuro" aria-pressed="false" class="icon-action" id="themeToggle" onclick="toggleTheme()" title="Ativar modo escuro" type="button"><span aria-hidden="true" class="header-icon fa-solid fa-moon" id="themeIcon"></span></button>
 <div aria-label="Controle de zoom da visualização" class="zoom-stepper" role="group">
@@ -1683,7 +2992,7 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <div class="layout">
 <aside class="sidebar">
 <button class="navbtn active" data-page="noticias" onclick="showPage('noticias')">📰 Notícias</button>
-<button class="navbtn" data-page="radar" onclick="showPage('radar')">📡 Radar</button>
+<button class="navbtn" data-page="radar" onclick="showPage('radar')">💬 Comentários</button>
 <button class="navbtn" data-page="fontes" onclick="showPage('fontes')">🔗 Fontes</button>
 </aside>
 <main class="main">
@@ -1693,21 +3002,27 @@ body body .global-news-controls .editorial-pills-standalone{position:sticky!impo
 <div class="pill-row editorial-pills" id="editoriaPills"></div>
 <select aria-hidden="true" class="visually-hidden" id="filterEditoria" onchange="renderNews()" tabindex="-1"><option value="">Todas</option><option>Política</option><option>Cotidiano</option><option>Economia</option><option>Esportes</option><option>Cultura</option><option>Outros</option></select>
 </div>
-<div class="news-filter-layout">
-<div aria-label="Alternar entre Notícias e Radar" class="news-radar-segmented" role="group">
-<span aria-label="Quantidade de notícias no Radar" hidden="" id="radarCountBadge">0</span>
+<div class="news-filter-layout radar-toolbar-layout">
+<div class="radar-quick-controls" aria-label="Filtros rápidos">
+<div class="radar-quick-item" onmouseenter="showRadarQuickMenu('geo')" onmouseleave="hideRadarQuickMenu('geo')">
+<button class="radar-quick-btn" type="button" title="Abrangência" aria-label="Abrangência" aria-expanded="false" onclick="toggleRadarQuickMenu('geo')"><i class="fa-solid fa-globe" aria-hidden="true"></i></button>
+<div class="radar-quick-menu" id="radarGeoMenu" hidden><div class="filter-block"><div aria-label="Filtrar por abrangência" class="pill-row" id="geoPills"></div><select aria-hidden="true" class="visually-hidden" id="filterGeo" onchange="renderNews()" tabindex="-1"><option value="">Todos</option><option value="Internacional">Internacional</option><option value="Nacional">Nacional</option><option value="Local">Local</option></select></div></div>
+</div>
+<div class="radar-quick-item" onmouseenter="showRadarQuickMenu('sort')" onmouseleave="hideRadarQuickMenu('sort')">
+<button class="radar-quick-btn" type="button" title="Ordenação" aria-label="Ordenação" aria-expanded="false" onclick="toggleRadarQuickMenu('sort')"><i class="fa-solid fa-arrow-down-wide-short" aria-hidden="true"></i></button>
+<div class="radar-quick-menu" id="radarSortMenu" hidden><div class="filter-block"><div aria-label="Ordenar notícias" class="pill-row" id="sortPills"></div><select aria-hidden="true" class="visually-hidden" id="sortNews" onchange="renderNews()" tabindex="-1"><option value="priority">Relevância</option><option value="date">Recentes</option></select></div></div>
+</div>
+<div class="radar-quick-item" onmouseenter="showRadarQuickMenu('source')" onmouseleave="hideRadarQuickMenu('source')">
+<button class="radar-quick-btn" type="button" title="Fontes" aria-label="Fontes" aria-expanded="false" id="radarQuickSourceToggle" onclick="toggleRadarQuickMenu('source')"><i class="fa-solid fa-filter" aria-hidden="true"></i></button>
+<div class="radar-quick-menu" id="radarSourceMenu" hidden><div class="filter-block"><div aria-label="Filtrar por tipo de fonte" class="pill-row" id="sourceTypePills"></div><select aria-hidden="true" class="visually-hidden" id="filterSourceType" onchange="renderNews()" tabindex="-1"><option value="">Todos</option><option value="Portal">Portal</option><option value="Agência">Agência</option><option value="Blog">Blog</option><option value="Coluna">Coluna</option></select></div></div>
+</div>
+</div>
+<div aria-label="Alternar entre Notícias e Comentários" class="news-radar-segmented" role="group">
+<span aria-label="Quantidade de notícias nos Comentários" hidden="" id="radarCountBadge">0</span>
 <button aria-pressed="true" class="news-radar-tab active" data-page="noticias" onclick="showPage('noticias')" type="button"><span aria-hidden="true" class="header-icon fa-solid fa-newspaper"></span> Notícias</button>
-<button aria-pressed="false" class="news-radar-tab" data-page="radar" onclick="showPage('radar')" type="button"><span aria-hidden="true" class="header-icon fa-solid fa-satellite-dish"></span> Radar</button>
+<button aria-pressed="false" class="news-radar-tab" data-page="radar" onclick="showPage('radar')" type="button"><span aria-hidden="true" class="header-icon fa-solid fa-comments"></span> Comentários</button>
 </div>
-<div class="filter-bottom-grid" id="filterBottomGrid">
-<div aria-label="Abrangência" class="filter-block">
-<div aria-label="Filtrar por abrangência" class="pill-row" id="geoPills"></div>
-<select aria-hidden="true" class="visually-hidden" id="filterGeo" onchange="renderNews()" tabindex="-1"><option value="">Todas</option><option value="Internacional">Internacional</option><option value="Nacional">Nacional</option><option value="Local">Local</option></select>
-</div>
-<div aria-label="Ordenação" class="filter-block">
-<div aria-label="Ordenar notícias" class="pill-row" id="sortPills"></div>
-<select aria-hidden="true" class="visually-hidden" id="sortNews" onchange="renderNews()" tabindex="-1"><option value="priority">Relevância</option><option value="manual">Manual</option><option value="date">Recentes</option></select>
-</div>
+<div class="filter-bottom-grid radar-search-grid" id="filterBottomGrid">
 <div class="filter-block search-filter search-add-row">
 <input aria-label="Buscar notícias" id="searchNews" oninput="renderNews()" placeholder="Título, fonte ou palavra..." title="Buscar notícias por título, fonte ou palavra-chave"/>
 <button aria-label="Adicionar notícia por link" class="add-news-link-btn" onclick="openAddNewsLinkModal()" title="Adicionar notícia por link" type="button"><i aria-hidden="true" class="fa-solid fa-plus"></i></button>
@@ -2731,11 +4046,12 @@ function dropOnNexoCard(event,targetId){event.preventDefault();event.stopPropaga
 document.addEventListener('dragover',function(event){if(draggedNewsId||draggedNexoId)updateMoveDragPointer(event)},true);
 function toggleEditorialCollapse(editoria){state.ui.collapsedEditorials[editoria]=!state.ui.collapsedEditorials[editoria];persist();renderNews()}
 function setNewsFilter(kind,value){
-  const ids={editorial:'filterEditoria',geo:'filterGeo',sort:'sortNews'};
+  const ids={editorial:'filterEditoria',geo:'filterGeo',sort:'sortNews',source:'filterSourceType'};
   const el=document.getElementById(ids[kind]);
   if(!el)return;
   el.value=value;
   renderNews();
+  if(kind==='geo'||kind==='sort'||kind==='source')hideRadarQuickMenu(kind);
   if(kind==='editorial'){
     scrollNewsListToTop();
   }
@@ -2766,15 +4082,36 @@ function scrollNewsListToTop(){
     root.scrollTo({top:Math.max(0,target),behavior:'smooth'});
   }
 }
+function radarQuickMenuElements(kind){
+  const ids={geo:['radarGeoMenu','filterGeo'],sort:['radarSortMenu','sortNews'],source:['radarSourceMenu','filterSourceType']};
+  const pair=ids[kind];if(!pair)return null;
+  return {menu:document.getElementById(pair[0]),select:document.getElementById(pair[1]),button:document.querySelector(`.radar-quick-item button[aria-label="${kind==='geo'?'Abrangência':kind==='sort'?'Ordenação':'Fontes'}"]`)};
+}
+function showRadarQuickMenu(kind){
+  const item=radarQuickMenuElements(kind);if(!item?.menu)return;
+  item.menu.hidden=false;item.menu.style.display='block';if(item.button)item.button.setAttribute('aria-expanded','true');
+}
+function hideRadarQuickMenu(kind){
+  const item=radarQuickMenuElements(kind);if(!item?.menu)return;
+  item.menu.hidden=true;item.menu.style.display='none';if(item.button)item.button.setAttribute('aria-expanded','false');
+}
+function toggleRadarQuickMenu(kind){
+  const item=radarQuickMenuElements(kind);if(!item?.menu)return;
+  const open=item.menu.hidden;
+  ['geo','sort','source'].filter(x=>x!==kind).forEach(hideRadarQuickMenu);
+  if(open)showRadarQuickMenu(kind);else hideRadarQuickMenu(kind);
+}
 function renderNewsFilterPills(){
   const editorial=document.getElementById('editoriaPills');
   const geo=document.getElementById('geoPills');
   const sort=document.getElementById('sortPills');
-  if(!editorial||!geo||!sort)return;
+  const sourceType=document.getElementById('sourceTypePills');
+  if(!editorial||!geo||!sort||!sourceType)return;
   const currentEd=document.getElementById('filterEditoria').value;
   const currentGeo=document.getElementById('filterGeo').value;
   const rawSort=document.getElementById('sortNews').value;
   const currentSort=rawSort==='manual'?'priority':rawSort;
+  const currentSourceType=document.getElementById('filterSourceType')?.value||'';
   const editorials=[
     {value:'',label:'Todas',icon:'list',cls:'',color:'#526579',bg:'#eef2f6'},
     {value:'Política',label:'Política',...editorialMeta('Política')},
@@ -2794,17 +4131,20 @@ function renderNewsFilterPills(){
     return `<button type="button" class="filter-pill editorial-choice ${x.cls} ${currentEd===x.value?'active':''}" style="--pill-color:${x.color||'#526579'};--pill-bg:${x.bg||'#eef2f6'}" title="Filtrar por editoria: ${x.label}" aria-label="Filtrar por editoria: ${x.label}" aria-pressed="${currentEd===x.value}" onclick="setNewsFilter('editorial','${x.value}')"><span class="pill-icon">${editorialIconSvg(x.icon)}</span><span class="editorial-pill-label">${x.label}</span><span class="editorial-pill-count">${counter}</span></button>`
   }).join('');
   const geos=[
-    {value:'',label:'Todas'},
-    {value:'Internacional',label:'Internacional'},
+    {value:'',label:'Todos'},
+    {value:'Internacional',label:'Inter'},
     {value:'Nacional',label:'Nacional'},
     {value:'Local',label:'Local'}
   ];
-  geo.innerHTML=geos.map(x=>`<button type="button" class="filter-pill geo-choice ${currentGeo===x.value?'active':''}" title="Abrangência: ${x.value||'Todas'}" aria-label="Filtrar abrangência: ${x.value||'Todas'}" aria-pressed="${currentGeo===x.value}" onclick="setNewsFilter('geo','${x.value}')">${x.label}</button>`).join('');
+  const quickOption=(kind,x,active,icon,title)=>`<button type="button" class="radar-menu-option ${active?'active':''}" title="${title}: ${x.label}" aria-label="${title}: ${x.label}" aria-pressed="${active}" onclick="setNewsFilter('${kind}','${x.value}')"><i class="fa-solid ${icon}" aria-hidden="true"></i><span>${x.label}</span></button>`;
+  geo.innerHTML=geos.map(x=>quickOption('geo',x,currentGeo===x.value,({'':'fa-globe','Internacional':'fa-earth-americas','Nacional':'fa-flag','Local':'fa-location-dot'})[x.value],'Abrangência')).join('');
   const sorts=[
-    {value:'priority',label:'Prioridade'},
-    {value:'date',label:'Recentes'}
+    {value:'priority',label:'Relevância',icon:'fa-ranking-star'},
+    {value:'date',label:'Recentes',icon:'fa-clock'}
   ];
-  sort.innerHTML=sorts.map(x=>`<button type="button" class="filter-pill sort-choice ${currentSort===x.value?'active':''}" title="Ordenar notícias: ${x.label}" aria-label="Ordenar notícias: ${x.label}" aria-pressed="${currentSort===x.value}" onclick="setNewsFilter('sort','${x.value}')">${x.label}</button>`).join('');
+  sort.innerHTML=sorts.map(x=>quickOption('sort',x,currentSort===x.value,x.icon,'Ordenação')).join('');
+  const sourceTypes=[{value:'',label:'Todos',icon:'fa-layer-group'},{value:'Portal',label:'Portal',icon:'fa-globe'},{value:'Agência',label:'Agência',icon:'fa-building'},{value:'Blog',label:'Blog',icon:'fa-pen-to-square'},{value:'Coluna',label:'Coluna',icon:'fa-newspaper'}];
+  sourceType.innerHTML=sourceTypes.map(x=>quickOption('source',x,currentSourceType===x.value,x.icon,'Fonte')).join('');
 }
 function displayGeoLabel(value){
   const key=normalizeEditorialText(value);
@@ -2813,6 +4153,12 @@ function displayGeoLabel(value){
   return value==='Nacional'?'Nacional':'Local';
 }
 
+function getNewsSourceType(news){
+  const sourceName=String(news?.source||'').trim().toLocaleLowerCase('pt-BR');
+  if(!sourceName)return '';
+  const source=(state.sources||[]).find(item=>String(item.name||'').trim().toLocaleLowerCase('pt-BR')===sourceName);
+  return source?normalizeVehicleType(source.vehicleType,source.name):'';
+}
 function renderNews(){
   refreshStoryClusters(state.news||[]);
   if(typeof refreshEditorialCards==='function')refreshEditorialCards();
@@ -2823,7 +4169,8 @@ function renderNews(){
   if(!filterEditorial||!searchInput||!filterGeo||!newsBox)return;
   const f=filterEditorial.value, q=searchInput.value.toLowerCase();
   const fg=filterGeo.value;
-  let arr=state.news.filter(n=>(!f||n.editoria===f)&&(!fg||n.geo===fg)&&(!q||[n.title,n.source,n.lead,n.editoria,n.geo].join(' ').toLowerCase().includes(q)));
+  const sourceType=document.getElementById('filterSourceType')?.value||'';
+  let arr=state.news.filter(n=>(!f||n.editoria===f)&&(!fg||n.geo===fg)&&(!sourceType||getNewsSourceType(n)===sourceType)&&(!q||[n.title,n.source,n.lead,n.editoria,n.geo].join(' ').toLowerCase().includes(q)));
   const sort=document.getElementById('sortNews')?.value||'priority';
   if(sort==='manual')arr.sort((a,b)=>editorialRank(a.editoria)-editorialRank(b.editoria)||((a.manualOrder??state.news.indexOf(a))-(b.manualOrder??state.news.indexOf(b))));
   else if(sort==='date')arr.sort((a,b)=>new Date(b.date||0)-new Date(a.date||0));
@@ -5702,1032 +7049,80 @@ document.addEventListener('click',function(event){
 #rulesInstructionsModal .profile-source-table td:first-child .small{font-weight:600!important}
 </style>
 
+
+<style id="radar-toolbar-right-alignment-final">
+/* V5.1 — alinhamento estrutural da barra superior. Escopo exclusivo da barra global. */
+@media (min-width: 851px) {
+  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 296px 390px !important;
+    grid-template-rows: auto !important;
+    align-items: center !important;
+    column-gap: 12px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > .radar-quick-controls {
+    grid-column: 1 !important; grid-row: 1 !important;
+    justify-self: start !important; width: max-content !important; min-width: 0 !important;
+  }
+  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > .news-radar-segmented {
+    grid-column: 2 !important; grid-row: 1 !important;
+    justify-self: center !important; width: 296px !important; max-width: 296px !important;
+    min-width: 0 !important; margin: 0 !important;
+  }
+  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > #filterBottomGrid {
+    grid-column: 3 !important; grid-row: 1 !important;
+    justify-self: end !important; align-self: center !important;
+    display: block !important; width: 390px !important; max-width: 390px !important;
+    min-width: 390px !important; margin: 0 !important; padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+  #globalNewsControls #filterBottomGrid > .filter-block.search-filter.search-add-row {
+    display: flex !important; flex-flow: row nowrap !important;
+    align-items: center !important; justify-content: flex-end !important;
+    gap: 8px !important; width: 100% !important; min-width: 0 !important;
+    margin: 0 !important; padding: 0 !important; box-sizing: border-box !important;
+  }
+  #globalNewsControls #filterBottomGrid #searchNews {
+    display: block !important; flex: 0 0 294px !important;
+    width: 294px !important; min-width: 294px !important; max-width: 294px !important;
+    margin: 0 !important; box-sizing: border-box !important;
+  }
+  #globalNewsControls #filterBottomGrid .add-news-link-btn,
+  #globalNewsControls #filterBottomGrid .global-pdf-btn {
+    display: inline-flex !important; flex: 0 0 40px !important;
+    width: 40px !important; min-width: 40px !important; max-width: 40px !important;
+    height: 40px !important; margin: 0 !important; box-sizing: border-box !important;
+  }
+}
+@media (min-width: 851px) and (max-width: 1200px) {
+  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout {
+    grid-template-columns: minmax(0, 1fr) 250px 350px !important; column-gap: 8px !important;
+  }
+  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > .news-radar-segmented {
+    width: 250px !important; max-width: 250px !important;
+  }
+  #globalNewsControls .news-filter-card .news-filter-layout.radar-toolbar-layout > #filterBottomGrid {
+    width: 350px !important; min-width: 350px !important; max-width: 350px !important;
+  }
+  #globalNewsControls #filterBottomGrid #searchNews {
+    flex-basis: 254px !important; width: 254px !important; min-width: 254px !important; max-width: 254px !important;
+  }
+}
+</style>
+
+<style id="radar-search-width-final-override">
+@media (min-width: 851px) {
+  html body #globalNewsControls #filterBottomGrid input#searchNews {
+    flex: 0 0 200px !important;
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+    box-sizing: border-box !important;
+  }
+}
+</style>
+
 </body>
 </html>
-<style id="v88-sidebar-import-width">
-/* V88: força o botão Importar Boletim a ocupar a largura útil da barra lateral. */
-#page-noticias .sidebar-collect-toolbar,
-#page-noticias .sidebar-collect-toolbar > #outlookImportBtn,
-#page-noticias #outlookImportBtn {
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  box-sizing: border-box !important;
-}
-#page-noticias .sidebar-collect-toolbar {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: stretch !important;
-}
-#page-noticias #outlookImportBtn {
-  display: block !important;
-  flex: 0 0 auto !important;
-  align-self: stretch !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="v96-center-main-column">
-/* V96: centraliza a coluna de notícias no espaço entre a barra de coleta e a barra informativa.
-   As barras laterais permanecem fixas; largura e margem esquerda são calculadas em conjunto. */
-@media (min-width: 1400px) {
-  .layout:has(#page-noticias.active) .main {
-    box-sizing: border-box !important;
-    width: min(1056px, calc(100vw - 524px)) !important;
-    max-width: 1056px !important;
-    margin-left: calc((100vw - min(1056px, calc(100vw - 524px)) + 16px) / 2) !important;
-    margin-right: 0 !important;
-  }
-  .layout:has(#page-fontes.active) .main {
-    box-sizing: border-box !important;
-    width: min(1056px, calc(100vw - 524px)) !important;
-    max-width: 1056px !important;
-    margin-left: calc((100vw - min(1056px, calc(100vw - 524px)) + 16px) / 2) !important;
-    margin-right: 0 !important;
-  }
-}
-@media (min-width: 901px) and (max-width: 1399px) {
-  .layout:has(#page-noticias.active) .main {
-    box-sizing: border-box !important;
-    width: calc(100vw - 300px) !important;
-    max-width: 1056px !important;
-    margin-left: 270px !important;
-    margin-right: 18px !important;
-  }
-}
-@media (max-width: 900px) {
-  .layout:has(#page-noticias.active) .main {
-    width: 100% !important;
-    max-width: 1056px !important;
-    margin: 0 auto !important;
-    box-sizing: border-box !important;
-  }
-}
-
-/* V106: ampliar as áreas de texto e manter o acesso às pautas na base do modal. */
-.rules-instructions-modal-box{display:flex;flex-direction:column}
-.rules-instructions-content{flex:1;display:flex;flex-direction:column}
-.rules-instructions-content textarea{min-height:170px;height:170px;max-height:360px}
-.rules-instructions-content .rules-pautas-bottom-btn{margin-top:auto;flex-shrink:0;width:100%;}
-@media(max-width:760px){.rules-instructions-content textarea{min-height:130px;height:130px;max-height:260px}}
-
-/* V109: mantém as editorias e a barra de filtros visíveis também na aba Radar. */
-/* V110: fixa barra de dados do Radar e remove Observação da IA e seu processamento. */
-body.radar-workspace-active body body .global-news-controls .editorial-pills-standalone{display:block!important;visibility:visible!important;position:sticky;top:64px;z-index:16;}
-body.radar-workspace-active .global-news-controls .news-filter-card{display:flex!important;visibility:visible!important;position:sticky;top:124px;z-index:15;}
-@media(max-width:900px){body.radar-workspace-active body body .global-news-controls .editorial-pills-standalone{top:58px}body.radar-workspace-active .global-news-controls .news-filter-card{top:118px}}
-/* V115: controles editoriais globais compartilhados pelas abas Notícias e Radar. */
-.global-news-controls{display:block;width:100%;}
-body:not(.news-radar-workspace-active):not(.radar-workspace-active) .global-news-controls{display:none!important;}
-body.sources-workspace-active .global-news-controls{display:none!important;}
-
-/* V112: os filtros são irmãos de #page-noticias e #page-radar; aplicar sticky no estado Radar sem alterar aparência. */
-body.radar-workspace-active .editorial-pills-standalone{display:block!important;visibility:visible!important;position:sticky!important;top:64px!important;z-index:16!important;}
-body.radar-workspace-active .news-filter-card{display:flex!important;visibility:visible!important;position:sticky!important;top:124px!important;z-index:15!important;}
-@media(max-width:900px){body.radar-workspace-active .editorial-pills-standalone{top:58px!important;}body.radar-workspace-active .news-filter-card{top:118px!important;}}
-.priority-score-tag{font-variant-numeric:tabular-nums;white-space:nowrap}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<!-- V142: preserva a editoria de seção no boletim Outlook e as categorias RSS/Atom; classifica primeiro pela fonte, mantendo inferência como fallback. -->
-<!-- V147: card lateral de futebol integrado à API Dados Futebol via Worker; chave em Secret; preserva V145/V146. -->
-<!-- V150: unifica o card Futebol nos resultados encerrados mais recentes; lembra o token de importação do Outlook após autorização válida. -->
-<!-- V152: card renomeado para Futebol Resultados, botão de atualização discreto no cabeçalho e atualização automática após coleta. -->
-<style id="v153-mobile-layout">
-/* V153 — composição mobile inspirada no mockup: menu lateral, Notícias/Radar, busca e editorias fixas no rodapé. */
-.mobile-header-action,.mobile-sidebar-backdrop,.mobile-drawer-head{display:none}
-@media(max-width:850px){
-  html,body{max-width:100%;overflow-x:hidden}
-  body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
-  .topbar{position:sticky!important;top:0!important;z-index:70!important;display:flex!important;gap:12px!important;padding:0 12px!important;min-height:58px!important;height:58px!important}
-  .mobile-header-action{display:inline-flex!important;align-items:center;justify-content:center;flex:0 0 38px;width:38px;height:38px;min-width:38px;padding:0!important;border:0!important;border-radius:9px!important;background:transparent!important;color:#fff!important;font-size:20px!important;box-shadow:none!important}
-  .mobile-header-action:active,.mobile-header-action.is-open{background:rgba(255,255,255,.14)!important}
-  .mobile-menu-toggle{margin-left:0!important}
-  .brand{left:0!important;margin:0!important;font-size:20px!important;flex:0 1 auto;white-space:nowrap;letter-spacing:.1px}
-  .brand small{display:none!important}
-  .mobile-filter-toggle{margin-left:auto!important}
-  .top-actions{display:none!important}
-  .layout{display:block!important;min-height:calc(100dvh - 58px)!important}
-  .layout:has(#page-noticias.active) .main,.layout:has(#page-fontes.active) .main{width:100%!important;max-width:none!important;margin:0!important;padding:0 0 calc(78px + env(safe-area-inset-bottom))!important;box-sizing:border-box!important}
-  .global-news-controls{display:block!important;position:relative!important;top:auto!important;z-index:10!important;width:100%!important;margin:0!important;padding:0!important;background:var(--card)!important;border-bottom:1px solid var(--line);box-shadow:0 3px 10px rgba(16,42,67,.05)}
-  body.sources-workspace-active .global-news-controls{display:none!important}
-  body.sources-workspace-active .mobile-filter-toggle{display:none!important}
-  .global-news-controls .news-filter-card{display:flex!important;flex-direction:column!important;gap:0!important;position:relative!important;top:auto!important;margin:0!important;padding:10px 14px 12px!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:var(--card)!important}
-  .global-news-controls .editorial-pills-standalone{display:none!important;position:static!important;top:auto!important;height:0!important;margin:0!important;padding:0!important;visibility:hidden!important}
-  .global-news-controls .news-filter-layout{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:10px!important;width:100%!important}
-  .global-news-controls .news-radar-segmented{order:0!important;display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important;max-width:none!important;min-width:0!important;min-height:52px!important;padding:4px!important;gap:4px!important;border:1px solid #d8e0e9!important;border-radius:13px!important;background:#eef2f7!important}
-  .global-news-controls .news-radar-tab{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;width:100%!important;min-width:0!important;height:42px!important;padding:7px 6px!important;border:1px solid transparent!important;border-radius:10px!important;font-size:15px!important;font-weight:700!important;white-space:nowrap!important;color:#40546a!important}
-  .global-news-controls .news-radar-tab.active{background:#2F6FAE!important;border-color:#2F6FAE!important;color:#fff!important;box-shadow:0 1px 3px rgba(16,42,67,.15)!important}
-  .global-news-controls .news-radar-tab .header-icon{width:19px!important;height:19px!important;font-size:17px!important}
-  .global-news-controls .news-filter-card .filter-bottom-grid{order:1!important;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-areas:"search search" "geo sort"!important;gap:8px!important;width:100%!important;margin:0!important;padding:0!important;border:0!important}
-  .global-news-controls .news-filter-card .filter-bottom-grid>.search-filter{grid-area:search!important;display:block!important;min-width:0!important;width:100%!important;margin:0!important}
-  .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:first-child{grid-area:geo!important;display:none!important;min-width:0!important}
-  .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:nth-child(2){grid-area:sort!important;display:none!important;min-width:0!important}
-  body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:first-child,body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:nth-child(2){display:block!important}
-  .global-news-controls .news-filter-card .search-filter input{width:100%!important;min-width:0!important;height:48px!important;min-height:48px!important;padding:9px 14px 9px 44px!important;border:1px solid #d7e0ea!important;border-radius:14px!important;background-color:var(--card)!important;color:var(--text)!important;font-size:16px!important;line-height:1.25!important;box-shadow:none!important}
-  .global-news-controls .news-filter-card .search-filter{position:relative!important}
-  .global-news-controls .news-filter-card .search-filter:before{content:"";position:absolute;left:17px;top:16px;width:13px;height:13px;border:2px solid #8793a1;border-radius:50%;pointer-events:none}
-  .global-news-controls .news-filter-card .search-filter:after{content:"";position:absolute;left:30px;top:29px;width:7px;height:2px;background:#8793a1;transform:rotate(45deg);transform-origin:left center;pointer-events:none}
-  .global-news-controls .news-filter-card .filter-block .pill-row{display:flex!important;flex-wrap:wrap!important;gap:6px!important;min-height:0!important;align-items:center!important}
-  .global-news-controls .news-filter-card .filter-bottom-grid .filter-pill{width:auto!important;min-width:0!important;min-height:34px!important;height:auto!important;padding:6px 10px!important;border:1px solid var(--line)!important;border-radius:999px!important;font-size:12px!important;background:var(--surface-soft)!important;color:var(--text)!important}
-  .global-news-controls .news-filter-card .filter-bottom-grid .filter-pill.active{background:var(--navy)!important;border-color:var(--navy)!important;color:#fff!important}
-  .mobile-bottom{display:block!important;position:fixed!important;left:0!important;right:0!important;bottom:0!important;z-index:80!important;width:100%!important;margin:0!important;padding:5px 6px calc(5px + env(safe-area-inset-bottom))!important;background:var(--card)!important;border-top:1px solid var(--line)!important;box-shadow:0 -5px 18px rgba(16,42,67,.08)!important}
-  .mobile-bottom #editoriaPills{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;align-items:stretch!important;justify-content:stretch!important;gap:2px!important;width:100%!important;overflow:visible!important;padding:0!important;margin:0!important}
-  .mobile-bottom #editoriaPills .filter-pill{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;width:100%!important;min-width:0!important;height:58px!important;min-height:58px!important;padding:3px 1px!important;margin:0!important;border:1px solid transparent!important;border-radius:11px!important;background:transparent!important;color:var(--pill-color,#526579)!important;box-shadow:none!important;font-size:10px!important;line-height:1.15!important;font-weight:650!important;white-space:normal!important;overflow:hidden!important}
-  .mobile-bottom #editoriaPills .filter-pill.active{background:var(--pill-bg,#eef2f6)!important;border-color:transparent!important;color:var(--pill-color,#526579)!important;box-shadow:none!important}
-  .mobile-bottom #editoriaPills .filter-pill .pill-icon{display:flex!important;align-items:center!important;justify-content:center!important;width:25px!important;height:25px!important;min-height:25px!important;margin:0!important;background:transparent!important;border-radius:0!important;color:var(--pill-color,#526579)!important}
-  .mobile-bottom #editoriaPills .filter-pill .pill-icon svg{display:block!important;width:23px!important;height:23px!important}
-  .mobile-bottom #editoriaPills .filter-pill .editorial-pill-label{display:block!important;width:100%!important;max-width:100%!important;overflow:hidden!important;text-align:center!important;text-overflow:clip!important;white-space:nowrap!important;font-size:clamp(8px,2.4vw,10px)!important;line-height:1.15!important;font-weight:650!important}
-  .mobile-bottom #editoriaPills .filter-pill .editorial-pill-count{display:none!important}
-  .mobile-bottom #editoriaPills .filter-pill .pill-icon{flex:none!important}
-  #page-noticias .collection-card{position:fixed!important;left:0!important;top:58px!important;bottom:0!important;width:min(350px,88vw)!important;max-width:88vw!important;height:calc(100dvh - 58px)!important;max-height:none!important;margin:0!important;padding:14px!important;border-radius:0 16px 0 0!important;overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior:contain!important;z-index:62!important;transform:translateX(-110%);visibility:hidden;transition:transform .22s ease,visibility .22s ease;box-shadow:8px 0 28px rgba(4,18,31,.22)!important;background:var(--card)!important}
-  body.mobile-sidebar-open #page-noticias .collection-card{transform:translateX(0)!important;visibility:visible!important}
-  .mobile-sidebar-backdrop{display:block;position:fixed;left:0;right:0;top:58px;bottom:0;z-index:60;background:rgba(4,16,29,.48);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease}
-  body.mobile-sidebar-open .mobile-sidebar-backdrop{opacity:1;visibility:visible}
-  body.mobile-sidebar-open{overflow:hidden!important}
-  .mobile-drawer-head{display:flex!important;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px;padding:0 0 10px;border-bottom:1px solid var(--line);color:var(--text);font-size:15px}
-  .mobile-drawer-head button{border:1px solid var(--line)!important;background:var(--surface-soft)!important;color:var(--text)!important;border-radius:9px!important;width:34px!important;height:34px!important;padding:0!important;font-size:24px!important;line-height:1!important}
-  #page-noticias #newsList,#page-radar #radarList{padding:12px 12px 8px!important;min-width:0!important}
-  .notice,.radar-item{max-width:100%!important;min-width:0!important;overflow-wrap:anywhere}
-  .notice{padding:12px!important;border-radius:15px!important;margin-bottom:12px!important}
-  .notice-head{min-width:0!important;gap:8px!important}
-  .notice-title-row{min-width:0!important}
-  .notice h3{font-size:16px!important;line-height:1.3!important;overflow-wrap:anywhere}
-  .lead{font-size:14px!important;line-height:1.45!important}
-  .notice-actions{gap:5px!important;flex-wrap:wrap!important}
-  .mobile-bottom button{cursor:pointer}
-  /* V156: oculta a barra fixa de editorias enquanto a gaveta lateral estiver aberta no celular. */
-  body.mobile-sidebar-open .mobile-bottom{display:none!important}
-  body.sources-workspace-active .mobile-bottom{display:none!important}
-  .toast{left:12px!important;right:12px!important;bottom:calc(82px + env(safe-area-inset-bottom))!important;max-width:none!important}
-}
-@media(max-width:360px){
-  .topbar{gap:7px!important;padding:0 8px!important}
-  .brand{font-size:18px!important}
-  .mobile-header-action{flex-basis:34px;width:34px;height:34px;min-width:34px}
-  .mobile-bottom #editoriaPills .filter-pill .editorial-pill-label{font-size:8px!important}
-}
-:root[data-theme="dark"] .mobile-bottom{background:var(--card)!important;border-color:var(--line)!important}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<!-- V154: unifica abrangência em Nacional/Local na interface, classificadores, fontes, boletim e Worker; migra dados antigos do navegador. -->
-<!-- V156: oculta a barra inferior de editorias enquanto o menu lateral estiver aberto em dispositivos móveis. -->
-<!-- V155: mantém todos os filtros móveis (Todas, Nacional, Local, Editorial e Recentes) em uma única linha. -->
-<style id="v155-mobile-filters-one-line">
-@media(max-width:850px){
-  body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid{
-    display:grid!important;
-    grid-template-columns:.95fr 1.2fr .8fr 1.1fr 1.1fr!important;
-    grid-template-rows:auto auto!important;
-    grid-template-areas:none!important;
-    column-gap:5px!important;
-    row-gap:8px!important;
-    align-items:center!important;
-  }
-  body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid>.search-filter{
-    grid-area:1 / 1 / 2 / 6!important;
-    grid-column:1 / -1!important;
-    grid-row:1!important;
-  }
-  body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:first-child,
-  body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:nth-child(2){
-    display:contents!important;
-    grid-area:auto!important;
-  }
-  body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:first-child #geoPills,
-  body.mobile-filters-open .global-news-controls .news-filter-card .filter-bottom-grid>.filter-block:nth-child(2) #sortPills{
-    display:contents!important;
-  }
-  body.mobile-filters-open #geoPills .geo-choice,
-  body.mobile-filters-open #sortPills .sort-choice{
-    grid-row:2!important;
-    display:inline-flex!important;
-    align-items:center!important;
-    justify-content:center!important;
-    width:100%!important;
-    min-width:0!important;
-    max-width:100%!important;
-    min-height:34px!important;
-    height:34px!important;
-    padding:5px 1px!important;
-    gap:0!important;
-    font-size:clamp(9px,2.7vw,11px)!important;
-    line-height:1.1!important;
-    white-space:nowrap!important;
-    overflow:hidden!important;
-    text-overflow:clip!important;
-    box-sizing:border-box!important;
-  }
-  body.mobile-filters-open #geoPills .geo-choice:nth-child(1){grid-column:1!important}
-  body.mobile-filters-open #geoPills .geo-choice:nth-child(2){grid-column:2!important}
-  body.mobile-filters-open #geoPills .geo-choice:nth-child(3){grid-column:3!important}
-  body.mobile-filters-open #sortPills .sort-choice:nth-child(1){grid-column:4!important}
-  body.mobile-filters-open #sortPills .sort-choice:nth-child(2){grid-column:5!important}
-}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<!-- V158: adiciona atalho móvel Fontes à direita do filtro no cabeçalho; reutiliza showPage('fontes'). -->
-<!-- V161: resultados variam conforme o dia da semana e a mesma consulta passa a incluir a agenda Jogos do Dia. -->
-<!-- V162: card Futebol Brasileiro; Jogos de Hoje antes de Resultados; oculta seções vazias e o card quando não há jogos. -->
-<style>
-/* V188: cor azul da aba ativa e botão voltar ao topo centralizado. */
-.news-radar-tab.active,.news-radar-tab[aria-pressed="true"]{background:#2F6FAE!important;border-color:#2F6FAE!important;color:#fff!important}
-.news-radar-tab.active .header-icon,.news-radar-tab[aria-pressed="true"] .header-icon{color:#fff!important}
-#backToTopBtn{left:50%!important;right:auto!important;transform:translateX(-50%)!important}
-#backToTopBtn:hover{transform:translate(-50%,-2px)!important}
-@media(max-width:600px){#backToTopBtn{left:50%!important;right:auto!important}}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style>
-/* V189: troca experimental das cores dos seletores ativos. */
-.global-news-controls .news-radar-tab.active{background:#172f4a!important;border-color:#172f4a!important;color:#fff!important;box-shadow:0 2px 5px rgba(16,42,67,.12)!important}
-.global-news-controls .news-radar-tab.active .header-icon{color:#fff!important}
-.global-news-controls .filter-pill.active,.global-news-controls .filter-pill.active.editorial-choice,.global-news-controls .filter-pill.geo-choice.active,.global-news-controls .filter-pill.sort-choice.active{background:#2F6FAE!important;border-color:#2F6FAE!important;color:#fff!important}
-.global-news-controls .filter-pill.active .pill-icon{background:rgba(255,255,255,.18)!important;color:#fff!important}
-.news-radar-segmented{position:relative}
-#radarCountBadge{position:absolute;right:-7px;top:-9px;z-index:5;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:#D64545;color:#fff;border:2px solid #fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;line-height:1;box-shadow:0 2px 5px rgba(16,42,67,.18);pointer-events:none}
-#radarCountBadge[hidden]{display:none!important}
-#page-noticias .notice{cursor:pointer}
-#page-noticias .notice .check{display:none!important}
-#page-noticias .notice.selected{border-color:#2F6FAE!important;box-shadow:0 0 0 2px rgba(47,111,174,.18)!important;background:#f7fbff}
-#page-noticias .notice .notice-title-row{display:block}
-#page-noticias .notice .notice-title-row .notice-classifiers{display:none!important}
-#page-noticias .notice .meta .notice-classifiers{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap;margin-right:3px}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style>
-/* V190: metadados mais discretos e pílulas editoriais sem borda. */
-#page-noticias .meta .tag,
-#page-radar .meta .tag,
-#page-radar .radar-meta .tag{
-  background:#F7F9FB!important;
-  border:0!important;
-  box-shadow:none!important;
-  color:#263746!important;
-  font-weight:500!important;
-}
-#page-noticias .meta .tag.editorial-tag,
-#page-radar .meta .tag.editorial-tag,
-#page-radar .radar-meta .tag.editorial-tag{
-  border:0!important;
-  font-weight:600!important;
-}
-/* Rótulos de editoria preservam suas cores próprias. */
-#page-noticias .meta .tag.editorial-tag{filter:none!important}
-#radarCountBadge{background:#D64545!important}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style>
-#page-noticias .notice-actions{display:flex!important;justify-content:flex-start!important;align-items:center!important;gap:6px!important}
-#page-noticias .notice-actions .btn-comment{order:0!important;margin-left:0!important}
-#page-noticias .notice-actions .btn{margin-left:0!important}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style>
-#page-radar .radar-num.radar-move-handle{cursor:grab!important;user-select:none!important;touch-action:pan-y!important}
-#page-radar .radar-num.radar-move-handle:active{cursor:grabbing!important}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style>
-/* V190 final: botão Comentar no início da linha, alinhado à esquerda. */
-#page-noticias .notice-actions{display:flex!important;justify-content:flex-start!important;align-items:center!important;gap:6px!important}
-#page-noticias .notice-actions .comment-single-action{order:0!important;margin:0!important;align-self:flex-start!important}
-#page-noticias .notice-actions button{margin-left:0!important}
-#page-radar .radar-num.radar-move-handle{cursor:grab!important;user-select:none!important;touch-action:none!important}
-#page-radar .radar-num.radar-move-handle:active{cursor:grabbing!important}
-#page-radar .card-move-top-radar{display:none!important}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style>
-/* V191: as pílulas de editoria preservam integralmente suas cores originais.
-   Apenas a borda e o peso excessivo da tipografia são removidos. */
-#page-noticias .meta .tag.editorial-tag,
-#page-radar .meta .tag.editorial-tag,
-#page-radar .radar-meta .tag.editorial-tag{
-  border:0!important;
-  box-shadow:none!important;
-  font-weight:500!important;
-}
-#page-noticias .meta .tag.editorial-tag.ed-politica,
-#page-radar .meta .tag.editorial-tag.ed-politica{background:#eaf0fb!important;color:#315ea8!important}
-#page-noticias .meta .tag.editorial-tag.ed-cotidiano,
-#page-radar .meta .tag.editorial-tag.ed-cotidiano{background:#fdecec!important;color:#c62828!important}
-#page-noticias .meta .tag.editorial-tag.ed-economia,
-#page-radar .meta .tag.editorial-tag.ed-economia{background:#fff5df!important;color:#95670d!important}
-#page-noticias .meta .tag.editorial-tag.ed-esportes,
-#page-radar .meta .tag.editorial-tag.ed-esportes{background:#e7f7ef!important;color:#16845b!important}
-#page-noticias .meta .tag.editorial-tag.ed-cultura,
-#page-radar .meta .tag.editorial-tag.ed-cultura{background:#f4ebfa!important;color:#8b4bb0!important}
-#page-noticias .meta .tag.editorial-tag.ed-outros,
-#page-radar .meta .tag.editorial-tag.ed-outros{background:#eef1f4!important;color:#667085!important}
-:root[data-theme="dark"] #page-noticias .meta .tag.editorial-tag.ed-politica,
-:root[data-theme="dark"] #page-radar .meta .tag.editorial-tag.ed-politica{background:#263b5c!important;color:#a9c7ff!important}
-:root[data-theme="dark"] #page-noticias .meta .tag.editorial-tag.ed-cotidiano,
-:root[data-theme="dark"] #page-radar .meta .tag.editorial-tag.ed-cotidiano{background:#4a292d!important;color:#ffaaa5!important}
-:root[data-theme="dark"] #page-noticias .meta .tag.editorial-tag.ed-economia,
-:root[data-theme="dark"] #page-radar .meta .tag.editorial-tag.ed-economia{background:#4a3b20!important;color:#f5d28a!important}
-:root[data-theme="dark"] #page-noticias .meta .tag.editorial-tag.ed-esportes,
-:root[data-theme="dark"] #page-radar .meta .tag.editorial-tag.ed-esportes{background:#1e4035!important;color:#8ce0bd!important}
-:root[data-theme="dark"] #page-noticias .meta .tag.editorial-tag.ed-cultura,
-:root[data-theme="dark"] #page-radar .meta .tag.editorial-tag.ed-cultura{background:#3d294a!important;color:#d9b5f0!important}
-:root[data-theme="dark"] #page-noticias .meta .tag.editorial-tag.ed-outros,
-:root[data-theme="dark"] #page-radar .meta .tag.editorial-tag.ed-outros{background:#303943!important;color:#c1cad4!important}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-v192-filter-style">
-/* V192: filtros com fundo neutro e destaque ativo por contorno azul-escuro. */
-.global-news-controls .filter-pill,
-.mobile-bottom #editoriaPills .filter-pill {
-  background: #EEF2F6 !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  color: #526579 !important;
-  box-sizing: border-box !important;
-}
-.global-news-controls .filter-pill.active,
-.mobile-bottom #editoriaPills .filter-pill.active {
-  background: #EEF2F6 !important;
-  border: 2px solid #172F4A !important;
-  color: #172F4A !important;
-  box-shadow: none !important;
-}
-.global-news-controls .filter-pill.active .pill-icon,
-.mobile-bottom #editoriaPills .filter-pill.active .pill-icon {
-  color: #172F4A !important;
-  background: transparent !important;
-}
-.global-news-controls .filter-pill.active .editorial-pill-label,
-.global-news-controls .filter-pill.active .editorial-pill-count,
-.mobile-bottom #editoriaPills .filter-pill.active .editorial-pill-label,
-.mobile-bottom #editoriaPills .filter-pill.active .editorial-pill-count {
-  color: #172F4A !important;
-}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-v193-filter-correction">
-/* V193: neutraliza também os estilos específicos das pílulas editoriais,
-   geográficas e de ordenação que sobrescreviam a regra geral da V192. */
-body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill,
-body .global-news-controls .news-filter-card .filter-bottom-grid .filter-pill,
-body .mobile-bottom #editoriaPills .filter-pill {
-  background: #EEF2F6 !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  box-sizing: border-box !important;
-}
-body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.active,
-body .global-news-controls .news-filter-card .filter-bottom-grid .filter-pill.active,
-body .mobile-bottom #editoriaPills .filter-pill.active {
-  background: #EEF2F6 !important;
-  border: 2px solid #172F4A !important;
-  color: #172F4A !important;
-  box-shadow: none !important;
-}
-body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.active .pill-icon,
-body .global-news-controls .news-filter-card .filter-bottom-grid .filter-pill.active .pill-icon,
-body .mobile-bottom #editoriaPills .filter-pill.active .pill-icon {
-  background: transparent !important;
-  color: #172F4A !important;
-}
-body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.active .editorial-pill-label,
-body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.active .editorial-pill-count,
-body .mobile-bottom #editoriaPills .filter-pill.active .editorial-pill-label,
-body .mobile-bottom #editoriaPills .filter-pill.active .editorial-pill-count {
-  color: #172F4A !important;
-}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-v194-interface-adjustments">
-/* V194: ícone PDF na identidade azul-escura. */
-.global-news-controls .global-pdf-btn,
-.global-news-controls .global-pdf-btn i {
-  color: #172F4A !important;
-}
-/* Ordem vertical dos comandos de coleta. */
-#page-noticias .sidebar-collect-toolbar .clear-collection-top-btn,
-#page-noticias .sidebar-collect-toolbar .outlook-import-btn {
-  width: 100% !important;
-  display: block !important;
-  margin-top: 6px !important;
-}
-/* Lista de aniversariantes com remoção individual. */
-.birthday-names-list{display:flex;flex-wrap:wrap;gap:5px 8px;align-items:center}
-.birthday-name-item{display:inline-flex;align-items:center;gap:3px;max-width:100%;white-space:nowrap}
-.birthday-name-label{overflow-wrap:anywhere;white-space:normal}
-.birthday-name-remove{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;min-width:16px;padding:0;border:0;border-radius:50%;background:#EEF2F6;color:#526579;font-size:13px;font-weight:700;line-height:1;cursor:pointer}
-.birthday-name-remove:hover{background:#FDECEC;color:#B42318}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-v195-ui-adjustments">
-/* Espaçamento compacto entre Coletar, Limpar e Importar. */
-#page-noticias .sidebar-collect-toolbar{gap:3px!important}
-#page-noticias .sidebar-collect-toolbar .clear-collection-top-btn{
-  background:#D64545!important;
-  border-color:#D64545!important;
-  color:#fff!important;
-  font-weight:700!important;
-}
-#page-noticias .sidebar-collect-toolbar .clear-collection-top-btn:hover{
-  background:#bd3535!important;
-  border-color:#bd3535!important;
-  color:#fff!important;
-}
-/* Ações de restauração e edição de pautas lado a lado no modal de regras. */
-#rulesInstructionsModal .rules-processing-actions{
-  display:flex;gap:8px;align-items:stretch;width:100%;margin-top:4px
-}
-#rulesInstructionsModal .rules-processing-actions .btn{
-  flex:1 1 0;min-width:0;white-space:normal
-}
-@media(max-width:520px){
-  #rulesInstructionsModal .rules-processing-actions{gap:6px}
-}
-/* Botão Comentar indisponível quando a notícia já está no Radar. */
-#page-noticias .notice-actions .comment-single-action:disabled{
-  opacity:.42!important;filter:grayscale(1);cursor:not-allowed!important;
-  background:#eef2f6!important;border-color:#d8e0e8!important;color:#718096!important
-}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-v196-compact-collection-buttons">
-/* V196: espaçamento realmente compacto entre os três botões de coleta. */
-#page-noticias .sidebar-collect-toolbar{
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:stretch!important;
-  gap:2px!important;
-  row-gap:2px!important;
-}
-#page-noticias .sidebar-collect-toolbar .collect-news-btn,
-#page-noticias .sidebar-collect-toolbar .clear-collection-top-btn,
-#page-noticias .sidebar-collect-toolbar .outlook-import-btn{
-  display:block!important;
-  width:100%!important;
-  margin:0!important;
-}
-#page-noticias .sidebar-collect-toolbar .clear-collection-top-btn{
-  margin-top:0!important;
-  margin-bottom:0!important;
-}
-#page-noticias .sidebar-collect-toolbar #outlookImportStatus:empty{
-  display:none!important;
-  margin:0!important;
-  padding:0!important;
-}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-v197-comment-navigation">
-#radarList .radar-item.radar-card-focus{
-  outline:2px solid #172F4A!important;
-  outline-offset:3px!important;
-  transition:outline-color .2s ease;
-}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-v198-editorial-active-border-only">
-/* V198: o card ativo mantém as cores próprias da editoria.
-   A borda usa a mesma cor do ícone e do nome; o ícone fica sem fundo. */
-body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice,
-body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice.active {
-  background: var(--pill-bg, #EEF2F6) !important;
-  color: var(--pill-color, #526579) !important;
-  box-shadow: none !important;
-}
-body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice.active {
-  border: 2px solid var(--pill-color, #526579) !important;
-}
-body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice .pill-icon,
-body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice.active .pill-icon {
-  background: transparent !important;
-  color: var(--pill-color, #526579) !important;
-}
-body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice .editorial-pill-label,
-body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice .editorial-pill-count,
-body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice.active .editorial-pill-label,
-body .global-news-controls .editorial-pills-standalone .editorial-pills .filter-pill.editorial-choice.active .editorial-pill-count {
-  color: var(--pill-color, #526579) !important;
-}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-brand-and-sidebar-actions">
-/* Marca RADAR e assinatura */
-.topbar .brand {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0;
-  white-space: nowrap;
-}
-.topbar .brand .brand-name {
-  color: inherit;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: 850;
-  letter-spacing: 1px;
-}
-.topbar .brand .brand-dot {
-  color: #F2C94C !important;
-  font-size: inherit;
-  font-weight: 850;
-  margin-right: 9px;
-}
-.topbar .brand .brand-tagline {
-  color: rgba(255,255,255,.82);
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 12px;
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: .1px;
-}
-/* Ação principal em cima; ações secundárias alinhadas e com espaçamento uniforme */
-#page-noticias .sidebar-collect-toolbar {
-  display: flex !important;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 0;
-}
-#page-noticias .sidebar-collect-toolbar .collect-news-btn {
-  width: 100%;
-  display: block;
-  margin: 0 0 22px !important;
-}
-#page-noticias .sidebar-collect-secondary-actions {
-  display: grid;
-  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
-  gap: 8px;
-  width: 100%;
-}
-#page-noticias .sidebar-collect-secondary-actions .outlook-import-btn,
-#page-noticias .sidebar-collect-secondary-actions .clear-collection-top-btn {
-  width: 100%;
-  min-width: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  margin: 0 !important;
-  white-space: nowrap;
-}
-#page-noticias .sidebar-collect-secondary-actions .outlook-import-btn i,
-#page-noticias .sidebar-collect-secondary-actions .clear-collection-top-btn i {
-  font-size: 12px;
-}
-#page-noticias .sidebar-collect-toolbar #outlookImportStatus {
-  margin-top: 6px;
-}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-official-slogan">
-.topbar .brand .brand-tagline {
-  font-style: normal !important;
-  font-family: Arial, Helvetica, sans-serif !important;
-}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-fix-spacing-collection-actions">
-/* Correção definitiva: distância real entre Coletar notícias e a dupla de ações. */
-#page-noticias .sidebar-collect-toolbar {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: stretch !important;
-  gap: 0 !important;
-  row-gap: 0 !important;
-}
-#page-noticias .sidebar-collect-toolbar > .collect-news-btn {
-  margin: 0 !important;
-}
-#page-noticias .sidebar-collect-toolbar > .sidebar-collect-secondary-actions {
-  margin-top: 30px !important;
-  padding-top: 0 !important;
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-  gap: 8px !important;
-  width: 100% !important;
-}
-#page-noticias .sidebar-collect-toolbar > .sidebar-collect-secondary-actions > button {
-  margin: 0 !important;
-}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-fix-spacing-collection-actions-uniform">
-/* Mesmo intervalo vertical usado entre os demais controles da barra lateral. */
-#page-noticias .sidebar-collect-toolbar {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: stretch !important;
-  gap: 8px !important;
-  row-gap: 8px !important;
-}
-#page-noticias .sidebar-collect-toolbar > .collect-news-btn {
-  margin: 0 !important;
-}
-#page-noticias .sidebar-collect-toolbar > .sidebar-collect-secondary-actions {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-  gap: 8px !important;
-  width: 100% !important;
-}
-#page-noticias .sidebar-collect-toolbar > .sidebar-collect-secondary-actions > button {
-  margin: 0 !important;
-}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-collection-icon-corrected">
-#page-noticias .sidebar-collect-toolbar .collect-news-btn {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-}
-#page-noticias .sidebar-collect-toolbar .collect-news-btn .collect-news-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 16px;
-  height: 16px;
-  flex: 0 0 16px;
-}
-#page-noticias .sidebar-collect-toolbar .collect-news-btn .collect-news-icon svg {
-  display: block;
-  width: 16px;
-  height: 16px;
-}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-football-round-summary">
-.context-card-head.football-card-head { display:flex; align-items:center; gap:6px; }
-.football-card-actions { margin-left:auto; display:inline-flex; align-items:center; gap:5px; }
-.context-card-head.football-card-head .football-refresh { margin-left:0; }
-.context-card-head.football-card-head .football-comment-btn { flex:0 0 24px; }
-.radar-item .radar-title-plain { color:var(--navy); }
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-2026v1-ajustes-aniversario">
-.birthday-section-title.birthday-import-btn{
-  appearance:none;width:100%;border:0;background:transparent;color:var(--text,#263449);
-  font:inherit;font-size:12px;font-weight:750;display:flex;align-items:center;
-  gap:7px;text-align:left;margin:0 0 6px;padding:0;cursor:pointer;
-}
-.birthday-section-title.birthday-import-btn:hover{color:var(--accent,#245b91)}
-.birthday-section-title.birthday-import-btn:focus-visible{outline:2px solid var(--accent,#245b91);outline-offset:3px;border-radius:3px}
-.birthday-section .birthday-names-list{margin-bottom:0}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-agenda-annotations">
-.agenda-card-head{justify-content:space-between}
-.agenda-card-head>span{display:inline-flex;align-items:center;gap:8px}
-.agenda-add-btn{flex:0 0 22px;width:22px;height:22px;padding:0;border:1px solid var(--line);border-radius:5px;background:var(--surface-soft);color:var(--blue);font-size:19px;line-height:18px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
-.agenda-add-btn:hover{border-color:var(--blue);background:var(--surface)}
-.agenda-annotations{display:flex;flex-direction:column;gap:5px;margin:0 0 8px}
-.agenda-annotation,.agenda-annotation-editor{display:flex;align-items:flex-start;gap:6px;padding:5px 6px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
-.agenda-annotation-text{flex:1;min-width:0;font-size:11px;line-height:1.45;color:var(--text);white-space:pre-wrap;overflow-wrap:anywhere}
-.agenda-remove-btn,.agenda-cancel-btn{flex:0 0 19px;width:19px;height:19px;padding:0;border:0;border-radius:4px;background:transparent;color:var(--muted);font-size:17px;line-height:17px;cursor:pointer}
-.agenda-remove-btn:hover,.agenda-cancel-btn:hover{background:var(--surface-soft);color:var(--danger,#b42318)}
-.agenda-annotation-editor{align-items:flex-start}
-.agenda-annotation-editor textarea{flex:1;min-width:0;min-height:42px;max-height:70px;resize:vertical;font-size:11px;padding:6px}
-.agenda-editor-actions{display:flex;gap:3px;flex:0 0 auto}
-.agenda-confirm-btn{width:21px;height:21px;padding:0;border:0;border-radius:4px;background:var(--surface-soft);color:var(--success,#16803c);cursor:pointer}
-.agenda-confirm-btn:hover{background:var(--line)}
-
-/* V1: perfis editoriais independentes e regras separadas para resumo/comentário. */
-.rules-instructions-modal-box{width:min(1400px,97vw);max-height:96vh;min-height:82vh}
-.editorial-profiles-toolbar{display:flex;align-items:flex-end;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:2px 0 4px}
-.editorial-profile-picker{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px}
-.editorial-profile-picker select{height:36px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--text);padding:5px 9px}
-.editorial-profile-actions{display:flex;gap:6px;flex-wrap:wrap}
-.editorial-profile-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
-.editorial-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-.editorial-rules-grid>div{display:flex;flex-direction:column;gap:5px;min-width:0}
-.editorial-rules-grid textarea{height:260px;max-height:42vh}
-@media(max-width:760px){.rules-instructions-modal-box{width:98vw;min-height:92vh;padding:12px}.editorial-rules-grid{grid-template-columns:1fr}.editorial-rules-grid textarea{height:180px;max-height:30vh}.editorial-profile-actions{width:100%}.editorial-profile-actions .btn{flex:1}}
-
-</style>
-<style id="radar-v132-sidebar-and-profile-switch">
-/* V1.32: removeu-se o botão Boletim; Limpar ocupa toda a largura disponível. */
-#page-noticias .sidebar-collect-secondary-actions {
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) !important;
-  width: 100% !important;
-}
-#page-noticias .sidebar-collect-secondary-actions .clear-collection-top-btn {
-  width: 100% !important;
-  min-width: 0 !important;
-  grid-column: 1 / -1 !important;
-}
-
-/* V1.55: a área central ocupa somente o espaço livre entre as laterais.
-   Evita que o zoom do navegador faça o conteúdo central invadir o trilho contextual. */
-@media (min-width:1400px){
-  .layout:has(#page-noticias.active) .main{
-    box-sizing:border-box !important;
-    width:min(1280px, calc(100vw - 520px)) !important;
-    max-width:none !important;
-    margin-left:270px !important;
-    margin-right:auto !important;
-    padding-left:18px !important;
-    padding-right:18px !important;
-    min-width:0 !important;
-  }
-}
-</style>
